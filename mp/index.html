@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Data Live Marketplace — Toko Albani | SIMASRIM</title>
+    <meta name="description"
+        content="Data performa Live Streaming Shopee & TikTok Shop Toko Albani. Bukti nyata hasil kolaborasi bersama PT Solusi Mitra Aplikasi (SIMASRIM).">
+
+    <!-- Fonts: Clash Display (display) + Satoshi (body) — sama seperti babehwan.simasrim.id -->
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ===== DESIGN TOKENS ===== */
+        :root {
+            --purple: #582B8C;
+            --purple-light: #7B42C4;
+            --purple-dark: #3D1E63;
+            --purple-glow: rgba(88, 43, 140, 0.35);
+            --shopee: #EE4D2D;
+            --tiktok: #010101;
+            --tiktok-accent: #69C9D0;
+            --green: #22C55E;
+            --bg: #07050F;
+            --bg-card: rgba(18, 11, 32, 0.75);
+            --bg-card-hover: rgba(88, 43, 140, 0.12);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(88, 43, 140, 0.5);
+            --text: #F0ECF8;
+            --text-muted: rgba(240, 236, 248, 0.5);
+            --text-subtle: rgba(240, 236, 248, 0.4);
+            --font-body: 'Satoshi', sans-serif;
+            --font-display: 'Clash Display', sans-serif;
+        }
+
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--purple);
+            border-radius: 99px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--purple-light);
+        }
+
+        /* ===== BACKGROUND EFFECTS — static, no animation for perf ===== */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            /* Static gradients — no animation = zero GPU drain */
+            background:
+                radial-gradient(ellipse 700px 600px at -5% -10%, rgba(88, 43, 140, 0.22) 0%, transparent 70%),
+                radial-gradient(ellipse 600px 500px at 105% 105%, rgba(123, 66, 196, 0.14) 0%, transparent 70%);
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(88, 43, 140, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(88, 43, 140, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            background: rgba(7, 5, 15, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--purple-light);
+        }
+
+        .nav-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: rgba(88, 43, 140, 0.15);
+            border: 1px solid rgba(88, 43, 140, 0.3);
+            padding: 0.35rem 0.85rem;
+            border-radius: 99px;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+            }
+
+            50% {
+                opacity: 0.8;
+                box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+            }
+        }
+
+        /* ===== MAIN WRAPPER ===== */
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 7rem 1.5rem 4rem;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 3rem 0 4rem;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(88, 43, 140, 0.15);
+            border: 1px solid rgba(88, 43, 140, 0.35);
+            border-radius: 99px;
+            padding: 0.4rem 1.1rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #C084FC;
+            margin-bottom: 1.75rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .hero-title .grad {
+            background: linear-gradient(135deg, #C084FC 0%, var(--purple-light) 40%, #A855F7 70%, #F0ABFC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.85rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(88, 43, 140, 0.45);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(88, 43, 140, 0.65);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-hover);
+            color: var(--text);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(88, 43, 140, 0.15);
+            border-color: var(--purple-light);
+        }
+
+        /* ===== SECTION HEADER ===== */
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--purple-light);
+            margin-bottom: 0.6rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .section-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.6rem;
+            line-height: 1.7;
+            max-width: 550px;
+        }
+
+        /* ===== PLATFORM HEADER ===== */
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .platform-icon.shopee {
+            background: rgba(238, 77, 45, 0.15);
+            color: var(--shopee);
+            border: 1px solid rgba(238, 77, 45, 0.25);
+        }
+
+        .platform-icon.tiktok {
+            background: rgba(105, 201, 208, 0.12);
+            color: var(--tiktok-accent);
+            border: 1px solid rgba(105, 201, 208, 0.25);
+        }
+
+        .platform-name {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .platform-period {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.1rem;
+        }
+
+        /* ===== STATS GRID ===== */
+        .stats-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stats-grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .stats-grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .stats-grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== CARD BASE — backdrop-filter hanya pada platform-block besar ===== */
+        .card {
+            background: var(--bg-card);
+            /* backdrop-filter dinonaktifkan di card kecil — boros GPU */
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 0 30px -8px var(--purple-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Hanya elemen besar yang pakai backdrop-filter */
+        .platform-block,
+        .partner-cta,
+        .proof-band {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* ===== STAT CARD ===== */
+        .stat-card {
+            padding: 1.4rem 1.5rem;
+            position: relative;
+        }
+
+        .stat-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-subtle);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.6rem;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3.5vw, 2rem);
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .stat-value.big {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+        }
+
+        .stat-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 99px;
+        }
+
+        .stat-change.up {
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ADE80;
+        }
+
+        .stat-change.down {
+            background: rgba(239, 68, 68, 0.12);
+            color: #F87171;
+        }
+
+        .stat-change.neu {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+        }
+
+        .stat-icon {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            font-size: 1.3rem;
+            opacity: 0.12;
+        }
+
+        /* ===== HERO STAT (large featured) ===== */
+        .hero-stat-card {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(88, 43, 140, 0.25) 0%, rgba(18, 11, 32, 0.85) 100%);
+            border-color: rgba(88, 43, 140, 0.4);
+        }
+
+        .hero-stat-card .stat-value {
+            font-size: clamp(2rem, 5vw, 3rem);
+            background: linear-gradient(135deg, #fff 0%, #E9D5FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== SCREENSHOT SECTION — dioptimasi performa ===== */
+        .screenshot-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: zoom-in;
+            /* contain layout agar browser tahu area ini terisolasi */
+            contain: layout paint;
+            /* Batasi tinggi screenshot besar agar tidak render seluruh 8000px+ pixel PNG */
+            max-height: 420px;
+            background: rgba(18, 11, 32, 0.6);
+        }
+
+        .screenshot-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+            /* TIDAK ada transition scale — gambar besar sangat mahal di-repaint */
+            border-radius: 12px;
+            /* Optimasi rendering gambar */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        /* Tambah hint zoom tanpa scale hover yang mahal */
+        .screenshot-wrapper:hover .screenshot-overlay {
+            opacity: 1;
+        }
+
+        .screenshot-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(7, 5, 15, 0.65) 0%, rgba(7, 5, 15, 0.1) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.25rem;
+        }
+
+        .screenshot-zoom-hint {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(0, 0, 0, 0.55);
+            padding: 0.35rem 0.75rem;
+            border-radius: 99px;
+        }
+
+        /* ===== PLATFORM BLOCK ===== */
+        .platform-block {
+            padding: 2.5rem;
+            border-radius: 28px;
+            margin-bottom: 2rem;
+        }
+
+        .platform-block.shopee-block {
+            background: linear-gradient(145deg, rgba(238, 77, 45, 0.08) 0%, rgba(7, 5, 15, 0.9) 70%);
+            border: 1px solid rgba(238, 77, 45, 0.18);
+        }
+
+        .platform-block.tiktok-block {
+            background: linear-gradient(145deg, rgba(105, 201, 208, 0.08) 0%, rgba(7, 5, 15, 0.9) 70%);
+            border: 1px solid rgba(105, 201, 208, 0.18);
+        }
+
+        /* ===== DIVIDER ===== */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(88, 43, 140, 0.35), transparent);
+            margin: 4rem 0;
+        }
+
+        /* ===== PROOF BLOCK ===== */
+        .proof-band {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+
+        .proof-item {
+            background: var(--bg-card);
+            padding: 1.75rem 1.5rem;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .proof-item:hover {
+            background: rgba(88, 43, 140, 0.1);
+        }
+
+        .proof-item-val {
+            font-family: var(--font-display);
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .proof-item-val.purple {
+            color: #C084FC;
+        }
+
+        .proof-item-val.shopee-red {
+            color: #EE4D2D;
+        }
+
+        .proof-item-val.tiktok-teal {
+            color: var(--tiktok-accent);
+        }
+
+        .proof-item-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 0.35rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .proof-band {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== PARTNER CTA ===== */
+        .partner-cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(88, 43, 140, 0.2) 0%, rgba(7, 5, 15, 0.95) 100%);
+            border: 1px solid rgba(88, 43, 140, 0.3);
+        }
+
+        .partner-cta::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 250px;
+            background: radial-gradient(ellipse, rgba(88, 43, 140, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ===== PARTNER LOGOS ===== */
+        .partners-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        .partner-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            border-radius: 99px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            background: rgba(88, 43, 140, 0.12);
+            border: 1px solid rgba(88, 43, 140, 0.25);
+            color: #C084FC;
+            transition: all 0.3s;
+        }
+
+        .partner-tag:hover {
+            background: rgba(88, 43, 140, 0.25);
+            border-color: var(--purple-light);
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(7, 5, 15, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 90vh;
+            border-radius: 16px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+            object-fit: contain;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* ===== NUMBER COUNTER ===== */
+        .counter-val {
+            display: inline-block;
+        }
+
+        /* ===== BADGES ===== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.3rem 0.7rem;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .badge-shopee {
+            background: rgba(238, 77, 45, 0.12);
+            color: var(--shopee);
+            border: 1px solid rgba(238, 77, 45, 0.25);
+        }
+
+        .badge-tiktok {
+            background: rgba(105, 201, 208, 0.1);
+            color: var(--tiktok-accent);
+            border: 1px solid rgba(105, 201, 208, 0.25);
+        }
+
+        .badge-purple {
+            background: rgba(88, 43, 140, 0.15);
+            color: #C084FC;
+            border: 1px solid rgba(88, 43, 140, 0.35);
+        }
+
+        /* ===== HIGHLIGHT ROW ===== */
+        .highlight-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .highlight-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            font-size: 0.78rem;
+            color: var(--text-subtle);
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #C084FC;
+        }
+
+        /* ===== ANIMATED BARS ===== */
+        .bar-track {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 99px;
+            overflow: hidden;
+            margin-top: 0.75rem;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 99px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bar-fill.purple {
+            background: linear-gradient(90deg, var(--purple), var(--purple-light));
+        }
+
+        .bar-fill.shopee {
+            background: linear-gradient(90deg, #EE4D2D, #FF8C6E);
+        }
+
+        .bar-fill.tiktok {
+            background: linear-gradient(90deg, #010101, var(--tiktok-accent));
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            main {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .platform-block {
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+
+            nav {
+                padding: 0.85rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Effects -->
+    <div class="bg-glow" aria-hidden="true"></div>
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Tutup">
+            <i class="fas fa-times"></i>
+        </button>
+        <img src="" alt="" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav aria-label="Navigasi utama">
+        <div class="nav-logo">Toko<span>Albani</span> · SIMASRIM</div>
+        <div class="nav-badge">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            Data Live Verified
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- ===== HERO ===== -->
+        <section class="hero reveal">
+            <div class="hero-eyebrow">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                Laporan Performa Marketplace 2026
+            </div>
+            <h1 class="hero-title">
+                Angka Nyata.<br>
+                <span class="grad">Hasil Live yang Terbukti.</span>
+            </h1>
+            <p class="hero-sub">
+                Data performa resmi <strong>Toko Albani</strong> di Shopee & TikTok Shop — dikelola oleh tim
+                profesional <strong>PT Solusi Mitra Aplikasi (SIMASRIM)</strong>. Transparansi penuh untuk calon mitra
+                kami.
+            </p>
+            <div class="hero-cta-group">
+                <a href="#shopee-data" class="btn btn-primary">
+                    <i class="fas fa-shopping-bag" aria-hidden="true"></i> Lihat Data Shopee
+                </a>
+                <a href="#tiktok-data" class="btn btn-ghost">
+                    <i class="fab fa-tiktok" aria-hidden="true"></i> Lihat Data TikTok
+                </a>
+                <a href="https://wa.me/6280000000000?text=Halo%20Tim%20SIMASRIM,%20saya%20tertarik%20kolaborasi%20Live%20Marketplace"
+                    target="_blank" class="btn btn-ghost">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Hubungi Kami
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== PROOF BAND ===== -->
+        <div class="proof-band reveal reveal-delay-1" role="region" aria-label="Ringkasan performa">
+            <div class="proof-item">
+                <div class="proof-item-val shopee-red counter-val" data-target="5295914" data-prefix="Rp"
+                    data-format="currency">Rp5,29 Jt</div>
+                <div class="proof-item-label">💰 Total GMV Shopee Live</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-item-val purple counter-val" data-target="51" data-suffix=" Sesi">51</div>
+                <div class="proof-item-label">🎥 Total Sesi Live</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-item-val tiktok-teal counter-val" data-target="496238" data-format="big">496K+</div>
+                <div class="proof-item-label">❤️ Total Suka di Live</div>
+            </div>
+            <div class="proof-item">
+                <div class="proof-item-val counter-val" data-target="1305" data-format="big">1.305</div>
+                <div class="proof-item-label">👁️ Penonton Unik / Sesi</div>
+            </div>
+        </div>
+
+        <!-- ===== SHOPEE SECTION ===== -->
+        <section id="shopee-data" aria-labelledby="shopee-heading">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fab fa-shopify"></i> &nbsp;Platform</div>
+                <h2 class="section-title" id="shopee-heading">Data Live Shopee</h2>
+                <p class="section-desc">Data resmi dari Seller Center Shopee · Toko Albani (albanistore). Semua angka
+                    dapat diverifikasi langsung.</p>
+            </div>
+
+            <!-- April 2026 - Full Overview -->
+            <div class="platform-block shopee-block card reveal reveal-delay-1">
+                <div class="platform-header">
+                    <div class="platform-icon shopee"><i class="fab fa-shopify"></i></div>
+                    <div>
+                        <div class="platform-name">Shopee Live — Tinjauan Data</div>
+                        <div class="platform-period">Periode: 01 April – 30 April 2026</div>
+                    </div>
+                    <div style="margin-left:auto;"><span class="badge badge-shopee"><i class="fas fa-circle"
+                                style="font-size:0.5em;"></i> VERIFIED</span></div>
+                </div>
+
+                <!-- Hero Stats -->
+                <div class="stats-grid stats-grid-2" style="margin-bottom:1rem;">
+                    <div class="card hero-stat-card">
+                        <div class="stat-label">💰 Total Penjualan Live</div>
+                        <div class="stat-value big">Rp5.295.914</div>
+                        <div style="margin-top:0.5rem;">
+                            <span class="badge badge-shopee"><i class="fas fa-store"></i> Pembeli Baru:
+                                Rp5.295.914</span>
+                        </div>
+                    </div>
+                    <div class="card hero-stat-card">
+                        <div class="stat-label">🎥 Total Sesi & Durasi Live</div>
+                        <div class="stat-value big">51 <span style="font-size:1.2rem;opacity:0.7;">Sesi</span></div>
+                        <div style="margin-top:0.5rem;font-size:0.8rem;color:var(--text-muted);">Total Durasi:
+                            <strong>67:43:59</strong> jam · Avg. 1:19:41/sesi
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visitor Stats -->
+                <div class="stats-grid stats-grid-4" style="margin-bottom:1rem;">
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                        <div class="stat-label">Total Penonton</div>
+                        <div class="stat-value">1.305</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-label">Penonton Aktif</div>
+                        <div class="stat-value">55</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+                        <div class="stat-label">Total Dilihat</div>
+                        <div class="stat-value">2.312</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="stat-label">Penonton Tertinggi</div>
+                        <div class="stat-value">11</div>
+                        <div class="stat-label" style="margin-top:0.4rem;">dalam satu sesi</div>
+                    </div>
+                </div>
+
+                <!-- Conversion Stats -->
+                <div class="stats-grid stats-grid-4" style="margin-bottom:1.5rem;">
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+                        <div class="stat-label">Persentase Klik</div>
+                        <div class="stat-value" style="color:#4ADE80;">5,41%</div>
+                        <span class="stat-change up"><i class="fas fa-arrow-up"></i> 113,83%</span>
+                        <div class="bar-track">
+                            <div class="bar-fill shopee" data-width="54"></div>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="stat-label">Pesanan per Klik</div>
+                        <div class="stat-value">5,60%</div>
+                        <span class="stat-change neu"><i class="fas fa-minus"></i> 0%</span>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-box"></i></div>
+                        <div class="stat-label">Pesanan Masuk</div>
+                        <div class="stat-value">7</div>
+                        <div class="stat-label" style="margin-top:0.3rem;">24 Produk Terjual</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-tag"></i></div>
+                        <div class="stat-label">Tambah ke Keranjang</div>
+                        <div class="stat-value">38</div>
+                        <div class="stat-label" style="margin-top:0.3rem;">potensial konversi</div>
+                    </div>
+                </div>
+
+                <!-- Engagement -->
+                <div class="stats-grid stats-grid-4" style="margin-bottom:2rem;">
+                    <div class="card stat-card"
+                        style="border-color:rgba(239,68,68,0.2);background:rgba(239,68,68,0.05);">
+                        <div class="stat-icon" style="color:var(--shopee);opacity:0.3;"><i class="fas fa-heart"></i>
+                        </div>
+                        <div class="stat-label">❤️ Total Suka</div>
+                        <div class="stat-value" style="color:#F87171;">496.238</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-share"></i></div>
+                        <div class="stat-label">🔁 Share</div>
+                        <div class="stat-value">1.202</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-comment"></i></div>
+                        <div class="stat-label">💬 Komentar</div>
+                        <div class="stat-value">413</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                        <div class="stat-label">👥 Pengikut Baru</div>
+                        <div class="stat-value">2</div>
+                        <div class="stat-label" style="margin-top:0.3rem;">dari sesi live</div>
+                    </div>
+                </div>
+
+                <!-- Revenue Detail -->
+                <div class="highlight-row" style="margin-bottom:1.5rem;">
+                    <div class="card stat-card">
+                        <div class="stat-label">💵 Nilai Penjualan per Pesanan</div>
+                        <div class="stat-value" style="font-size:1.4rem;">Rp756.559</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-label">👤 Penjualan per Pembeli</div>
+                        <div class="stat-value" style="font-size:1.4rem;">Rp1.059.183</div>
+                    </div>
+                </div>
+
+                <!-- Screenshot -->
+                <div style="margin-top:1.5rem;">
+                    <div
+                        style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:0.75rem;">
+                        <i class="fas fa-image"></i> &nbsp;Screenshot Verifikasi — Tinjauan Data April 2026
+                    </div>
+                    <div class="screenshot-wrapper" onclick="openLightbox(this)"
+                        data-caption="Shopee Live – Tinjauan Data April 2026">
+                        <img src="screencapture-seller-shopee-co-id-creator-center-insight-live-2026-06-15-16_22_57.png"
+                            alt="Shopee Live Insight – Tinjauan Data April 2026" loading="lazy" decoding="async">
+                        <div class="screenshot-overlay">
+                            <div class="screenshot-zoom-hint"><i class="fas fa-search-plus"></i> Klik untuk perbesar
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analisis Live — March & April -->
+            <div class="stats-grid stats-grid-2 reveal reveal-delay-2" style="margin-bottom:2rem;">
+
+                <!-- Maret 2026 -->
+                <div class="platform-block shopee-block card" style="margin-bottom:0;">
+                    <div class="platform-header">
+                        <div class="platform-icon shopee"><i class="fas fa-calendar"></i></div>
+                        <div>
+                            <div class="platform-name">Analisis Live — Maret</div>
+                            <div class="platform-period">01-03-2026 ~ 31-03-2026</div>
+                        </div>
+                    </div>
+                    <div class="stats-grid stats-grid-2" style="margin-bottom:1rem;gap:0.75rem;">
+                        <div class="card stat-card" style="padding:1rem;">
+                            <div class="stat-label">Total Durasi Live</div>
+                            <div class="stat-value" style="font-size:1.4rem;">20:30:59</div>
+                            <span class="stat-change up"><i class="fas fa-arrow-up"></i> 1,97%</span>
+                        </div>
+                        <div class="card stat-card" style="padding:1rem;">
+                            <div class="stat-label">Dilihat per Jam</div>
+                            <div class="stat-value" style="font-size:1.4rem;">28</div>
+                            <span class="stat-change up"><i class="fas fa-arrow-up"></i> 3,70%</span>
+                        </div>
+                        <div class="card stat-card" style="padding:1rem;">
+                            <div class="stat-label">Avg. Durasi Ditonton</div>
+                            <div class="stat-value" style="font-size:1.4rem;">27:38</div>
+                            <span class="stat-change up"><i class="fas fa-arrow-up"></i> 13,96%</span>
+                        </div>
+                        <div class="card stat-card" style="padding:1rem;">
+                            <div class="stat-label">Pesanan per Klik</div>
+                            <div class="stat-value" style="font-size:1.4rem;">6,67%</div>
+                            <span class="stat-change up"><i class="fas fa-arrow-up"></i> 96,76%</span>
+                        </div>
+                    </div>
+                    <div class="screenshot-wrapper" onclick="openLightbox(this)"
+                        data-caption="Shopee – Analisis Live Maret 2026">
+                        <img src="Screenshot 2026-06-15 at 16.20.42.png" alt="Shopee Analisis Live Maret 2026"
+                            loading="lazy" decoding="async">
+                        <div class="screenshot-overlay">
+                            <div class="screenshot-zoom-hint"><i class="fas fa-search-plus"></i> Klik untuk perbesar
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- April 2026 Analisis -->
+                <div class="platform-block shopee-block card" style="margin-bottom:0;">
+                    <div class="platform-header">
+                        <div class="platform-icon shopee"><i class="fas fa-calendar-check"></i></div>
+                        <div>
+                            <div class="platform-name">Analisis Live — April</div>
+                            <div class="platform-period">01-04-2026 ~ 30-04-2026</div>
+                        </div>
+                    </div>
+                    <div class="stats-grid stats-grid-2" style="margin-bottom:1rem;gap:0.75rem;">
+                        <div class="card stat-card" style="padding:1rem;">
+                            <div class="stat-label">Total Durasi Live</div>
+                            <div class="stat-value" style="font-size:1.4rem;">67:43:59</div>
+                            <span class="stat-change up"><i class="fas fa-arrow-up"></i> 230,14%</span>
+                        </div>
+                        <div class="card stat-card" style="padding:1rem;">
+                            <div class="stat-label">Dilihat per Jam</div>
+                            <div class="stat-value" style="font-size:1.4rem;">34</div>
+                            <span class="stat-change up"><i class="fas fa-arrow-up"></i> 21,43%</span>
+                        </div>
+                        <div class="card stat-card" style="padding:1rem;">
+                            <div class="stat-label">Avg. Durasi Ditonton</div>
+                            <div class="stat-value" style="font-size:1.4rem;">14:05</div>
+                            <span class="stat-change down"><i class="fas fa-arrow-down"></i> 49,01%</span>
+                        </div>
+                        <div class="card stat-card" style="padding:1rem;">
+                            <div class="stat-label">Persentase Klik</div>
+                            <div class="stat-value" style="font-size:1.4rem;">5,41%</div>
+                            <span class="stat-change up"><i class="fas fa-arrow-up"></i> 113,83%</span>
+                        </div>
+                    </div>
+                    <div class="screenshot-wrapper" onclick="openLightbox(this)"
+                        data-caption="Shopee – Analisis Live April 2026">
+                        <img src="Screenshot 2026-06-15 at 16.21.13.png" alt="Shopee Analisis Live April 2026"
+                            loading="lazy" decoding="async">
+                        <div class="screenshot-overlay">
+                            <div class="screenshot-zoom-hint"><i class="fas fa-search-plus"></i> Klik untuk perbesar
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- ===== TIKTOK SECTION ===== -->
+        <section id="tiktok-data" aria-labelledby="tiktok-heading">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fab fa-tiktok"></i> &nbsp;Platform</div>
+                <h2 class="section-title" id="tiktok-heading">Data Analitik TikTok Shop</h2>
+                <p class="section-desc">Data dari TikTok Seller Center · Toko Albani. Dikelola via tokopedia Seller
+                    Center (Powered by TikTok Shop).</p>
+            </div>
+
+            <!-- TikTok Main Block -->
+            <div class="platform-block tiktok-block card reveal reveal-delay-1" style="margin-bottom:1.5rem;">
+                <div class="platform-header">
+                    <div class="platform-icon tiktok"><i class="fab fa-tiktok"></i></div>
+                    <div>
+                        <div class="platform-name">TikTok Shop — Metrik Utama</div>
+                        <div class="platform-period">Mei 2026 · Dibandingkan: Mar–Apr 2026</div>
+                    </div>
+                    <div style="margin-left:auto;"><span class="badge badge-tiktok"><i class="fas fa-circle"
+                                style="font-size:0.5em;"></i> VERIFIED</span></div>
+                </div>
+
+                <div class="stats-grid stats-grid-4" style="margin-bottom:1rem;">
+                    <div class="card stat-card"
+                        style="border-color:rgba(105,201,208,0.2);background:rgba(105,201,208,0.05);">
+                        <div class="stat-icon" style="color:var(--tiktok-accent);"><i class="fas fa-store"></i></div>
+                        <div class="stat-label">GMV Total</div>
+                        <div class="stat-value" style="color:var(--tiktok-accent);">Rp306.938</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-box"></i></div>
+                        <div class="stat-label">Produk Terjual</div>
+                        <div class="stat-value">2 SKU</div>
+                        <div class="stat-label" style="margin-top:0.3rem;">2 Pesanan</div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                        <div class="stat-label">Total Penonton</div>
+                        <div class="stat-value">16,24 RB</div>
+                        <span class="stat-change up"><i class="fas fa-arrow-up"></i> 415,13%</span>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="stat-label">Pembeli Harian</div>
+                        <div class="stat-value">1</div>
+                        <span class="stat-change down"><i class="fas fa-arrow-down"></i> 50%</span>
+                    </div>
+                </div>
+
+                <div class="screenshot-wrapper" onclick="openLightbox(this)"
+                    data-caption="TikTok Shop – Metrik Utama Mei 2026" style="margin-bottom:1rem;">
+                    <img src="screencapture-seller-id-tokopedia-compass-data-overview-2026-06-15-17_00_00.png"
+                        alt="TikTok Shop Analytics Overview Mei 2026" loading="lazy" decoding="async">
+                    <div class="screenshot-overlay">
+                        <div class="screenshot-zoom-hint"><i class="fas fa-search-plus"></i> Klik untuk perbesar</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TikTok Kartu Produk -->
+            <div class="platform-block tiktok-block card reveal reveal-delay-2">
+                <div class="platform-header">
+                    <div class="platform-icon tiktok"><i class="fas fa-chart-pie"></i></div>
+                    <div>
+                        <div class="platform-name">Analitik Kartu Produk — Sumber Trafik</div>
+                        <div class="platform-period">28 Hari Terakhir: 18 Mei – 14 Jun 2026</div>
+                    </div>
+                </div>
+
+                <!-- Traffic breakdown -->
+                <div class="stats-grid stats-grid-2" style="margin-bottom:1rem;gap:0.75rem;">
+                    <div class="card stat-card">
+                        <div class="stat-label">Penonton Total</div>
+                        <div class="stat-value" style="font-size:1.4rem;">16,24 RB</div>
+                        <span class="stat-change up"><i class="fas fa-arrow-up"></i> 415,13%</span>
+                        <div class="bar-track">
+                            <div class="bar-fill tiktok" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="card stat-card">
+                        <div class="stat-label">Tingkat Konversi ke Bayar</div>
+                        <div class="stat-value" style="font-size:1.4rem;">0,01%</div>
+                        <span class="stat-change down"><i class="fas fa-arrow-down"></i> 90,22%</span>
+                    </div>
+                </div>
+
+                <!-- Traffic Sources Table -->
+                <div class="card" style="padding:1.25rem;margin-bottom:1.25rem;">
+                    <div
+                        style="font-size:0.75rem;font-weight:700;color:var(--text-subtle);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1rem;">
+                        Sumber Trafik</div>
+                    <div style="display:flex;flex-direction:column;gap:0.6rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;">
+                            <span style="color:var(--text-muted);min-width:110px;">Pencarian</span>
+                            <div style="flex:1;margin:0 1rem;">
+                                <div class="bar-track" style="margin-top:0;">
+                                    <div class="bar-fill tiktok" data-width="82"></div>
+                                </div>
+                            </div>
+                            <span style="color:#fff;font-weight:600;">8,31 RB penonton</span>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;">
+                            <span style="color:var(--text-muted);min-width:110px;">Rekomendasi</span>
+                            <div style="flex:1;margin:0 1rem;">
+                                <div class="bar-track" style="margin-top:0;">
+                                    <div class="bar-fill purple" data-width="57"></div>
+                                </div>
+                            </div>
+                            <span style="color:#fff;font-weight:600;">4,74 RB penonton</span>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;">
+                            <span style="color:var(--text-muted);min-width:110px;">Lainnya</span>
+                            <div style="flex:1;margin:0 1rem;">
+                                <div class="bar-track" style="margin-top:0;">
+                                    <div class="bar-fill shopee" data-width="84"></div>
+                                </div>
+                            </div>
+                            <span style="color:#fff;font-weight:600;">6,76 RB penonton</span>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;">
+                            <span style="color:var(--text-muted);min-width:110px;">Tab Toko</span>
+                            <div style="flex:1;margin:0 1rem;">
+                                <div class="bar-track" style="margin-top:0;">
+                                    <div class="bar-fill tiktok" data-width="4"></div>
+                                </div>
+                            </div>
+                            <span style="color:#fff;font-weight:600;">355 penonton</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="screenshot-wrapper" onclick="openLightbox(this)"
+                    data-caption="TikTok Shop – Analitik Kartu Produk (Mei–Jun 2026)">
+                    <img src="screencapture-seller-id-tokopedia-compass-product-card-analytics-2026-06-15-16_26_52.png"
+                        alt="TikTok Shop Product Card Analytics" loading="lazy" decoding="async">
+                    <div class="screenshot-overlay">
+                        <div class="screenshot-zoom-hint"><i class="fas fa-search-plus"></i> Klik untuk perbesar</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- ===== GROWTH STORY ===== -->
+        <section aria-labelledby="growth-heading">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fas fa-rocket"></i> &nbsp;Pertumbuhan</div>
+                <h2 class="section-title" id="growth-heading">Tren Naik yang Konsisten</h2>
+                <p class="section-desc">Dari Maret ke April 2026, sesi Live kami tumbuh lebih dari <strong
+                        style="color:#4ADE80;">230%</strong> dalam total durasi — menunjukkan komitmen tim dan
+                    kepercayaan audiens yang terus meningkat.</p>
+            </div>
+
+            <div class="stats-grid stats-grid-3 reveal reveal-delay-1" style="margin-bottom:2rem;">
+                <div class="card stat-card">
+                    <div class="stat-label">📈 Pertumbuhan Durasi Live</div>
+                    <div class="stat-value" style="color:#4ADE80;font-size:2rem;">+230%</div>
+                    <div class="stat-label" style="margin-top:0.5rem;">Maret → April 2026</div>
+                    <div class="bar-track">
+                        <div class="bar-fill purple" data-width="100"></div>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-label">🎯 Pertumbuhan Klik Produk</div>
+                    <div class="stat-value" style="color:#C084FC;font-size:2rem;">+114%</div>
+                    <div class="stat-label" style="margin-top:0.5rem;">vs Bulan Sebelumnya</div>
+                    <div class="bar-track">
+                        <div class="bar-fill shopee" data-width="78"></div>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-label">📱 Pertumbuhan Penonton TikTok</div>
+                    <div class="stat-value" style="color:var(--tiktok-accent);font-size:2rem;">+415%</div>
+                    <div class="stat-label" style="margin-top:0.5rem;">vs Periode Sebelumnya</div>
+                    <div class="bar-track">
+                        <div class="bar-fill tiktok" data-width="92"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- ===== PARTNER CTA ===== -->
+        <section class="partner-cta reveal" aria-labelledby="partner-heading">
+            <span class="badge badge-purple" style="margin-bottom:1.5rem;display:inline-flex;">
+                <i class="fas fa-handshake"></i> &nbsp;Terbuka untuk Kolaborasi
+            </span>
+            <h2 class="section-title" id="partner-heading" style="text-align:center;margin-bottom:1rem;">
+                Produk Anda, <span
+                    style="background:linear-gradient(135deg,#C084FC,#7B42C4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Audiens
+                    Kami.</span>
+            </h2>
+            <p
+                style="font-size:0.95rem;color:var(--text-muted);max-width:540px;margin:0 auto 2rem;line-height:1.75;text-align:center;">
+                Data ini adalah bukti nyata kemampuan kami. Kami membuka kolaborasi bagi brand dan produsen yang ingin
+                menjangkau pasar yang lebih luas melalui Live Marketplace bersama <strong>Tim SIMASRIM</strong>.
+            </p>
+
+            <!-- Partner Tags -->
+            <div class="partners-row" style="margin-bottom:2.5rem;">
+                <div class="partner-tag"><i class="fas fa-circle-dot" style="font-size:0.6em;"></i> Planet Ban</div>
+                <div class="partner-tag"><i class="fas fa-circle-dot" style="font-size:0.6em;"></i> Onix Bubur Bayi
+                </div>
+                <div class="partner-tag"><i class="fas fa-circle-dot" style="font-size:0.6em;"></i> Selera Food</div>
+                <div class="partner-tag"><i class="fas fa-circle-dot" style="font-size:0.6em;"></i> & Produsen Lainnya
+                </div>
+            </div>
+
+            <div class="hero-cta-group">
+                <a href="https://wa.me/6280000000000?text=Halo%20Tim%20SIMASRIM,%20saya%20tertarik%20kolaborasi%20Live%20Marketplace%20setelah%20melihat%20data%20performa%20Toko%20Albani"
+                    target="_blank" class="btn btn-primary" style="font-size:1rem;padding:0.9rem 2rem;">
+                    <i class="fab fa-whatsapp"></i> Diskusi Kolaborasi
+                </a>
+                <a href="https://babehwan.smsrm.com" target="_blank" class="btn btn-ghost">
+                    <i class="fas fa-user"></i> Profil Host Babeh Wan
+                </a>
+            </div>
+
+            <!-- Trust indicators -->
+            <div
+                style="display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:2.5rem;flex-wrap:wrap;">
+                <div style="font-size:0.8rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
+                    <i class="fas fa-shield-check" style="color:#4ADE80;"></i> Data Terverifikasi
+                </div>
+                <div style="font-size:0.8rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
+                    <i class="fas fa-building" style="color:#C084FC;"></i> Dikelola PT SMA
+                </div>
+                <div style="font-size:0.8rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
+                    <i class="fas fa-video" style="color:var(--tiktok-accent);"></i> Studio Profesional
+                </div>
+                <div style="font-size:0.8rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
+                    <i class="fas fa-chart-line" style="color:#EE4D2D;"></i> Laporan Transparan
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Toko Albani · Dikelola oleh <a href="https://simasrim.id" target="_blank">PT Solusi Mitra Aplikasi
+                (SIMASRIM)</a></p>
+        <p style="margin-top:0.4rem;">Data per Juni 2026 · <a href="https://babehwan.simasrim.id"
+                target="_blank">babehwan.simasrim.id</a></p>
+    </footer>
+
+    <script>
+        // ===== LIGHTBOX =====
+        function openLightbox(el) {
+            const img = el.querySelector('img');
+            const caption = el.dataset.caption || '';
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightboxImg').alt = img.alt;
+            document.getElementById('lightboxCaption').textContent = caption;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox(e) {
+            if (!e || e.target === document.getElementById('lightbox') || e.currentTarget.classList.contains('lightbox-close')) {
+                document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') });
+        });
+
+        // ===== SCROLL REVEAL =====
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => observer.observe(el));
+
+        // ===== ANIMATED BARS =====
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fill = entry.target;
+                    const width = fill.dataset.width;
+                    setTimeout(() => { fill.style.width = width + '%'; }, 200);
+                    barObserver.unobserve(fill);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.bar-fill').forEach(el => barObserver.observe(el));
+
+        // ===== COUNTER ANIMATION =====
+        function animateCounter(el) {
+            const target = parseInt(el.dataset.target);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const format = el.dataset.format;
+            const duration = 1800;
+            const start = performance.now();
+
+            function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(eased * target);
+
+                if (format === 'currency') {
+                    if (current >= 1000000) el.textContent = prefix + (current / 1000000).toFixed(2) + ' Jt';
+                    else el.textContent = prefix + current.toLocaleString('id-ID');
+                } else if (format === 'big') {
+                    if (current >= 1000) el.textContent = (current / 1000).toFixed(0) + 'K+';
+                    else el.textContent = current.toLocaleString('id-ID');
+                } else {
+                    el.textContent = prefix + current.toLocaleString('id-ID') + suffix;
+                }
+
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('.counter-val[data-target]').forEach(el => counterObserver.observe(el));
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{
+  "links": [
+    { "type": "highlight", "text": "Cek Ongkir & Kirim Paket", "url": "https://www.simasrim.com" },
+    { "type": "whatsapp", "text": "Chat Admin (Demo)", "url": "https://wa.me/6280000000000" },
+    { "type": "pembelian", "text": "Beli Pulsa & PPOB", "url": "#" },
+    { "type": "daftar", "text": "Daftar Jadi Mitra", "url": "#" },
+    { "type": "default", "text": "Lacak Resi", "url": "#", "hoverColor": "bg-accent" },
+    { "type": "default", "text": "Syarat & Ketentuan", "url": "#" }
+  ],
+  "socials": [
+    { "platform": "instagram", "url": "https://instagram.com/contoh.demo" },
+    { "platform": "tiktok", "url": "https://tiktok.com/@contoh.demo" },
+    { "platform": "youtube", "url": "https://youtube.com/@contoh.demo" },
+    { "platform": "website", "url": "https://www.simasrim.com" }
+  ]
+}

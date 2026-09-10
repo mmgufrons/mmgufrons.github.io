@@ -1,0 +1,7 @@
+==============================================
+PROYEK   : cekongkir (HTML statis)
+FOLDER   : /home/tatangracing/projects/cekongkir
+ALAMAT   : http://localhost:8093
+NGINX    : /etc/nginx/sites-available/cekongkir
+Dikelola : http://localhost:7000 (Proyek Manager)
+==============================================

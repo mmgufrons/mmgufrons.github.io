@@ -1,0 +1,35 @@
+{
+  "name": "PT SMA Enterprise OS",
+  "short_name": "SMA ERP",
+  "description": "PT SMA Enterprise OS CLOUD v10.3 — Sistem ERP Terpadu",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#121212",
+  "theme_color": "#8B5CF6",
+  "lang": "id",
+  "categories": ["productivity", "business"],
+  "icons": [
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Dasbor Harian",
+      "url": "./",
+      "description": "Buka Dasbor Hari Ini"
+    }
+  ]
+}

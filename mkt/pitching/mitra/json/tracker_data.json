@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "DEMO-1 - Kota Contoh A (PIC Demo)",
+    "notes": "Contoh catatan progres onboarding mitra (data fiktif untuk portofolio).",
+    "progress": {
+      "present": true, "grup": true, "nda": true, "penunjukan": true, "adendum": true,
+      "akun": true, "looker": true, "amunisi": true, "prospek": true, "plan": true, "jalan": true,
+      "am_brand": true, "am_area": true, "am_panduan": true, "am_flyer": true, "am_story": true,
+      "am_presentasi": false, "am_sop": true, "am_banner": false
+    },
+    "assets": [
+      { "name": "Contoh Dokumen NDA (Demo)", "url": "#" },
+      { "name": "Contoh Surat Penunjukan (Demo)", "url": "#" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "DEMO-2 - Kota Contoh B (PIC Demo)",
+    "notes": "Contoh mitra masih tahap awal onboarding.",
+    "progress": {
+      "present": true, "grup": true, "nda": false, "penunjukan": false, "adendum": false,
+      "akun": false, "looker": false, "amunisi": false, "prospek": true, "plan": false, "jalan": false
+    },
+    "assets": []
+  }
+]

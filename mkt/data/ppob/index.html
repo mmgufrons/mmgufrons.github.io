@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMASRIM PPOB — Analytics & CRM Dashboard</title>
+    <meta name="description" content="Dashboard Analitik & CRM untuk layanan PPOB SIMASRIM. Monitoring transaksi, profit, segmentasi user, dan fitur WhatsApp otomatis.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ============================================================
+         LOGIN OVERLAY
+    ============================================================ -->
+    <div id="login-screen" class="login-overlay">
+        <div class="login-blob"></div>
+        <div class="login-card">
+            <div class="login-logo"><i class='bx bx-bolt-circle'></i></div>
+            <h1>SIMASRIM PPOB</h1>
+            <p class="login-sub">Analytics & CRM Dashboard — Admin Access</p>
+            <input type="password" id="login-password" class="login-input" placeholder="Masukkan kata sandi..." autocomplete="current-password">
+            <button id="btn-login" class="btn btn-primary btn-lg" style="width:100%;margin-top:4px;">
+                <i class='bx bx-log-in'></i> Masuk ke Dashboard
+            </button>
+            <p id="login-error" class="login-error"></p>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MAIN APP
+    ============================================================ -->
+    <div class="app-container">
+
+        <!-- ──────── SIDEBAR ──────── -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box"><i class='bx bx-bolt-circle'></i></div>
+                <div class="sidebar-brand">
+                    <h2>SIMASRIM</h2>
+                    <small>PPOB Dashboard</small>
+                </div>
+            </div>
+
+            <p class="nav-section-label">Navigasi</p>
+            <ul class="nav-links">
+                <li class="active" data-target="dashboard">
+                    <a href="#">
+                        <i class='bx bx-grid-alt'></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li data-target="crm">
+                    <a href="#">
+                        <i class='bx bx-user-pin'></i>
+                        <span>CRM & Segmentasi</span>
+                        <span class="nav-badge" id="badge-crm">–</span>
+                    </a>
+                </li>
+                <li data-target="transaksi">
+                    <a href="#">
+                        <i class='bx bx-receipt'></i>
+                        <span>Data Transaksi</span>
+                    </a>
+                </li>
+                <li data-target="upload">
+                    <a href="#">
+                        <i class='bx bx-cloud-upload'></i>
+                        <span>Upload Data</span>
+                    </a>
+                </li>
+                <li data-target="tutorial">
+                    <a href="#">
+                        <i class='bx bx-book-open'></i>
+                        <span>Tutorial Penggunaan</span>
+                    </a>
+                </li>
+            </ul>
+
+
+
+            <div class="sidebar-footer">
+                <p>SIMASRIM PPOB Dashboard</p>
+                <p>v1.0 · Firebase Realtime DB</p>
+            </div>
+        </aside>
+
+        <!-- ──────── MAIN CONTENT ──────── -->
+        <main class="main-content">
+
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="page-header">
+                    <h1 id="page-title">Dashboard Analytics</h1>
+                    <p id="page-sub">Ringkasan performa transaksi PPOB SIMASRIM</p>
+                </div>
+                <div class="top-bar-actions">
+                    <select class="glass-select" id="filter-period" title="Filter Periode">
+                        <option value="all">Semua Waktu</option>
+                        <option value="7d">7 Hari Terakhir</option>
+                        <option value="30d">30 Hari Terakhir</option>
+                        <option value="90d">90 Hari Terakhir</option>
+                    </select>
+                    <button class="btn btn-ghost btn-sm" id="btn-refresh" title="Refresh dari Firebase">
+                        <i class='bx bx-refresh'></i> Refresh
+                    </button>
+                    <div id="db-status" class="badge-status success">
+                        <span class="dot"></span>Database Terhubung
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content-wrapper">
+
+                <!-- ══════════════════════════════════
+                     TAB: DASHBOARD
+                ══════════════════════════════════ -->
+                <section id="dashboard" class="tab-pane active">
+                    <div class="content-area">
+
+                        <!-- Summary Cards -->
+                        <div class="summary-cards">
+                            <div class="metric-card purple">
+                                <div class="card-icon-wrap purple"><i class='bx bx-receipt'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Total Transaksi</div>
+                                    <div class="card-value" id="card-total-trx">0</div>
+                                    <div class="card-sub">PPOB berhasil diproses</div>
+                                </div>
+                                <span class="card-trend up" id="card-trx-trend" style="display:none;"></span>
+                            </div>
+                            <div class="metric-card orange">
+                                <div class="card-icon-wrap orange"><i class='bx bx-dollar-circle'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Total Volume</div>
+                                    <div class="card-value" id="card-total-volume">Rp 0</div>
+                                    <div class="card-sub">Total tagihan user</div>
+                                </div>
+                            </div>
+                            <div class="metric-card green">
+                                <div class="card-icon-wrap green"><i class='bx bx-wallet'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Total Profit Bersih</div>
+                                    <div class="card-value" id="card-total-profit">Rp 0</div>
+                                    <div class="card-sub">(Tagihan − Cashback) − Bayar Mitra</div>
+                                </div>
+                            </div>
+                            <div class="metric-card blue">
+                                <div class="card-icon-wrap blue"><i class='bx bx-group'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">User Aktif PPOB</div>
+                                    <div class="card-value" id="card-user-aktif">0</div>
+                                    <div class="card-sub">Email unik bertransaksi</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Row 1: Tren + Kategori -->
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Tren Transaksi & Profit</h3>
+                                        <p>Pergerakan jumlah transaksi dan profit per bulan</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:280px;">
+                                    <canvas id="chart-trend"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Top Kategori</h3>
+                                        <p>Distribusi berdasarkan jenis layanan PPOB</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:280px;">
+                                    <canvas id="chart-kategori"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Row 2: Profit Bar + Top Produk + Segmen CRM -->
+                        <div class="charts-grid-3">
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Profit per Bulan</h3>
+                                        <p>Ungu = ganjil, Oranye = genap</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:220px;">
+                                    <canvas id="chart-profit"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Top 10 Produk Terlaris</h3>
+                                        <p>Berdasarkan jumlah transaksi</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:220px;">
+                                    <canvas id="chart-produk"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Distribusi Segmen CRM</h3>
+                                        <p>Komposisi user berdasarkan perilaku</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:220px;">
+                                    <canvas id="chart-segmen"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ══════════════════════════════════
+                     TAB: CRM & SEGMENTASI
+                ══════════════════════════════════ -->
+                <section id="crm" class="tab-pane">
+                    <div class="content-area">
+                        <div class="table-toolbar">
+                            <h3>🎯 Leaderboard & CRM Target</h3>
+                            <span style="color:var(--text-muted);font-size:0.8rem;" id="crm-count"></span>
+                            <select class="glass-select" id="filter-segmen">
+                                <option value="all">Semua Segmen</option>
+                                <option value="champion">Champion / VIP 👑</option>
+                                <option value="micro">Active Micro ⚡</option>
+                                <option value="crosssell">Cross-Sell Target 🎯</option>
+                                <option value="atrisk">At Risk / Churn ⚠️</option>
+                                <option value="active">Active User ✅</option>
+                            </select>
+                            <input type="text" class="glass-input" id="filter-crm-search" placeholder="🔍 Cari nama atau email..." autocomplete="off">
+                        </div>
+
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width:50px;">#</th>
+                                        <th>Nama User</th>
+                                        <th>Email</th>
+                                        <th>Segmen</th>
+                                        <th style="text-align:right;">Transaksi</th>
+                                        <th style="text-align:right;">Volume</th>
+                                        <th style="text-align:right;">Profit</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="crm-tbody">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="empty-state">
+                                                <i class='bx bx-user-pin'></i>
+                                                <h3>Data CRM Belum Tersedia</h3>
+                                                <p>Upload Data Master User dan Transaksi PPOB untuk melihat segmentasi</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ══════════════════════════════════
+                     TAB: DATA TRANSAKSI
+                ══════════════════════════════════ -->
+                <section id="transaksi" class="tab-pane">
+                    <div class="content-area">
+                        <div class="table-toolbar">
+                            <h3>📋 Data Transaksi PPOB</h3>
+                            <span style="color:var(--text-muted);font-size:0.8rem;" id="trx-count"></span>
+                            <select class="glass-select" id="filter-trx-kat">
+                                <option value="all">Semua Kategori</option>
+                            </select>
+                            <input type="text" class="glass-input" id="filter-trx-search" placeholder="🔍 Cari kode/produk/email...">
+                        </div>
+
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Kode Transaksi</th>
+                                        <th>Kategori</th>
+                                        <th>Nama Produk</th>
+                                        <th style="text-align:right;">Tagihan User</th>
+                                        <th style="text-align:right;">Cashback</th>
+                                        <th style="text-align:right;">Profit</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trx-tbody">
+                                    <tr>
+                                        <td colspan="8">
+                                            <div class="empty-state">
+                                                <i class='bx bx-receipt'></i>
+                                                <h3>Belum Ada Transaksi</h3>
+                                                <p>Upload file transaksi PPOB dari menu Upload Data</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ══════════════════════════════════
+                     TAB: UPLOAD DATA
+                ══════════════════════════════════ -->
+                <section id="upload" class="tab-pane">
+                    <div class="content-area">
+                        <div class="upload-page">
+
+                            <!-- Upload Tabs -->
+                            <div class="upload-tabs">
+                                <button class="upload-tab-btn active" data-panel="master">
+                                    <i class='bx bx-user'></i> Data Master User
+                                </button>
+                                <button class="upload-tab-btn" data-panel="ppob">
+                                    <i class='bx bx-bolt-circle'></i> Transaksi PPOB
+                                </button>
+                                <button class="upload-tab-btn" data-panel="logistik">
+                                    <i class='bx bx-package'></i> Logistik (Opsional)
+                                </button>
+                            </div>
+
+                            <!-- Panel: Master User -->
+                            <div class="upload-panel active" id="panel-master">
+                                <div class="upload-card">
+                                    <div class="upload-card-header">
+                                        <div class="uc-icon" style="background:var(--primary-light);color:var(--primary);">
+                                            <i class='bx bx-user'></i>
+                                        </div>
+                                        <h2>Upload Data Master User</h2>
+                                        <p>File Excel/CSV berisi profil semua user SIMASRIM.<br>Data ini akan menjadi referensi kontak (No WA) untuk fitur CRM.</p>
+                                        <div class="field-tags">
+                                            <span class="field-tag">EMAIL</span>
+                                            <span class="field-tag">ID USER</span>
+                                            <span class="field-tag">NAMA USER</span>
+                                            <span class="field-tag">NO WA</span>
+                                            <span class="field-tag">KATEGORI USER</span>
+                                            <span class="field-tag">ORIGIN</span>
+                                        </div>
+                                    </div>
+                                    <div class="drop-zone" id="drop-master">
+                                        <input type="file" id="file-master" accept=".xlsx,.xls,.csv">
+                                        <i class='bx bx-cloud-upload'></i>
+                                        <h4>Klik atau Drag & Drop File</h4>
+                                        <p>Format: .xlsx, .xls, atau .csv</p>
+                                    </div>
+                                    <div class="file-selected" id="file-sel-master">
+                                        <i class='bx bxs-file-blank' style="color:var(--primary);"></i>
+                                        <div>
+                                            <div class="fn" id="fname-master">–</div>
+                                            <div class="fs">Siap diproses</div>
+                                        </div>
+                                    </div>
+                                    <div class="upload-actions">
+                                        <button class="btn btn-primary btn-lg" id="btn-upload-master" disabled>
+                                            <i class='bx bx-upload'></i> Proses & Sinkronisasi ke Firebase
+                                        </button>
+                                    </div>
+                                    <div class="progress-wrap" id="prog-master" style="display:none;">
+                                        <div class="progress-label">
+                                            <span id="plabel-master">Memproses...</span>
+                                            <span id="ppct-master">0%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="pfill-master"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Panel: Transaksi PPOB -->
+                            <div class="upload-panel" id="panel-ppob">
+                                <div class="upload-card">
+                                    <div class="upload-card-header">
+                                        <div class="uc-icon" style="background:var(--accent-light);color:var(--accent);">
+                                            <i class='bx bx-bolt-circle'></i>
+                                        </div>
+                                        <h2>Upload Transaksi PPOB</h2>
+                                        <p>File ekspor transaksi PPOB. Sistem akan otomatis menghitung <strong>PROFIT</strong> per transaksi dan mencegah duplikasi menggunakan <strong>KODE TRANSAKSI</strong>.</p>
+                                        <div class="field-tags">
+                                            <span class="field-tag">EMAIL</span>
+                                            <span class="field-tag">KODE TRANSAKSI</span>
+                                            <span class="field-tag">TANGGAL BELI</span>
+                                            <span class="field-tag">KATEGORI</span>
+                                            <span class="field-tag">NAMA PRODUK</span>
+                                            <span class="field-tag">TAGIHAN USER</span>
+                                            <span class="field-tag">CASHBACK USER</span>
+                                            <span class="field-tag">BAYAR MITRA</span>
+                                            <span class="field-tag">STATUS</span>
+                                        </div>
+                                    </div>
+                                    <div class="drop-zone" id="drop-ppob">
+                                        <input type="file" id="file-ppob" accept=".xlsx,.xls,.csv">
+                                        <i class='bx bx-cloud-upload'></i>
+                                        <h4>Klik atau Drag & Drop File</h4>
+                                        <p>Format: .xlsx, .xls, atau .csv</p>
+                                    </div>
+                                    <div class="file-selected" id="file-sel-ppob">
+                                        <i class='bx bxs-file-blank' style="color:var(--accent);"></i>
+                                        <div>
+                                            <div class="fn" id="fname-ppob">–</div>
+                                            <div class="fs">Siap diproses • Profit akan dihitung otomatis</div>
+                                        </div>
+                                    </div>
+                                    <div class="upload-actions">
+                                        <button class="btn btn-accent btn-lg" id="btn-upload-ppob" disabled>
+                                            <i class='bx bx-upload'></i> Proses, Hitung Profit & Sinkronisasi
+                                        </button>
+                                    </div>
+                                    <div class="progress-wrap" id="prog-ppob" style="display:none;">
+                                        <div class="progress-label">
+                                            <span id="plabel-ppob">Memproses...</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="pfill-ppob"></div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top:16px;padding:14px;background:var(--primary-light);border-radius:var(--radius-md);font-size:0.82rem;color:var(--primary);">
+                                        <strong>💡 Rumus Profit SIMASRIM:</strong><br>
+                                        <code style="display:block;margin-top:6px;background:rgba(255,255,255,0.6);padding:8px;border-radius:6px;font-size:0.85em;">
+                                            PROFIT = (TAGIHAN USER − CASHBACK USER) − BAYAR MITRA
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Demo Data Banner -->
+                            <div style="margin-bottom:16px;padding:16px 20px;background:linear-gradient(135deg,var(--primary-light),var(--accent-light));border:1px solid var(--primary);border-radius:var(--radius-lg);display:flex;align-items:center;gap:16px;">
+                                <div style="font-size:2rem;">📊</div>
+                                <div style="flex:1;">
+                                    <div style="font-weight:800;font-size:0.9rem;color:var(--primary);margin-bottom:3px;">Coba dengan Data Demo</div>
+                                    <div style="font-size:0.8rem;color:var(--text-muted);">Muat data contoh untuk melihat dashboard langsung bekerja sebelum upload file asli.</div>
+                                </div>
+                                <button class="btn btn-ghost" onclick="loadDemoData()" style="flex-shrink:0;">
+                                    <i class='bx bx-play-circle'></i> Muat Demo
+                                </button>
+                            </div>
+
+                <!-- Panel: Logistik -->
+                            <div class="upload-panel" id="panel-logistik">
+                                <div class="upload-card">
+                                    <div class="upload-card-header">
+                                        <div class="uc-icon" style="background:var(--success-light);color:var(--success);">
+                                            <i class='bx bx-package'></i>
+                                        </div>
+                                        <h2>Upload Data Logistik (Opsional)</h2>
+                                        <p>Data pengiriman paket. Digunakan untuk segmentasi <strong>Cross-Sell Target</strong> — mengidentifikasi user yang aktif di PPOB tapi belum pakai Logistik (atau sebaliknya).</p>
+                                        <div class="field-tags">
+                                            <span class="field-tag">ID USER</span>
+                                            <span class="field-tag">NAMA USER</span>
+                                            <span class="field-tag">EMAIL</span>
+                                            <span class="field-tag">AWB / RESI</span>
+                                            <span class="field-tag">EKSPEDISI</span>
+                                            <span class="field-tag">STATUS</span>
+                                        </div>
+                                    </div>
+                                    <div class="drop-zone" id="drop-logistik">
+                                        <input type="file" id="file-logistik" accept=".xlsx,.xls,.csv">
+                                        <i class='bx bx-cloud-upload'></i>
+                                        <h4>Klik atau Drag & Drop File</h4>
+                                        <p>Format: .xlsx, .xls, atau .csv</p>
+                                    </div>
+                                    <div class="file-selected" id="file-sel-logistik">
+                                        <i class='bx bxs-file-blank' style="color:var(--success);"></i>
+                                        <div>
+                                            <div class="fn" id="fname-logistik">–</div>
+                                            <div class="fs">Siap diproses</div>
+                                        </div>
+                                    </div>
+                                    <div class="upload-actions">
+                                        <button class="btn btn-lg" id="btn-upload-logistik" disabled
+                                            style="background:linear-gradient(135deg,var(--success),#4ade80);color:#fff;box-shadow:0 4px 16px rgba(34,197,94,0.3);">
+                                            <i class='bx bx-upload'></i> Proses & Sinkronisasi Logistik
+                                        </button>
+                                    </div>
+                                    <div class="progress-wrap" id="prog-logistik" style="display:none;">
+                                        <div class="progress-label">
+                                            <span id="plabel-logistik">Memproses...</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="pfill-logistik"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ══════════════════════════════════
+                     TAB: TUTORIAL
+                ══════════════════════════════════ -->
+                <section id="tutorial" class="tab-pane">
+                    <div class="content-area">
+                        <div style="background:var(--bg-card);border-radius:var(--radius-lg);padding:30px;box-shadow:var(--shadow-md);">
+                            <h2 style="margin-bottom:20px;color:var(--primary);font-size:1.5rem;font-weight:800;">
+                                <i class='bx bx-book-open'></i> Panduan Penggunaan SIMASRIM Dashboard
+                            </h2>
+                            <p style="color:var(--text-muted);margin-bottom:30px;line-height:1.6;">
+                                Selamat datang di SIMASRIM PPOB Dashboard! Halaman ini dibuat untuk membantu tim operasional memahami dan menggunakan semua fitur yang ada dengan mudah dan praktis.
+                            </p>
+
+                            <div style="display:grid;grid-template-columns:1fr;gap:20px;">
+                                <!-- Tutorial 1 -->
+                                <div style="border-left:4px solid var(--accent);padding:16px 20px;background:var(--bg);border-radius:var(--radius-sm);">
+                                    <h3 style="font-size:1.1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+                                        <i class='bx bx-cloud-upload' style="color:var(--accent);font-size:1.4rem;"></i> 
+                                        1. Cara Mengupload Data
+                                    </h3>
+                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                        <strong>Tujuan:</strong> Memasukkan data transaksi dan data pelanggan agar dashboard bisa menampilkan laporan terbaru.
+                                    </p>
+                                    <ol style="margin-left:20px;margin-top:10px;font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                        <li style="margin-bottom:6px;">Buka menu <strong>Upload Data</strong> di menu sebelah kiri.</li>
+                                        <li style="margin-bottom:6px;">Akan muncul tiga kotak upload: <strong>Master User</strong>, <strong>Transaksi PPOB</strong>, dan <strong>Logistik</strong>.</li>
+                                        <li style="margin-bottom:6px;">Klik kotak tersebut atau seret (drag & drop) file Excel (.xlsx) atau CSV ke dalamnya.</li>
+                                        <li style="margin-bottom:6px;">Setelah file terpilih, klik tombol berwarna <strong>"Proses & Sinkronisasi"</strong> yang muncul di bawahnya.</li>
+                                        <li style="margin-bottom:6px;">Tunggu hingga loading selesai dan muncul notifikasi sukses. Lakukan hal yang sama untuk kotak lainnya jika diperlukan.</li>
+                                    </ol>
+                                </div>
+
+                                <!-- Tutorial 2 -->
+                                <div style="border-left:4px solid var(--primary);padding:16px 20px;background:var(--bg);border-radius:var(--radius-sm);">
+                                    <h3 style="font-size:1.1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+                                        <i class='bx bx-grid-alt' style="color:var(--primary);font-size:1.4rem;"></i> 
+                                        2. Membaca Laporan & Grafik
+                                    </h3>
+                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                        <strong>Tujuan:</strong> Melihat rangkuman bisnis secara cepat (berapa banyak transaksi, pendapatan, dll).
+                                    </p>
+                                    <ul style="margin-left:20px;margin-top:10px;font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                        <li style="margin-bottom:6px;">Buka menu <strong>Dashboard</strong>. Di bagian atas, bisa dilihat Total Transaksi, Total Uang Masuk (Volume), dan Profit Bersih.</li>
+                                        <li style="margin-bottom:6px;"><strong>Filter waktu</strong> bisa diubah di pojok kanan atas (misalnya: <strong>7 Hari Terakhir</strong> atau <strong>30 Hari Terakhir</strong>) untuk melihat perkembangan terbaru saja.</li>
+                                        <li style="margin-bottom:6px;">Grafik di bawahnya menunjukkan produk apa saja yang paling laku (Top Produk) dan seberapa aktif pelanggan.</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Tutorial 3 -->
+                                <div style="border-left:4px solid var(--success);padding:16px 20px;background:var(--bg);border-radius:var(--radius-sm);">
+                                    <h3 style="font-size:1.1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+                                        <i class='bx bx-user-pin' style="color:var(--success);font-size:1.4rem;"></i> 
+                                        3. Mengelola Pelanggan (CRM & WhatsApp)
+                                    </h3>
+                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                        <strong>Tujuan:</strong> Menghubungi pelanggan berdasarkan kebiasaan mereka secara tepat sasaran (misal: menyapa pelanggan VIP, atau merayu pelanggan yang sudah lama tidak beli).
+                                    </p>
+                                    <ol style="margin-left:20px;margin-top:10px;font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                        <li style="margin-bottom:6px;">Buka menu <strong>CRM & Segmentasi</strong>. Di sini pelanggan sudah dikelompokkan otomatis oleh sistem (contoh: <strong>Champion/VIP 👑</strong> untuk pelanggan setia, <strong>At Risk ⚠️</strong> untuk pelanggan yang sudah lebih dari 30 hari tidak transaksi).</li>
+                                        <li style="margin-bottom:6px;">Gunakan kotak pencarian atau pilihan dropdown kategori untuk memfilter data.</li>
+                                        <li style="margin-bottom:6px;">Klik pada baris/nama salah satu pelanggan untuk membuka detailnya.</li>
+                                        <li style="margin-bottom:6px;">Sistem sudah menyiapkan pesan WhatsApp (Template) yang kata-katanya disesuaikan otomatis dengan kebiasaan pelanggan tersebut!</li>
+                                        <li style="margin-bottom:6px;">Klik tombol hijau <strong>"Hubungi via WhatsApp"</strong> untuk langsung membuka obrolan ke nomor pelanggan bersangkutan tanpa perlu repot mengetik/copy paste.</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /tab-content-wrapper -->
+        </main>
+    </div><!-- /app-container -->
+
+    <!-- ============================================================
+         CRM MODAL POPUP
+    ============================================================ -->
+    <div id="crm-modal-overlay" class="modal-overlay hidden">
+        <div class="crm-modal">
+            <!-- Header -->
+            <div class="crm-modal-header">
+                <div class="mh-top">
+                    <div class="user-avatar-lg" id="modal-user-initial">U</div>
+                    <div class="mh-info">
+                        <h2 id="modal-user-name">Nama User</h2>
+                        <p id="modal-user-email">email@example.com</p>
+                    </div>
+                </div>
+                <div class="mh-seg">
+                    <span class="seg-badge champion" id="modal-segmen-badge">Champion / VIP 👑</span>
+                </div>
+                <button class="modal-close-btn" id="modal-close-btn">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="crm-modal-body">
+                <!-- Stats -->
+                <div class="crm-stat-row">
+                    <div class="crm-stat-item">
+                        <div class="cs-val" id="modal-stat-trx">0</div>
+                        <div class="cs-lbl">Transaksi</div>
+                    </div>
+                    <div class="crm-stat-item">
+                        <div class="cs-val" id="modal-stat-volume">Rp 0</div>
+                        <div class="cs-lbl">Total Volume</div>
+                    </div>
+                    <div class="crm-stat-item">
+                        <div class="cs-val" id="modal-stat-profit">Rp 0</div>
+                        <div class="cs-lbl">Profit Bersih</div>
+                    </div>
+                </div>
+
+                <!-- Detail Info -->
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;font-size:0.82rem;">
+                    <div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);">
+                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;">ORIGIN</div>
+                        <div id="modal-origin" style="font-weight:700;">–</div>
+                    </div>
+                    <div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);">
+                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;">KATEGORI USER</div>
+                        <div id="modal-kategori" style="font-weight:700;">–</div>
+                    </div>
+                    <div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);">
+                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;">PRODUK FAVORIT</div>
+                        <div id="modal-fav-produk" style="font-weight:700;">–</div>
+                    </div>
+                    <div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);">
+                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;">TRANSAKSI TERAKHIR</div>
+                        <div id="modal-last-trx" style="font-weight:700;">–</div>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Template -->
+                <div style="margin-bottom:6px;font-size:0.8rem;font-weight:700;color:var(--text-muted);">
+                    📝 Template WhatsApp (Auto-Generated):
+                </div>
+                <div class="wa-template-box">
+                    <p id="modal-wa-template">–</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="modal-footer-btns">
+                    <button class="btn btn-ghost" onclick="closeCRMModal()">
+                        <i class='bx bx-x'></i> Tutup
+                    </button>
+                    <a id="modal-wa-btn" class="btn btn-wa" href="#" target="_blank">
+                        <i class='bx bxl-whatsapp'></i> Hubungi via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         TOAST CONTAINER
+    ============================================================ -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ============================================================
+         SCRIPTS
+    ============================================================ -->
+    <!-- SheetJS — Parse Excel/CSV client-side -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+    <!-- App Modules (urutan penting) -->
+    <script src="js/firebase-api.js"></script>
+    <script src="js/parser.js"></script>
+    <script src="js/crm.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/demo-data.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Badge counter update — runs after all scripts loaded -->
+    <script>
+        // Patch processAndRender to also update the CRM badge counter
+        // This runs AFTER app.js so processAndRender is already defined
+        (function patchBadge() {
+            const _orig = window.processAndRender;
+            if (typeof _orig !== 'function') {
+                // Retry on next tick if app.js not yet finished
+                return setTimeout(patchBadge, 50);
+            }
+            window.processAndRender = function() {
+                _orig.call(this);
+                // Update badge CRM
+                const badge = document.getElementById('badge-crm');
+                if (badge && window.AppState && AppState.segmented) {
+                    const active = AppState.segmented.filter(u => u.total_trx > 0 || u.has_logistic).length;
+                    badge.textContent = active > 0 ? active : '–';
+                }
+                // Update page subtitle
+                const sub = document.getElementById('page-sub');
+                if (sub && window.AppState) {
+                    const s = AppState.summary || {};
+                    sub.textContent = `${(s.totalTrx||0).toLocaleString('id-ID')} transaksi · ${(s.totalUserAktif||0)} user aktif · Profit ${fmtShort(s.totalProfit||0)}`;
+                }
+            };
+        })();
+    </script>
+
+</body>
+</html>

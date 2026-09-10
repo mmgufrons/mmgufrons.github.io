@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeri Tema — Cek Ongkir</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23121215' stroke='%2327272a' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='system-ui, sans-serif' font-weight='800' font-size='24' fill='%23f4f4f5' text-anchor='middle'%3EMG%3C/text%3E%3Ccircle cx='48' cy='18' r='4' fill='%236366f1'/%3E%3C/svg%3E">
+<meta name="description" content="Galeri desain purwarupa halaman Cek Ongkir SiCek — pilih varian untuk melihat tampilannya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#09090b; --panel:#121215; --panel-2:#18181c; --border:#27272a;
+    --border-hover:#3f3f46; --text:#f4f4f5; --muted:#a1a1aa;
+    --accent:#6366f1; --accent-2:#10b981;
+    --shadow-card:0 10px 30px -10px rgba(0,0,0,0.6);
+    --shadow-hover:0 20px 40px -12px rgba(0,0,0,0.8), 0 0 25px -5px rgba(99,102,241,0.15);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .top-nav{
+    display:flex; align-items:center; gap:12px; padding:18px 32px;
+    border-bottom:1px solid var(--border); background:rgba(18,18,21,0.7); backdrop-filter:blur(12px);
+    font-size:13px; font-weight:600;
+  }
+  .top-nav a{ color:var(--muted); text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all .2s ease; }
+  .top-nav a:hover{ color:#ffffff; transform:translateX(-2px); }
+  .top-nav .sep{ color:#3f3f46; }
+  .top-nav .current{ color:var(--text); }
+  header{
+    padding:64px 24px 36px; text-align:center;
+    background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 65%);
+  }
+  header h1{
+    margin:0 0 12px; font-size:clamp(30px,4.5vw,44px); font-weight:800;
+    letter-spacing:-0.03em; color:#fafafa;
+  }
+  header p{margin:0 auto;max-width:640px;color:var(--muted);font-size:14.5px;line-height:1.65;}
+  .badge{
+    display:inline-block;background:rgba(255,255,255,0.06);color:#e4e4e7;
+    border:1px solid rgba(255,255,255,0.14);padding:5px 14px;border-radius:99px;
+    font-size:12px;font-weight:700;letter-spacing:.02em;margin-bottom:16px;
+    transition:all .2s ease;
+  }
+  .badge:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.09);}
+  main{max-width:1180px;margin:0 auto;padding:0 24px 80px;}
+  .group{margin-bottom:52px;}
+  .group-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+  .group-head h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-0.02em;}
+  .group-head span{color:var(--muted);font-size:13.5px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+  .card{
+    background:var(--panel);border:1px solid var(--border);border-radius:18px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:all .28s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow:var(--shadow-card);
+  }
+  .card:hover{
+    transform:translateY(-5px);border-color:var(--border-hover);
+    box-shadow:var(--shadow-hover);
+  }
+  .thumb{height:130px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid var(--border);}
+  .thumb .mock{width:82%;height:78%;background:var(--panel-2);border-radius:12px;border:1px solid var(--border);padding:10px;display:flex;flex-direction:column;gap:6px;}
+  .mock .bar{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent),transparent);width:60%;}
+  .mock .line{height:6px;border-radius:3px;background:rgba(255,255,255,0.08);}
+  .mock .line.w1{width:90%;} .mock .line.w2{width:70%;} .mock .line.w3{width:50%;}
+  .mock .chip{margin-top:auto;height:20px;width:40%;border-radius:99px;background:rgba(99,102,241,0.25);}
+  .thumb.t-base{background:linear-gradient(135deg,#1c1c22,#121215);}
+  .thumb.t-bold{background:linear-gradient(135deg,#201c24,#121215);}
+  .thumb.t-minimal{background:linear-gradient(135deg,#181c20,#121215);}
+  .thumb.t-update{background:linear-gradient(135deg,#18201a,#121215);}
+  .thumb.t-signature{background:linear-gradient(135deg,#1d1a24,#121215);}
+  .thumb.t-nova{background:linear-gradient(135deg,#191c26,#121215);}
+  .thumb.t-landing{background:linear-gradient(135deg,#221e16,#121215);}
+  .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .body h3{margin:0;font-size:17px;font-weight:700;}
+  .body p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55;}
+  .pages{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:12px;}
+  .pages a{
+    font-size:12px;font-weight:600;color:var(--text);background:var(--panel-2);
+    border:1px solid var(--border);padding:6px 12px;border-radius:9px;text-decoration:none;
+    transition:all .2s ease;
+  }
+  .pages a:hover{border-color:var(--border-hover);color:#fff;transform:translateY(-1px);}
+  .pages a.primary{
+    background:#6366f1;border-color:transparent;color:#ffffff;
+    box-shadow:0 3px 12px rgba(99,102,241,0.35);
+  }
+  .pages a.primary:hover{background:#4f46e5;color:#ffffff;}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:28px 24px 48px;border-top:1px solid var(--border);max-width:1180px;margin:0 auto;}
+  footer a{color:var(--accent);text-decoration:none;transition:all .2s ease;display:inline-block;}
+  footer a:hover{color:#818cf8;transform:translateX(-2px);text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="../index.html">← Portofolio Hub</a>
+  <span class="sep">/</span>
+  <span class="current">Purwarupa Cek Ongkir</span>
+</nav>
+
+<header>
+  <div class="badge">Purwarupa Desain Antarmuka</div>
+  <h1>Galeri Tema Cek Ongkir</h1>
+  <p>Kompilasi eksplorasi purwarupa UI/UX modul Cek Ongkir &amp; Tracking SiCek, mencakup varian Signature, Nova, dan implementasi Landing Page.</p>
+</header>
+
+<main>
+
+  <div class="group">
+    <div class="group-head"><h2>SiCek</h2><span>3 varian: Signature, Nova, dan Landing Page</span></div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="thumb t-signature"><div class="mock"><div class="bar" style="background:linear-gradient(90deg,#b58cff,transparent);"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip" style="background:rgba(181,140,255,.25);"></div></div></div>
+        <div class="body">
+          <h3>Signature</h3>
+          <p>Identitas visual khas SiCek — beranda, cek ongkir, tracking, dan halaman transaksi berhasil.</p>
+          <div class="pages">
+            <a class="primary" href="sicek/signature/beranda/code.html">Beranda</a>
+            <a href="sicek/signature/cek_ongkir/code.html">Cek Ongkir</a>
+            <a href="sicek/signature/tracking/code.html">Tracking</a>
+            <a href="sicek/signature/transaksi_berhasil/code.html">Transaksi Berhasil</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb t-nova"><div class="mock"><div class="bar" style="background:linear-gradient(90deg,#7eb8ff,transparent);"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip" style="background:rgba(126,184,255,.25);"></div></div></div>
+        <div class="body">
+          <h3>Nova</h3>
+          <p>Iterasi lanjutan dari Signature dengan penyegaran visual & interaksi.</p>
+          <div class="pages">
+            <a class="primary" href="sicek/nova/beranda/code.html">Beranda</a>
+            <a href="sicek/nova/cek_ongkir/code.html">Cek Ongkir</a>
+            <a href="sicek/nova/tracking/code.html">Tracking</a>
+            <a href="sicek/nova/transaksi_berhasil/code.html">Transaksi Berhasil</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="thumb t-landing"><div class="mock"><div class="bar" style="background:linear-gradient(90deg,#ffd27e,transparent);"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip" style="background:rgba(255,210,126,.25);"></div></div></div>
+        <div class="body">
+          <span class="tag" style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 8px;border-radius:6px;width:fit-content;background:rgba(126,224,193,0.15);color:var(--accent-2);">Sudah Live</span>
+          <h3>Landing Page</h3>
+          <p>Halaman pemasaran berdiri sendiri — "Cek Ongkir Murah, Bandingkan &amp; Lacak Sekejap".
+          Sudah live di <a href="https://cekongkirmurah.smsrm.com" target="_blank" rel="noopener">cekongkirmurah.smsrm.com</a>.</p>
+          <div class="pages">
+            <a class="primary" href="sicek/landing-page/index.html">Buka Purwarupa</a>
+            <a href="https://cekongkirmurah.smsrm.com" target="_blank" rel="noopener">Buka Versi Live</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Bagian dari portofolio demo — lihat hub lengkap di <a href="../index.html">index portofolio</a>.
+</footer>
+
+</body>
+</html>

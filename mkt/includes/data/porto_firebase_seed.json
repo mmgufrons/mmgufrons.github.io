@@ -1,0 +1,29 @@
+{
+  "mitra_lookers": {
+    "DEMO-1 - Kota Contoh A (PIC Demo)": "#",
+    "DEMO-2 - Kota Contoh B (PIC Demo)": "#",
+    "DEMO-3 - Kota Contoh C (PIC Demo)": "#"
+  },
+  "mitra_spreadsheets": {
+    "DEMO-1 - Kota Contoh A (PIC Demo)": "#",
+    "DEMO-2 - Kota Contoh B (PIC Demo)": "#",
+    "DEMO-3 - Kota Contoh C (PIC Demo)": "#"
+  },
+  "marketing_kit": {
+    "X-Banner EDC (Demo)": "#",
+    "Spanduk 2x1 M (Demo)": "#",
+    "Spanduk 3x1 M (Demo)": "#"
+  },
+  "coverage": {
+    "exp_names": ["Ekspedisi Demo A", "Ekspedisi Demo B", "Ekspedisi Demo C"],
+    "raw_data": [
+      ["Jawa Barat", "Bogor", "Bogor Utara", "111", "Aktif"],
+      ["Jawa Barat", "Bandung", "Coblong", "101", "Aktif"],
+      ["DKI Jakarta", "Jakarta Selatan", "Kebayoran Baru", "111", "Aktif"]
+    ]
+  },
+  "edc_todo": {
+    "demo_edc_1": { "nama_toko": "Toko Contoh Sejahtera", "area": "Bogor", "status": "Terpasang", "created_at": "2026-08-20" },
+    "demo_edc_2": { "nama_toko": "Warung Contoh Makmur", "area": "Depok", "status": "Menunggu Survei", "created_at": "2026-08-25" }
+  }
+}

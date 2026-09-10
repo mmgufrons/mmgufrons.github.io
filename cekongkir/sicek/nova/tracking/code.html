@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tracking — SiCek Nova</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          violet: "#6D28D9", "violet-deep": "#4C1D95", "violet-soft": "#F3EEFC",
+          surface: "#FAF8FF", "surface-card": "#FFFFFF", "surface-muted": "#F1ECFB", border: "#E7DFF7",
+          gold: "#FFB627", "gold-dark": "#F0970A", mint: "#12B981", "mint-soft": "#E3FBF1",
+          ink: "#241547", ink70: "rgba(36,21,71,0.68)", ink45: "rgba(36,21,71,0.45)",
+        },
+        fontFamily: { display: ["Plus Jakarta Sans", "sans-serif"], body: ["Inter", "sans-serif"] },
+        borderRadius: { xl2: "22px", xl3: "32px" },
+      },
+    },
+  };
+</script>
+<style>
+  body { min-height: max(884px, 100dvh); }
+  .glow::before {
+    content: ""; position: absolute; inset: 0; opacity: .16; pointer-events: none;
+    background: radial-gradient(circle at 20% 0%, #fff 0%, transparent 55%);
+  }
+  .timeline-dot { box-shadow: 0 0 0 4px #FAF8FF; }
+</style>
+</head>
+<body class="bg-surface text-ink font-body antialiased pb-28">
+
+<header class="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-border">
+  <div class="max-w-md mx-auto px-5 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../beranda/code.html" title="Kembali ke Beranda" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-muted active:scale-95 transition">
+        <span class="material-symbols-outlined text-violet">arrow_back</span>
+      </a>
+      <div>
+        <h1 class="font-display font-extrabold text-lg leading-tight">Lacak Pengiriman</h1>
+        <p class="text-[11px] text-ink45 -mt-0.5">Pantengin paketmu, real-time</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="../../../../index.html" class="text-xs bg-violet text-white px-2.5 py-1.5 rounded-lg hover:bg-violet-deep transition font-medium">Hub Utama</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-md mx-auto px-5 pt-5 flex flex-col gap-7">
+
+  <!-- Search Card -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-violet to-violet-deep text-white rounded-xl3 p-5 glow">
+    <div class="absolute -top-14 -right-8 w-36 h-36 bg-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="relative flex flex-col gap-3">
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-[20px]">barcode_scanner</span>
+        <input class="w-full h-[52px] rounded-2xl bg-white/10 border border-white/15 pl-11 pr-4 text-sm placeholder:text-white/40 focus:outline-none focus:border-gold transition" placeholder="Masukkan nomor resi (AWB)" type="text"/>
+      </div>
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-[20px]">local_shipping</span>
+        <select class="w-full h-[52px] rounded-2xl bg-white/10 border border-white/15 pl-11 pr-4 text-sm text-white/80 focus:outline-none focus:border-gold transition appearance-none">
+          <option class="text-ink">Pilih kurir…</option>
+          <option class="text-ink">JNE</option>
+          <option class="text-ink">SAPX</option>
+          <option class="text-ink">J&amp;T Express</option>
+          <option class="text-ink">AnterAja</option>
+        </select>
+      </div>
+      <button class="h-[52px] rounded-2xl bg-gold hover:bg-gold-dark active:scale-[.98] transition flex items-center justify-center gap-2 font-bold text-sm text-violet-deep">
+        <span class="material-symbols-outlined text-[20px]">search</span>
+        Lacak Sekarang
+      </button>
+    </div>
+  </section>
+
+  <!-- Status Timeline -->
+  <section class="flex flex-col gap-3">
+    <div class="flex items-center justify-between">
+      <h3 class="font-display font-bold text-base">JP9876543210</h3>
+      <span class="bg-mint-soft text-mint text-[10px] font-bold px-2.5 py-1 rounded-full">Dalam Perjalanan</span>
+    </div>
+    <div class="bg-surface-card border border-border rounded-xl2 p-4">
+      <div class="relative pl-7">
+        <div class="absolute left-[7px] top-1 bottom-1 w-[2px] bg-border"></div>
+        <div class="relative pb-5">
+          <div class="absolute -left-[21px] top-0.5 w-4 h-4 rounded-full bg-gold timeline-dot"></div>
+          <p class="text-sm font-bold">Paket sedang diantar kurir</p>
+          <p class="text-[11px] text-ink45 mt-0.5">Hari ini, 09.42 · Surabaya</p>
+        </div>
+        <div class="relative pb-5">
+          <div class="absolute -left-[21px] top-0.5 w-4 h-4 rounded-full bg-violet timeline-dot"></div>
+          <p class="text-sm font-semibold text-ink70">Tiba di gudang transit tujuan</p>
+          <p class="text-[11px] text-ink45 mt-0.5">Kemarin, 21.15 · Surabaya Hub</p>
+        </div>
+        <div class="relative pb-5">
+          <div class="absolute -left-[21px] top-0.5 w-4 h-4 rounded-full bg-violet timeline-dot"></div>
+          <p class="text-sm font-semibold text-ink70">Paket dalam perjalanan</p>
+          <p class="text-[11px] text-ink45 mt-0.5">Kemarin, 14.03 · Jakarta Hub</p>
+        </div>
+        <div class="relative">
+          <div class="absolute -left-[21px] top-0.5 w-4 h-4 rounded-full bg-ink45 timeline-dot"></div>
+          <p class="text-sm font-semibold text-ink70">Pesanan diterima ekspedisi</p>
+          <p class="text-[11px] text-ink45 mt-0.5">2 hari lalu, 10.20 · Jakarta Pusat</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Riwayat -->
+  <section class="flex flex-col gap-3">
+    <h3 class="font-display font-bold text-base">Riwayat Pencarian</h3>
+    <div class="flex flex-col gap-2.5">
+      <div class="bg-surface-card border border-border rounded-xl2 p-3.5 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#EF3340] text-white flex items-center justify-center font-display font-bold text-[10px]">SAPX</div>
+        <div class="flex-1 min-w-0">
+          <p class="font-semibold text-sm truncate">0012398475</p>
+          <p class="text-[11px] text-ink45">SAPX · Terkirim</p>
+        </div>
+        <button class="text-ink45"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+      </div>
+      <div class="bg-surface-card border border-border rounded-xl2 p-3.5 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#DA0812] text-white flex items-center justify-center font-display font-bold text-[10px]">JNE</div>
+        <div class="flex-1 min-w-0">
+          <p class="font-semibold text-sm truncate">TKP882211</p>
+          <p class="text-[11px] text-ink45">JNE Reguler · Manifested</p>
+        </div>
+        <button class="text-ink45"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slot Iklan -->
+  <section class="relative pb-6">
+    <div class="absolute top-2.5 left-2.5 z-10 bg-violet-deep/70 backdrop-blur-sm text-white/90 text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wide">IKLAN</div>
+    <div class="w-full h-24 rounded-xl2 bg-surface-muted border border-dashed border-border flex items-center justify-center overflow-hidden">
+      <p class="text-[11px] text-ink45">Slot Banner Ads · 336×96</p>
+    </div>
+  </section>
+</main>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-t border-border">
+  <div class="max-w-md mx-auto grid grid-cols-4 h-[74px] px-2 pb-safe">
+    <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../beranda/code.html">
+      <span class="material-symbols-outlined text-[22px]">home</span>
+      <span class="text-[10px] font-medium">Beranda</span>
+    </a>
+    <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../cek_ongkir/code.html">
+      <span class="material-symbols-outlined text-[22px]">payments</span>
+      <span class="text-[10px] font-medium">Cek Ongkir</span>
+    </a>
+    <a class="flex flex-col items-center justify-center gap-1 text-violet" href="../tracking/code.html">
+      <span class="material-symbols-outlined text-[22px]" style="font-variation-settings:'FILL' 1">local_shipping</span>
+      <span class="text-[10px] font-bold">Tracking</span>
+    </a>
+    <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../cek_ongkir/code.html#kirim">
+      <span class="material-symbols-outlined text-[22px]">send</span>
+      <span class="text-[10px] font-medium">Kirim</span>
+    </a>
+  </div>
+</nav>
+
+<style>.pb-safe{padding-bottom:env(safe-area-inset-bottom,10px)}</style>
+</body>
+</html>

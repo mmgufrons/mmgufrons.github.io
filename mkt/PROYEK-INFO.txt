@@ -1,0 +1,7 @@
+==============================================
+PROYEK   : mkt (PHP)
+FOLDER   : /home/tatangracing/projects/mkt
+ALAMAT   : http://localhost:8092
+NGINX    : /etc/nginx/sites-available/mkt
+Dikelola : http://localhost:7000 (Proyek Manager)
+==============================================

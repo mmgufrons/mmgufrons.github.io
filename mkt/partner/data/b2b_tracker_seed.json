@@ -1,0 +1,96 @@
+{
+  "b2b_tracker": {
+    "demo_b2b_1": {
+      "name": "Yayasan Amal Contoh (DEMO)",
+      "direction": "IN",
+      "type": "Lembaga Sosial",
+      "category": "Ekonomi Pemberdayaan",
+      "notes": "Contoh prospek B2B — sudah tanda tangan NDA, tahap integrasi teknis.",
+      "progress": {
+        "kontak_awal": true,
+        "nda": true,
+        "integrasi": false,
+        "live": false
+      },
+      "order": 0,
+      "assets": [],
+      "contacts": [
+        {
+          "nama": "Bapak Rahman (Demo)",
+          "peran": "PIC Program",
+          "kontak": "demo@contoh-yayasan.id"
+        }
+      ],
+      "detail_content": "Contoh catatan detail kerja sama B2B (data fiktif untuk portofolio)."
+    },
+    "demo_b2b_2": {
+      "name": "Aplikasi Mitra Digital (DEMO)",
+      "direction": "OUT",
+      "type": "Aplikasi/Platform",
+      "category": "Integrasi API",
+      "notes": "Contoh prospek integrasi API pengiriman & PPOB ke aplikasi pihak ketiga.",
+      "progress": {
+        "kontak_awal": true,
+        "nda": false,
+        "integrasi": false,
+        "live": false
+      },
+      "order": 1,
+      "assets": [],
+      "contacts": [
+        {
+          "nama": "Ibu Sinta (Demo)",
+          "peran": "Product Manager",
+          "kontak": "demo@contoh-app.id"
+        }
+      ],
+      "detail_content": "Contoh catatan detail kerja sama B2B (data fiktif untuk portofolio)."
+    },
+    "demo_b2b_3": {
+      "name": "Koperasi Sejahtera Bersama (DEMO)",
+      "direction": "IN",
+      "type": "Koperasi",
+      "category": "Ritel & Logistik",
+      "notes": "Contoh mitra sudah live dan rutin bertransaksi.",
+      "progress": {
+        "kontak_awal": true,
+        "nda": true,
+        "integrasi": true,
+        "live": true
+      },
+      "order": 2,
+      "assets": [],
+      "contacts": [
+        {
+          "nama": "Bapak Hendra (Demo)",
+          "peran": "Ketua Koperasi",
+          "kontak": "demo@contoh-koperasi.id"
+        }
+      ],
+      "detail_content": "Contoh catatan detail kerja sama B2B (data fiktif untuk portofolio)."
+    },
+    "demo_b2b_4": {
+      "name": "Toko Elektronik Makmur Jaya (DEMO)",
+      "direction": "OUT",
+      "type": "Ritel",
+      "category": "Ritel & Logistik",
+      "notes": "Contoh penawaran integrasi pengiriman ke jaringan toko ritel — proposal sudah dikirim.",
+      "progress": {
+        "kontak_awal": true,
+        "nda": false,
+        "integrasi": false,
+        "live": false
+      },
+      "order": 3,
+      "assets": [],
+      "contacts": [
+        {
+          "nama": "Ibu Wulan (Demo)",
+          "peran": "Owner",
+          "kontak": "demo@contoh-elektronik.id"
+        }
+      ],
+      "detail_content": "Contoh catatan detail kerja sama B2B (data fiktif untuk portofolio)."
+    }
+  }
+}

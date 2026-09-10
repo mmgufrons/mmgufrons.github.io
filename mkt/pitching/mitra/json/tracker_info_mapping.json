@@ -1,0 +1,50 @@
+{
+  "tracker_to_info": {
+    "1":              "plm",
+    "2":              "sub",
+    "3":              "bks",
+    "4":              null,
+    "1777515617136":  "mes1",
+    "1777515642629":  "mxg",
+    "1779176477865":  "mes2",
+    "1779176500745":  "mes3",
+    "1779176507336":  "mes4",
+    "1780888799948":  null,
+    "1782799964975":  "kdr"
+  },
+  "info_to_tracker": {
+    "plm":  "1",
+    "sub":  "2",
+    "bks":  "3",
+    "mes1": "1777515617136",
+    "mxg":  "1777515642629",
+    "mes2": "1779176477865",
+    "mes3": "1779176500745",
+    "mes4": "1779176507336",
+    "kdr":  "1782799964975"
+  },
+  "counted_keys": [
+    "present","grup","nda","penunjukan","adendum","akun","looker",
+    "am_brand","am_area","am_panduan","am_flyer","am_story","am_presentasi","am_sop","am_banner",
+    "plan","jalan"
+  ],
+  "progress_labels": {
+    "present":      "Presentasi Web Mitra",
+    "grup":         "Grup WA Dibuat",
+    "nda":          "NDA",
+    "penunjukan":   "Surat Penunjukan",
+    "adendum":      "Adendum Skema",
+    "akun":         "Akun Utama",
+    "looker":       "Dashboard Looker",
+    "am_brand":     "Amunisi: Campaign Brand",
+    "am_area":      "Amunisi: Campaign Area",
+    "am_panduan":   "Amunisi: Panduan Dasar",
+    "am_flyer":     "Amunisi: Flyer A4",
+    "am_story":     "Amunisi: Template Story",
+    "am_presentasi":"Amunisi: Presentasi PLG",
+    "am_sop":       "Amunisi: SOP Sosmed",
+    "am_banner":    "Amunisi: Banner",
+    "plan":         "Monthly Strategy Plan",
+    "jalan":        "Operasional Berjalan"
+  }
+}

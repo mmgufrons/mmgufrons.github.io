@@ -1,0 +1,41 @@
+<?php
+// data/transaksi/province_coords.php
+// Titik pusat approx tiap provinsi — fallback kalau nama kota tidak ada di city_coords.php.
+// Dicocokkan dengan substring nama kota (mis. "BALI, KAB. BADUNG, KUTA" -> match "BALI").
+
+return [
+    'ACEH' => [4.6951, 96.7494],
+    'SUMATERA UTARA' => [2.1154, 99.5451],
+    'SUMATERA BARAT' => [-0.7399, 100.8000],
+    'RIAU' => [0.2933, 101.7068],
+    'JAMBI' => [-1.6101, 103.6131],
+    'SUMATERA SELATAN' => [-3.3194, 103.9143],
+    'BENGKULU' => [-3.5778, 102.3464],
+    'LAMPUNG' => [-4.5586, 105.4068],
+    'KEPULAUAN BANGKA BELITUNG' => [-2.7411, 106.4406],
+    'KEPULAUAN RIAU' => [3.9456, 108.1428],
+    'DKI JAKARTA' => [-6.2088, 106.8456], 'JAKARTA' => [-6.2088, 106.8456],
+    'JAWA BARAT' => [-6.9147, 107.6098],
+    'JAWA TENGAH' => [-7.1510, 110.1403],
+    'DI YOGYAKARTA' => [-7.7956, 110.3695], 'YOGYAKARTA' => [-7.7956, 110.3695],
+    'JAWA TIMUR' => [-7.5361, 112.2384],
+    'BANTEN' => [-6.4058, 106.0640],
+    'BALI' => [-8.4095, 115.1889],
+    'NUSA TENGGARA BARAT' => [-8.6529, 117.3616],
+    'NUSA TENGGARA TIMUR' => [-8.6574, 121.0794],
+    'KALIMANTAN BARAT' => [-0.2787, 111.4753],
+    'KALIMANTAN TENGAH' => [-1.6815, 113.3824],
+    'KALIMANTAN SELATAN' => [-3.0926, 115.2838],
+    'KALIMANTAN TIMUR' => [0.5387, 116.4194],
+    'KALIMANTAN UTARA' => [3.0731, 116.0414],
+    'SULAWESI UTARA' => [0.6246, 123.9750],
+    'SULAWESI TENGAH' => [-1.4300, 121.4456],
+    'SULAWESI SELATAN' => [-3.6688, 119.9741],
+    'SULAWESI TENGGARA' => [-4.1449, 122.1746],
+    'GORONTALO' => [0.6999, 122.4467],
+    'SULAWESI BARAT' => [-2.8441, 119.2321],
+    'MALUKU' => [-3.2385, 130.1453],
+    'MALUKU UTARA' => [1.5709, 127.8087],
+    'PAPUA BARAT' => [-1.3361, 133.1747],
+    'PAPUA' => [-4.2699, 138.0804],
+];

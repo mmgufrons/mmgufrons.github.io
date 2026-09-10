@@ -1,0 +1,37 @@
+{
+  "title": "ALBANI STORE",
+  "subtitle": "Solusi Barang Mempermudah Hidup Unik & Aestetik",
+  "uspText": "⭐️ Stok Ready | Bintang 4.9 | Kirim Senin - Sabtu ⭐️",
+  "mainLink": {
+    "url": "https://s.shopee.co.id/3qFSA6KBik?share_channel_code=1",
+    "text": "🛒 KUNJUNGI TOKO ALBANI STORE"
+  },
+  "categories": [
+    {
+      "label": "Solusi Pembayaran & EDC",
+      "links": [
+        { "url": "https://s.shopee.co.id/BNXcfcxGG", "text": "01. 🔊 SoundBox SQRIS Dinamis" },
+        { "url": "https://s.shopee.co.id/7AXHxatVJD", "text": "02. 📢 SoundBox SQRIS Statis" },
+        { "url": "https://s.shopee.co.id/9fEcwUz4BX", "text": "03. 💳 Mesin EDC T1 Android" },
+        { "url": "https://s.shopee.co.id/9zrTL9QghG", "text": "04. 📟 Mesin EDC T3 Modern" }
+      ]
+    },
+    {
+      "label": "Perlengkapan Rumah & Hobby",
+      "links": [
+        { "url": "https://s.shopee.co.id/806OxCEq5V", "text": "05. 🚴‍♀️ Jok Sepeda Empuk Nyaman" },
+        { "url": "https://s.shopee.co.id/30hj0BT5QP", "text": "06. 🍳 Grill Pan Anti Lengket" },
+        { "url": "https://s.shopee.co.id/8KjFLmipfN", "text": "07. 🥩 Cetakan Bakso Anti Lengket" },
+        { "url": "https://s.shopee.co.id/1gCLPcpZ2I", "text": "08. 🪴 Alat Berkebun Mini Serbaguna" },
+        { "url": "https://fTlIK6jkk", "text": "09. 📦 Container Box Lipat Praktis" }
+      ]
+    },
+    {
+      "label": "Kebutuhan Packing & Bisnis",
+      "links": [
+        { "url": "https://s.shopee.co.id/7KqutVQBIz", "text": "10. 🫧 Bubble Wrap Extra Aman" },
+        { "url": "https://s.shopee.co.id/70E4UuvqQ0", "text": "11. 🥛 Standing Pouch Anti Tumpah" }
+      ]
+    }
+  ]
+}

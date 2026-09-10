@@ -1,0 +1,37 @@
+{
+  "categories": [
+    {
+      "title": "B2B & Mitra Area (Demo)",
+      "items": [
+        { "url": "#", "icon": "ph-buildings", "isRegionCode": false, "tooltipTitle": "Resource Center B2B (Demo)", "tooltipDesc": "Pusat data dan resource B2B", "tooltipPw": "demo123", "tooltipId": "" },
+        { "url": "#", "icon": "ph-handshake", "isRegionCode": false, "tooltipTitle": "Resource Center Mitra Area (Demo)", "tooltipDesc": "Pusat data dan resource Mitra Internal", "tooltipPw": "demo123", "tooltipId": "" }
+      ]
+    },
+    {
+      "title": "Dashboard Mitra (Looker Studio) — Demo",
+      "subtitle": "Contoh tampilan portal internal (data & akses fiktif untuk portofolio)",
+      "items": [
+        { "url": "#", "icon": "PLM", "isRegionCode": true, "tooltipTitle": "Dashboard Kota Contoh A", "tooltipDesc": "Report Looker Studio Regional (Demo)", "tooltipPw": "", "tooltipId": "" },
+        { "url": "#", "icon": "SUB", "isRegionCode": true, "tooltipTitle": "Dashboard Kota Contoh B", "tooltipDesc": "Report Looker Studio Regional (Demo)", "tooltipPw": "", "tooltipId": "" },
+        { "url": "#", "icon": "BKS", "isRegionCode": true, "tooltipTitle": "Dashboard Kota Contoh C", "tooltipDesc": "Report Looker Studio Regional (Demo)", "tooltipPw": "", "tooltipId": "" }
+      ]
+    },
+    {
+      "title": "Resource Tim (Demo)",
+      "items": [
+        { "url": "#", "icon": "ph-users-three", "isRegionCode": false, "tooltipTitle": "Resource Center Tim (Demo)", "tooltipDesc": "Tim CS/Sales/Marketing", "tooltipPw": "demo123", "tooltipId": "" },
+        { "url": "#", "icon": "ph-image", "isRegionCode": false, "tooltipTitle": "Pembuatan Banner 2x1 (Demo)", "tooltipDesc": "Tools untuk User/CS", "tooltipPw": "", "tooltipId": "" },
+        { "url": "smr/", "icon": "ph-link", "isRegionCode": false, "tooltipTitle": "Linktree SIMASRIM (Demo Porto)", "tooltipDesc": "URL Sosial Media Simasrim", "tooltipPw": "", "tooltipId": "" },
+        { "url": "sma/", "icon": "ph-hard-drives", "isRegionCode": false, "tooltipTitle": "ERP Sistem PT SMA (Demo Porto)", "tooltipDesc": "Sistem ERP Internal", "tooltipId": "dimas@contoh-perusahaan.demo", "tooltipPw": "demo123" }
+      ]
+    },
+    {
+      "title": "Albani Store & Marketplace (Demo)",
+      "items": [
+        { "url": "babehwan/", "icon": "ph-microphone-stage", "isRegionCode": false, "tooltipTitle": "Landing Page Babeh Wan (Demo Porto)", "tooltipDesc": "Promosi Host untuk Calon Klien", "tooltipPw": "", "tooltipId": "" },
+        { "url": "mp/", "icon": "ph-storefront", "isRegionCode": false, "tooltipTitle": "Landing Page Albani Store (Demo Porto)", "tooltipDesc": "Promosi Marketplace untuk Calon Klien", "tooltipPw": "", "tooltipId": "" },
+        { "url": "sta/", "icon": "ph-link-simple", "isRegionCode": false, "tooltipTitle": "Linktree Albani Store (Demo Porto)", "tooltipDesc": "URL Sosial Media Albani Store", "tooltipPw": "", "tooltipId": "" }
+      ]
+    }
+  ]
+}

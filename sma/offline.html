@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sedang Offline — SIMASRIM Marketing OS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: #121212;
+            color: #e5e5e5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        .icon-wrap {
+            width: 80px; height: 80px;
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 30px rgba(139,92,246,0.2);
+        }
+        .icon-wrap svg { width: 36px; height: 36px; stroke: #8B5CF6; fill: none; stroke-width: 1.8; }
+        h1 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+        .version { font-size: 0.65rem; color: #6b7280; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2rem; }
+        p { color: #9ca3af; font-size: 0.9rem; line-height: 1.7; max-width: 380px; margin-bottom: 2rem; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #f87171;
+            font-size: 0.7rem; font-weight: 700;
+            padding: 0.5rem 1.25rem; border-radius: 9999px;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.6; }
+        }
+        .btn {
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #7c3aed; }
+        .tips {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-wrap">
+        <svg viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+        </svg>
+    </div>
+
+    <h1>SIMASRIM Marketing OS</h1>
+    <p class="version">PT SMA Enterprise OS CLOUD v10.2</p>
+
+    <div class="badge">
+        <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" style="border-radius:50%;">
+            <circle cx="4" cy="4" r="4"/>
+        </svg>
+        Koneksi Terputus
+    </div>
+
+    <p>
+        Anda sedang <strong style="color:#f3f4f6;">offline</strong>. Data terakhir Anda tetap aman di cloud.
+        Perubahan tidak dapat disimpan sampai koneksi internet kembali.
+    </p>
+
+    <button class="btn" onclick="window.location.reload()">
+        🔄 Coba Sambungkan Kembali
+    </button>
+
+    <p class="tips">
+        Tip: Setelah koneksi pulih, klik tombol di atas untuk memuat ulang aplikasi.
+    </p>
+
+    <script>
+        // Auto-reload when back online
+        window.addEventListener('online', () => window.location.reload());
+    </script>
+</body>
+</html>

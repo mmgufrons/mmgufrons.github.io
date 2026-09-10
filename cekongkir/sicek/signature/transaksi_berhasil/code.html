@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transaksi Berhasil — SiCek</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: "#0B1B33", "ink-soft": "#1B2C4A", surface: "#FBFAF7",
+          "surface-card": "#FFFFFF", "surface-muted": "#F1EEE6", border: "#E7E2D9",
+          amber: "#FF6B35", "amber-dark": "#E05A28", teal: "#0EA5A0", "teal-soft": "#E4F7F5",
+          ink70: "rgba(11,27,51,0.70)", ink45: "rgba(11,27,51,0.45)",
+        },
+        fontFamily: { display: ["Space Grotesk", "sans-serif"], body: ["Inter", "sans-serif"] },
+        borderRadius: { xl2: "20px", xl3: "28px" },
+      },
+    },
+  };
+</script>
+<style>
+  body { min-height: max(884px, 100dvh); }
+  @keyframes pop { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); } }
+  .pop-in { animation: pop .5s cubic-bezier(.22,1,.36,1); }
+  .cross-sell { transition: opacity .25s ease, max-height .35s ease, margin .35s ease; }
+</style>
+</head>
+<body class="bg-surface text-ink font-body antialiased">
+
+<main class="max-w-md mx-auto px-5 pt-10 pb-8 min-h-screen flex flex-col">
+
+  <!-- Success -->
+  <section class="flex flex-col items-center text-center gap-3 mt-4">
+    <div class="pop-in w-20 h-20 rounded-full bg-teal-soft flex items-center justify-center">
+      <span class="material-symbols-outlined text-teal text-[42px]" style="font-variation-settings:'FILL' 1">task_alt</span>
+    </div>
+    <h1 class="font-display font-semibold text-xl mt-2">Beres! Resimu Sudah Terbit.</h1>
+    <p class="text-sm text-ink45 max-w-[280px]">Tinggal duduk manis — kami bantu pantau sampai paket sampai tujuan.</p>
+  </section>
+
+  <!-- Ringkasan -->
+  <section class="mt-8 bg-surface-card border border-border rounded-xl2 p-4 flex flex-col gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl bg-[#EF3340] text-white flex items-center justify-center font-display font-bold text-[10px]">SAPX</div>
+      <div class="flex-1">
+        <p class="font-semibold text-sm">SAPX Reguler</p>
+        <p class="text-[12px] text-ink45">Jakarta Pusat → Surabaya</p>
+      </div>
+      <p class="font-display font-bold text-sm">Rp 14.850</p>
+    </div>
+    <div class="h-px bg-border"></div>
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-ink45">No. Resi</span>
+      <span class="font-semibold">SX2408190021</span>
+    </div>
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-ink45">Estimasi Tiba</span>
+      <span class="font-semibold">2-3 hari kerja</span>
+    </div>
+  </section>
+
+  <!-- Cross-sell kontekstual -->
+  <section id="cross-sell" class="cross-sell mt-4 relative overflow-hidden bg-ink text-white rounded-xl2 p-4 flex items-center gap-3">
+    <button onclick="dismissCrossSell()" class="absolute top-2.5 right-2.5 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center active:scale-90 transition">
+      <span class="material-symbols-outlined text-[14px] text-white/70">close</span>
+    </button>
+    <div class="w-10 h-10 rounded-xl bg-amber/20 flex items-center justify-center shrink-0">
+      <span class="material-symbols-outlined text-amber text-[20px]">bolt</span>
+    </div>
+    <div class="flex-1 pr-4">
+      <p class="text-sm font-semibold leading-snug">Sekalian isi pulsa atau token listrik?</p>
+      <p class="text-[11px] text-white/50 mt-0.5">Selagi menunggu, beres-beres yang lain juga bisa di sini.</p>
+    </div>
+  </section>
+
+  <!-- CTA utama -->
+  <div class="mt-auto pt-8 flex flex-col gap-2.5">
+    <a href="../tracking/code.html" class="h-[52px] rounded-2xl bg-ink text-white text-sm font-semibold flex items-center justify-center gap-2 active:scale-[.98] transition">
+      <span class="material-symbols-outlined text-[18px]">local_shipping</span>
+      Lacak Paket Ini
+    </a>
+    <a href="../beranda/code.html" class="h-[52px] rounded-2xl border border-border text-sm font-semibold flex items-center justify-center gap-2 active:scale-[.98] transition">
+      Kembali ke Beranda
+    </a>
+    <a href="../../../../index.html" class="h-[46px] rounded-2xl bg-surface-muted text-ink text-xs font-semibold flex items-center justify-center gap-2 active:scale-[.98] transition">
+      🏠 Kembali ke Portofolio Utama
+    </a>
+  </div>
+</main>
+
+<script>
+  function dismissCrossSell() {
+    const el = document.getElementById("cross-sell");
+    el.style.opacity = "0";
+    el.style.maxHeight = "0px";
+    el.style.marginTop = "0px";
+    el.style.paddingTop = "0px";
+    el.style.paddingBottom = "0px";
+  }
+</script>
+</body>
+</html>

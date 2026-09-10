@@ -1,0 +1,986 @@
+<?php 
+session_start();
+$current_page = basename($_SERVER['PHP_SELF']);
+// PORTOFOLIO DEMO: gate login dihilangkan — halaman ini bagian dari showcase
+// publik, jadi datanya harus langsung bisa diakses tanpa perlu login manual dulu.
+$_SESSION['login_simasrim'] = true;
+
+// Referral data sekarang disimpan di Firebase — tidak perlu load JSON lokal
+
+// Load the old tracker data for migration to Firebase
+$tracker_db_file = 'json/tracker_data.json';
+$old_tracker_data = file_exists($tracker_db_file) ? file_get_contents($tracker_db_file) : '[]';
+
+$page_title = "Mitra Progress Tracker | SIMASRIM";
+$footer_desc = "Sistem Pemantauan Progres Aktivasi Master Mitra Area secara Real-Time (Firebase).";
+include '../includes/header.php'; 
+?>
+
+<style>
+    body { background-color: #f0f2f5 !important; }
+    
+    .tracker-card { 
+        background: #fff; border-radius: 16px; border: 1px solid rgba(115, 53, 183, 0.1); 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 25px; transition: 0.3s; 
+    }
+    .tracker-card:hover { box-shadow: 0 8px 25px rgba(115, 53, 183, 0.1); transform: translateY(-3px); }
+
+    .step-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #eee; }
+    .step-item:last-child { border-bottom: none; }
+    
+    .btn-wa-followup { 
+        color: #25D366; background: rgba(37, 211, 102, 0.1); border-radius: 6px; 
+        padding: 4px 10px; font-size: 0.75rem; font-weight: 700; text-decoration: none; 
+        transition: 0.2s; border: 1px solid transparent; 
+    }
+    .btn-wa-followup:hover { background: #25D366; color: white; }
+    
+    .btn-link-resource {
+        color: var(--primary); background: rgba(115, 53, 183, 0.1); border-radius: 6px;
+        padding: 4px 8px; font-size: 0.75rem; text-decoration: none; transition: 0.2s;
+        margin-left: 5px;
+    }
+    .btn-link-resource:hover { background: var(--primary); color: white; }
+
+    .badge-parallel { font-size: 0.6rem; background: #e2e8f0; color: #64748b; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; font-weight: 800; }
+    
+    .sync-alert { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 12px; margin-bottom: 20px; display: none; }
+
+    .steps-container::-webkit-scrollbar { width: 5px; }
+    .steps-container::-webkit-scrollbar-track { background: #f1f1f1; }
+    .steps-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+</style>
+
+<div class="hero-section px-4">
+    <div class="position-absolute" style="width: 300px; height: 300px; background: var(--accent); filter: blur(100px); opacity: 0.2; border-radius: 50%; top: -50px; right: -50px;"></div>
+    <div class="position-relative z-1 pt-2">
+        <h3 class="fw-bold mb-1">Mitra Onboarding Tracker</h3>
+        <p class="text-white-50 mb-0 small">Pantau aktivitas dan percepat proses aktivasi Master Area secara terpusat.</p>
+    </div>
+</div>
+
+<div class="container-fluid px-4 pb-5">
+    <!-- Section: Sync Alert (Menampilkan data JSON lokal ke Firebase) -->
+    <div id="syncAlert" class="sync-alert shadow-sm mb-4" data-aos="fade-down">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+            <span>
+                <i class="fas fa-exclamation-triangle text-warning me-2"></i> 
+                <b>Data JSON lama terdeteksi!</b> Klik tombol untuk mengembalikan dan memindahkan data lokal ke Firebase.
+            </span>
+            <button class="btn btn-warning fw-bold rounded-pill px-4 text-nowrap" onclick="syncOldData()">
+                <i class="fas fa-cloud-upload-alt me-1"></i> Sinkronisasi ke Firebase
+            </button>
+        </div>
+    </div>
+
+    <!-- Section: Header & Actions -->
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3" data-aos="fade-up">
+        <!-- Title Group -->
+        <div class="d-none d-md-block">
+            <h4 class="fw-bold mb-1">Board Aktivasi Mitra</h4>
+            <p class="text-muted small mb-0">
+                <i class="fas fa-server text-success me-1"></i> Data Real-Time Firebase Tersinkronisasi
+            </p>
+        </div>
+
+        <!-- Action Group -->
+        <div class="d-flex gap-2 flex-wrap justify-content-end">
+            <button class="btn btn-primary rounded-pill px-4 shadow" onclick="addNewMitra()">
+                <i class="fas fa-plus me-2"></i> Tambah Mitra
+            </button>
+        </div>
+    </div>
+
+    <!-- Section: Link Pendaftaran Referral (Bisa Diedit) -->
+    <div class="card border-0 shadow-sm mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-body rounded-3 p-4" style="background-color: #f8f9fa; border-left: 5px solid #20c997;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-link text-success me-2"></i>Link Pendaftaran Referral Mitra Area</h5>
+                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 fw-bold" onclick="openReferralModal()">
+                    <i class="fas fa-edit me-1"></i> Kelola Link
+                </button>
+            </div>
+            <div class="d-flex flex-wrap gap-2" id="referralLinksContainer">
+                <!-- Diisi via JS (referralData) -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Content Tracker -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">Daftar Mitra Area</h5>
+    </div>
+    <div id="mitraContainer" class="row g-4"></div>
+</div>
+
+<!-- Modal Aset Mitra -->
+<div class="modal fade" id="assetModal" tabindex="-1" aria-labelledby="assetModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-primary text-white border-0">
+        <h5 class="modal-title fw-bold" id="assetModalLabel"><i class="fas fa-folder-open me-2"></i> Kelola Database Aset: <span id="assetMitraName"></span></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-light">
+        <input type="hidden" id="assetMitraId">
+        
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3"><i class="fas fa-plus-circle text-success me-2"></i>Tambah Aset / Link Baru</h6>
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <input type="text" id="newAssetName" class="form-control" placeholder="Nama Dokumen (Contoh: Surat NDA)">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="url" id="newAssetUrl" class="form-control" placeholder="https://link-dokumen...">
+                    </div>
+                    <div class="col-md-2">
+                        <button id="addAssetBtn" class="btn btn-success w-100 fw-bold" onclick="addAsset()"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3"><i class="fas fa-list text-primary me-2"></i>Daftar Aset Tersimpan</h6>
+        <div id="assetListContainer" class="list-group mb-3">
+            <!-- Asset items injected by JS -->
+        </div>
+
+      </div>
+      <div class="modal-footer border-0 bg-light">
+        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Kelola Link Referral -->
+<div class="modal fade" id="referralModal" tabindex="-1" aria-labelledby="referralModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content border-0 shadow-lg">
+      <div class="modal-header bg-success text-white border-0">
+        <h5 class="modal-title fw-bold" id="referralModalLabel"><i class="fas fa-link me-2"></i> Kelola Link Referral Area</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-light">
+        
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3"><i class="fas fa-plus-circle text-success me-2"></i>Tambah Link Referral Baru</h6>
+                <div class="row g-2">
+                    <div class="col-md-3">
+                        <input type="text" id="newRefLabel" class="form-control" placeholder="Label (Mis: JKT)">
+                    </div>
+                    <div class="col-md-5">
+                        <input type="url" id="newRefUrl" class="form-control" placeholder="https://app.simasrim...">
+                    </div>
+                    <div class="col-md-2">
+                        <select id="newRefStatus" class="form-select">
+                            <option value="active">Aktif</option>
+                            <option value="inactive">Nonaktif</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="addRefBtn" class="btn btn-success w-100 fw-bold" onclick="addReferral()"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3"><i class="fas fa-list text-success me-2"></i>Daftar Link Saat Ini</h6>
+        <div id="referralListContainer" class="list-group mb-3">
+            <!-- Referral items injected by JS -->
+        </div>
+
+      </div>
+      <div class="modal-footer border-0 bg-light">
+        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notifikasi -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+  <div id="statusToast" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body fw-bold" id="toastMessage">
+        <i class="fas fa-check-circle me-2"></i> Berhasil disimpan.
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+    // DATA MASTER CHECKLIST
+    const standardSteps = [
+        // ── FASE 1: PERKENALAN ──
+        { id: "present", label: "1. Presentasi Web Mitra", group: "awal",
+          link: "https://contoh-eksternal.example.com/",
+          wa: "Halo *[MITRA]*, makasih udah sempetin waktunya ya! Gimana, ada yang mau ditanyain soal ekosistem SIMASRIM yang tadi kita bahas?" },
+        { id: "grup", label: "2. Pembuatan Grup WA", group: "awal",
+          wa: "Halo *[MITRA]*, grup koordinasi area kita udah siap ya! Boleh kenalin tim yang bakal handle operasional di sana?" },
+
+        // ── FASE 2: LEGALITAS (PARALEL) ──
+        { id: "header_legal", label: "3-5. PROSES LEGALITAS (Paralel)", isHeader: true },
+        { id: "legal_draft", label: "3a. Kirim Draft Dokumen + Minta Data Verifikasi", isSub: true, parallel: true, group: "legal_draft",
+          wa_template: "kirim_draft" },
+        { id: "legal_review", label: "3b. Proses Review / Revisi (jika ada)", isSub: true, parallel: true, group: "legal_review",
+          wa: "Halo *[MITRA]*, dokumennya lagi kita perbaiki sesuai masukan ya. Ditunggu sebentar, segera kami kirim kembali!" },
+        { id: "nda", label: "3c. Final: NDA ✔", isSub: true, parallel: true, group: "legal_final",
+          link: "#",
+          wa: "Halo *[MITRA]*, NDA sudah final ya! Mohon konfirmasi kalau sudah diterima." },
+        { id: "penunjukan", label: "4c. Final: Surat Penunjukan ✔", isSub: true, parallel: true, group: "legal_final",
+          link: "#",
+          wa: "Halo *[MITRA]*, Surat Penunjukan Area sudah final! Proteksi wilayah resmi berlaku setelah ini." },
+        { id: "adendum", label: "5c. Final: Adendum Skema ✔", isSub: true, parallel: true, group: "legal_final",
+          link: "#",
+          wa: "Halo *[MITRA]*, Adendum Skema Komisi sudah final! Skema resmi berlaku mulai sekarang." },
+
+        // ── FASE 3: SETUP AKUN & DASHBOARD ──
+        { id: "akun_minta_data", label: "6a. Minta Data Akun Utama", parallel: true, group: "akun_minta",
+          wa_template: "minta_data_akun" },
+        { id: "akun", label: "6b. Akun Utama Dibuat ✔", parallel: true, group: "akun_done",
+          wa: "Halo *[MITRA]*, akun utama SIMASRIM area sudah berhasil dibuat! Detail login sudah kami kirim ke email terdaftar ya." },
+        { id: "looker", label: "7. Dashboard Rekonsiliasi (Looker) ✔", parallel: true,
+          link: "https://mkt.smsrm.com/sop/duplikasi_mitra.php",
+          wa: "Halo *[MITRA]*, Dashboard Rekonsiliasi (Looker Studio) sudah aktif dan bisa diakses via link yang kami kirim ke email terdaftar ya!" },
+
+        // ── FASE 4: DISTRIBUSI AMUNISI ──
+        { id: "header_amunisi", label: "8. DISTRIBUSI AMUNISI MARKETING", isHeader: true },
+        { id: "am_brand", label: "1.A. Data Campaign by Brand", isSub: true, group: "amunisi",
+          link: "#", wa_template: "amunisi" },
+        { id: "am_area", label: "1.B. Data Campaign by Area", isSub: true, group: "amunisi",
+          link: "#", wa_template: "amunisi" },
+        { id: "am_panduan", label: "2. Panduan Dasar + Monthly Plan", isSub: true, group: "amunisi",
+          link: "#", wa_template: "amunisi" },
+        { id: "am_flyer", label: "3. Flyer (A4 Siap Cetak)", isSub: true, group: "amunisi",
+          link: "https://www.canva.com/design/DAHA6KZRWrw/wICDE-i6h9qer1STvunffg/edit?ui=eyJBIjp7fX0", wa_template: "amunisi" },
+        { id: "am_story", label: "4. Template Story (9:16)", isSub: true, group: "amunisi",
+          link: "https://www.canva.com/design/DAHISXv_GVY/ZJD8xCLQ7OzNYG_M_qCcDQ/edit", wa_template: "amunisi" },
+        { id: "am_presentasi", label: "5. Materi Presentasi (PLG)", isSub: true, group: "amunisi",
+          link: "https://canva.link/g14wran3zh2qdje", wa_template: "amunisi" },
+        { id: "am_sop", label: "6. SOP Juklak Sosmed", isSub: true, group: "amunisi",
+          link: "#", wa_template: "amunisi" },
+        { id: "am_banner", label: "7. Penawaran Banner / X-Banner", isSub: true, group: "amunisi",
+          link: "https://www.canva.com/design/DAGpXqdHpyQ/DPNDK8jrkTrghDTA1M_mfQ/edit", wa_template: "amunisi" },
+
+        // ── FASE FINAL ──
+        { id: "plan", label: "9. Monthly Strategy Plan (dalam Panduan Dasar)",
+          wa: "Halo *[MITRA]*, di Panduan Dasar yang sudah kami kirim ada *Template Monthly Strategy Plan* ya! Yuk kita isi bareng — ini jadi kompas operasional area bulan ini. Bisa dicek di dokumen panduan dulu?" },
+        { id: "jalan", label: "10. Operasional Berjalan ✔",
+          wa: "Selamat *[MITRA]*! Semua sudah lengkap dan resmi. Operasional QSIR Hub area bisa mulai berjalan penuh. Kami selalu ada jika butuh support 🚀" }
+    ];
+    window.standardSteps = standardSteps;
+</script>
+
+<!-- Modal: Gabung & Kirim WA -->
+<div class="modal fade" id="mergeWAModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 shadow-lg" style="border-radius:20px;">
+      <div class="modal-header text-white border-0" style="background:linear-gradient(135deg,#25d366,#128c7e);border-radius:20px 20px 0 0;">
+        <div>
+          <h5 class="modal-title fw-bold mb-0"><i class="fab fa-whatsapp me-2"></i>Gabung & Kirim WA</h5>
+          <div class="small opacity-75" id="mergeWAMitraLabel">— Pilih item yang akan dikirim sekaligus</div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="alert alert-light border small py-2 mb-3">
+          <i class="fas fa-lightbulb text-warning me-1"></i>
+          <strong>Centang</strong> item yang mau dikirim bersamaan → Preview pesan gabungan akan muncul di bawah → Salin & kirim ke grup WA mitra.
+        </div>
+        <div id="mergeStepChecklist" class="mb-4"></div>
+        <div>
+          <label class="fw-bold small text-muted mb-2">PREVIEW PESAN WA GABUNGAN</label>
+          <textarea id="mergeWAPreview" class="form-control" rows="12"
+            style="font-family:monospace;font-size:0.82rem;background:#0f0c29;color:#a8f0b8;border:1px solid rgba(37,211,102,0.3);border-radius:12px;resize:none;line-height:1.7;"
+            readonly></textarea>
+        </div>
+      </div>
+      <div class="modal-footer border-0" style="background:#f8fff9;border-radius:0 0 20px 20px;">
+        <button class="btn btn-sm rounded-pill px-4 fw-bold" id="btnCopyMergeWA" onclick="copyMergeWA()" style="background:#25d366;color:white;border:none;">
+          <i class="fas fa-copy me-1"></i>Salin Pesan
+        </button>
+        <a id="btnOpenWA" href="#" target="_blank" class="btn btn-sm rounded-pill px-3 fw-bold" style="background:#128c7e;color:white;border:none;">
+          <i class="fab fa-whatsapp me-1"></i>Buka WA
+        </a>
+        <button class="btn btn-secondary btn-sm rounded-pill px-3" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// === MERGE WA LOGIC ===
+let _mergeWAMitraName = '';
+
+window.openMergeWA = function(mitraName) {
+    _mergeWAMitraName = mitraName;
+    document.getElementById('mergeWAMitraLabel').textContent = '— ' + mitraName;
+
+    // Build checklist — exclude headers and awal group
+    const checkable = window.standardSteps.filter(s => !s.isHeader && s.group !== 'awal' && (s.wa || s.wa_template));
+    const container = document.getElementById('mergeStepChecklist');
+    container.innerHTML = '';
+
+    // Group by category
+    const groups = [
+        { key: 'legal_draft', label: '📋 Kirim Draft + Minta Verifikasi', steps: checkable.filter(s => s.group === 'legal_draft') },
+        { key: 'legal_review', label: '🔄 Review / Revisi Dokumen', steps: checkable.filter(s => s.group === 'legal_review') },
+        { key: 'legal_final', label: '✅ Finalisasi Dokumen Legal', steps: checkable.filter(s => s.group === 'legal_final') },
+        { key: 'akun_minta', label: '📤 Minta Data Akun Utama', steps: checkable.filter(s => s.group === 'akun_minta') },
+        { key: 'akun_done', label: '🔑 Akun Dibuat / Dashboard Ready', steps: checkable.filter(s => s.group === 'akun_done' || s.id === 'looker') },
+        { key: 'amunisi', label: '📦 Amunisi Marketing', steps: checkable.filter(s => s.group === 'amunisi') },
+        { key: 'lainnya', label: '📌 Lainnya', steps: checkable.filter(s => !s.group || ['awal','lainnya'].includes(s.group)) },
+    ];
+
+    groups.forEach(g => {
+        if (g.steps.length === 0) return;
+        container.innerHTML += `<div class="fw-bold small text-muted mb-1 mt-3" style="letter-spacing:0.5px;">${g.label}</div>`;
+        g.steps.forEach(s => {
+            container.innerHTML += `
+                <div class="d-flex align-items-center gap-2 ms-2 mb-1">
+                    <input type="checkbox" class="m-0" id="mwc_${s.id}" value="${s.id}" onchange="updateMergePreview()">
+                    <label class="small text-dark mb-0" for="mwc_${s.id}">${s.label}</label>
+                </div>`;
+        });
+    });
+
+    updateMergePreview();
+    new bootstrap.Modal(document.getElementById('mergeWAModal')).show();
+};
+
+window.updateMergePreview = function() {
+    const checked = [...document.querySelectorAll('#mergeStepChecklist input:checked')].map(el => el.value);
+    const text = buildMergedWA(_mergeWAMitraName, checked);
+    document.getElementById('mergeWAPreview').value = text;
+    document.getElementById('btnOpenWA').href = 'https://wa.me/?text=' + encodeURIComponent(text);
+};
+
+window.buildMergedWA = function(mitraName, selectedIds) {
+    if (selectedIds.length === 0) return '(Belum ada item yang dipilih)';
+
+    const selected = selectedIds.map(id => window.standardSteps.find(s => s.id === id)).filter(Boolean);
+
+    // Templates khusus
+    const templateMap = {
+        kirim_draft: `Halo *${mitraName}*, izin mengirimkan draft 3 dokumen legal kita ya:\n\n• *NDA* (Non-Disclosure Agreement)\n• *Surat Penunjukan Area*\n• *Adendum Skema Komisi*\n\nMohon dicek kesesuaian data di dalamnya. Kalau ada yang perlu direvisi atau dikonfirmasi, langsung info di sini ya!`,
+        minta_data_akun: `Halo *${mitraName}*, untuk proses pembuatan akun utama area, mohon bantuannya mengirimkan data berikut ya:\n\n• Nama Lengkap PIC Utama\n• Nomor HP aktif\n• Alamat Hub / Kantor Area\n• Email (untuk login & dashboard)\n\nSetelah data masuk, akun langsung kami proses!`,
+        amunisi: `Halo *${mitraName}*, berikut akses untuk *[LABEL]* ya:\n[LINK]\n\nBisa langsung diakses dan disimpan!`,
+    };
+
+    // Kelompokkan
+    const cats = {
+        legal_draft: selected.filter(s => s.group === 'legal_draft'),
+        legal_review: selected.filter(s => s.group === 'legal_review'),
+        legal_final: selected.filter(s => s.group === 'legal_final'),
+        akun_minta: selected.filter(s => s.group === 'akun_minta'),
+        akun_done: selected.filter(s => s.group === 'akun_done' || s.id === 'looker'),
+        amunisi: selected.filter(s => s.group === 'amunisi'),
+        lainnya: selected.filter(s => !s.group || ['awal','lainnya'].includes(s.group)),
+    };
+
+    let parts = [];
+
+    // Jika hanya 1 item & punya template/wa langsung
+    if (selected.length === 1) {
+        const s = selected[0];
+        if (s.wa_template && templateMap[s.wa_template]) {
+            let res = templateMap[s.wa_template];
+            if (s.wa_template === 'amunisi') {
+                res = res.replace(/\[LABEL\]/g, s.label.replace(/^[0-9a-zA-Z\.]+\s*/, '')).replace(/\[LINK\]/g, s.link);
+            }
+            return res;
+        }
+        if (s.wa) return s.wa.replace(/\[MITRA\]/g, mitraName);
+    }
+
+    // Opening
+    parts.push(`Halo *${mitraName}*, izin update beberapa hal sekaligus ya! 👋`);
+
+    // Kirim draft
+    if (cats.legal_draft.length > 0) {
+        parts.push(`\n📋 *Draft Dokumen Legal:*\nBerikut kami kirimkan draft:\n• NDA (Non-Disclosure Agreement)\n• Surat Penunjukan Area\n• Adendum Skema Komisi\nMohon dicek kesesuaian datanya ya. Revisi/konfirmasi langsung info di sini!`);
+    }
+
+    // Revisi
+    if (cats.legal_review.length > 0) {
+        parts.push(`\n🔄 *Revisi Dokumen:*\nDokumen sedang kita perbaiki sesuai masukan. Segera kami kirimkan kembali ya!`);
+    }
+
+    // Finalisasi legal
+    if (cats.legal_final.length > 0) {
+        const finals = cats.legal_final.map(s => '• ' + s.label.replace('✔','').trim()).join('\n');
+        parts.push(`\n✅ *Dokumen Legal Final:*\n${finals}\nSemua sudah final — mohon konfirmasi penerimaannya ya!`);
+    }
+
+    // Minta data akun
+    if (cats.akun_minta.length > 0) {
+        parts.push(`\n📤 *Data Akun Utama:*\nUntuk pembuatan akun area, mohon bantuannya kirimkan:\n• Nama Lengkap PIC Utama\n• Nomor HP aktif\n• Alamat Hub / Kantor\n• Email (login & dashboard)`);
+    }
+
+    // Akun done / Dashboard
+    if (cats.akun_done.length > 0) {
+        const items = cats.akun_done.map(s => '• ' + s.label.replace('✔','').trim()).join('\n');
+        parts.push(`\n🔑 *Akun & Dashboard:*\n${items}\nDetail sudah kami kirim ke email terdaftar ya!`);
+    }
+
+    // Amunisi Marketing
+    if (cats.amunisi.length > 0) {
+        const items = cats.amunisi.map(s => '• ' + s.label.replace(/^[0-9a-zA-Z\.]+\s*/, '').replace('✔','').trim() + ':\n  ' + s.link).join('\n\n');
+        parts.push(`\n🎁 *Amunisi Marketing & Training:*\nBerikut akses untuk beberapa aset yang sudah bisa digunakan:\n\n${items}\n\nBisa langsung diakses dan disimpan ya!`);
+    }
+
+
+    // Lainnya
+    cats.lainnya.forEach(s => {
+        const txt = s.wa ? s.wa.replace(/\[MITRA\]/g, mitraName) : s.label;
+        parts.push(`\n${txt}`);
+    });
+
+    parts.push(`\nSemangat gaspol ${mitraName}! Ada yang mau ditanyain? 🚀`);
+    return parts.join('\n').trim();
+};
+
+window.copyMergeWA = function() {
+    const ta = document.getElementById('mergeWAPreview');
+    navigator.clipboard.writeText(ta.value).then(() => {
+        const btn = document.getElementById('btnCopyMergeWA');
+        btn.innerHTML = '<i class="fas fa-check me-1"></i>Tersalin!';
+        btn.style.background = '#198754';
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-copy me-1"></i>Salin Pesan';
+            btn.style.background = '#25d366';
+        }, 2500);
+    });
+};
+</script>
+
+<!-- PORTOFOLIO DEMO: Firebase SDK modular asli diganti mock lokal (localStorage), tidak connect ke server manapun -->
+<script type="module">
+    import { initializeApp, getDatabase, ref, set, onValue, push, update, remove, child, get, getAuth, signInAnonymously } from "./js/firebase-modular-mock.js";
+
+    // FIREBASE CONFIG (DUMMY)
+    const firebaseConfig = {
+        apiKey: "DUMMY-SECRET-GANTI-SENDIRI",
+        authDomain: "demo-project.firebaseapp.com",
+        databaseURL: "https://demo-project-default-rtdb.firebaseio.com",
+        projectId: "demo-project",
+        storageBucket: "demo-project.firebasestorage.app",
+        messagingSenderId: "000000000000",
+        appId: "1:000000000000:web:0000000000000000000000",
+        measurementId: "G-DUMMY000000"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    signInAnonymously(auth).catch(err => console.error("Auth failed", err));
+    
+    const db = getDatabase(app);
+    const trackerRef = ref(db, 'mitra_tracker');
+
+    window.mitraData = [];
+    window.referralData = []; // Diisi oleh Firebase listener
+    window.oldTrackerData = <?php echo $old_tracker_data ?: '[]'; ?>;
+    
+    // LISTEN DATA FIREBASE
+    onValue(trackerRef, (snapshot) => {
+        window.mitraData = [];
+        snapshot.forEach((childSnap) => {
+            window.mitraData.push({ key: childSnap.key, id: childSnap.key, ...childSnap.val() });
+        });
+        
+        // Show sync alert if Firebase is empty but we have local JSON data to migrate
+        if (window.mitraData.length === 0 && window.oldTrackerData.length > 0) {
+            document.getElementById('syncAlert').style.display = 'block';
+        } else {
+            document.getElementById('syncAlert').style.display = 'none';
+        }
+        
+        window.renderTracker();
+        
+        if (window.currentAssetMitraId && document.getElementById('assetModal').classList.contains('show')) {
+            window.renderAssetList();
+        }
+    }, (error) => {
+        console.error("FIREBASE TRACKER ERROR:", error);
+    });
+
+    // ── REFERRAL DATA: Load & Listen dari Firebase ──
+    const referralRef = ref(db, 'mitra_referral');
+    onValue(referralRef, (snap) => {
+        if (snap.exists()) {
+            window.referralData = snap.val();
+            // Pastikan array (bukan object dari Firebase)
+            if (!Array.isArray(window.referralData)) {
+                window.referralData = Object.values(window.referralData);
+            }
+        } else {
+            // Pertama kali: seed data awal ke Firebase
+            window.referralData = [
+                { label: "PLM", url: "https://app.simasrim.com/pendaftaran_referral/MzI1Mg==", status: "active" },
+                { label: "SUB", url: "https://app.simasrim.com/pendaftaran_referral/MzI1OQ==", status: "active" },
+                { label: "BKS", url: "https://app.simasrim.com/pendaftaran_referral/MzI2MA==", status: "active" },
+                { label: "MES-1", url: "https://app.simasrim.com/pendaftaran_referral/MzI3Nw==", status: "active" },
+                { label: "MES-2", url: "https://app.simasrim.com/pendaftaran_referral/MzI4NQ==", status: "active" },
+                { label: "MES-3", url: "https://app.simasrim.com/pendaftaran_referral/MzI4Ng==", status: "active" },
+                { label: "MES-4", url: "https://app.simasrim.com/pendaftaran_referral/MzI5OA==", status: "active" },
+                { label: "MXG", url: "https://app.simasrim.com/pendaftaran_referral/MzI4OA==", status: "active" },
+                { label: "MXG-2 (Belum kerjasama)", url: "#", status: "inactive" }
+            ];
+            // Simpan seed ke Firebase
+                set(referralRef, window.referralData);
+        }
+        window.renderReferralUI();
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // renderReferralUI dipanggil dari listener, tidak perlu di sini
+    });
+
+    // MIGRATION SCRIPT (JSON to FIREBASE)
+    window.syncOldData = function() {
+        if(confirm("Yakin memindahkan semua data JSON lokal (lama) ke Firebase Server?")) {
+            if(!window.oldTrackerData || window.oldTrackerData.length === 0) {
+                alert("Tidak ada data JSON lokal yang bisa dipindahkan!");
+                return;
+            }
+            
+            const updates = {};
+            window.oldTrackerData.forEach(mitra => {
+                let key = mitra.id.toString(); // Gunakan id lama sebagai key atau timestamp
+                updates[`mitra_tracker/${key}`] = {
+                    name: mitra.name,
+                    notes: mitra.notes || "",
+                    progress: mitra.progress || {},
+                    assets: mitra.assets || []
+                };
+            });
+            
+            update(ref(db), updates).then(() => {
+                alert("Sukses! Data lokal berhasil disinkronisasi ke Firebase.");
+                document.getElementById('syncAlert').style.display = 'none';
+            }).catch(err => {
+                alert("Gagal sinkronisasi: " + err);
+            });
+        }
+    };
+
+    // Mapping tracker key → info.php mitra_id (untuk auto-log)
+    const TRACKER_MAPPING = {
+        '1': 'plm', '2': 'sub', '3': 'bks',
+        '1777515617136': 'mes1', '1777515642629': 'mxg',
+        '1779176477865': 'mes2', '1779176500745': 'mes3',
+        '1779176507336': 'mes4', '1782799964975': 'kdr'
+    };
+    const PROGRESS_LABELS = {
+        present:'Presentasi Web Mitra', grup:'Grup WA Dibuat',
+        nda:'NDA ditandatangani', penunjukan:'Surat Penunjukan ditandatangani',
+        adendum:'Adendum Skema ditandatangani', akun:'Akun Utama dibuat',
+        looker:'Dashboard Looker aktif', legal_draft:'Draft dokumen dikirim',
+        legal_review:'Revisi dokumen selesai', akun_minta_data:'Data akun diterima',
+        am_brand:'Amunisi Campaign Brand dikirim', am_area:'Amunisi Campaign Area dikirim',
+        am_panduan:'Panduan Dasar + Monthly Plan dikirim', am_flyer:'Flyer A4 dikirim',
+        am_story:'Template Story dikirim', am_presentasi:'Materi Presentasi PLG dikirim',
+        am_sop:'SOP Sosmed dikirim', am_banner:'Penawaran Banner dikirim',
+        plan:'Monthly Strategy Plan disusun', jalan:'Operasional resmi berjalan'
+    };
+
+    // DAFTARKAN FUNGSI FIREBASE KE WINDOW
+    window.toggleStep = function(mitraId, stepId, currentValue) {
+        const newValue = !currentValue;
+        update(child(ref(db), `mitra_tracker/${mitraId}/progress`), { [stepId]: newValue });
+
+        // Auto-log ke info.php history saat step selesai (menjadi true)
+        if (newValue === true) {
+            const infoId = TRACKER_MAPPING[mitraId];
+            if (infoId) {
+                const stepLabel = PROGRESS_LABELS[stepId] || stepId;
+                const today = new Date().toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
+                
+                const infoDbRef = ref(db, 'b2b_info_mitra_data');
+                get(infoDbRef).then(snapshot => {
+                    if (snapshot.exists()) {
+                        let allMitras = snapshot.val();
+                        if (!Array.isArray(allMitras)) allMitras = Object.values(allMitras);
+                        const m = allMitras.find(x => x.id === infoId);
+                        if (m) {
+                            if (!m.history) m.history = [];
+                            m.history.push({
+                                id: 'hist_' + Date.now(),
+                                date: today,
+                                content: `✅ <strong>[Auto-log Tracker]</strong> ${stepLabel}`
+                            });
+                            m.history.sort((a,b) => new Date(b.date) - new Date(a.date));
+                            set(infoDbRef, allMitras).catch(err => console.warn('Auto-log FB failed:', err));
+                        }
+                    }
+                }).catch(err => console.warn('Fetch info FB failed:', err));
+            }
+        }
+    };
+
+    window.updateNotes = function(mitraId, newNotes) {
+        update(child(ref(db), `mitra_tracker/${mitraId}`), { notes: newNotes });
+    };
+
+    window.addNewMitra = function() {
+        const name = prompt("Masukkan Nama Area/Mitra Baru:");
+        if (name && name.trim() !== "") {
+            const newProgress = {};
+            window.standardSteps.forEach(s => { if(!s.isHeader) newProgress[s.id] = false; });
+            push(trackerRef, { name: name.trim(), notes: "", progress: newProgress, assets: [] });
+        }
+    };
+
+    window.editMitraName = function(id) {
+        const mitra = window.mitraData.find(m => m.id === id);
+        if (mitra) {
+            const newName = prompt("Edit Nama Mitra Area:", mitra.name);
+            if (newName && newName.trim() !== "") {
+                update(child(ref(db), `mitra_tracker/${id}`), { name: newName.trim() });
+            }
+        }
+    };
+
+    window.removeMitra = function(mitraId) {
+        if(confirm("Yakin ingin menghapus data mitra ini secara permanen dari Cloud?")) {
+            remove(child(ref(db), `mitra_tracker/${mitraId}`));
+        }
+    };
+
+    window.renderTracker = function() {
+        const container = document.getElementById('mitraContainer');
+        container.innerHTML = '';
+
+        if(window.mitraData.length === 0) {
+            container.innerHTML = `<div class="col-12 text-center text-muted py-5"><i class="fas fa-folder-open fs-1 mb-3 text-light"></i><br>Belum ada data Mitra.</div>`;
+            return;
+        }
+
+        const validStepsCount = window.standardSteps.filter(s => !s.isHeader).length;
+
+        window.mitraData.forEach(mitra => {
+            let completed = 0;
+            // Handle missing progress object gracefully
+            const progress = mitra.progress || {};
+            window.standardSteps.forEach(step => { if(!step.isHeader && progress[step.id]) completed++; });
+            const percent = Math.round((completed / validStepsCount) * 100) || 0;
+
+            let stepsHTML = '';
+            window.standardSteps.forEach(step => {
+                if (step.isHeader) {
+                    stepsHTML += `<div class="mt-4 mb-2 fw-bold text-primary" style="font-size: 0.75rem; letter-spacing: 1px; border-bottom: 1px solid #eee; padding-bottom: 5px;">${step.label}</div>`;
+                    return;
+                }
+
+                const isChecked = progress[step.id] ? 'checked' : '';
+                const checkVal = isChecked ? true : false;
+                const isTextStrike = isChecked ? 'text-decoration-line-through text-muted' : 'text-dark fw-bold';
+                const parallelBadge = step.parallel ? '<span class="badge-parallel ms-1">Paralel</span>' : '';
+                const indentClass = step.isSub ? 'ms-3 border-start border-2 border-primary border-opacity-25 ps-2' : '';
+                
+                const linkBtn = step.link ? `<a href="${step.link}" target="_blank" class="btn-link-resource" title="Buka Dokumen/Link"><i class="fas fa-external-link-alt"></i></a>` : '';
+                
+                let textWA = '';
+                if (step.wa) {
+                    textWA = step.wa.replace(/\[MITRA\]/g, mitra.name);
+                } else if (step.wa_template) {
+                    textWA = window.buildMergedWA(mitra.name, [step.id]);
+                }
+                const linkWA = textWA ? `<a href="https://wa.me/?text=${encodeURIComponent(textWA)}" target="_blank" class="btn-wa-followup ms-2" title="Kirim Follow Up WA"><i class="fab fa-whatsapp"></i></a>` : '';
+
+                stepsHTML += `
+                    <div class="step-item ${indentClass}">
+                        <div class="d-flex align-items-center gap-2 m-0">
+                            <input class="m-0" type="checkbox" id="step_${mitra.id}_${step.id}" ${isChecked} onchange="window.toggleStep('${mitra.id}', '${step.id}', ${checkVal})">
+                            <label class="small mb-0 ${isTextStrike}" for="step_${mitra.id}_${step.id}" style="cursor:pointer">
+                                ${step.label} ${parallelBadge}
+                            </label>
+                            ${linkBtn}
+                        </div>
+                        ${linkWA}
+                    </div>
+                `;
+            });
+
+            let assetLinksHTML = '';
+            if(mitra.assets && mitra.assets.length > 0) {
+                assetLinksHTML += '<div class="d-flex flex-wrap gap-2 mt-3 pt-3 border-top">';
+                mitra.assets.forEach((asset) => {
+                    assetLinksHTML += `<a href="${asset.url}" target="_blank" class="badge text-bg-primary text-decoration-none py-2 px-3 fw-normal shadow-sm"><i class="fas fa-link me-2"></i>${asset.name}</a>`;
+                });
+                assetLinksHTML += '</div>';
+            }
+
+            const card = `
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in">
+                    <div class="tracker-card p-4 rounded-4 overflow-hidden h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="fw-bold mb-0 text-dark">
+                                ${mitra.name}
+                                <button class="btn btn-sm text-secondary p-0 ms-1" onclick="window.editMitraName('${mitra.id}')" title="Edit Nama"><i class="fas fa-edit"></i></button>
+                            </h5>
+                            <button class="btn btn-sm btn-link text-danger p-0" onclick="window.removeMitra('${mitra.id}')" title="Hapus Mitra"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                        <input type="text" class="form-control form-control-sm mb-3 bg-light border-0 small" value="${mitra.notes || ''}" onchange="window.updateNotes('${mitra.id}', this.value)" placeholder="Catatan status/PIC...">
+                        
+                        <div class="progress mb-2" style="height: 6px;">
+                            <div class="progress-bar ${percent === 100 ? 'bg-success' : 'bg-primary'}" role="progressbar" style="width: ${percent}%;"></div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3"><small class="text-muted small">Aktivasi</small><small class="fw-bold text-primary small">${percent}%</small></div>
+                        
+                        <div class="steps-container border rounded-3 p-3 bg-white mb-3" style="max-height: 250px; overflow-y: auto;">
+                            ${stepsHTML}
+                        </div>
+                        
+                        <button class="btn btn-sm w-100 fw-bold mb-2" onclick="window.openMergeWA('${mitra.name.replace(/'/g, "\\'")}')" style="background:#25d366;color:white;border:none;">
+                            <i class="fab fa-whatsapp me-1"></i> Gabung & Kirim WA
+                        </button>
+                        <button class="btn btn-sm btn-outline-primary w-100 fw-bold" onclick="window.openAssetModal('${mitra.id}', '${mitra.name.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-folder-open me-1"></i> Kelola Database Aset
+                        </button>
+                        
+                        ${assetLinksHTML}
+                    </div>
+                </div>
+            `;
+            container.innerHTML += card;
+        });
+    };
+
+    window.currentAssetMitraId = null;
+    let editAssetIndex = -1;
+
+    window.openAssetModal = function(id, name) {
+        window.currentAssetMitraId = id;
+        document.getElementById('assetMitraName').innerText = name;
+        document.getElementById('newAssetName').value = '';
+        document.getElementById('newAssetUrl').value = '';
+        
+        editAssetIndex = -1;
+        document.getElementById('addAssetBtn').innerHTML = '<i class="fas fa-plus"></i> Add';
+        document.getElementById('addAssetBtn').className = 'btn btn-success w-100 fw-bold';
+        
+        window.renderAssetList();
+        
+        const modal = new bootstrap.Modal(document.getElementById('assetModal'));
+        modal.show();
+    };
+
+    window.renderAssetList = function() {
+        const mitra = window.mitraData.find(m => m.id === window.currentAssetMitraId);
+        const container = document.getElementById('assetListContainer');
+        container.innerHTML = '';
+        
+        if(!mitra || !mitra.assets || mitra.assets.length === 0) {
+            container.innerHTML = '<div class="text-muted text-center py-3 small">Belum ada aset/dokumen yang disimpan.</div>';
+            return;
+        }
+
+        mitra.assets.forEach((asset, index) => {
+            if (!asset) return;
+            container.innerHTML += `
+                <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                    <div>
+                        <div class="fw-bold text-dark small"><i class="fas fa-file-alt text-secondary me-2"></i>${asset.name}</div>
+                        <a href="${asset.url}" target="_blank" class="text-decoration-none small text-primary text-truncate d-inline-block" style="max-width: 400px;">${asset.url}</a>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="window.editAsset(${index})" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="window.removeAsset(${index})" title="Hapus"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+    };
+
+    window.editAsset = function(index) {
+        const mitra = window.mitraData.find(m => m.id === window.currentAssetMitraId);
+        if(mitra && mitra.assets) {
+            document.getElementById('newAssetName').value = mitra.assets[index].name;
+            document.getElementById('newAssetUrl').value = mitra.assets[index].url;
+            editAssetIndex = index;
+            document.getElementById('addAssetBtn').innerHTML = '<i class="fas fa-save"></i> Save';
+            document.getElementById('addAssetBtn').className = 'btn btn-warning w-100 fw-bold text-dark';
+        }
+    };
+
+    window.addAsset = function() {
+        const name = document.getElementById('newAssetName').value.trim();
+        let url = document.getElementById('newAssetUrl').value.trim();
+        
+        if(name === '' || url === '') {
+            alert("Nama Aset dan URL tidak boleh kosong.");
+            return;
+        }
+        
+        if(!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+
+        const mitra = window.mitraData.find(m => m.id === window.currentAssetMitraId);
+        if(mitra) {
+            let assets = mitra.assets ? [...mitra.assets] : [];
+            
+            if (editAssetIndex > -1) {
+                assets[editAssetIndex] = { name: name, url: url };
+            } else {
+                assets.push({ name: name, url: url });
+            }
+            
+            update(child(ref(db), `mitra_tracker/${window.currentAssetMitraId}`), { assets: assets });
+            
+            document.getElementById('newAssetName').value = '';
+            document.getElementById('newAssetUrl').value = '';
+            editAssetIndex = -1;
+            document.getElementById('addAssetBtn').innerHTML = '<i class="fas fa-plus"></i> Add';
+            document.getElementById('addAssetBtn').className = 'btn btn-success w-100 fw-bold';
+        }
+    };
+
+    window.removeAsset = function(index) {
+        if(confirm("Hapus aset ini?")) {
+            const mitra = window.mitraData.find(m => m.id === window.currentAssetMitraId);
+            if(mitra && mitra.assets) {
+                let assets = [...mitra.assets];
+                assets.splice(index, 1);
+                update(child(ref(db), `mitra_tracker/${window.currentAssetMitraId}`), { assets: assets });
+            }
+        }
+    };
+
+    // --- REFERRAL LINK LOGIC (LOCAL JSON API) ---
+    let editRefIndex = -1;
+
+    window.renderReferralUI = function() {
+        const container = document.getElementById('referralLinksContainer');
+        container.innerHTML = '';
+        
+        window.referralData.forEach(ref => {
+            if(ref.status === 'active') {
+                container.innerHTML += `<a href="${ref.url}" target="_blank" class="btn btn-sm btn-outline-success fw-bold rounded-pill"><i class="fas fa-user-plus me-1"></i> ${ref.label}</a>`;
+            } else {
+                container.innerHTML += `<span class="badge bg-secondary bg-opacity-10 text-secondary border py-2 px-3 fw-normal rounded-pill"><i class="fas fa-clock me-1"></i> ${ref.label}</span>`;
+            }
+        });
+    };
+
+    window.openReferralModal = function() {
+        document.getElementById('newRefLabel').value = '';
+        document.getElementById('newRefUrl').value = '';
+        document.getElementById('newRefStatus').value = 'active';
+        
+        editRefIndex = -1;
+        document.getElementById('addRefBtn').innerHTML = '<i class="fas fa-plus"></i> Add';
+        document.getElementById('addRefBtn').className = 'btn btn-success w-100 fw-bold';
+        
+        window.renderReferralListModal();
+        const modal = new bootstrap.Modal(document.getElementById('referralModal'));
+        modal.show();
+    };
+
+    window.renderReferralListModal = function() {
+        const container = document.getElementById('referralListContainer');
+        container.innerHTML = '';
+        
+        if(window.referralData.length === 0) {
+            container.innerHTML = '<div class="text-muted text-center py-3 small">Belum ada data referral.</div>';
+            return;
+        }
+
+        window.referralData.forEach((ref, index) => {
+            const badge = ref.status === 'active' ? '<span class="badge bg-success ms-2">Aktif</span>' : '<span class="badge bg-secondary ms-2">Nonaktif</span>';
+            container.innerHTML += `
+                <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                    <div>
+                        <div class="fw-bold text-dark small">${ref.label} ${badge}</div>
+                        <a href="${ref.url}" target="_blank" class="text-decoration-none small text-success text-truncate d-inline-block" style="max-width: 400px;">${ref.url}</a>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-success me-1" onclick="window.editReferral(${index})" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="window.removeReferral(${index})" title="Hapus"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+    };
+
+    window.editReferral = function(index) {
+        document.getElementById('newRefLabel').value = window.referralData[index].label;
+        document.getElementById('newRefUrl').value = window.referralData[index].url;
+        document.getElementById('newRefStatus').value = window.referralData[index].status;
+        editRefIndex = index;
+        document.getElementById('addRefBtn').innerHTML = '<i class="fas fa-save"></i> Save';
+        document.getElementById('addRefBtn').className = 'btn btn-warning w-100 fw-bold text-dark';
+    };
+
+    window.addReferral = function() {
+        const label = document.getElementById('newRefLabel').value.trim();
+        let url = document.getElementById('newRefUrl').value.trim();
+        const status = document.getElementById('newRefStatus').value;
+        
+        if(label === '' || url === '') {
+            alert("Label dan URL tidak boleh kosong.");
+            return;
+        }
+        
+        if(url !== '#' && !url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+
+        if (editRefIndex > -1) {
+            window.referralData[editRefIndex] = { label, url, status };
+            editRefIndex = -1;
+            document.getElementById('addRefBtn').innerHTML = '<i class="fas fa-plus"></i> Add';
+            document.getElementById('addRefBtn').className = 'btn btn-success w-100 fw-bold';
+        } else {
+            window.referralData.push({ label, url, status });
+        }
+        
+        window.saveReferralToServer();
+        document.getElementById('newRefLabel').value = '';
+        document.getElementById('newRefUrl').value = '';
+        document.getElementById('newRefStatus').value = 'active';
+        window.renderReferralListModal();
+        window.renderReferralUI();
+    };
+
+    window.removeReferral = function(index) {
+        if(confirm("Hapus link referral ini?")) {
+            window.referralData.splice(index, 1);
+            window.saveReferralToServer();
+            window.renderReferralListModal();
+            window.renderReferralUI();
+        }
+    };
+
+    window.saveReferralToServer = function() {
+        // Simpan ke Firebase — bukan lagi ke JSON file lokal
+        set(referralRef, window.referralData)
+            .then(() => window.showToast('Link Referral tersimpan! ✅', 'success'))
+            .catch(err => {
+                console.error('Firebase referral save error:', err);
+                window.showToast('Gagal simpan: ' + err.message, 'danger');
+            });
+    };
+
+    window.showToast = function(message, type) {
+        const toastEl = document.getElementById('statusToast');
+        const toastMsg = document.getElementById('toastMessage');
+        toastEl.className = `toast align-items-center text-white border-0 bg-${type}`;
+        
+        let icon = 'info-circle';
+        if(type === 'success') icon = 'check-circle';
+        if(type === 'danger' || type === 'warning') icon = 'exclamation-triangle';
+        
+        toastMsg.innerHTML = `<i class="fas fa-${icon} me-2"></i> ${message}`;
+        const bsToast = new bootstrap.Toast(toastEl, { delay: 3000 });
+        bsToast.show();
+    };
+
+</script>
+
+<?php include '../includes/footer.php'; ?>
