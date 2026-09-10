@@ -1,0 +1,57 @@
+<?php
+// ============================================================
+// PORTOFOLIO DEMO — partner/api_firebase.php
+// Versi asli proxy cURL ke Firebase RTDB (project simasrim-b2b-os)
+// dengan secret asli, node 'b2b_tracker'. Di versi porto ini
+// SELURUH panggilan live DIHILANGKAN TOTAL — baca/tulis ke file
+// JSON dummy lokal (data/b2b_tracker_store.json, di-seed dari
+// data/b2b_tracker_seed.json — prospek B2B fiktif).
+// ============================================================
+session_start();
+require_once __DIR__ . '/../includes/porto_kv_store.php';
+
+// PORTOFOLIO DEMO: gate login dihilangkan — halaman ini bagian dari showcase
+// publik, jadi datanya harus langsung bisa diakses tanpa perlu login manual dulu.
+$_SESSION['login_simasrim'] = true;
+
+$action = $_GET['action'] ?? '';
+$path = $_GET['path'] ?? 'b2b_tracker';
+if (strpos($path, 'b2b_tracker') !== 0) {
+    $path = 'b2b_tracker';
+}
+
+header('Content-Type: application/json');
+
+$storeFile = __DIR__ . '/data/b2b_tracker_store.json';
+$seedFile  = __DIR__ . '/data/b2b_tracker_seed.json';
+$tree = porto_kv_load($storeFile, $seedFile);
+
+function porto_gen_key() {
+    return '-M' . base_convert((string)microtime(true) * 1000, 10, 36) . substr(md5(uniqid('', true)), 0, 6);
+}
+
+if ($action === 'read') {
+    echo json_encode(porto_kv_get($tree, $path));
+} elseif ($action === 'push') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $key = porto_gen_key();
+    porto_kv_set($tree, "$path/$key", $data);
+    porto_kv_save($storeFile, $tree);
+    echo json_encode(['name' => $key]);
+} elseif ($action === 'update') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $existing = porto_kv_get($tree, $path);
+    if (!is_array($existing)) $existing = [];
+    if (is_array($data)) {
+        foreach ($data as $k => $v) $existing[$k] = $v;
+    }
+    porto_kv_set($tree, $path, $existing);
+    porto_kv_save($storeFile, $tree);
+    echo json_encode($existing);
+} elseif ($action === 'remove') {
+    porto_kv_set($tree, $path, null);
+    porto_kv_save($storeFile, $tree);
+    echo json_encode(null);
+} else {
+    echo json_encode(['error' => 'Invalid action']);
+}

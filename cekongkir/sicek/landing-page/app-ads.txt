@@ -1,0 +1,9 @@
+# app-ads.txt — Cek Ongkir Murah
+# Format standar IAB Tech Lab. WAJIB di-deploy persis di root domain
+# (contoh: https://domainkamu.com/app-ads.txt), bukan di dalam subfolder.
+#
+# GANTI baris di bawah dengan Publisher ID AdMob asli sebelum deploy.
+# Format: <DOMAIN_ADSERVER>, <PUBLISHER_ID>, <ACCOUNT_TYPE>, <TAG_ID_OPSIONAL>
+#
+# Contoh untuk Google AdMob (ganti pub-0000000000000000 dengan ID asli):
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

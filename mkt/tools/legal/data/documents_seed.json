@@ -1,0 +1,44 @@
+{
+  "demo_doc_1": {
+    "internal_no": "001/PKS/DEMO/VI/2026",
+    "external_no": "EXT-001/2026",
+    "type": "NDA",
+    "partner_name": "PT Contoh Mitra Sejahtera",
+    "brand": "Contoh Brand A",
+    "direction": "Inbound",
+    "status": "Signed & Sealed",
+    "start_date": "2026-06-01",
+    "end_date": "2027-06-01",
+    "created_at": "2026-05-20",
+    "year": 2026,
+    "pic_phone": "628100000001"
+  },
+  "demo_doc_2": {
+    "internal_no": "002/PKS/DEMO/VIII/2026",
+    "external_no": "EXT-002/2026",
+    "type": "Surat Penunjukan",
+    "partner_name": "Koperasi Contoh Makmur",
+    "brand": "Contoh Brand B",
+    "direction": "Outbound",
+    "status": "Negotiation",
+    "start_date": "2026-08-01",
+    "end_date": "2027-08-01",
+    "created_at": "2026-07-15",
+    "year": 2026,
+    "pic_phone": "628100000002"
+  },
+  "demo_doc_3": {
+    "internal_no": "003/PKS/DEMO/III/2026",
+    "external_no": "EXT-003/2026",
+    "type": "PKS",
+    "partner_name": "PT Contoh Aplikasi Digital",
+    "brand": "Contoh Brand C",
+    "direction": "Inbound",
+    "status": "Approved",
+    "start_date": "2026-03-01",
+    "end_date": "2026-09-15",
+    "created_at": "2026-02-10",
+    "year": 2026,
+    "pic_phone": "628100000003"
+  }
+}

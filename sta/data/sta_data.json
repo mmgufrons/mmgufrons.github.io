@@ -1,0 +1,28 @@
+{
+  "title": "ALBANI STORE",
+  "subtitle": "Toko Serba Ada — Grosir & Eceran",
+  "uspText": "Belanja kebutuhan sehari-hari, praktis & terpercaya.",
+  "mainLink": { "text": "Kunjungi Toko Online", "url": "#" },
+  "categories": [
+    {
+      "label": "Belanja",
+      "links": [
+        { "text": "Katalog Produk (Demo)", "url": "#" },
+        { "text": "Promo Minggu Ini (Demo)", "url": "#" }
+      ]
+    },
+    {
+      "label": "Media Sosial",
+      "links": [
+        { "text": "Instagram (Demo)", "url": "https://instagram.com/contoh.demo" },
+        { "text": "TikTok Shop (Demo)", "url": "https://tiktok.com/@contoh.demo" }
+      ]
+    },
+    {
+      "label": "Kontak",
+      "links": [
+        { "text": "Chat WhatsApp (Demo)", "url": "https://wa.me/6280000000000" }
+      ]
+    }
+  ]
+}

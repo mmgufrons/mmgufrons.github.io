@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cek Ongkir — SiCek Nova</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          violet: "#6D28D9", "violet-deep": "#4C1D95", "violet-soft": "#F3EEFC",
+          surface: "#FAF8FF", "surface-card": "#FFFFFF", "surface-muted": "#F1ECFB", border: "#E7DFF7",
+          gold: "#FFB627", "gold-dark": "#F0970A", mint: "#12B981", "mint-soft": "#E3FBF1",
+          ink: "#241547", ink70: "rgba(36,21,71,0.68)", ink45: "rgba(36,21,71,0.45)",
+        },
+        fontFamily: { display: ["Plus Jakarta Sans", "sans-serif"], body: ["Inter", "sans-serif"] },
+        borderRadius: { xl2: "22px", xl3: "32px" },
+      },
+    },
+  };
+</script>
+<style>
+  body { min-height: max(884px, 100dvh); }
+  .glow::before {
+    content: ""; position: absolute; inset: 0; opacity: .16; pointer-events: none;
+    background: radial-gradient(circle at 20% 0%, #fff 0%, transparent 55%);
+  }
+  .courier-card { transition: max-height .35s ease, opacity .25s ease; }
+  .courier-detail { max-height: 0; overflow: hidden; opacity: 0; }
+  .courier-detail.open { max-height: 420px; opacity: 1; }
+</style>
+</head>
+<body class="bg-surface text-ink font-body antialiased pb-28">
+
+<header class="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-border">
+  <div class="max-w-md mx-auto px-5 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../beranda/code.html" title="Kembali ke Beranda" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-muted active:scale-95 transition">
+        <span class="material-symbols-outlined text-violet">arrow_back</span>
+      </a>
+      <div>
+        <h1 class="font-display font-extrabold text-lg leading-tight">Cek Ongkir</h1>
+        <p class="text-[11px] text-ink45 -mt-0.5">Bandingkan, terus pilih yang paling hemat</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="../../../../index.html" class="text-xs bg-violet text-white px-2.5 py-1.5 rounded-lg hover:bg-violet-deep transition font-medium">Hub Utama</a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-md mx-auto px-5 pt-5 flex flex-col gap-7">
+
+  <!-- Form Card -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-violet to-violet-deep text-white rounded-xl3 p-5 glow">
+    <div class="absolute -bottom-16 -left-10 w-40 h-40 bg-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="relative flex flex-col gap-4">
+      <div>
+        <h2 class="font-display font-extrabold text-xl leading-snug">Jangan buru-buru<br/>kirim, cek dulu <span class="text-gold">di sini.</span></h2>
+        <p class="text-[13px] text-white/60 mt-1">9 ekspedisi diadu sekaligus, nggak perlu bolak-balik aplikasi.</p>
+      </div>
+      <div class="flex flex-col gap-2.5">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-[20px]">trip_origin</span>
+          <input class="w-full h-[52px] rounded-2xl bg-white/10 border border-white/15 pl-11 pr-4 text-sm placeholder:text-white/40 focus:outline-none focus:border-gold transition" placeholder="Kota / kecamatan asal" type="text"/>
+        </div>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gold text-[20px]">location_on</span>
+          <input class="w-full h-[52px] rounded-2xl bg-white/10 border border-white/15 pl-11 pr-4 text-sm placeholder:text-white/40 focus:outline-none focus:border-gold transition" placeholder="Kota / kecamatan tujuan" type="text"/>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-[20px]">scale</span>
+            <input class="w-full h-[52px] rounded-2xl bg-white/10 border border-white/15 pl-11 pr-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-gold transition" placeholder="Berat (kg)" type="number" value="1"/>
+          </div>
+          <div class="grid grid-cols-3 gap-1.5">
+            <input class="h-[52px] rounded-2xl bg-white/10 border border-white/15 text-center text-sm placeholder:text-white/40 focus:outline-none focus:border-gold transition" placeholder="P" type="number"/>
+            <input class="h-[52px] rounded-2xl bg-white/10 border border-white/15 text-center text-sm placeholder:text-white/40 focus:outline-none focus:border-gold transition" placeholder="L" type="number"/>
+            <input class="h-[52px] rounded-2xl bg-white/10 border border-white/15 text-center text-sm placeholder:text-white/40 focus:outline-none focus:border-gold transition" placeholder="T" type="number"/>
+          </div>
+        </div>
+      </div>
+      <button class="h-[54px] rounded-2xl bg-gold hover:bg-gold-dark active:scale-[.98] transition flex items-center justify-center gap-2 font-bold text-sm text-violet-deep shadow-lg shadow-black/10">
+        <span class="material-symbols-outlined text-[20px]">bolt</span>
+        Cari Tarif Terbaik
+      </button>
+    </div>
+  </section>
+
+  <!-- Ekspedisi Grid -->
+  <section class="flex flex-col gap-3">
+    <div class="flex items-center justify-between">
+      <h3 class="font-display font-bold text-base">Pilih Ekspedisi</h3>
+      <span class="text-[11px] text-ink45">Ketuk buat intip detail</span>
+    </div>
+    <div id="courier-grid" class="grid grid-cols-5 gap-2.5"></div>
+    <div id="courier-detail" class="courier-detail bg-surface-card border border-border rounded-xl2 courier-card"></div>
+  </section>
+
+  <!-- Hasil Pencarian -->
+  <section id="kirim" class="flex flex-col gap-3 pb-6 scroll-mt-20">
+    <div>
+      <h3 class="font-display font-bold text-base">Hasil Pencarian</h3>
+      <p class="text-[12px] text-ink45 mt-0.5">Jakarta Pusat → Surabaya, 1 kg</p>
+    </div>
+    <div id="results-list" class="flex flex-col gap-3"></div>
+  </section>
+
+  <!-- Slot Iklan -->
+  <section class="relative pb-6">
+    <div class="absolute top-2.5 left-2.5 z-10 bg-violet-deep/70 backdrop-blur-sm text-white/90 text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wide">IKLAN</div>
+    <div class="w-full h-24 rounded-xl2 bg-surface-muted border border-dashed border-border flex items-center justify-center overflow-hidden">
+      <p class="text-[11px] text-ink45">Slot Banner Ads · 336×96</p>
+    </div>
+  </section>
+</main>
+
+<!-- Modal Interupsi -->
+<div id="discount-backdrop" class="fixed inset-0 bg-violet-deep/60 z-[80] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+<div id="discount-modal" class="fixed left-0 right-0 bottom-0 z-[90] max-w-md mx-auto translate-y-full transition-transform duration-300">
+  <div class="bg-surface-card rounded-t-xl3 p-5 pb-8 relative overflow-hidden">
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-gold/15 rounded-full blur-2xl pointer-events-none"></div>
+    <div class="w-10 h-1 rounded-full bg-border mx-auto mb-4"></div>
+    <div class="relative flex flex-col gap-4">
+      <div class="flex items-start gap-3">
+        <div class="w-11 h-11 rounded-xl bg-gold/15 flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-gold-dark text-[22px]">bolt</span>
+        </div>
+        <div>
+          <p class="font-display font-extrabold text-base leading-snug">Eits, tunggu dulu!</p>
+          <p class="text-[13px] text-ink45 mt-0.5">Masa iya bayar tarif normal? Kamu bisa lebih hemat</p>
+        </div>
+      </div>
+      <div id="discount-summary" class="bg-surface-muted rounded-xl2 p-3.5 flex items-center justify-between"></div>
+      <div class="flex flex-col gap-2">
+        <button id="discount-cta" class="h-[52px] rounded-2xl bg-gold text-violet-deep text-sm font-bold active:scale-[.98] transition flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+          Aktifkan Harga Hemat
+        </button>
+        <button id="discount-skip" class="h-[52px] rounded-2xl text-ink45 text-sm font-semibold active:scale-[.98] transition">
+          Nanti Saja, Lanjut Tarif Normal
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-t border-border">
+  <div class="max-w-md mx-auto grid grid-cols-4 h-[74px] px-2 pb-safe">
+    <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../beranda/code.html">
+      <span class="material-symbols-outlined text-[22px]">home</span>
+      <span class="text-[10px] font-medium">Beranda</span>
+    </a>
+    <a class="flex flex-col items-center justify-center gap-1 text-violet" href="../cek_ongkir/code.html">
+      <span class="material-symbols-outlined text-[22px]" style="font-variation-settings:'FILL' 1">payments</span>
+      <span class="text-[10px] font-bold">Cek Ongkir</span>
+    </a>
+    <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../tracking/code.html">
+      <span class="material-symbols-outlined text-[22px]">local_shipping</span>
+      <span class="text-[10px] font-medium">Tracking</span>
+    </a>
+    <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="#kirim">
+      <span class="material-symbols-outlined text-[22px]">send</span>
+      <span class="text-[10px] font-medium">Kirim</span>
+    </a>
+  </div>
+</nav>
+
+<style>.pb-safe{padding-bottom:env(safe-area-inset-bottom,10px)}</style>
+
+<script>
+  const couriers = [
+    { code: "JNE", name: "JNE", full: "JNE", color: "#DA0812", text: "#fff", eta: "1-2 hari", from: "Rp 9.000", rating: "4.6",
+      tagline: "Berdiri sejak 1990, salah satu pionir ekspedisi nasional dengan jaringan sampai ke pelosok desa.",
+      chips: ["Reguler", "YES", "Trucking"] },
+    { code: "SAPX", name: "SAPX", full: "SAPX", color: "#EF3340", text: "#fff", eta: "2-4 hari", from: "Rp 8.000", rating: "4.4",
+      tagline: "Bagian dari SAP Group, gesit melayani rute kota besar dengan tarif bersaing.",
+      chips: ["Reguler", "Cargo"] },
+    { code: "J&T", name: "J&T", full: "J&T Express", color: "#E31E24", text: "#fff", eta: "1-3 hari", from: "Rp 9.500", rating: "4.7",
+      tagline: "Tumbuh pesat sejak 2015, dikenal lewat sistem tracking yang rajin update.",
+      chips: ["EZ", "Reguler", "Super"] },
+    { code: "SPX", name: "SPX", full: "SPX Express", color: "#EE4D2D", text: "#fff", eta: "2-4 hari", from: "Rp 7.000", rating: "4.4",
+      tagline: "Armada logistik yang terintegrasi langsung dengan ekosistem belanja online terbesar.",
+      chips: ["Standar", "Hemat"] },
+    { code: "JTC", name: "J&T Cargo", full: "J&T Cargo", color: "#F47521", text: "#fff", eta: "3-6 hari", from: "Rp 4.000/kg", rating: "4.3",
+      tagline: "Divisi kargo untuk kiriman besar & berat, tarif dihitung per kilogram.",
+      chips: ["Trucking", "Fullload"] },
+    { code: "LP", name: "Lion Parcel", full: "Lion Parcel", color: "#6A1B9A", text: "#fff", eta: "2-4 hari", from: "Rp 8.000", rating: "4.4",
+      tagline: "Ditopang jaringan penerbangan grup maskapai, kuat di rute-rute antar pulau.",
+      chips: ["Jagopack", "Regpack"] },
+    { code: "PXL", name: "Paxel", full: "Paxel", color: "#8B5CF6", text: "#fff", eta: "Hari ini", from: "Rp 15.000", rating: "4.6",
+      tagline: "Spesialis pengiriman dalam kota, lahir dari kebutuhan kirim serba cepat era e-commerce.",
+      chips: ["Sameday", "Nextday"] },
+    { code: "AA", name: "AnterAja", full: "AnterAja", color: "#FBC02D", text: "#241547", eta: "1 hari", from: "Rp 10.000", rating: "4.5",
+      tagline: "Ekspedisi lokal yang tumbuh cepat lewat janji estimasi yang jarang meleset.",
+      chips: ["Reguler", "Next Day"] },
+    { code: "IDE", name: "ID Express", full: "ID Express", color: "#1565C0", text: "#fff", eta: "2-4 hari", from: "Rp 8.000", rating: "4.3",
+      tagline: "Ekspedisi lokal yang fokus menjaga efisiensi biaya kirim untuk paket ringan.",
+      chips: ["Standar", "Truck"] },
+  ];
+
+  const grid = document.getElementById("courier-grid");
+  const detail = document.getElementById("courier-detail");
+  let activeIndex = null;
+
+  couriers.forEach((c, i) => {
+    const btn = document.createElement("button");
+    btn.className = "flex flex-col items-center gap-1.5 group";
+    btn.innerHTML = `
+      <span class="w-12 h-12 rounded-2xl flex items-center justify-center font-display font-bold text-[11px] shadow-sm border border-border transition group-active:scale-90"
+            style="background:${c.color};color:${c.text}">${c.code}</span>
+      <span class="text-[10px] text-ink70 leading-tight text-center">${c.name}</span>
+    `;
+    btn.addEventListener("click", () => toggleDetail(i));
+    grid.appendChild(btn);
+  });
+
+  function toggleDetail(i) {
+    if (activeIndex === i) {
+      detail.classList.remove("open");
+      activeIndex = null;
+      return;
+    }
+    activeIndex = i;
+    const c = couriers[i];
+    detail.innerHTML = `
+      <div class="p-4 flex flex-col gap-3">
+        <div class="flex items-center gap-3">
+          <span class="w-11 h-11 rounded-xl flex items-center justify-center font-display font-bold text-xs" style="background:${c.color};color:${c.text}">${c.code}</span>
+          <div>
+            <p class="font-semibold text-sm">${c.full}</p>
+            <p class="text-[11px] text-ink45">⭐ ${c.rating} · Estimasi ${c.eta}</p>
+          </div>
+        </div>
+        <p class="text-[12px] text-ink70 leading-relaxed">${c.tagline}</p>
+        <div class="flex flex-wrap gap-1.5">
+          ${c.chips.map((ch) => `<span class="bg-surface-muted text-ink70 text-[11px] font-bold px-2.5 py-1 rounded-full">${ch}</span>`).join("")}
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-[12px]">
+          <div class="bg-surface-muted rounded-xl px-3 py-2">
+            <p class="text-ink45">Mulai dari</p>
+            <p class="font-semibold">${c.from}</p>
+          </div>
+          <div class="bg-surface-muted rounded-xl px-3 py-2">
+            <p class="text-ink45">Estimasi tiba</p>
+            <p class="font-semibold">${c.eta}</p>
+          </div>
+        </div>
+        <button class="h-11 rounded-xl bg-violet text-white text-sm font-bold active:scale-95 transition">Cek Ongkir dengan ${c.name}</button>
+      </div>
+    `;
+    detail.classList.add("open");
+  }
+
+  const results = [
+    {
+      code: "SAPX", name: "SAPX", color: "#EF3340", text: "#fff", badge: "TERMURAH", badgeColor: "mint",
+      services: [
+        { label: "Reguler", eta: "2-4 hari", normal: 16500, member: 14850 },
+        { label: "SAPX Cargo", eta: "4-5 hari", normal: 42000, member: null },
+      ],
+    },
+    {
+      code: "AA", name: "AnterAja", color: "#FBC02D", text: "#241547", badge: "TERCEPAT", badgeColor: "gold",
+      services: [
+        { label: "Next Day", eta: "1 hari", normal: 22000, member: 19800 },
+        { label: "Reguler", eta: "2-3 hari", normal: 14125, member: null },
+      ],
+    },
+    {
+      code: "JNE", name: "JNE", color: "#DA0812", text: "#fff", badge: null,
+      services: [
+        { label: "Reguler", eta: "1-2 hari", normal: 19000, member: null },
+        { label: "YES", eta: "1 hari", normal: 31000, member: 27900 },
+      ],
+    },
+    {
+      code: "J&T", name: "J&T Express", color: "#E31E24", text: "#fff", badge: null,
+      services: [
+        { label: "EZ", eta: "2-7 hari", normal: 11000, member: 9900 },
+        { label: "Reguler", eta: "2 hari", normal: 20000, member: null },
+      ],
+    },
+  ];
+
+  const rupiah = (n) => "Rp" + n.toLocaleString("id-ID");
+  const resultsList = document.getElementById("results-list");
+
+  results.forEach((c) => {
+    const card = document.createElement("div");
+    card.className = "bg-surface-card border border-border rounded-xl2 p-4 flex flex-col gap-3 relative";
+    if (c.badge) {
+      const badgeBg = c.badgeColor === "mint" ? "bg-mint" : "bg-gold";
+      const badgeText = c.badgeColor === "mint" ? "text-white" : "text-violet-deep";
+      card.innerHTML += `<div class="absolute -top-2 right-4 ${badgeBg} ${badgeText} text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow">${c.badge}</div>`;
+    }
+    const header = document.createElement("div");
+    header.className = "flex items-center gap-3" + (c.badge ? " pt-2" : "");
+    header.innerHTML = `
+      <div class="w-11 h-11 rounded-xl flex items-center justify-center font-display font-bold text-xs shrink-0" style="background:${c.color};color:${c.text}">${c.code}</div>
+      <p class="font-bold text-sm">${c.name}</p>
+    `;
+    card.appendChild(header);
+    card.appendChild(Object.assign(document.createElement("div"), { className: "h-px bg-border" }));
+
+    const rows = document.createElement("div");
+    rows.className = "flex flex-col gap-3";
+    c.services.forEach((s) => {
+      const row = document.createElement("div");
+      if (s.member) {
+        row.className = "flex items-end justify-between";
+        row.innerHTML = `
+          <div>
+            <p class="text-[11px] text-ink45">${s.label} · ${s.eta}</p>
+            <div class="flex items-center gap-2">
+              <span class="text-[12px] text-ink45 line-through">${rupiah(s.normal)}</span>
+              <span class="font-display font-extrabold text-lg text-gold-dark">${rupiah(s.member)}</span>
+            </div>
+            <p class="text-[10px] text-mint font-bold">Hemat ${Math.round((1 - s.member / s.normal) * 100)}% — harga member aktif ⚡</p>
+          </div>
+          <a href="../transaksi_berhasil/code.html" class="h-11 px-5 rounded-xl bg-violet text-white text-sm font-bold flex items-center gap-1.5 active:scale-95 transition shrink-0">
+            Kirim Sekarang
+            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+          </a>
+        `;
+      } else {
+        row.className = "flex items-center justify-between gap-3 cursor-pointer group";
+        row.innerHTML = `
+          <div>
+            <p class="text-[11px] text-ink45">${s.label} · ${s.eta}</p>
+            <p class="font-display font-bold text-[15px] text-ink45">${rupiah(s.normal)}</p>
+          </div>
+          <span class="text-[11px] text-gold-dark font-bold text-right leading-tight max-w-[110px] group-active:opacity-70">Ada harga lebih murah, lho →</span>
+        `;
+        row.addEventListener("click", () => openDiscountModal({ courier: c.name, label: s.label, normal: s.normal }));
+      }
+      rows.appendChild(row);
+    });
+    card.appendChild(rows);
+    resultsList.appendChild(card);
+  });
+
+  const dModal = document.getElementById("discount-modal");
+  const dBackdrop = document.getElementById("discount-backdrop");
+  const dSummary = document.getElementById("discount-summary");
+  const dCta = document.getElementById("discount-cta");
+  const dSkip = document.getElementById("discount-skip");
+
+  function openDiscountModal({ courier, label, normal }) {
+    const estMember = Math.round(normal * 0.9);
+    dSummary.innerHTML = `
+      <div>
+        <p class="text-[11px] text-ink45">${courier} · ${label}</p>
+        <p class="text-[12px] text-ink45 line-through">${rupiah(normal)}</p>
+      </div>
+      <p class="font-display font-extrabold text-lg text-mint">~${rupiah(estMember)}</p>
+    `;
+    dBackdrop.classList.remove("pointer-events-none");
+    dBackdrop.style.opacity = "1";
+    dModal.style.transform = "translateY(0)";
+  }
+
+  function closeDiscountModal() {
+    dBackdrop.style.opacity = "0";
+    dBackdrop.classList.add("pointer-events-none");
+    dModal.style.transform = "translateY(100%)";
+  }
+
+  dBackdrop.addEventListener("click", closeDiscountModal);
+  dSkip.addEventListener("click", closeDiscountModal);
+  dCta.addEventListener("click", closeDiscountModal);
+</script>
+</body>
+</html>

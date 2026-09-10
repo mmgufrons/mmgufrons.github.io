@@ -1,0 +1,116 @@
+# ============================================================
+# SIMASRIM Marketing OS v8.0 — Apache Security Configuration
+# /mg/.htaccess
+# ============================================================
+
+# ── FORCE HTTPS ─────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect HTTP → HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Redirect www → non-www (optional — adjust to your domain)
+    # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    # RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ── SECURITY HEADERS ─────────────────────────────────────────
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Prevent MIME sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # XSS Protection (legacy browsers)
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Content Security Policy
+    # NOTE: Firebase, Google Fonts, CDN libs explicitly whitelisted
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.gstatic.com https://www.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.firebasedatabase.app https://*.googleapis.com https://identitytoolkit.googleapis.com wss://*.firebasedatabase.app; worker-src 'self'; manifest-src 'self';"
+
+    # HSTS — enable after confirming HTTPS works (6 months)
+    # Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains"
+
+    # Permissions Policy (disable unused browser features)
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+</IfModule>
+
+# ── BLOCK DIRECTORY LISTING ──────────────────────────────────
+Options -Indexes
+
+# ── BLOCK SENSITIVE FILE ACCESS ──────────────────────────────
+<FilesMatch "\.(bak|log|env|sh|sql|git|htpasswd|DS_Store)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block Firebase config (berisi secret key)
+<Files "firebase_config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Block backup script (tidak perlu diakses via browser)
+<Files "backup.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Block access to the original backup
+<Files "index.html.bak">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# ── BLOCK AKSES FOLDER BACKUPS (berisi dump database) ────────
+<IfModule mod_rewrite.c>
+    RewriteRule ^backups(/.*)?$ - [F,L]
+</IfModule>
+
+# Fallback: Blokir file JSON di folder backups via FilesMatch
+<FilesMatch "^simasrim_backup_.*\.json$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ── CACHE CONTROL FOR STATIC ASSETS ─────────────────────────
+<IfModule mod_headers.c>
+    # Long-lived cache for CSS, JS, images (1 week)
+    <FilesMatch "\.(css|js|png|jpg|jpeg|webp|svg|ico|woff|woff2)$">
+        Header set Cache-Control "public, max-age=604800, stale-while-revalidate=86400"
+    </FilesMatch>
+
+    # HTML and manifest → no-cache (always revalidate)
+    <FilesMatch "\.(html|json)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+
+    # Service Worker → always revalidate
+    <Files "sw.js">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Service-Worker-Allowed "/"
+    </Files>
+</IfModule>
+
+# ── GZIP COMPRESSION ─────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ── MIME TYPES ───────────────────────────────────────────────
+<IfModule mod_mime.c>
+    AddType application/manifest+json .json
+    AddType text/javascript            .js
+</IfModule>
+
+# ── ERROR PAGES ──────────────────────────────────────────────
+ErrorDocument 403 /mg/offline.html
+ErrorDocument 404 /mg/offline.html

@@ -1,0 +1,1840 @@
+<?php
+session_start();
+if (!isset($_SESSION['login_simasrim']) || $_SESSION['login_simasrim'] !== true) {
+    header("Location: ../../login.php");
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMASRIM Campaign — Smart Leads & CRM Tracker</title>
+    <meta name="description" content="Smart Leads Cleanser & Master Tracking Campaign SIMASRIM. Upload, bersihkan, dan kelola leads WhatsApp & Email dalam satu dashboard CRM interaktif.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- WA Broadcast tool CSS (scoped dalam .wa-scope) -->
+    <link rel="stylesheet" href="css/wa-broadcast.css">
+</head>
+<body>
+
+
+    <!-- Login overlay removed: auth handled by PHP session (mkt/login.php) -->
+
+
+    <!-- ============================================================
+         MAIN APP
+    ============================================================ -->
+    <div class="app-container" id="main-app">
+
+        <!-- ──────── SIDEBAR ──────── -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box"><i class='bx bx-target-lock'></i></div>
+                <div class="sidebar-brand">
+                    <h2>SIMASRIM</h2>
+                    <small>Campaign Tracker</small>
+                </div>
+            </div>
+
+            <!-- Mode Switcher: WhatsApp / Email -->
+            <p class="nav-section-label">Mode Campaign</p>
+            <div class="mode-tabs" id="mode-tabs">
+                <button class="mode-tab-btn active wa" data-mode="wa" id="mode-btn-wa">
+                    <i class='bx bxl-whatsapp'></i> WA
+                </button>
+                <button class="mode-tab-btn email" data-mode="email" id="mode-btn-email">
+                    <i class='bx bx-envelope'></i> Email
+                </button>
+            </div>
+
+            <!-- Navigasi Pages -->
+            <p class="nav-section-label">Halaman</p>
+            <ul class="nav-links" id="nav-links">
+                <li style="margin-bottom: 8px;">
+                    <a href="../../index.php" style="background: rgba(243,112,13,0.15); color: #F3700D; border: 1px solid rgba(243,112,13,0.3); border-radius: 8px; padding: 8px 12px; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:0.85rem; font-weight:600;">
+                        <i class='bx bx-arrow-back'></i>
+                        <span>Back to MKT Hub</span>
+                    </a>
+                </li>
+                <li class="active" data-target="dashboard">
+                    <a href="#">
+                        <i class='bx bx-grid-alt'></i>
+                        <span>Dashboard</span>
+                        <span class="nav-badge" id="badge-dashboard" style="display:none;"></span>
+                    </a>
+                </li>
+                <li data-target="leads">
+                    <a href="#">
+                        <i class='bx bx-spreadsheet'></i>
+                        <span>Master Leads</span>
+                        <span class="nav-badge" id="badge-leads">–</span>
+                    </a>
+                </li>
+                <li data-target="upload">
+                    <a href="#">
+                        <i class='bx bx-cloud-upload'></i>
+                        <span>Upload & Cleansing</span>
+                    </a>
+                </li>
+                <li data-target="broadcast">
+                    <a href="#">
+                        <i class='bx bxl-whatsapp'></i>
+                        <span>WA Broadcast</span>
+                    </a>
+                </li>
+                <li data-target="leadgen">
+                    <a href="#">
+                        <i class='bx bx-radar'></i>
+                        <span>Cari Leads Baru</span>
+                    </a>
+                </li>
+                <li data-target="tutorial">
+                    <a href="#">
+                        <i class='bx bx-book-open'></i>
+                        <span>Panduan</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <p>SIMASRIM Campaign</p>
+                <p>v1.0 · Firebase Realtime DB</p>
+                <p id="sidebar-db-info" style="margin-top:4px; color:rgba(255,255,255,0.2);">campaign-smsrm · SG</p>
+            </div>
+        </aside>
+
+        <!-- ──────── MAIN CONTENT ──────── -->
+        <main class="main-content">
+
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="page-header">
+                    <h1 id="page-title">Dashboard Campaign</h1>
+                    <p id="page-sub">Ringkasan performa leads SIMASRIM</p>
+                </div>
+                <div class="top-bar-actions">
+                    <div id="mode-badge-topbar" class="mode-badge wa">
+                        <i class='bx bxl-whatsapp'></i> WhatsApp Mode
+                    </div>
+                    <button class="btn btn-ghost btn-sm" id="btn-refresh" title="Refresh dari Firebase">
+                        <i class='bx bx-refresh'></i> Refresh
+                    </button>
+                    <div id="db-status" class="badge-status">
+                        <span class="dot"></span>Menghubungkan...
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content-wrapper">
+
+                <!-- ══════════════════════════════════
+                     TAB: DASHBOARD
+                ══════════════════════════════════ -->
+                <section id="dashboard" class="tab-pane active">
+                    <div class="content-area">
+
+                        <!-- Demo Banner (muncul jika Firebase kosong) -->
+                        <div id="demo-banner" class="demo-banner" style="display:none;">
+                            <div class="db-icon">🎯</div>
+                            <div style="flex:1;">
+                                <div class="db-title">Selamat Datang di SIMASRIM Campaign Dashboard!</div>
+                                <div class="db-sub">Database masih kosong. Upload data leads dari menu <strong style="color:var(--accent);">Upload & Cleansing</strong>, atau coba lihat demo dengan data contoh.</div>
+                            </div>
+                            <div class="db-actions">
+                                <button onclick="switchTab('upload')" class="btn btn-accent btn-sm">
+                                    <i class='bx bx-upload'></i> Upload Leads
+                                </button>
+                                <button onclick="loadDemoData()" class="btn btn-sm" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);">
+                                    <i class='bx bx-play-circle'></i> Lihat Demo
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Filter Dashboard — sama seperti Master Leads, supaya bisa lihat performa
+                             per brand/produk/wilayah/PIC/periode, bukan cuma total keseluruhan -->
+                        <div class="filter-bar" id="dashboard-filter-bar">
+                            <i class='bx bx-filter-alt' style="color:var(--primary);font-size:1.1rem; flex-shrink: 0;"></i>
+                            <select class="glass-select" id="dash-filter-brand"><option value="">Semua Brand</option></select>
+                            <select class="glass-select" id="dash-filter-produk"><option value="">Semua Produk</option></select>
+                            <select class="glass-select" id="dash-filter-provinsi"><option value="">Semua Area Utama</option></select>
+                            <select class="glass-select" id="dash-filter-area"><option value="">Semua Sub Area</option></select>
+                            <select class="glass-select" id="dash-filter-pic"><option value="">Semua PIC</option></select>
+                            <div class="filter-divider"></div>
+                            <label style="font-size:0.76rem;color:var(--text-muted);white-space:nowrap;">Dari:</label>
+                            <input type="date" class="glass-input" id="dash-filter-date-from" style="max-width:145px;">
+                            <label style="font-size:0.76rem;color:var(--text-muted);white-space:nowrap;">Sampai:</label>
+                            <input type="date" class="glass-input" id="dash-filter-date-to" style="max-width:145px;">
+                            <button class="btn btn-ghost btn-sm" id="btn-reset-dash-filter" title="Reset Filter" style="padding: 7px 10px;">
+                                <i class='bx bx-refresh' style="font-size: 1.2rem; margin: 0;"></i>
+                            </button>
+                            <button class="btn btn-ghost btn-sm" id="btn-export-dashboard" title="Export data hasil filter ini ke CSV" style="padding: 7px 10px;">
+                                <i class='bx bx-export' style="font-size: 1.1rem;"></i> Export CSV
+                            </button>
+                        </div>
+
+                        <!-- Summary Cards -->
+                        <div class="summary-cards" id="summary-cards">
+                            <div class="metric-card purple">
+                                <div class="card-icon-wrap purple"><i class='bx bx-group'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Total Leads</div>
+                                    <div class="card-value" id="card-total">0</div>
+                                    <div class="card-sub" id="card-total-sub">Semua mode aktif</div>
+                                </div>
+                            </div>
+                            <div class="metric-card red">
+                                <div class="card-icon-wrap red"><i class='bx bxs-flame'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Hot Leads 🔴</div>
+                                    <div class="card-value" id="card-hot">0</div>
+                                    <div class="card-sub">Siap closing</div>
+                                </div>
+                            </div>
+                            <div class="metric-card orange">
+                                <div class="card-icon-wrap orange"><i class='bx bx-trending-up'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Warm Leads 🟡</div>
+                                    <div class="card-value" id="card-warm">0</div>
+                                    <div class="card-sub">Sedang dijajaki</div>
+                                </div>
+                            </div>
+                            <div class="metric-card blue">
+                                <div class="card-icon-wrap blue"><i class='bx bx-minus-circle'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Cold / Dead 🔵</div>
+                                    <div class="card-value" id="card-cold">0</div>
+                                    <div class="card-sub">Tidak merespon</div>
+                                </div>
+                            </div>
+                            <div class="metric-card green">
+                                <div class="card-icon-wrap green"><i class='bx bx-time-five'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Belum Direspon</div>
+                                    <div class="card-value" id="card-noresponse">0</div>
+                                    <div class="card-sub">Menunggu follow-up</div>
+                                </div>
+                            </div>
+                            <div class="metric-card teal">
+                                <div class="card-icon-wrap teal"><i class='bx bx-check-shield'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Sudah Dikirim Pesan</div>
+                                    <div class="card-value" id="card-sent">0</div>
+                                    <div class="card-sub">Tahap 1+</div>
+                                </div>
+                            </div>
+                            <div class="metric-card red">
+                                <div class="card-icon-wrap red"><i class='bx bx-bell'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">🔔 Perlu Follow-Up</div>
+                                    <div class="card-value" id="card-fu-needed">0</div>
+                                    <div class="card-sub">Hot/Warm, belum closing, &gt;=3 hari tanpa update</div>
+                                </div>
+                            </div>
+                            <div class="metric-card green">
+                                <div class="card-icon-wrap green"><i class='bx bx-pulse'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Aktivitas Hari Ini</div>
+                                    <div class="card-value" id="card-active-today">0</div>
+                                    <div class="card-sub">Leads di-update hari ini</div>
+                                </div>
+                            </div>
+                            <div class="metric-card teal">
+                                <div class="card-icon-wrap teal"><i class='bx bx-link'></i></div>
+                                <div class="card-body">
+                                    <div class="card-label">Kontak Lengkap (WA+Email)</div>
+                                    <div class="card-value" id="card-dual-contact">0</div>
+                                    <div class="card-sub" id="card-dual-contact-sub">Lead dengan 2 kanal kontak</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Row 1 -->
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Distribusi Tipe Leads per Brand</h3>
+                                        <p>Hot / Warm / Cold per Brand</p>
+                                    </div>
+                                    <select class="glass-select glass-select--sm" id="chart-brand-filter" style="font-size:0.76rem;padding:5px 10px;">
+                                        <option value="all">Semua Brand</option>
+                                    </select>
+                                </div>
+                                <div style="position:relative;height:260px;">
+                                    <canvas id="chart-by-brand"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Tipe Leads (Donut)</h3>
+                                        <p>Komposisi keseluruhan</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:260px;">
+                                    <canvas id="chart-tipe-donut"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Row 2 -->
+                        <div class="charts-grid-3">
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Progress per PIC Garap</h3>
+                                        <p>Jumlah leads per eksekutor</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:210px;">
+                                    <canvas id="chart-by-pic"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Distribusi per Area</h3>
+                                        <p>Top 8 kota/area</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:210px;">
+                                    <canvas id="chart-by-area"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Tahap Campaign</h3>
+                                        <p>Progress per tahapan pesan</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:210px;">
+                                    <canvas id="chart-by-tahap"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Row 3 — tren waktu & funnel konversi, saling melengkapi chart
+                             snapshot di atas (Row 1-2 cuma kondisi sekarang, tanpa elemen waktu) -->
+                        <div class="charts-grid" style="margin-top:1.5rem;">
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Tren Leads Masuk & Closing</h3>
+                                        <p>14 hari terakhir, berdasar tanggal dibuat/update</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:220px;">
+                                    <canvas id="chart-trend"></canvas>
+                                </div>
+                            </div>
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>Funnel Tahap Campaign</h3>
+                                        <p>Berapa leads yang bertahan sampai tahap tertentu</p>
+                                    </div>
+                                </div>
+                                <div style="position:relative;height:220px;">
+                                    <canvas id="chart-funnel-tahap"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="charts-grid" style="margin-top:1.5rem;">
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>🔔 Perlu Follow-Up</h3>
+                                        <p>Leads Hot/Warm yang butuh perhatian — klik baris utk langsung edit</p>
+                                    </div>
+                                </div>
+                                <div id="followup-list" class="leaderboard-list"></div>
+                            </div>
+                        </div>
+
+                        <div class="charts-grid" style="margin-top:1.5rem;">
+                            <div class="chart-card">
+                                <div class="chart-card-header">
+                                    <div>
+                                        <h3>🏆 Leaderboard PIC Garap</h3>
+                                        <p>Ranking closing terbanyak</p>
+                                    </div>
+                                </div>
+                                <div id="leaderboard-pic-garap" class="leaderboard-list"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ══════════════════════════════════
+                     TAB: MASTER LEADS (CRM Table)
+                ══════════════════════════════════ -->
+                <section id="leads" class="tab-pane">
+                    <div class="content-area">
+
+                        <!-- Filter Bar -->
+                        <div class="filter-bar" id="filter-bar">
+                            <i class='bx bx-filter-alt' style="color:var(--primary);font-size:1.1rem; flex-shrink: 0;"></i>
+                            <input type="text" class="glass-input" id="filter-search"
+                                   placeholder="🔍 Cari..." style="flex: 1; min-width: 140px;" autocomplete="off">
+                            <div class="filter-divider"></div>
+                            <select class="glass-select" id="filter-provinsi"><option value="">Semua Area Utama</option></select>
+                            <select class="glass-select" id="filter-area"><option value="">Semua Sub Area</option></select>
+                            <select class="glass-select" id="filter-brand"><option value="">Semua Brand</option></select>
+                            <select class="glass-select" id="filter-produk"><option value="">Semua Produk</option></select>
+                            <select class="glass-select" id="filter-pic"><option value="">Semua PIC</option></select>
+                            <select class="glass-select" id="filter-tipe">
+                                <option value="">Semua Tipe</option>
+                                <option value="Hot">🔴 Hot</option>
+                                <option value="Warm">🟡 Warm</option>
+                                <option value="Cold">🔵 Cold</option>
+                                <option value="Cold / Dead">⚫ Cold / Dead</option>
+                                <option value="New">🆕 New</option>
+                            </select>
+                            <select class="glass-select" id="filter-tahap"><option value="">Semua Tahap</option></select>
+                            <button class="btn btn-ghost btn-sm" id="btn-reset-filter" title="Reset Filter" style="padding: 7px 10px;">
+                                <i class='bx bx-refresh' style="font-size: 1.2rem; margin: 0;"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" id="btn-export-csv" title="Export CSV" style="padding: 7px 10px;">
+                                <i class='bx bx-download' style="font-size: 1.2rem; margin: 0;"></i>
+                            </button>
+                            <button class="btn btn-primary btn-sm" id="btn-open-handover" title="Export untuk Handover Mitra Area" style="padding: 7px 10px;">
+                                <i class='bx bx-transfer' style="font-size: 1.2rem; margin: 0;"></i>
+                            </button>
+                        </div>
+
+                        <!-- Bulk Action Bar -->
+                        <div class="bulk-bar" id="bulk-bar">
+                            <i class='bx bx-checkbox-checked' style="font-size:1.2rem;"></i>
+                            <span class="bulk-count" id="bulk-count">0</span>
+                            <span class="bulk-label">baris dipilih</span>
+                            <div class="bulk-divider"></div>
+                            <span style="font-size:0.8rem; opacity:0.85;">Edit massal:</span>
+                            <div class="bulk-field-row">
+                                <label>Brand:</label>
+                                <input type="text" class="bulk-select" id="bulk-brand" placeholder="Ketik brand..." style="width:120px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;">
+                                <button class="btn btn-sm" id="btn-bulk-brand" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>Area Utama:</label>
+                                <input type="text" class="bulk-select" id="bulk-provinsi" list="provinsi-suggestions" placeholder="Ketik provinsi..." style="width:120px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;">
+                                <button class="btn btn-sm" id="btn-bulk-provinsi" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>Sub Area:</label>
+                                <input type="text" class="bulk-select" id="bulk-area" placeholder="Ketik area..." style="width:120px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;">
+                                <button class="btn btn-sm" id="btn-bulk-area" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>Produk:</label>
+                                <input type="text" class="bulk-select" id="bulk-produk" list="produk-suggestions" placeholder="Ketik produk..." style="width:110px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;">
+                                <button class="btn btn-sm" id="btn-bulk-produk" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>PIC Campaign:</label>
+                                <input type="text" class="bulk-select" id="bulk-pic-campaign" placeholder="Ketik nama..." style="width:120px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;">
+                                <button class="btn btn-sm" id="btn-bulk-pic-campaign" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>PIC Garap:</label>
+                                <input type="text" class="bulk-select" id="bulk-pic-garap" placeholder="Ketik nama..." style="width:130px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;">
+                                <button class="btn btn-sm" id="btn-bulk-pic" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>Nomor WA CS Dipakai:</label>
+                                <input type="text" class="bulk-select" id="bulk-nomor-wa-terpakai" placeholder="Contoh: 628123..." style="width:140px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;">
+                                <button class="btn btn-sm" id="btn-bulk-nomor-wa-terpakai" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>Aksi Lanjutan:</label>
+                                <input type="text" class="bulk-select" id="bulk-aksi-lanjutan" placeholder="Ketik aksi..." style="width:140px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;">
+                                <button class="btn btn-sm" id="btn-bulk-aksi" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>+ Tgl Kirim:</label>
+                                <input type="date" class="bulk-select" id="bulk-tgl-kirim" style="width:135px;padding:5px 10px;border-radius:8px;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);font-family:inherit;font-size:0.8rem;outline:none;color-scheme:dark;">
+                                <button class="btn btn-sm" id="btn-bulk-tgl-kirim" title="Tambahkan tanggal ini ke riwayat Tgl Kirim (bukan menimpa, cuma menambah)" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Tambah</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>Tahap:</label>
+                                <select class="bulk-select" id="bulk-tahap">
+                                    <option value="">Pilih tahap...</option>
+                                    <option>PESAN 1</option><option>PESAN 2</option><option>PESAN 3</option>
+                                    <option>FOLLOW UP</option><option>CLOSING</option>
+                                </select>
+                                <button class="btn btn-sm" id="btn-bulk-tahap" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <div class="bulk-field-row">
+                                <label>Tipe:</label>
+                                <select class="bulk-select" id="bulk-tipe">
+                                    <option value="">Pilih tipe...</option>
+                                    <option>Hot</option><option>Warm</option><option>Cold</option><option>Cold / Dead</option><option>New</option>
+                                </select>
+                                <button class="btn btn-sm" id="btn-bulk-tipe" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);">Terapkan</button>
+                            </div>
+                            <div class="bulk-divider"></div>
+                            <button class="btn btn-sm" id="btn-broadcast-wa-selected" style="background:rgba(37,211,102,0.2);color:#25D366;border:1px solid rgba(37,211,102,0.3);" title="Buka tab WA Broadcast dengan kontak baris terpilih">
+                                <i class='bx bxl-whatsapp'></i> Broadcast WA
+                            </button>
+                            <button class="btn btn-sm" id="btn-copy-contact-selected" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.2);" title="Copy kontak baris terpilih, siap paste ke BCC">
+                                <i class='bx bx-copy'></i> Copy Kontak
+                            </button>
+                            <div class="bulk-divider"></div>
+                            <button class="btn btn-sm" id="btn-bulk-delete" style="background:rgba(239,68,68,0.25);color:#fca5a5;border:1px solid rgba(239,68,68,0.3);">
+                                <i class='bx bx-trash'></i> Hapus
+                            </button>
+                            <button class="btn btn-ghost btn-sm" id="btn-deselect" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.2);">
+                                <i class='bx bx-x'></i>
+                            </button>
+                        </div>
+
+                        <!-- Table Toolbar -->
+                        <div class="table-toolbar">
+                            <h3 id="leads-table-title">📋 Master Leads — WhatsApp</h3>
+                            <span style="color:var(--text-muted);font-size:0.78rem;" id="leads-count"></span>
+                            <button class="btn btn-ghost btn-sm" id="btn-select-all-vis" title="Pilih semua baris terlihat (1 halaman)">
+                                <i class='bx bx-select-multiple'></i> Pilih Semua
+                            </button>
+                            <button class="btn btn-ghost btn-sm" id="btn-select-all-filtered" title="Pilih SEMUA hasil filter, termasuk yang di halaman lain">
+                                <i class='bx bx-list-check'></i> Pilih Semua Hasil Filter
+                            </button>
+                            <button class="btn btn-ghost btn-sm" id="btn-copy-contact-filtered" title="Copy kontak semua hasil filter, siap paste ke BCC">
+                                <i class='bx bx-copy'></i> Copy Kontak (Terfilter)
+                            </button>
+                            <button class="btn btn-accent btn-sm" id="btn-open-rename-massal" title="Ganti nilai suatu field untuk banyak leads sekaligus, tanpa perlu centang satu-satu">
+                                <i class='bx bx-search-alt'></i> Cari & Ganti Massal
+                            </button>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="table-wrap">
+                            <table class="data-table" id="leads-table">
+                                <thead>
+                                    <tr id="leads-thead">
+                                        <!-- Diisi dinamis oleh JS sesuai mode -->
+                                    </tr>
+                                </thead>
+                                <tbody id="leads-tbody">
+                                    <tr>
+                                        <td colspan="19">
+                                            <div class="empty-state">
+                                                <i class='bx bx-target-lock'></i>
+                                                <h3>Belum Ada Data Leads</h3>
+                                                <p>Upload file CSV/XLSX di menu <strong>Upload & Cleansing</strong> atau muat data Demo.</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:10px;">
+                            <div style="font-size:0.78rem;color:var(--text-muted);" id="pagination-info"></div>
+                            <div style="display:flex;gap:6px;" id="pagination-controls"></div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ══════════════════════════════════
+                     TAB: UPLOAD & CLEANSING
+                ══════════════════════════════════ -->
+                <section id="upload" class="tab-pane">
+                    <div class="content-area">
+                        <div class="upload-page">
+
+                            <div class="upload-wizard">
+
+                                <!-- STEP 1: SEGMENTASI -->
+                                <div class="wizard-step step-active" id="step-1">
+                                    <div class="step-header">
+                                        <div class="step-number" id="step1-num">1</div>
+                                        <div>
+                                            <div class="step-title">Segmentasi Data</div>
+                                            <div class="step-sub">Isi informasi kampanye sebelum upload</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mode super: Upload Data Segar (default, harian) vs Migrasi Data Lama (multi-sheet) -->
+                                    <div style="margin-bottom:16px;">
+                                        <label style="font-size:0.76rem;font-weight:700;color:var(--text-muted);display:block;margin-bottom:8px;">Jenis Upload:</label>
+                                        <div style="display:flex;gap:10px;">
+                                            <label class="super-mode-choice" id="choice-fresh" style="flex:1;display:flex;align-items:center;gap:10px;padding:13px 16px;border:2px solid var(--primary);border-radius:var(--radius-md);cursor:pointer;background:var(--primary-light);">
+                                                <input type="radio" name="upload-super-mode" value="fresh" checked>
+                                                <div>
+                                                    <div style="font-weight:700;font-size:0.85rem;">Upload Data Segar</div>
+                                                    <div style="font-size:0.72rem;color:var(--text-muted);">1 file = 1 kombinasi Area/Brand/PIC (hasil scraping/list baru)</div>
+                                                </div>
+                                            </label>
+                                            <label class="super-mode-choice" id="choice-migrate" style="flex:1;display:flex;align-items:center;gap:10px;padding:13px 16px;border:2px solid var(--border-solid);border-radius:var(--radius-md);cursor:pointer;background:var(--bg);">
+                                                <input type="radio" name="upload-super-mode" value="migrate">
+                                                <div>
+                                                    <div style="font-weight:700;font-size:0.85rem;">Migrasi Data Lama</div>
+                                                    <div style="font-size:0.72rem;color:var(--text-muted);">File Excel banyak sheet, Area/Brand beda-beda per sheet/baris</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="seg-form" id="seg-form-fresh">
+                                        <div class="form-group">
+                                            <label>Sub Area / Kota <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-input" id="seg-area" placeholder="Contoh: Bogor, Depok, Bekasi...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Area Utama <span style="color:var(--text-light);font-weight:400;">(Provinsi, opsional)</span></label>
+                                            <input type="text" class="form-input" id="seg-provinsi" list="provinsi-suggestions" placeholder="Otomatis dari Sub Area kalau dikenali">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Brand <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-input" id="seg-brand" placeholder="Contoh: Wahana, Koperasi...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>PIC Campaign <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-input" id="seg-pic-campaign" placeholder="Nama pemilik data...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>PIC Garap <span style="color:var(--text-light);font-weight:400;">(opsional, bisa diisi nanti)</span></label>
+                                            <input type="text" class="form-input" id="seg-pic-garap" placeholder="Nama eksekutor lapangan...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Produk <span style="color:var(--text-light);font-weight:400;">(opsional)</span></label>
+                                            <input type="text" class="form-input" id="seg-produk" list="produk-suggestions" placeholder="Contoh: SIMASRIM">
+                                        </div>
+                                    </div>
+
+                                    <div class="seg-form" id="seg-form-migrate" style="display:none;">
+                                        <div class="form-group">
+                                            <label>PIC Campaign <span style="color:var(--danger);">*</span></label>
+                                            <input type="text" class="form-input" id="seg-pic-campaign-migrate" placeholder="Nama pemilik data (berlaku utk semua sheet)...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>PIC Garap <span style="color:var(--text-light);font-weight:400;">(opsional, bisa diisi nanti)</span></label>
+                                            <input type="text" class="form-input" id="seg-pic-garap-migrate" placeholder="Nama eksekutor lapangan...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Produk <span style="color:var(--text-light);font-weight:400;">(opsional)</span></label>
+                                            <input type="text" class="form-input" id="seg-produk-migrate" list="produk-suggestions" placeholder="Contoh: SIMASRIM">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Area Utama <span style="color:var(--text-light);font-weight:400;">(Provinsi, opsional)</span></label>
+                                            <input type="text" class="form-input" id="seg-provinsi-migrate" list="provinsi-suggestions" placeholder="Otomatis dari Sub Area per sheet kalau dikenali">
+                                        </div>
+                                        <div class="form-group" style="grid-column:1/-1;">
+                                            <div class="info-box info" style="margin:0;">
+                                                <i class='bx bx-info-circle'></i>
+                                                <span>Area & Brand/Kategori otomatis dideteksi per sheet (dari kolom Brand kalau ada, atau nama sheet) — akan ditampilkan untuk direview di langkah berikutnya sebelum diproses. Brand yang tidak cocok salah satu kategori resmi masuk antrean review manual, tidak otomatis dibuat baru. PIC Campaign/PIC Garap/Produk/Provinsi di atas berlaku sebagai default untuk SEMUA sheet dalam file ini.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Mode toggle di form upload -->
+                                    <div style="margin-top:18px;">
+                                        <label style="font-size:0.76rem;font-weight:700;color:var(--text-muted);display:block;margin-bottom:8px;">Tipe Data yang Diupload:</label>
+                                        <div style="display:flex;gap:10px;">
+                                            <label class="mode-choice" id="choice-wa" style="flex:1;display:flex;align-items:center;gap:10px;padding:13px 16px;border:2px solid var(--wa-green);border-radius:var(--radius-md);cursor:pointer;background:rgba(37,211,102,0.06);">
+                                                <input type="radio" name="upload-mode" value="wa" checked style="accent-color:var(--wa-green);">
+                                                <i class='bx bxl-whatsapp' style="font-size:1.3rem;color:var(--wa-dark);"></i>
+                                                <div>
+                                                    <div style="font-weight:700;font-size:0.85rem;">Data WhatsApp</div>
+                                                    <div style="font-size:0.72rem;color:var(--text-muted);">Ekstrak nomor 08.../+62...</div>
+                                                </div>
+                                            </label>
+                                            <label class="mode-choice" id="choice-email" style="flex:1;display:flex;align-items:center;gap:10px;padding:13px 16px;border:2px solid var(--border-solid);border-radius:var(--radius-md);cursor:pointer;background:var(--bg);">
+                                                <input type="radio" name="upload-mode" value="email" style="accent-color:var(--email-blue);">
+                                                <i class='bx bx-envelope' style="font-size:1.3rem;color:var(--email-blue);"></i>
+                                                <div>
+                                                    <div style="font-weight:700;font-size:0.85rem;">Data Email</div>
+                                                    <div style="font-size:0.72rem;color:var(--text-muted);">Ekstrak format *@*.*</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-top:18px;display:flex;justify-content:flex-end;">
+                                        <button class="btn btn-primary" id="btn-step1-next">
+                                            Lanjut ke Upload <i class='bx bx-chevron-right'></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 2: UPLOAD FILE -->
+                                <div class="wizard-step" id="step-2" style="opacity:0.6;pointer-events:none;">
+                                    <div class="step-header">
+                                        <div class="step-number" id="step2-num">2</div>
+                                        <div>
+                                            <div class="step-title">Upload File Data Mentah</div>
+                                            <div class="step-sub" id="step2-sub">Format bebas — kolom acak hasil scraping Google Maps / Website diterima</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="drop-zone" id="drop-zone">
+                                        <input type="file" id="file-input" accept=".xlsx,.xls,.csv">
+                                        <i class='bx bx-cloud-upload'></i>
+                                        <h4>Klik atau Drag & Drop File</h4>
+                                        <p>Format: .xlsx, .xls, atau .csv · Kolom bebas/acak tidak masalah</p>
+                                    </div>
+
+                                    <div class="file-selected" id="file-selected-info">
+                                        <i class='bx bxs-file-blank'></i>
+                                        <div>
+                                            <div class="fn" id="file-name">–</div>
+                                            <div class="fs" id="file-size">–</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field-tags" id="step2-tips" style="margin-top:12px;">
+                                        <span class="field-tag">Kolom Acak OK</span>
+                                        <span class="field-tag">Nama Toko/Agen</span>
+                                        <span class="field-tag">Alamat/Kota</span>
+                                        <span class="field-tag">Nomor WA / Email</span>
+                                        <span class="field-tag">Auto Clean</span>
+                                    </div>
+
+                                    <div class="progress-wrap" id="parse-progress" style="display:none;">
+                                        <div class="progress-label">
+                                            <span id="parse-label">Memproses...</span>
+                                            <span id="parse-pct">0%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="parse-fill"></div>
+                                        </div>
+                                    </div>
+
+                                    <div style="margin-top:16px;display:flex;gap:10px;justify-content:space-between;">
+                                        <button class="btn btn-ghost btn-sm" id="btn-step2-back">
+                                            <i class='bx bx-chevron-left'></i> Kembali
+                                        </button>
+                                        <button class="btn btn-primary" id="btn-process-file" disabled>
+                                            <i class='bx bx-cog'></i> Proses & Analisis
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 2b: PILIH SHEET (khusus mode Migrasi Data Lama) -->
+                                <div class="wizard-step" id="step-2b" style="display:none;">
+                                    <div class="step-header">
+                                        <div class="step-number">2b</div>
+                                        <div>
+                                            <div class="step-title">Pilih Sheet yang Dimigrasikan</div>
+                                            <div class="step-sub">Sheet yang kelihatan seperti daftar leads otomatis tercentang — cek lagi sebelum lanjut, dan sesuaikan Brand/Area default kalau perlu</div>
+                                        </div>
+                                    </div>
+                                    <div id="sheet-checklist-wrap" style="max-height:420px;overflow-y:auto;border:1px solid var(--border-solid);border-radius:var(--radius-md);padding:4px;"></div>
+                                    <div style="margin-top:16px;display:flex;gap:10px;justify-content:space-between;">
+                                        <button class="btn btn-ghost btn-sm" id="btn-step2b-back"><i class='bx bx-chevron-left'></i> Kembali</button>
+                                        <button class="btn btn-primary" id="btn-step2b-next"><i class='bx bx-cog'></i> Proses Sheet Terpilih</button>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 2c: REVIEW BRAND TIDAK DIKENALI (khusus mode Migrasi Data Lama, kalau ada) -->
+                                <div class="wizard-step" id="step-2c" style="display:none;">
+                                    <div class="step-header">
+                                        <div class="step-number">2c</div>
+                                        <div>
+                                            <div class="step-title">Review Brand Tidak Dikenali</div>
+                                            <div class="step-sub">Nilai Brand ini tidak cocok kategori resmi manapun — pilih pemetaannya secara manual, tidak dibuat kategori baru otomatis</div>
+                                        </div>
+                                    </div>
+                                    <div id="brand-review-wrap"></div>
+                                    <div style="margin-top:16px;display:flex;gap:10px;justify-content:space-between;">
+                                        <button class="btn btn-ghost btn-sm" id="btn-step2c-back"><i class='bx bx-chevron-left'></i> Kembali</button>
+                                        <button class="btn btn-primary" id="btn-step2c-next"><i class='bx bx-check'></i> Terapkan & Lanjut</button>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 3: PREVIEW & DEDUP -->
+                                <div class="wizard-step" id="step-3" style="display:none;">
+                                    <div class="step-header">
+                                        <div class="step-number" id="step3-num">3</div>
+                                        <div>
+                                            <div class="step-title">Preview Hasil Cleansing</div>
+                                            <div class="step-sub">Review data sebelum commit ke Firebase</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="preview-panel">
+                                        <div class="preview-summary" id="preview-summary">
+                                            <!-- Diisi JS -->
+                                        </div>
+
+                                        <!-- Dedup controls -->
+                                        <div class="dedup-controls" id="dedup-controls" style="display:none;">
+                                            <i class='bx bx-copy-alt' style="color:var(--warning);"></i>
+                                            <label id="dedup-label">127 data duplikat ditemukan:</label>
+                                            <button class="btn btn-ghost btn-sm" id="btn-skip-dupes">
+                                                <i class='bx bx-skip-next'></i> Skip Semua Duplikat (default)
+                                            </button>
+                                            <button class="btn btn-accent btn-sm" id="btn-overwrite-dupes">
+                                                <i class='bx bx-refresh'></i> Timpa Semua
+                                            </button>
+                                        </div>
+
+                                        <!-- Preview Table -->
+                                        <div style="margin-bottom:10px;font-size:0.78rem;font-weight:700;color:var(--text-muted);">
+                                            Preview 10 baris pertama data bersih:
+                                        </div>
+                                        <div class="preview-table-wrap">
+                                            <table class="data-table" id="preview-table" style="min-width:auto;">
+                                                <thead><tr id="preview-thead"></tr></thead>
+                                                <tbody id="preview-tbody"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="progress-wrap" id="upload-progress" style="display:none;margin-top:14px;">
+                                        <div class="progress-label">
+                                            <span id="upload-label">Mengunggah ke Firebase...</span>
+                                            <span id="upload-pct">0%</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" id="upload-fill"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="upload-actions">
+                                        <button class="btn btn-ghost" id="btn-step3-back">
+                                            <i class='bx bx-chevron-left'></i> Kembali
+                                        </button>
+                                        <button class="btn btn-primary btn-lg" id="btn-commit-firebase" disabled>
+                                            <i class='bx bx-cloud-upload'></i> Commit ke Firebase
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Demo Data Card -->
+                                <div style="padding:18px 22px;background:linear-gradient(135deg,var(--primary-light),var(--accent-light));border:1px solid var(--primary);border-radius:var(--radius-lg);display:flex;align-items:center;gap:14px;">
+                                    <div style="font-size:2rem;">📊</div>
+                                    <div style="flex:1;">
+                                        <div style="font-weight:800;font-size:0.88rem;color:var(--primary);margin-bottom:2px;">Coba dengan Data Demo</div>
+                                        <div style="font-size:0.78rem;color:var(--text-muted);">Muat data contoh leads untuk melihat semua fitur CRM bekerja secara langsung.</div>
+                                    </div>
+                                    <button class="btn btn-ghost btn-sm" onclick="loadDemoData(); switchTab('leads');" style="flex-shrink:0;">
+                                        <i class='bx bx-play-circle'></i> Muat Demo
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ══════════════════════════════════
+                     TAB: WA BROADCAST
+                ══════════════════════════════════ -->
+                <section id="broadcast" class="tab-pane">
+                    <div class="content-area">
+<div class="wrap wa-scope">
+
+  <header class="app-head">
+    <div class="brand">
+      <div class="mark">WA</div>
+      <div>
+        <h1>Kirim WA</h1>
+        <p>Kirim pesan personal ke banyak nomor dari daftar Excel</p>
+      </div>
+    </div>
+    <div class="status-pill" id="storageStatus">memuat data tersimpan…</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="kontak"><span class="num">01</span> Daftar Kontak</button>
+    <button class="tab-btn" data-tab="pesan"><span class="num">02</span> Tulis Pesan</button>
+    <button class="tab-btn" data-tab="kirim" id="tabKirimBtn"><span class="num">03</span> Kirim</button>
+  </nav>
+
+  <!-- TAB 1: KONTAK -->
+  <section id="tab-kontak">
+    <!-- Panel kontak aktif — muncul kalau ada kontak sedang dipakai (baik dari
+         "Broadcast WA" di Master Leads, upload file, maupun input manual) -->
+    <div class="panel" id="activeListPanel" style="display:none;border:1.5px solid var(--moss);background:#f2f8f4;">
+      <h2>✅ Kontak Aktif Saat Ini</h2>
+      <p class="sub" id="activeListMeta"></p>
+      <div class="inline-actions" id="activeListSaveRow">
+        <input type="text" id="activeListGroupName" placeholder="Nama grup, contoh: Pelanggan Juli" style="max-width:280px;">
+        <button class="btn btn-primary" id="activeListSaveBtn">💾 Simpan sebagai Grup Permanen</button>
+      </div>
+      <table class="preview" id="activeListTable" style="margin-top:14px;"></table>
+    </div>
+    <div class="panel" style="background:#fdfcf8;">
+      <h2>💾 Data offline (JSON)</h2>
+      <p class="sub">Kumpulan kontak, grup, dan template kamu bisa juga disimpan sebagai satu file JSON di komputer kamu — file itu bisa dibuka & diedit langsung pakai teks editor biasa, lalu dimuat lagi ke halaman ini kapan saja (misal untuk pindah ke komputer lain).</p>
+      <div class="inline-actions">
+        <button class="btn btn-primary" id="exportJsonBtn">⬇ Unduh data sebagai JSON</button>
+        <button class="btn btn-ghost" id="importJsonBtn">⬆ Muat data dari file JSON</button>
+        <input type="file" id="importJsonInput" accept=".json,application/json" style="display:none;">
+      </div>
+      <details style="margin-top:14px;">
+        <summary style="cursor:pointer;font-size:12.5px;color:var(--moss-dark);font-family:'IBM Plex Mono',monospace;">Lihat format JSON (untuk edit manual)</summary>
+        <pre style="background:#f2f1e9;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:11.5px;overflow:auto;margin-top:10px;line-height:1.5;">{
+  "pool": {
+    "headers": ["Nama", "Nomor WA", "Lokasi"],
+    "rows": [
+      { "Nama": "Budi", "Nomor WA": "0812xxxxxxx", "Lokasi": "Bogor" }
+    ]
+  },
+  "groups": {
+    "kontak:pelanggan_juli": {
+      "name": "Pelanggan Juli",
+      "headers": ["Nama", "Nomor WA", "Lokasi"],
+      "rows": [ { "Nama": "Budi", "Nomor WA": "0812xxxxxxx", "Lokasi": "Bogor" } ],
+      "colNomor": "Nomor WA",
+      "colNama": "Nama"
+    }
+  },
+  "templates": {
+    "template:promo_juli": {
+      "name": "Promo Juli",
+      "text": "Halo {{Nama}}, ada promo khusus buat kamu!",
+      "attachment": null
+    }
+  }
+}</pre>
+      </details>
+    </div>
+
+    <div class="mode-toggle" style="display:flex;gap:8px;margin-bottom:16px;">
+      <button class="btn-mode active" id="modeFileBtn" data-mode="file">📄 Unggah File</button>
+      <button class="btn-mode" id="modeManualBtn" data-mode="manual">✍️ Input Manual</button>
+    </div>
+
+    <div class="panel" id="filePanel">
+      <h2>Unggah file Excel</h2>
+      <p class="sub">File berisi kolom nomor WhatsApp dan nama (boleh ada kolom lain untuk personalisasi pesan, misalnya Produk atau Kota). Format .xlsx, .xls, atau .csv.</p>
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+        <div class="icon">📄</div>
+        <div class="txt">Klik untuk pilih file, atau seret ke sini</div>
+        <div class="txt2">Baris pertama akan dianggap sebagai judul kolom</div>
+      </div>
+    </div>
+
+    <div class="panel" id="mappingPanel" style="display:none;">
+      <h2>Cocokkan kolom</h2>
+      <p class="sub">Beri tahu mana kolom nomor WA dan nama kontak. Kolom lainnya bisa dipakai sebagai isian personalisasi pesan.</p>
+      <div class="row2">
+        <div>
+          <label class="field-label">Kolom Nomor WhatsApp</label>
+          <select id="colNomor"></select>
+        </div>
+        <div>
+          <label class="field-label">Kolom Nama</label>
+          <select id="colNama"></select>
+        </div>
+      </div>
+      <table class="preview" id="previewTable"></table>
+      <div class="inline-actions">
+        <input type="text" id="listName" placeholder="Nama daftar, contoh: Pelanggan Juli" style="max-width:280px;">
+        <button class="btn btn-primary" id="saveListBtn">Simpan daftar ini</button>
+      </div>
+    </div>
+
+    <!-- MANUAL INPUT PANEL -->
+    <div class="panel" id="manualPanel" style="display:none;">
+      <h2>Tambah kontak satu per satu</h2>
+      <p class="sub">Kontak yang kamu tambahkan di sini langsung masuk ke <strong>kumpulan kontak</strong> kamu — tidak perlu dimasukkan ke grup/daftar tertentu dulu. Grup bisa kamu buat belakangan dengan memilih kontak dari kumpulan ini.</p>
+
+      <div style="margin-bottom:16px;">
+        <label class="field-label">Kolom tambahan (opsional, berlaku untuk semua kontak di kumpulan)</label>
+        <div class="row2" style="align-items:end;">
+          <input type="text" id="manualExtraCols" placeholder="Contoh: Produk, Kota (pisahkan koma)">
+          <button class="btn btn-ghost" id="applyExtraColsBtn">Terapkan kolom</button>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div>
+          <label class="field-label">Nama kontak</label>
+          <input type="text" id="manualNama" placeholder="Contoh: Budi Santoso">
+        </div>
+        <div>
+          <label class="field-label">Nomor WhatsApp</label>
+          <input type="text" id="manualNomor" placeholder="Contoh: 0812xxxxxxx">
+        </div>
+      </div>
+      <div class="row2" id="manualExtraInputs"></div>
+
+      <button class="btn btn-primary" id="manualAddBtn">+ Tambah ke kumpulan kontak</button>
+    </div>
+
+    <!-- CONTACT POOL PANEL -->
+    <div class="panel" id="poolPanel" style="display:none;">
+      <h2>Kumpulan kontak <span id="poolCountLabel" style="color:var(--muted);font-weight:500;font-size:14px;"></span></h2>
+      <p class="sub">Semua kontak yang kamu tambahkan manual ada di sini, di luar grup manapun. Centang beberapa atau semuanya, beri nama grup, lalu buat grup baru untuk dipakai mengirim pesan di tab Kirim.</p>
+
+      <div class="select-toolbar">
+        <button class="btn btn-ghost" id="poolSelectAllBtn" style="padding:7px 12px;font-size:13px;">Pilih semua</button>
+        <button class="btn btn-ghost" id="poolSelectNoneBtn" style="padding:7px 12px;font-size:13px;">Kosongkan pilihan</button>
+        <span class="count" id="poolSelectCount">0 dipilih</span>
+      </div>
+
+      <table class="preview" id="poolTable" style="margin-top:14px;"></table>
+      <div class="banner empty" id="emptyPool" style="display:none;">Belum ada kontak di kumpulan. Tambahkan lewat form di atas.</div>
+
+      <div class="inline-actions" style="margin-top:16px;">
+        <input type="text" id="groupNameInput" placeholder="Nama grup, contoh: Pelanggan Juli" style="max-width:280px;">
+        <button class="btn btn-primary" id="createGroupBtn">Buat grup dari kontak terpilih</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Daftar kontak tersimpan</h2>
+      <p class="sub">Daftar ini tersimpan di browser kamu dan bisa dipakai lagi kapan saja dengan pesan yang berbeda.</p>
+      <div class="saved-list" id="savedLists"></div>
+      <div class="banner empty" id="emptyLists" style="display:none;">Belum ada daftar kontak tersimpan. Unggah file Excel di atas untuk mulai.</div>
+    </div>
+  </section>
+
+  <!-- TAB 2: PESAN -->
+  <section id="tab-pesan" style="display:none;">
+    <div class="panel">
+      <h2>Tulis pesan</h2>
+      <p class="sub" id="pesanSub">Gunakan placeholder untuk personalisasi otomatis per kontak.</p>
+      <div class="banner warn" id="noListWarn" style="display:none;">Pilih atau unggah daftar kontak dulu di tab <strong>Daftar Kontak</strong> supaya placeholder-nya muncul di sini.</div>
+      <div id="placeholderChips" style="margin-bottom:10px;"></div>
+      <label class="field-label">Isi pesan</label>
+      <textarea id="messageBox" rows="7" placeholder="Contoh: Halo {{Nama}}, terima kasih sudah belanja di toko kami. Pesanan {{Produk}} kamu sedang diproses ya!"></textarea>
+      <p class="sub" style="margin:10px 0 0;">Pesan di atas langsung bisa dipakai di tab Kirim, tanpa harus disimpan sebagai template. Simpan sebagai template hanya kalau kamu mau memakainya lagi lain kali.</p>
+      <div class="inline-actions">
+        <input type="text" id="templateName" placeholder="Nama template, contoh: Konfirmasi Pesanan" style="max-width:280px;">
+        <button class="btn btn-ghost" id="saveTemplateBtn">Simpan sebagai template (opsional)</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Lampiran (opsional)</h2>
+      <p class="sub">Tambahkan gambar, dokumen, audio, atau video untuk dikirim bersama pesan. WhatsApp tidak mengizinkan lampiran ditempel otomatis lewat link, jadi lampiran ini akan disiapkan untuk kamu unduh dan seret ke chat saat mengirim — lihat detailnya di tab Kirim.</p>
+      <div class="dropzone" id="attachDropzone">
+        <input type="file" id="attachInput" accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.txt">
+        <div class="icon">📎</div>
+        <div class="txt">Klik untuk pilih file, atau seret ke sini</div>
+        <div class="txt2">Gambar, video, audio, atau dokumen — maksimal sekitar 3.5MB agar bisa tersimpan</div>
+      </div>
+      <div id="attachPreview" style="display:none;"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Template tersimpan</h2>
+      <div class="saved-list" id="savedTemplates"></div>
+      <div class="banner empty" id="emptyTemplates" style="display:none;">Belum ada template pesan tersimpan.</div>
+    </div>
+  </section>
+
+  <!-- TAB 3: KIRIM -->
+  <section id="tab-kirim" style="display:none;">
+    <div class="panel">
+      <h2>Kirim ke <span id="kirimListName">-</span></h2>
+      <p class="sub">Buka <strong>web.whatsapp.com</strong> dan login (scan QR) sekali di tab terpisah, biarkan tetap terbuka. Setelah itu, setiap kontak yang kamu kirim dari sini akan <strong>memakai tab WhatsApp Web yang sama</strong> — chat-nya berganti otomatis, tanpa membuka tab baru terus-menerus.</p>
+
+      <div class="banner warn" id="kirimAttachBanner" style="display:none;">
+        📎 Ada lampiran di pesan ini. WhatsApp tidak bisa menerima file lewat link secara otomatis — <strong>unduh file di bawah lalu seret (drag & drop) ke kotak chat WhatsApp</strong> setelah teks pesan terbuka, sebelum menekan kirim.
+      </div>
+      <div id="kirimAttachPreview" style="display:none;"></div>
+
+      <div class="send-options">
+        <div class="send-opt">
+          <div class="send-opt-title">🔁 Kirim otomatis, satu tab</div>
+          <div class="send-opt-desc">Klik mulai. Tiap beberapa detik, tab WhatsApp Web yang sama otomatis pindah ke chat kontak berikutnya dengan pesan sudah terisi. Kamu tinggal duduk di tab WhatsApp dan tekan Enter tiap kali chat berganti.</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+            <label style="font-size:12.5px;color:var(--muted);" for="autoDelay">Jeda antar kontak:</label>
+            <select id="autoDelay" style="width:auto;padding:6px 8px;font-size:13px;">
+              <option value="4">4 detik</option>
+              <option value="6" selected>6 detik</option>
+              <option value="10">10 detik</option>
+              <option value="15">15 detik</option>
+            </select>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-primary" id="autoStartBtn">Mulai Kirim Otomatis</button>
+            <button class="btn btn-ghost" id="autoStopBtn" style="display:none;">Hentikan</button>
+          </div>
+          <div id="autoStatus" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--moss-dark);margin-top:10px;"></div>
+        </div>
+        <div class="send-opt">
+          <div class="send-opt-title">➡️ Mode berurutan (manual)</div>
+          <div class="send-opt-desc">Satu kontak ditampilkan bergantian. Klik "Kirim & Lanjut" saat kamu siap — chat tetap terbuka di tab WhatsApp Web yang sama, tidak berpindah tab baru.</div>
+          <button class="btn btn-ghost" id="sequentialModeBtn">Mulai Mode Berurutan</button>
+        </div>
+      </div>
+
+      <div class="banner info" id="popupHint" style="display:none;">
+        Pastikan tab <strong>web.whatsapp.com</strong> sudah terbuka dan sudah login sebelum mulai. Kalau muncul peringatan "pop-up diblokir" saat pertama kali, klik ikon di address bar dan pilih <strong>izinkan pop-up</strong> untuk situs ini.
+      </div>
+
+      <!-- SEQUENTIAL MODE CARD -->
+      <div class="seq-card" id="seqCard" style="display:none;">
+        <div class="seq-count" id="seqCount">Kontak 1 dari 10</div>
+        <div class="seq-name" id="seqName">Nama Kontak</div>
+        <div class="seq-phone" id="seqPhone">62812xxxxxxx</div>
+        <div class="seq-msg" id="seqMsg">Pratinjau pesan…</div>
+        <div class="seq-actions">
+          <button class="btn btn-primary" id="seqSendBtn">Kirim &amp; Lanjut →</button>
+          <button class="btn btn-ghost" id="seqSkipBtn">Lewati</button>
+          <button class="btn btn-ghost" id="seqCloseBtn">Tutup</button>
+        </div>
+      </div>
+
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-top:6px;" id="progressText">0 dari 0 terkirim</div>
+
+      <div class="select-toolbar">
+        <input type="text" id="contactFilter" placeholder="Cari nama atau nomor…">
+        <button class="btn btn-ghost" id="selectAllBtn" style="padding:7px 12px;font-size:13px;">Pilih semua</button>
+        <button class="btn btn-ghost" id="selectNoneBtn" style="padding:7px 12px;font-size:13px;">Kosongkan pilihan</button>
+        <span class="count" id="selectCount">0 dipilih</span>
+      </div>
+      <p class="sub" style="margin:8px 0 0;">Hanya kontak yang dicentang yang akan dikirimi pesan — baik lewat Kirim Otomatis, Mode Berurutan, maupun tombol Kirim satuan di bawah. Tidak perlu mengirim ke seluruh daftar.</p>
+
+      <table class="preview" id="sendTable" style="margin-top:18px;"></table>
+    </div>
+  </section>
+
+  <div class="footer-note">Kontak & grup tersimpan di browser ini saja. Template pesan tersinkron ke server SIMASRIM, bisa dipakai bersama anggota tim lain.</div>
+</div>
+
+                    </div>
+                </section>
+
+                <!-- ══════════════════════════════════
+                     TAB: CARI LEADS BARU (Automation Scraping B2B)
+                ══════════════════════════════════ -->
+                <section id="leadgen" class="tab-pane">
+                    <div class="content-area">
+
+                        <div class="wizard-step" style="margin-bottom:16px;">
+                            <div class="step-header">
+                                <div class="step-number"><i class='bx bx-radar'></i></div>
+                                <div>
+                                    <div class="step-title">Cari Leads B2B Baru Otomatis</div>
+                                    <div class="step-sub">Cari target apapun dari Google Maps (Masjid, DKM, Koperasi, Yayasan, dll), hasilnya bisa direview sebelum masuk Master Leads</div>
+                                </div>
+                            </div>
+
+                            <div class="seg-form" style="margin-top:16px;">
+                                <div class="form-group">
+                                    <label>Kata Kunci</label>
+                                    <input class="form-input" id="leadgen-keyword" list="leadgen-keyword-suggest" placeholder="Contoh: Masjid Besar, DKM, Koperasi..." autocomplete="off">
+                                    <datalist id="leadgen-keyword-suggest">
+                                        <option value="Masjid Besar">
+                                        <option value="Masjid Agung">
+                                        <option value="Masjid">
+                                        <option value="Mushola Besar">
+                                        <option value="DKM">
+                                        <option value="Yayasan Islam">
+                                        <option value="Koperasi">
+                                    </datalist>
+                                </div>
+                                <div class="form-group">
+                                    <label>Kota / Wilayah</label>
+                                    <input class="form-input" id="leadgen-kota" list="leadgen-kota-suggest" placeholder="Contoh: Bogor, Jakarta Selatan..." autocomplete="off">
+                                    <datalist id="leadgen-kota-suggest">
+                                        <option value="Jakarta Pusat">
+                                        <option value="Jakarta Utara">
+                                        <option value="Jakarta Barat">
+                                        <option value="Jakarta Selatan">
+                                        <option value="Jakarta Timur">
+                                        <option value="Bogor">
+                                        <option value="Depok">
+                                        <option value="Tangerang">
+                                        <option value="Bekasi">
+                                        <option value="Bandung">
+                                        <option value="Surabaya">
+                                        <option value="Medan">
+                                    </datalist>
+                                </div>
+                                <div class="form-group">
+                                    <label>Brand / Kategori</label>
+                                    <input class="form-input" id="leadgen-brand" placeholder="Otomatis ikut Kata Kunci, bisa diedit" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label>Area Utama <span style="color:var(--text-light);font-weight:400;">(Provinsi)</span></label>
+                                    <input class="form-input" id="leadgen-provinsi" list="provinsi-suggestions" placeholder="Otomatis dari Kota, bisa diedit" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <div style="margin-top:14px;">
+                                <button class="btn btn-primary" id="leadgen-start-btn">
+                                    <i class='bx bx-search-alt'></i> Mulai Cari Leads
+                                </button>
+                                <span style="font-size:0.76rem;color:var(--text-muted);margin-left:10px;">Scroll sampai mentok, biasanya hitungan detik &middot; hasil muncul langsung selagi diproses</span>
+                            </div>
+
+                            <!-- Progress -->
+                            <div class="progress-wrap" id="leadgen-progress-wrap" style="display:none;">
+                                <div class="progress-label">
+                                    <span id="leadgen-progress-msg">Menyiapkan...</span>
+                                    <span id="leadgen-progress-pct"></span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="leadgen-progress-fill"></div>
+                                </div>
+                                <button type="button" class="btn btn-ghost btn-sm" id="leadgen-cancel-btn" style="margin-top:8px;color:var(--danger);">
+                                    <i class='bx bx-x-circle'></i> Batalkan Pencarian
+                                </button>
+                            </div>
+
+                            <div class="info-box info" id="leadgen-info-box" style="display:none;margin-top:14px;">
+                                <i class='bx bx-info-circle'></i>
+                                <span>Nomor telepon tidak selalu tampil di hasil pencarian cepat ini. Baris yang belum ada nomornya bisa dicek satu-satu lewat tombol <b>"Cek Nomor"</b>, atau centang beberapa lalu klik <b>"Verifikasi Nomor yang Dicentang"</b> di toolbar tabel.</span>
+                            </div>
+                        </div>
+
+                        <!-- Tabel review hasil -->
+                        <div class="table-toolbar" id="leadgen-review-toolbar" style="display:none;">
+                            <h3>📋 Review Hasil Pencarian</h3>
+                            <span style="color:var(--text-muted);font-size:0.78rem;" id="leadgen-review-count"></span>
+                            <button class="btn btn-ghost btn-sm" id="leadgen-select-all-btn"><i class='bx bx-select-multiple'></i> Pilih Semua</button>
+                            <button class="btn btn-ghost btn-sm" id="leadgen-verify-selected-btn"><i class='bx bx-phone-call'></i> Verifikasi Nomor yang Dicentang</button>
+                            <button type="button" class="btn btn-ghost btn-sm" id="leadgen-cancel-btn-toolbar" style="display:none;color:var(--danger);"><i class='bx bx-x-circle'></i> Batalkan Pencarian</button>
+                            <button class="btn btn-primary btn-sm" id="leadgen-import-btn"><i class='bx bx-import'></i> Import ke Master Leads</button>
+                            <button class="btn btn-ghost btn-sm" id="leadgen-discard-btn" style="color:var(--danger);"><i class='bx bx-trash'></i> Buang yang Dicentang</button>
+                        </div>
+                        <div class="table-wrap" id="leadgen-table-wrap" style="display:none;">
+                            <table class="data-table" id="leadgen-table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-check"><input type="checkbox" id="leadgen-select-all-chk"></th>
+                                        <th>Nama</th>
+                                        <th>Nomor WA</th>
+                                        <th>Alamat</th>
+                                        <th>Area Utama</th>
+                                        <th>Kota</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leadgen-tbody"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     PAGE 4: TUTORIAL
+                ============================================================= -->
+                <section id="tutorial" class="tab-pane">
+                    <div class="content-area">
+                        <div class="page-header" style="margin-bottom: 20px;">
+                            <h1><i class='bx bx-book-open'></i> Panduan Penggunaan</h1>
+                            <p>Pelajari cara menggunakan Smart Leads Cleanser & Master Tracking Campaign</p>
+                        </div>
+
+                        <nav class="guide-toc">
+                            <a href="#guide-alur">🧭 Alur Penggunaan</a>
+                            <a href="#guide-master-data">📊 Master Data CRM</a>
+                            <a href="#guide-upload">📤 Upload Wizard</a>
+                            <a href="#guide-dashboard">📈 Dashboard Analytics</a>
+                            <a href="#guide-broadcast">💬 WA Broadcast</a>
+                            <a href="#guide-leadgen">🛰️ Cari Leads Baru</a>
+                            <a href="#guide-spreadsheet">📋 Spreadsheet & Copy BCC</a>
+                        </nav>
+
+                        <!-- 0. ALUR PENGGUNAAN KESELURUHAN -->
+                        <div class="guide-section" id="guide-alur" style="border-color:var(--primary);background:linear-gradient(135deg,var(--primary-light),#fff);">
+                            <div class="guide-section-header">
+                                <div class="guide-section-icon" style="background:var(--primary);color:#fff;"><i class='bx bx-map-alt'></i></div>
+                                <h3>0. Alur Penggunaan Campaign Tracker (Mulai dari Sini)</h3>
+                            </div>
+                            <p class="guide-lead">Kalau baru pertama kali buka halaman ini, ikuti urutan sederhana ini dari atas ke bawah — semua menu (Dashboard, Master Leads, Upload & Cleansing, WA Broadcast) saling terhubung dalam satu alur kerja yang sama.</p>
+                            <ol class="guide-steps">
+                                <li><b>Masukkan data leads dulu</b> — ada 3 cara, pilih salah satu (atau kombinasi):
+                                    <br>• Punya file Excel/CSV berisi banyak leads sekaligus? Buka menu <b>Upload & Cleansing</b>, sistem akan otomatis membersihkan & merapikan datanya.
+                                    <br>• Cuma mau tambah 1-2 leads saja? Buka menu <b>Master Leads</b>, klik tombol <b>+</b> di pojok kanan bawah untuk input manual.
+                                    <br>• Mau cari leads B2B baru (Masjid, DKM, Koperasi, atau target lain) tanpa cari manual? Buka menu <b>Cari Leads Baru</b>, sistem otomatis mencarikan dari Google Maps.
+                                </li>
+                                <li><b>Cek & kelola datanya di Master Leads</b> — semua leads yang sudah masuk (dari cara manapun di langkah 1) muncul di sini. Bisa diedit, difilter, diberi status/tahap, atau dihapus dari sini.</li>
+                                <li><b>Pantau performa lewat Dashboard</b> — begitu ada data, angka dan grafik di menu <b>Dashboard</b> otomatis terisi: total leads, Hot/Warm/Cold, notifikasi 🔔 Perlu Follow-Up, sampai leaderboard tim.</li>
+                                <li><b>Follow-up leads via WhatsApp</b> — kalau mau mengirim pesan WA ke banyak leads sekaligus, balik ke <b>Master Leads</b>, centang leads yang mau dihubungi, klik <b>"Broadcast WA"</b> — otomatis pindah ke menu <b>WA Broadcast</b> dengan kontak sudah terisi, tinggal tulis pesan dan kirim.</li>
+                                <li><b>Ulangi terus</b> — tiap kali ada respon dari leads, balik ke Master Leads untuk update Tahap/Respon/Tipe Leads-nya (klik langsung di kolomnya), sampai leads-nya closing.</li>
+                            </ol>
+                            <div class="info-box info">
+                                <i class='bx bx-info-circle'></i>
+                                <span>Singkatnya: <b>Upload & Cleansing</b> / tombol <b>+</b> = pintu masuk data → <b>Master Leads</b> = pusat kerja sehari-hari → <b>Dashboard</b> = laporan → <b>WA Broadcast</b> = alat kirim pesan massal. Kelima menu ini bukan halaman terpisah-pisah, tapi satu alur yang saling mengisi.</span>
+                            </div>
+                        </div>
+
+                        <!-- 1. MASTER DATA CRM -->
+                        <div class="guide-section" id="guide-master-data">
+                            <div class="guide-section-header">
+                                <div class="guide-section-icon"><i class='bx bx-data'></i></div>
+                                <h3>1. Master Data CRM</h3>
+                            </div>
+                            <p class="guide-lead">Halaman utama untuk mengelola leads yang telah dibersihkan. Kamu bisa melihat leads WhatsApp dan Email secara terpisah lewat tombol mode di sidebar.</p>
+                            <div class="guide-features">
+                                <div class="guide-feature">
+                                    <i class='bx bx-edit-alt'></i>
+                                    <div><b>Edit Langsung per Kolom</b><span>Klik kolom manapun (Tahap, Respon, dll) untuk mengubah data itu saja secara langsung.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-window' style="color:var(--success);"></i>
+                                    <div><b>Edit 1 Baris Penuh (pop-up)</b><span>Klik ikon pensil hijau di kolom "Aksi" untuk buka form edit lengkap satu baris sekaligus — termasuk Nomor WA/Email-nya. Klik langsung pada nomor/email di tabel tetap berfungsi seperti biasa untuk buka WA/email atau menyalin (copy), tidak berubah.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-map-alt'></i>
+                                    <div><b>Area Utama & Sub Area</b><span>Wilayah dipecah 2 tingkat: <b>Area Utama</b> (provinsi) dan <b>Sub Area</b> (kota/kab) — biar bisa lihat performa per-provinsi maupun per-kota. Area Utama otomatis ke-isi dari Sub Area kalau dikenali (lihat saran di kolom "Ketik..."), tapi tetap bisa diedit manual. Alamat detail tetap ada terpisah, dikelola lewat form edit 1 baris.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-filter-alt'></i>
+                                    <div><b>Filter Lanjutan</b><span>Gunakan filter bar di atas tabel untuk menyaring data berdasarkan Area Utama, Sub Area, brand, <b>produk</b>, tipe leads, tahap, dll. Tiap dropdown yang datanya ada yang kosong otomatis punya opsi <b>"(Kosong)"</b> — pilih itu buat lihat leads yang field-nya belum diisi.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-checkbox-checked'></i>
+                                    <div><b>Tindakan Massal</b><span>Centang beberapa baris lalu gunakan panel ungu yang muncul untuk mengubah Brand/Produk/Area Utama/Sub Area/PIC Campaign/PIC Garap/Aksi Lanjutan/Tahap/Tipe, menambah Tanggal Kirim, atau menghapus sekaligus. Tombol <b>"Pilih Semua Hasil Filter"</b> di toolbar mencentang SEMUA leads hasil filter (bukan cuma 50 baris di halaman aktif) supaya tindakan massal bisa kena leads di halaman lain juga.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-search-alt'></i>
+                                    <div><b>Cari & Ganti Massal</b><span>Tombol di toolbar tabel — ganti nilai 1 field (Brand/Produk/Area Utama/Sub Area/PIC/Aksi Lanjutan/Tahap/Tipe Leads) untuk SEMUA leads yang cocok sekaligus, termasuk yang field-nya masih kosong (pilih "(Kosong)" di dropdown "Dari nilai"). Tidak perlu centang satu-satu atau ganti halaman — cocok untuk beres-beres data dalam jumlah besar. (Tanggal Kirim tidak ada di sini karena riwayatnya nambah, bukan mengganti — pakai bulk-bar "+ Tgl Kirim".)</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-package'></i>
+                                    <div><b>Produk</b><span>Field untuk membedakan leads berdasarkan produk/program (misal "SIMASRIM" dan produk lain ke depannya) — terpisah dari Brand (yang dipakai untuk nama mitra/ekspedisi/institusi). Isian bebas dengan saran otomatis dari nilai yang sudah pernah dipakai.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-sort-alt-2'></i>
+                                    <div><b>Sort Kolom & Pilih Rentang Sel</b><span>Klik judul kolom manapun (yang ada ikon panah) untuk urutkan tabel naik/turun. Fitur ini sekarang berfungsi normal (sempat ada bug halus yang bikin klik sort tidak ngefek — sudah diperbaiki).</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-plus-circle'></i>
+                                    <div><b>Tambah Manual</b><span>Gunakan tombol <b>+</b> di pojok kanan bawah untuk memasukkan lead baru satu per satu.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-bulb'></i>
+                                    <div><b>Smart Trigger</b><span>Ketik "deal", "closing", atau "mou" pada kolom Respon — sistem otomatis ubah tahap/tipe leads jadi Hot/Closing.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. UPLOAD WIZARD -->
+                        <div class="guide-section" id="guide-upload">
+                            <div class="guide-section-header">
+                                <div class="guide-section-icon"><i class='bx bx-upload'></i></div>
+                                <h3>2. Upload Wizard (Pembersihan Data)</h3>
+                            </div>
+                            <p class="guide-lead">Dipakai untuk mengunggah file CSV/XLSX mentah dan membersihkannya secara otomatis agar formatnya seragam. Ada 2 jenis upload, dipilih di Langkah 1:</p>
+                            <div class="guide-features" style="margin-bottom:14px;">
+                                <div class="guide-feature">
+                                    <i class='bx bx-upload'></i>
+                                    <div><b>Upload Data Segar</b><span>Untuk 1 file = 1 kombinasi Sub Area/Brand/PIC tetap (misal hasil scraping baru atau list dari 1 kota tertentu). Alur seperti biasa: isi Sub Area/Brand/PIC Campaign, unggah, preview, commit. Area Utama (provinsi) otomatis ke-isi dari Sub Area kalau dikenali.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-layer'></i>
+                                    <div><b>Migrasi Data Lama</b><span>Untuk file Excel lama berisi banyak sheet sekaligus, dengan Brand/Area yang beda-beda per sheet atau per baris (misal rekap campaign lama per-wilayah/per-brand). Sistem baca SEMUA sheet, tampilkan checklist untuk dipilih & disesuaikan sebelum diproses.</span></div>
+                                </div>
+                            </div>
+                            <ol class="guide-steps">
+                                <li>Pilih jenis data (WhatsApp/Email) dan jenis upload (Data Segar/Migrasi Data Lama).</li>
+                                <li><b>Data Segar:</b> isi Brand/Area/PIC Campaign lalu unggah file → langsung ke preview. <b>Migrasi Data Lama:</b> unggah file → muncul <b>checklist semua sheet</b> (sheet yang mirip daftar leads otomatis tercentang, sheet kosong/rekap otomatis tidak tercentang) — cek & sesuaikan Brand/Area default per sheet kalau perlu, lalu klik "Proses Sheet Terpilih".</li>
+                                <li>Kalau ada nilai Brand yang tidak cocok kategori resmi manapun, muncul langkah <b>Review Brand Tidak Dikenali</b> — pilih mau dipetakan ke kategori resmi yang mana, atau ketik kategori baru manual (sistem tidak pernah membuat kategori baru sendiri tanpa persetujuan).</li>
+                                <li>Sistem otomatis membersihkan nomor (awalan 0/62/+62 → 62), mendeteksi duplikat, dan (khusus Migrasi Data Lama) sheet "Copy of X" otomatis dianggap versi terbaru & menimpa data "X" aslinya kalau nomor WA-nya sama.</li>
+                                <li>Klik <b>Commit ke Firebase</b> untuk menyimpan hasil pembersihan ke Master Leads.</li>
+                            </ol>
+                        </div>
+
+                        <!-- 3. DASHBOARD ANALYTICS -->
+                        <div class="guide-section" id="guide-dashboard">
+                            <div class="guide-section-header">
+                                <div class="guide-section-icon"><i class='bx bx-pie-chart-alt-2'></i></div>
+                                <h3>3. Dashboard Analytics</h3>
+                            </div>
+                            <p class="guide-lead">Ringkasan statistik performa campaign — grafik dan kartu otomatis menyesuaikan data terbaru, mencakup sebaran area, tahapan (funnel), dan distribusi tipe leads (Hot/Warm/Cold).</p>
+                            <div class="guide-features">
+                                <div class="guide-feature">
+                                    <i class='bx bx-filter-alt'></i>
+                                    <div><b>Filter Dashboard</b><span>Filter bar di atas kartu ringkasan — saring berdasar Brand, Produk, Area Utama, Sub Area, PIC Garap, dan rentang tanggal (dari–sampai, berdasar tanggal update terakhir). Semua kartu & grafik di bawahnya otomatis mengikuti hasil filter, jadi bisa lihat misal "performa brand JNE di Jawa Barat bulan ini" tanpa harus hitung manual. Klik ikon refresh buat reset ke data penuh lagi.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-bell'></i>
+                                    <div><b>🔔 Perlu Follow-Up</b><span>Notifikasi leads <b>Hot/Warm</b> (Cold tidak pernah masuk sini) yang belum closing dan sudah lama tidak di-update: <b>🟠 Danger</b> (&gt;=3 hari, mulai perlu perhatian) dan <b>🔴 Wajib FU</b> (&gt;=7 hari, harus segera digarap). Muncul sebagai kartu angka, badge merah di menu "Dashboard" (kelihatan dari tab manapun), badge per baris di Master Leads, dan panel daftar lengkap — klik baris di panel buat langsung buka form edit lead itu.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-pulse'></i>
+                                    <div><b>Aktivitas Hari Ini</b><span>Jumlah leads yang di-update hari ini — indikator seberapa aktif tim bekerja.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-trophy'></i>
+                                    <div><b>Leaderboard PIC Garap</b><span>Ranking PIC dengan closing terbanyak.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. WA BROADCAST -->
+                        <div class="guide-section" id="guide-broadcast">
+                            <div class="guide-section-header">
+                                <div class="guide-section-icon"><i class='bx bxl-whatsapp'></i></div>
+                                <h3>4. WA Broadcast (Kirim WA Massal)</h3>
+                            </div>
+                            <p class="guide-lead">Mengirim pesan WhatsApp personal ke banyak kontak sekaligus, langsung dari leads di Master Leads — tanpa export/import manual.</p>
+                            <ol class="guide-steps">
+                                <li>Di tab <b>Master Leads</b> (mode WA), centang leads yang mau di-broadcast, lalu klik tombol <b>"Broadcast WA"</b> di panel biru yang muncul di atas tabel.</li>
+                                <li>Kamu otomatis dibawa ke tab <b>WA Broadcast</b> dengan kontak sudah terisi. (Tidak sempat centang leads dulu? Bisa juga unggah file Excel/CSV atau input manual langsung di tab ini.)</li>
+                                <li>Buka tab <b>Tulis Pesan</b>, ketik isi pesannya. Pakai placeholder seperti <code>{{Nama}}</code> supaya pesan otomatis dipersonalisasi per kontak.</li>
+                                <li>Buka tab <b>Kirim</b>, lalu pilih mode Kirim Otomatis (berjeda tiap beberapa detik) atau Mode Berurutan (manual, kontak demi kontak).</li>
+                            </ol>
+                            <div class="info-box warning">
+                                <i class='bx bx-info-circle'></i>
+                                <span><b>Kenapa cuma satu tab WhatsApp Web yang kebuka terus?</b> Ini memang disengaja, bukan bug — supaya rapi dan gampang dipantau, setiap kirim ke kontak berikutnya sistem akan <b>memakai tab web.whatsapp.com yang sama</b> yang sudah kamu buka & login sebelumnya (tidak numpuk tab baru). Pastikan sudah login (scan QR) di tab web.whatsapp.com dulu sebelum mulai kirim.</span>
+                            </div>
+                        </div>
+
+                        <!-- 5. CARI LEADS BARU (Automation Scraping B2B) -->
+                        <div class="guide-section" id="guide-leadgen">
+                            <div class="guide-section-header">
+                                <div class="guide-section-icon"><i class='bx bx-radar'></i></div>
+                                <h3>5. Cari Leads Baru (Automation Scraping B2B)</h3>
+                            </div>
+                            <p class="guide-lead">Mencari data leads B2B baru secara otomatis dari Google Maps — bisa cari target apapun (Masjid, DKM, Yayasan, Koperasi, atau institusi lain), tidak perlu lagi copy-paste manual satu-satu. Prosesnya dibagi 2 fase supaya cepat sekaligus rendah risiko diblokir.</p>
+
+                            <div class="guide-features" style="margin-bottom:14px;">
+                                <div class="guide-feature">
+                                    <i class='bx bx-run'></i>
+                                    <div><b>Fase A — Kumpulan Cepat (otomatis)</b><span>Scroll 1 halaman daftar hasil sampai benar-benar mentok (persis seperti SOP manual/ekstensi "Instant Data Scraper"), lalu semua nama/alamat langsung tersimpan — biasanya cuma hitungan detik. Tanpa buka satu-satu, jadi jauh lebih cepat & aman.</span></div>
+                                </div>
+                                <div class="guide-feature">
+                                    <i class='bx bx-phone-call'></i>
+                                    <div><b>Fase B — Cek Nomor (opsional, manual)</b><span>Nomor telepon tidak selalu tampil di daftar cepat. Untuk baris yang belum ada nomornya, klik "Cek Nomor" (1 lokasi) atau centang beberapa lalu "Verifikasi yang Dicentang" — baru di fase ini sistem buka halaman detail lokasinya.</span></div>
+                                </div>
+                            </div>
+
+                            <ol class="guide-steps">
+                                <li>Buka tab <b>Cari Leads Baru</b>, ketik <b>Kata Kunci</b> (misal "Masjid Besar", "DKM", atau "Koperasi" — bebas, ada saran tapi boleh ketik apa saja) dan <b>Kota/Wilayah</b> (misal "Bandung"). Isian <b>Brand/Kategori</b> otomatis ikut Kata Kunci (bisa diedit manual kalau mau beda, misal cari "JNE" tapi mau brand-nya "Ekspedisi"). Isian <b>Area Utama</b> otomatis terisi provinsi dari Kota yang diketik kalau dikenali (bisa diedit juga). Klik <b>"Mulai Cari Leads"</b>.</li>
+                                <li>Tunggu Fase A jalan (biasanya hitungan detik) — baris-baris hasil <b>langsung muncul satu-satu di tabel review</b> selagi diproses, tidak perlu nunggu sampai benar-benar selesai baru kelihatan.</li>
+                                <li>Cek tabel review: kolom <b>Nama, Nomor WA, Alamat, Area</b>. Baris yang <b>sudah</b> ada nomornya bisa langsung diedit kalau perlu. Baris yang <b>belum</b> ada nomornya punya tombol <b>"Cek Nomor"</b> — klik untuk buka 1 halaman detail lokasi itu saja dan ambil nomornya (kalau ada). Bisa juga centang beberapa baris tanpa nomor lalu klik <b>"Verifikasi Nomor yang Dicentang"</b>.</li>
+                                <li>Centang leads yang valid & sudah ada nomornya, klik <b>"Import ke Master Leads"</b> — leads itu langsung muncul di tab Master Leads (brand sesuai isian Brand/Kategori tadi, status masih kosong/belum dihubungi), siap di-follow-up seperti leads lainnya (termasuk lewat WA Broadcast). Baris tanpa nomor otomatis dilewati saat impor.</li>
+                                <li>Leads yang salah/tidak relevan tinggal dicentang lalu klik <b>"Buang yang Dicentang"</b> — tidak akan masuk Master Leads.</li>
+                            </ol>
+                            <div class="info-box info">
+                                <i class='bx bx-info-circle'></i>
+                                <span><b>Klik "Cek Nomor" sebanyak apapun, atau centang semua lalu "Verifikasi yang Dicentang" — semuanya otomatis masuk 1 antrean</b> dan diproses bergiliran di belakang layar (maksimal 15 lokasi tiap kali kirim ke server, otomatis lanjut ke kelompok berikutnya tanpa perlu klik ulang). Baris yang masih menunggu giliran akan menampilkan "Menunggu antrean...". Kalau baris yang masih menunggu itu dibuang lewat <b>"Buang yang Dicentang"</b>, otomatis batal dari antrean juga — aman, tidak perlu khawatir data nyasar.</span>
+                            </div>
+                            <div class="info-box info">
+                                <i class='bx bx-info-circle'></i>
+                                <span><b>Data yang belum diimpor TIDAK akan hilang</b> walau kamu ganti kata kunci dan cari lagi, atau tutup lalu buka ulang halaman ini — tabel review adalah gabungan dari SEMUA pencarian yang belum diimpor/dibuang, bukan cuma pencarian terakhir. Tapi supaya rapi, tetap disarankan impor atau buang dulu hasil yang sudah ada sebelum menumpuk terlalu banyak.</span>
+                            </div>
+                            <div class="info-box info">
+                                <i class='bx bx-info-circle'></i>
+                                <span><b>Ulangi kata kunci+kota yang sama = bukan lanjut, tapi cari dari awal lagi.</b> Google Maps punya batas jumlah hasil per satu pencarian (jadi bukan "halaman berikutnya" yang bisa dilanjutkan) — kalau kombinasi yang sama dicari lagi, sistem cuma akan ketemu tempat yang itu-itu saja (otomatis di-skip karena sudah pernah tersimpan). Supaya cakupan lebih luas, <b>gonta-ganti kombinasi</b> kata kunci dan kota — misal Jakarta sengaja dipecah jadi 5 pilihan (Pusat/Utara/Barat/Selatan/Timur) supaya tidak mentok di satu wilayah yang sama terus.</span>
+                            </div>
+                            <div class="info-box warning">
+                                <i class='bx bx-info-circle'></i>
+                                <span>Server cuma bisa memproses <b>1 hal dalam satu waktu</b> (Fase A ATAU Fase B, punya siapapun — supaya server tidak berat). Untuk Fase A ("Mulai Cari Leads"), kalau lagi dipakai rekan kerja lain, tunggu dulu baru mulai pencarian baru. Untuk Fase B (Cek Nomor / Verifikasi), tidak perlu tunggu manual — antreannya otomatis menunggu giliran sendiri kalau kebetulan Fase A sedang berjalan. Lagi terlanjur nunggu kelamaan atau salah klik? Klik <b>"Batalkan Pencarian"</b> di bawah progress bar — proses aktif (siapapun pemiliknya) langsung dihentikan dan giliran berikutnya bisa langsung jalan, tidak perlu nunggu 10 menit. Kalau Fase A gagal terus-menerus (kemungkinan tampilan Google Maps berubah), gunakan cara manual di SOP lama sebagai cadangan.</span>
+                            </div>
+                        </div>
+
+                        <!-- 6. SPREADSHEET MODE & COPY BCC -->
+                        <div class="guide-section" id="guide-spreadsheet">
+                            <div class="guide-section-header">
+                                <div class="guide-section-icon"><i class='bx bx-copy'></i></div>
+                                <h3>6. Spreadsheet Mode & Copy untuk BCC</h3>
+                            </div>
+                            <p class="guide-lead">Tabel Master Leads bisa dipakai mirip spreadsheet untuk menyalin data. Ada 4 cara copy berbeda untuk kebutuhan berbeda:</p>
+                            <div class="guide-copy-list">
+                                <div class="guide-copy-item">
+                                    <div class="guide-copy-badge">1</div>
+                                    <div><b>Pilih & copy rentang sel (ala Google Sheets)</b><span>Klik satu sel lalu <b>geser (drag)</b> sambil tetap ditekan, atau klik sel pertama lalu <b>Shift+klik</b> sel terakhir — bisa satu kolom penuh, satu baris, atau kotak beberapa kolom×baris. Area terpilih akan jadi ungu, lalu tekan <b>Ctrl+C</b> (Cmd+C di Mac) untuk menyalin, rapi per kolom kalau ditempel ke Excel/Sheets. Klik satu kali saja tanpa geser tetap berfungsi seperti biasa untuk <b>mengedit isi sel</b>. Klik di sel lain (atau di luar tabel) otomatis membatalkan pilihan rentang yang ungu tadi.</span></div>
+                                </div>
+                                <div class="guide-copy-item">
+                                    <div class="guide-copy-badge">2</div>
+                                    <div><b>Tombol "Copy Kontak (Terfilter)"</b><span>Di pojok kanan atas tabel. Menyalin kontak dari <b>semua baris hasil filter saat ini</b> (termasuk halaman lain kalau datanya di-paging), dipisah tanda titik-koma (<code>;</code>) — siap tempel ke kolom BCC email.</span></div>
+                                </div>
+                                <div class="guide-copy-item">
+                                    <div class="guide-copy-badge">3</div>
+                                    <div><b>Tombol "Copy Kontak" di panel biru (bulk-bar)</b><span>Muncul setelah kamu <b>centang</b> beberapa baris. Menyalin kontak <b>hanya dari baris yang dicentang</b>, bukan semua hasil filter.</span></div>
+                                </div>
+                                <div class="guide-copy-item">
+                                    <div class="guide-copy-badge">4</div>
+                                    <div><b>Tombol copy per baris</b><span>Ikon copy ungu di kolom paling kanan "Aksi" tiap baris, di sebelah ikon hapus. Menyalin <b>satu baris itu saja secara utuh</b> (semua kolom), siap ditempel jadi satu baris di Excel/Sheets.</span></div>
+                                </div>
+                            </div>
+                            <div class="info-box info">
+                                <i class='bx bx-info-circle'></i>
+                                <span>Cara 2, 3, dan 4 otomatis menyesuaikan mode aktif: mode <b>WhatsApp</b> menyalin nomor WA, mode <b>Email</b> menyalin alamat email.</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /tab-content-wrapper -->
+        </main>
+    </div><!-- /app-container -->
+
+    <!-- ============================================================
+         DELETE CONFIRM MODAL
+    ============================================================ -->
+    <div id="delete-modal" class="modal-overlay hidden">
+        <div class="modal-box" style="max-width:420px;">
+            <div class="modal-header" style="background:linear-gradient(135deg,#7f1d1d,#dc2626);">
+                <h2><i class='bx bx-trash'></i> Konfirmasi Hapus</h2>
+                <p id="delete-modal-sub">Tindakan ini tidak bisa dibatalkan</p>
+                <button class="modal-close" onclick="closeDeleteModal()"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <p id="delete-modal-msg" style="font-size:0.9rem;color:var(--text-main);margin-bottom:8px;"></p>
+                <div class="info-box warning">
+                    <i class='bx bx-error-alt'></i>
+                    Data yang dihapus dari Firebase tidak dapat dipulihkan.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeDeleteModal()">Batal</button>
+                <button class="btn btn-danger" id="btn-confirm-delete">
+                    <i class='bx bx-trash'></i> Ya, Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         TOAST CONTAINER
+    ============================================================ -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ============================================================
+         FLOATING ACTION BUTTON (FAB) & MANUAL INPUT MODAL
+    ============================================================ -->
+    <button class="fab-btn" id="fab-add-lead" title="Tambah Lead Manual">
+        <i class='bx bx-plus'></i>
+    </button>
+
+    <div id="manual-modal" class="modal-overlay hidden">
+        <div class="modal-box" style="max-width:480px;">
+            <div class="modal-header">
+                <h2><i class='bx bx-user-plus'></i> Tambah Lead Manual</h2>
+                <p id="manual-modal-sub">Data akan langsung disinkronisasi ke Firebase</p>
+                <button class="modal-close" onclick="closeManualModal()"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="seg-form">
+                    <div class="form-group">
+                        <label>Tipe Lead <span style="color:var(--danger);">*</span></label>
+                        <select class="form-input" id="manual-mode">
+                            <option value="wa">WhatsApp</option>
+                            <option value="email">Email</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label id="manual-contact-label">Nomor WA / Email <span style="color:var(--danger);">*</span></label>
+                        <input type="text" class="form-input" id="manual-contact" placeholder="Contoh: 08123... / budi@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label id="manual-contact2-label">Email (opsional)</label>
+                        <input type="text" class="form-input" id="manual-contact2" placeholder="Kontak tambahan, biar lead ini bisa dihubungi lewat WA & Email">
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor WA CS yang Dipakai <span style="color:var(--text-light);font-weight:400;">(opsional)</span></label>
+                        <input type="text" class="form-input" id="manual-nomor-wa-terpakai" placeholder="Nomor/akun WA CS mana yang dipakai chat ke lead ini, mis. CS 1 - 08123...">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Toko/Agen</label>
+                        <input type="text" class="form-input" id="manual-nama" placeholder="Contoh: Toko Berkah">
+                    </div>
+                    <div style="display:flex;gap:10px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Sub Area <span style="color:var(--danger);">*</span> <span style="color:var(--text-light);font-weight:400;">(Kota/Kab)</span></label>
+                            <input type="text" class="form-input" id="manual-area" placeholder="Kota...">
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Brand <span style="color:var(--danger);">*</span></label>
+                            <input type="text" class="form-input" id="manual-brand" placeholder="Brand...">
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:10px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Area Utama <span style="color:var(--text-light);font-weight:400;">(Provinsi, opsional)</span></label>
+                            <input type="text" class="form-input" id="manual-provinsi" list="provinsi-suggestions" placeholder="Otomatis dari Sub Area kalau dikenali">
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Produk</label>
+                            <input type="text" class="form-input" id="manual-produk" list="produk-suggestions" placeholder="Contoh: SIMASRIM">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>PIC Garap</label>
+                        <input type="text" class="form-input" id="manual-pic" placeholder="Nama eksekutor...">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeManualModal()">Batal</button>
+                <button class="btn btn-primary" id="btn-save-manual">
+                    <i class='bx bx-save'></i> Simpan Lead
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         EDIT LEAD MODAL (satu baris, semua kolom termasuk WA/Email)
+    ============================================================ -->
+    <div id="edit-lead-modal" class="modal-overlay hidden">
+        <div class="modal-box" style="max-width:560px;">
+            <div class="modal-header">
+                <h2><i class='bx bx-edit-alt'></i> Edit Lead</h2>
+                <p id="edit-modal-sub">Ubah data lengkap satu baris ini</p>
+                <button class="modal-close" onclick="closeEditLeadModal()"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-key">
+                <div class="seg-form">
+                    <div class="form-group">
+                        <label id="edit-contact-label">Nomor WA / Email</label>
+                        <input type="text" class="form-input" id="edit-contact" placeholder="Contoh: 628123... / budi@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label id="edit-contact2-label">Email (opsional)</label>
+                        <input type="text" class="form-input" id="edit-contact2" placeholder="Kontak tambahan, biar lead ini bisa dihubungi lewat WA & Email">
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor WA CS yang Dipakai <span style="color:var(--text-light);font-weight:400;">(opsional)</span></label>
+                        <input type="text" class="form-input" id="edit-nomor-wa-terpakai" placeholder="Nomor/akun WA CS mana yang dipakai chat ke lead ini, mis. CS 1 - 08123...">
+                    </div>
+                    <div class="form-group" id="edit-kontak-aktif-wrap" style="display:none;">
+                        <label>Kontak Aktif Dipakai <span style="color:var(--text-light);font-weight:400;">(opsional)</span></label>
+                        <div style="display:flex;gap:16px;">
+                            <label style="display:flex;align-items:center;gap:6px;font-weight:400;cursor:pointer;">
+                                <input type="checkbox" id="edit-kontak-aktif-wa"> WhatsApp
+                            </label>
+                            <label style="display:flex;align-items:center;gap:6px;font-weight:400;cursor:pointer;">
+                                <input type="checkbox" id="edit-kontak-aktif-email"> Email
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Agen/Toko</label>
+                        <input type="text" class="form-input" id="edit-nama-agen">
+                    </div>
+                    <div style="display:flex;gap:10px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Brand</label>
+                            <input type="text" class="form-input" id="edit-brand">
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Produk</label>
+                            <input type="text" class="form-input" id="edit-produk" list="produk-suggestions" placeholder="Contoh: SIMASRIM">
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:10px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Area Utama <span style="color:var(--text-light);font-weight:400;">(Provinsi)</span></label>
+                            <input type="text" class="form-input" id="edit-provinsi" list="provinsi-suggestions" placeholder="Contoh: Jawa Barat">
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Sub Area <span style="color:var(--text-light);font-weight:400;">(Kota/Kab)</span></label>
+                            <input type="text" class="form-input" id="edit-area">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Alamat</label>
+                        <input type="text" class="form-input" id="edit-alamat" placeholder="Alamat lengkap toko/agen...">
+                    </div>
+                    <div style="display:flex;gap:10px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>PIC Campaign</label>
+                            <input type="text" class="form-input" id="edit-pic-campaign">
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>PIC Garap</label>
+                            <input type="text" class="form-input" id="edit-pic-garap">
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:10px;">
+                        <div class="form-group" style="flex:1;">
+                            <label>Tahap</label>
+                            <select class="form-input" id="edit-tahap">
+                                <option value="">– Belum ada –</option>
+                                <option>PESAN 1</option><option>PESAN 2</option><option>PESAN 3</option>
+                                <option>FOLLOW UP</option><option>CLOSING</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex:1;">
+                            <label>Tipe Leads</label>
+                            <select class="form-input" id="edit-tipe-leads">
+                                <option>New</option><option>Hot</option><option>Warm</option>
+                                <option>Cold</option><option>Cold / Dead</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Respon</label>
+                        <input type="text" class="form-input" id="edit-respon" placeholder="Balasan terakhir dari leads...">
+                    </div>
+                    <div class="form-group">
+                        <label>Aksi Lanjutan</label>
+                        <input type="text" class="form-input" id="edit-aksi-lanjutan" placeholder="Rencana follow-up berikutnya...">
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <input type="text" class="form-input" id="edit-keterangan" placeholder="Catatan tambahan...">
+                    </div>
+                </div>
+                <p class="sub" style="font-size:0.75rem;margin-top:2px;">Tanggal Kirim tetap dikelola lewat klik langsung di kolom tabel (bisa tambah lebih dari satu tanggal).</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeEditLeadModal()">Batal</button>
+                <button class="btn btn-primary" id="btn-save-edit-lead">
+                    <i class='bx bx-save'></i> Simpan Perubahan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         CROSS-MATCH REVIEW — muncul kalau upload wizard mendeteksi baris baru
+         yang nama_agen+area-nya cocok persis dengan lead yang SUDAH ADA di
+         tree sebaliknya (WA<->Email). User yang putuskan gabung jadi 1 kontak
+         WA+Email atau biarkan terpisah — sistem cuma menawarkan, tidak nebak
+         sendiri (lihat LeadsCleaner.findCrossTreeMatches di js/cleaner.js).
+         ============================================================ -->
+    <div id="cross-match-modal" class="modal-overlay hidden">
+        <div class="modal-box" style="max-width:640px;">
+            <div class="modal-header">
+                <h2><i class='bx bx-git-merge'></i> Kemungkinan Lead yang Sama Ditemukan</h2>
+                <p>Nama & area cocok persis dengan lead yang sudah ada di tree satunya (WA/Email) — mau digabung jadi 1 kontak WA+Email, atau tetap dibuat lead terpisah?</p>
+            </div>
+            <div class="modal-body">
+                <div id="cross-match-list" style="display:flex;flex-direction:column;gap:10px;max-height:420px;overflow-y:auto;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="btn-cross-match-continue">
+                    <i class='bx bx-right-arrow-alt'></i> Lanjutkan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saran otomatis field Produk (freeform, dipakai bareng oleh edit modal & form tambah) -->
+    <datalist id="produk-suggestions"></datalist>
+    <datalist id="provinsi-suggestions"></datalist>
+
+    <!-- ============================================================
+         CARI & GANTI MASSAL (ganti nilai 1 field untuk SEMUA leads yang
+         cocok, tidak dibatasi centang/halaman aktif)
+    ============================================================ -->
+    <div id="handover-modal" class="modal-overlay hidden">
+        <div class="modal-box" style="max-width:440px;">
+            <div class="modal-header">
+                <h2><i class='bx bx-transfer'></i> Export untuk Handover Mitra Area</h2>
+                <p>Pilih satu Area Utama — leads di area itu langsung diexport CSV untuk diserahkan ke Mitra Area yang mengelola wilayah tersebut.</p>
+                <button class="modal-close" onclick="closeHandoverModal()"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Area Utama (Provinsi)</label>
+                    <select class="form-input" id="handover-provinsi"></select>
+                </div>
+                <div class="form-group" style="display:flex;align-items:center;gap:8px;">
+                    <input type="checkbox" id="handover-only-closing" checked style="width:auto;">
+                    <label for="handover-only-closing" style="margin:0;font-weight:600;">Hanya tahap CLOSING (rekomendasi — sudah siap dilanjutkan mitra)</label>
+                </div>
+                <p class="sub" id="handover-preview-count" style="font-size:0.8rem;font-weight:700;color:var(--primary);"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeHandoverModal()">Batal</button>
+                <button class="btn btn-primary" id="btn-apply-handover">
+                    <i class='bx bx-download'></i> Export CSV
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="rename-massal-modal" class="modal-overlay hidden">
+        <div class="modal-box" style="max-width:480px;">
+            <div class="modal-header">
+                <h2><i class='bx bx-search-alt'></i> Cari & Ganti Massal</h2>
+                <p>Ubah nilai 1 field untuk SEMUA leads yang cocok sekaligus — tidak perlu centang satu-satu atau ganti halaman.</p>
+                <button class="modal-close" onclick="closeRenameMassalModal()"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Field</label>
+                    <select class="form-input" id="rename-field">
+                        <option value="brand">Brand</option>
+                        <option value="produk">Produk</option>
+                        <option value="provinsi">Area Utama (Provinsi)</option>
+                        <option value="area">Sub Area (Kota/Kab)</option>
+                        <option value="pic_campaign">PIC Campaign</option>
+                        <option value="pic_garap">PIC Garap</option>
+                        <option value="aksi_lanjutan">Aksi Lanjutan</option>
+                        <option value="tahap">Tahap</option>
+                        <option value="tipe_leads">Tipe Leads</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Dari nilai</label>
+                    <select class="form-input" id="rename-from"></select>
+                </div>
+                <div class="form-group">
+                    <label>Ke nilai</label>
+                    <input type="text" class="form-input" id="rename-to" placeholder="Nilai baru...">
+                </div>
+                <p class="sub" id="rename-preview-count" style="font-size:0.8rem;font-weight:700;color:var(--primary);"></p>
+                <div class="progress-wrap" id="rename-progress" style="display:none;">
+                    <div class="progress-label">
+                        <span id="rename-progress-label">Memproses...</span>
+                        <span id="rename-progress-pct">0%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-fill" id="rename-progress-fill"></div></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeRenameMassalModal()">Batal</button>
+                <button class="btn btn-primary" id="btn-apply-rename-massal" disabled>
+                    <i class='bx bx-check'></i> Terapkan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         SCRIPTS (urutan penting)
+    ============================================================ -->
+    <!-- SheetJS — Parse Excel/CSV client-side -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <!-- Chart.js DataLabels Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <!-- App Modules -->
+    <script src="js/firebase-api.js"></script>
+    <script src="js/cleaner.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/tracker.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/demo-data.js"></script>
+    <script src="js/app.js"></script>
+    <!-- WA Broadcast tool (tab "WA Broadcast") -->
+    <script src="js/wa-broadcast.js"></script>
+    <!-- Cari Leads Baru (automation scraping B2B) -->
+    <script src="js/leadgen.js"></script>
+
+</body>
+</html>

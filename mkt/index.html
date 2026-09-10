@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MKT — Marketing OS</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23121215' stroke='%2327272a' stroke-width='2'/%3E%3Ctext x='32' y='43' font-family='system-ui, sans-serif' font-weight='800' font-size='24' fill='%23f4f4f5' text-anchor='middle'%3EMG%3C/text%3E%3Ccircle cx='48' cy='18' r='4' fill='%236366f1'/%3E%3C/svg%3E">
+<meta name="description" content="Suite tools marketing & CS PT SMA / SIMASRIM: campaign, mitra, B2B, PPOB, laporan, dan dokumen legal dalam satu tempat.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#09090b; --panel:#121215; --panel-2:#18181c; --border:#27272a;
+    --border-hover:#3f3f46; --text:#f4f4f5; --muted:#a1a1aa;
+    --accent:#6366f1; --accent-2:#10b981;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;-webkit-font-smoothing:antialiased;}
+  .top-nav{
+    display:flex; align-items:center; gap:12px; padding:18px 32px;
+    border-bottom:1px solid var(--border); background:rgba(18,18,21,0.7); backdrop-filter:blur(12px);
+    font-size:13px; font-weight:600;
+  }
+  .top-nav a{ color:var(--muted); text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all .2s ease; }
+  .top-nav a:hover{ color:#ffffff; transform:translateX(-2px); }
+  .top-nav .sep{ color:#3f3f46; }
+  .top-nav .current{ color:var(--text); }
+  header{padding:60px 24px 36px;text-align:center;background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 65%);}
+  header h1{margin:0 0 12px;font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-0.03em;color:#fafafa;}
+  header p{margin:0 auto;max-width:640px;color:var(--muted);font-size:14.5px;line-height:1.65;}
+  .badge{display:inline-block;background:rgba(255,255,255,0.06);color:#e4e4e7;border:1px solid rgba(255,255,255,0.14);padding:5px 14px;border-radius:99px;font-size:12px;font-weight:700;letter-spacing:.02em;margin-bottom:16px;transition:all .2s ease;}
+  .badge:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.09);}
+  main{max-width:1180px;margin:0 auto;padding:0 24px 80px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;}
+  .card:hover{transform:translateY(-4px);border-color:var(--border-hover);box-shadow:0 16px 36px rgba(0,0,0,0.6);}
+  .thumb{height:110px;display:flex;align-items:center;justify-content:center;font-size:38px;background:linear-gradient(135deg,#18181c,#121215);border-bottom:1px solid var(--border);}
+  .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .body h3{margin:0;font-size:17px;font-weight:700;}
+  .body p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55;flex:1;}
+  .card-foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;}
+  .badge-env{font-size:11px;padding:3px 9px;border-radius:6px;background:rgba(99,102,241,0.12);color:var(--accent);font-weight:600;border:1px solid rgba(99,102,241,0.2);}
+  .cta{display:inline-block;text-align:center;background:#6366f1;color:#fff;font-weight:700;font-size:12.5px;padding:8px 16px;border-radius:10px;text-decoration:none;transition:.2s;}
+  .cta:hover{background:#4f46e5;transform:scale(1.02);}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:28px 24px 48px;border-top:1px solid var(--border);max-width:1180px;margin:0 auto;}
+  footer a{color:var(--accent);text-decoration:none;transition:all .2s ease;display:inline-block;}
+  footer a:hover{color:#818cf8;transform:translateX(-2px);text-decoration:underline;}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="../index.html">← Portofolio Hub</a>
+  <span class="sep">/</span>
+  <span class="current">Marketing Operations Suite</span>
+</nav>
+
+<header>
+  <div class="badge">Marketing Operations Suite</div>
+  <h1>MKT — Marketing OS</h1>
+  <p>Pusat operasional tools tim Marketing &amp; CS SIMASRIM — mulai dari kemitraan B2B, tracking campaign periklanan, hingga ringkasan performa transaksi dan legalitas kerja sama.</p>
+</header>
+
+<main>
+  <div class="grid">
+
+    <div class="card">
+      <div class="thumb">🛠️</div>
+      <div class="body">
+        <h3>1. Admin Panel</h3>
+        <p>Panel pengelolaan pengguna, sinkronisasi data ekosistem, serta pengaturan konfigurasi operasional tim.</p>
+        <div class="card-foot">
+          <span class="badge-env">PHP Full-Stack</span>
+          <a class="cta" href="admin_panel.php">Buka Modul ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb">🤝</div>
+      <div class="body">
+        <h3>2. Partner B2B</h3>
+        <p>Tracker kerja sama korporat B2B — pipeline terstruktur dari tahap penjajakan, negosiasi, hingga onboarding mitra.</p>
+        <div class="card-foot">
+          <span class="badge-env">B2B CRM</span>
+          <a class="cta" href="partner/b2b.php">Buka Modul ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb">🧭</div>
+      <div class="body">
+        <h3>3. Mitra Tracker</h3>
+        <p>Dashboard monitoring kanvassing mitra agen di lapangan dengan status verifikasi dan titik koordinat terintegrasi.</p>
+        <div class="card-foot">
+          <span class="badge-env">Operations</span>
+          <a class="cta" href="mitra/tracker.php">Buka Modul ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb">📈</div>
+      <div class="body">
+        <h3>4. Campaign Tracker</h3>
+        <p>Rekapitulasi dan evaluasi performa campaign digital marketing, atribusi konversi, serta analisa ROI promosi.</p>
+        <div class="card-foot">
+          <span class="badge-env">Marketing</span>
+          <a class="cta" href="campaign/campaign-tracker/index.php">Buka Modul ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb">💳</div>
+      <div class="body">
+        <h3>5. PPOB Dashboard</h3>
+        <p>Pusat kendali transaksi PPOB (Payment Point Online Bank): pulsa, PLN, e-wallet, dan payment gateway.</p>
+        <div class="card-foot">
+          <span class="badge-env">Financial Ops</span>
+          <a class="cta" href="data/ppob/index.php">Buka Modul ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb">🛒</div>
+      <div class="body">
+        <h3>6. MP Report</h3>
+        <p>Dashboard analitik performa marketplace multi-channel dan live commerce (TikTok Shop, Shopee, Tokopedia).</p>
+        <div class="card-foot">
+          <span class="badge-env">E-Commerce</span>
+          <a class="cta" href="data/mp-report/index.php">Buka Modul ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="thumb">📑</div>
+      <div class="body">
+        <h3>7. Legal Tools</h3>
+        <p>Manajemen repositori dokumen perjanjian kerja sama, SLA kemitraan, NDA, dan standardisasi kepatuhan legal.</p>
+        <div class="card-foot">
+          <span class="badge-env">Compliance</span>
+          <a class="cta" href="tools/legal/index.php">Buka Modul ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  Arsitektur modul &amp; UI dirancang oleh Maulana Gufron • Bagian dari <a href="../index.html">Hub Portofolio Utama</a>.
+</footer>
+
+</body>
+</html>

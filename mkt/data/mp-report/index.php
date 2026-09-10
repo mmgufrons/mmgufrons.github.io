@@ -1,0 +1,350 @@
+<?php
+session_start();
+// PORTOFOLIO DEMO: gate login dihilangkan — halaman ini bagian dari showcase
+// publik, jadi datanya harus langsung bisa diakses tanpa perlu login manual dulu.
+$_SESSION['login_simasrim'] = true;
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albani Store Analytics</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-box" style="background: transparent;">
+                    <img src="logo.png" alt="Logo Albani" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(46,204,113,0.3));">
+                </div>
+                <h2>Albani Store</h2>
+            </div>
+            
+            <style>
+                .btn-back-mkt {
+                    display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; 
+                    background: var(--primary-light, #f3effa); color: var(--primary, #7335b7); 
+                    border: 1px solid var(--primary, #7335b7); border-radius: 8px; text-decoration: none; 
+                    font-weight: 500; font-size: 15px; transition: all 0.3s ease;
+                }
+                .btn-back-mkt:hover {
+                    background: var(--primary, #7335b7); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(115,53,183,0.2);
+                }
+                .btn-back-mkt:active {
+                    transform: translateY(0);
+                }
+            </style>
+            <div style="padding: 0 14px 20px 14px;">
+                <a href="../../index.php" class="btn-back-mkt">
+                    <i class='bx bx-arrow-back'></i>
+                    <span>Back to MKT Hub</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-target="dashboard">
+                    <a href="#"><i class='bx bx-grid-alt'></i><span>Dashboard</span></a>
+                </li>
+                <li data-target="upload">
+                    <a href="#"><i class='bx bx-cloud-upload'></i><span>Upload Data</span></a>
+                </li>
+                <li data-target="data-table">
+                    <a href="#"><i class='bx bx-table'></i><span>Tabel Data</span></a>
+                </li>
+                <li data-target="mutasi-saldo">
+                    <a href="#"><i class='bx bx-transfer'></i><span>Mutasi Saldo</span></a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-nav">
+                <div class="header-title">
+                    <h1 id="page-title">Dashboard Analytics</h1>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar"><i class='bx bx-store'></i></div>
+                    <span>Albani Store</span>
+                </div>
+            </header>
+
+            <div class="tab-content-wrapper">
+                <!-- Dashboard Tab -->
+                <section id="dashboard" class="tab-pane active">
+                    <div class="summary-cards">
+                        <div class="card glass">
+                            <div class="card-icon"><i class='bx bx-dollar-circle'></i></div>
+                            <div class="card-info">
+                                <h3>Total Omzet</h3>
+                                <h2 id="total-omzet">Rp 0</h2>
+                            </div>
+                        </div>
+                        <div class="card glass">
+                            <div class="card-icon green"><i class='bx bx-wallet'></i></div>
+                            <div class="card-info">
+                                <h3>Total Profit (Bersih)</h3>
+                                <h2 id="total-profit">Rp 0</h2>
+                            </div>
+                        </div>
+                        <div class="card glass">
+                            <div class="card-icon" style="background: #fdeded; color: var(--danger);"><i class='bx bx-trending-down'></i></div>
+                            <div class="card-info">
+                                <h3>Total Biaya Admin</h3>
+                                <h2 id="total-admin">Rp 0</h2>
+                            </div>
+                        </div>
+                        <div class="card glass">
+                            <div class="card-icon blue"><i class='bx bx-money-withdraw'></i></div>
+                            <div class="card-info">
+                                <h3>Mutasi Saldo Bobcare</h3>
+                                <h2 id="total-mutasi">Rp 0</h2>
+                            </div>
+                        </div>
+                        <div class="card glass">
+                            <div class="card-icon orange"><i class='bx bx-shopping-bag'></i></div>
+                            <div class="card-info">
+                                <h3>Total Pesanan</h3>
+                                <h2 id="total-pesanan">0</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charts-grid">
+                        <div class="chart-container glass main-chart">
+                            <h3>Tren Pendapatan Bulanan</h3>
+                            <div id="trendChart" class="css-chart-container"></div>
+                        </div>
+                        <div class="chart-container glass side-chart">
+                            <h3>Kontribusi Platform</h3>
+                            <div id="platformChart" class="css-chart-container"></div>
+                        </div>
+                        <div class="chart-container glass full-chart">
+                            <h3>Penjualan Berdasarkan Kategori/Produk</h3>
+                            <div id="productChart" class="css-chart-container"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upload Tab -->
+                <section id="upload" class="tab-pane">
+                    <div class="upload-container glass">
+                        <div class="upload-header">
+                            <i class='bx bx-cloud-upload'></i>
+                            <h2>Upload Laporan Penjualan</h2>
+                            <p>Upload satu file Excel (.xlsx/.xls) yang mengandung sheet: SHOPEE BOBCARE, SHOPEE ALBANISTORE, SOUNDBOX QRIS, TIKTOKSHOP TOKO ALBANIE</p>
+                        </div>
+                        
+                        <div class="upload-area" id="drop-zone">
+                            <input type="file" id="file-input" accept=".xlsx, .xls" hidden>
+                            <div class="upload-prompt">
+                                <i class='bx bx-folder-open'></i>
+                                <p>Klik atau Drag & Drop file Excel ke area ini</p>
+                            </div>
+                            <div class="file-details hidden" id="file-details">
+                                <i class='bx bxs-file-blank'></i>
+                                <span id="file-name">filename.xlsx</span>
+                                <button class="btn btn-remove" id="btn-remove"><i class='bx bx-x'></i></button>
+                            </div>
+                        </div>
+
+                        <div class="upload-actions">
+                            <button class="btn btn-primary" id="btn-process" disabled>Proses & Upload ke Database</button>
+                        </div>
+
+                        <div class="upload-status hidden" id="upload-status">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <p id="status-text">Memproses file...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Table Tab -->
+                <section id="data-table" class="tab-pane">
+                    <div class="table-container glass">
+                        <div class="table-header">
+                            <h3>Data Penjualan Keseluruhan</h3>
+                            <div class="table-actions">
+                                <input type="date" id="filter-date-start" class="glass-input" title="Dari Tanggal">
+                                <input type="date" id="filter-date-end" class="glass-input" title="Sampai Tanggal">
+                                <select id="filter-date-preset" class="glass-select">
+                                    <option value="">Semua Waktu</option>
+                                    <option value="today">Hari Ini</option>
+                                    <option value="this_week">Minggu Ini</option>
+                                    <option value="this_month">Bulan Ini</option>
+                                    <option value="last_1_month">1 Bulan Terakhir</option>
+                                    <option value="last_3_months">3 Bulan Terakhir</option>
+                                </select>
+                                <select id="filter-platform" class="glass-select">
+                                    <option value="all">Semua Platform</option>
+                                    <option value="shopee_albanistore">Shopee Albanistore</option>
+                                    <option value="shopee_bobcare">Shopee Bobcare</option>
+                                    <option value="soundbox">Soundbox QRIS</option>
+                                    <option value="tiktok_albanie">TikTok Shop</option>
+                                </select>
+                                <input type="text" id="filter-product" class="glass-input" placeholder="Cari Produk...">
+                                <button class="btn btn-secondary btn-icon-only" id="btn-refresh" title="Refresh Data"><i class='bx bx-refresh'></i></button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="date" style="cursor:pointer">Tanggal <i class='bx bx-sort'></i></th>
+                                        <th data-sort="id" style="cursor:pointer">No Pesanan/ID <i class='bx bx-sort'></i></th>
+                                        <th data-sort="platform" style="cursor:pointer">Platform <i class='bx bx-sort'></i></th>
+                                        <th data-sort="product" style="cursor:pointer">Nama Produk <i class='bx bx-sort'></i></th>
+                                        <th data-sort="price" style="cursor:pointer">Harga Jual <i class='bx bx-sort'></i></th>
+                                        <th data-sort="admin_fee" style="cursor:pointer">Biaya Admin <i class='bx bx-sort'></i></th>
+                                        <th data-sort="income" style="cursor:pointer">Pendapatan Bersih <i class='bx bx-sort'></i></th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-body">
+                                    <!-- Data will be populated here -->
+                                    <tr>
+                                        <td colspan="8" class="text-center loading-text">Memuat data dari database...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mutasi Tab -->
+                <section id="mutasi-saldo" class="tab-pane">
+                    <div class="table-container glass">
+                        <div class="table-header">
+                            <h3>Riwayat Mutasi Saldo (Shopee Bobcare)</h3>
+                            <button class="btn btn-secondary" id="btn-refresh-mutasi"><i class='bx bx-refresh'></i> Refresh</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal Transaksi</th>
+                                        <th>Keterangan</th>
+                                        <th>Nominal</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mutasi-body">
+                                    <tr>
+                                        <td colspan="3" class="text-center loading-text">Memuat data dari database...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Modals -->
+    <div id="edit-modal" class="custom-modal-overlay hidden">
+        <div class="custom-modal glass">
+            <h3>Edit Data Penjualan</h3>
+            <p class="modal-subtitle">Ubah rincian pesanan secara langsung.</p>
+            <div class="modal-body">
+                <input type="hidden" id="edit-platform">
+                <input type="hidden" id="edit-id">
+                
+                <div class="form-group">
+                    <label>Tanggal Order</label>
+                    <input type="date" id="edit-tanggal" class="glass-input">
+                </div>
+                <div class="form-group">
+                    <label>Nama Produk</label>
+                    <input type="text" id="edit-produk" class="glass-input">
+                </div>
+                <div class="form-group">
+                    <label>Harga Jual (Rp)</label>
+                    <input type="number" id="edit-harga" class="glass-input">
+                </div>
+                <div class="form-group">
+                    <label>Biaya Admin (Rp)</label>
+                    <input type="number" id="edit-admin" class="glass-input">
+                </div>
+                <div class="form-group">
+                    <label>Pendapatan Bersih (Rp)</label>
+                    <input type="number" id="edit-pendapatan" class="glass-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-cancel-edit">Batal</button>
+                <button class="btn btn-primary" id="btn-save-edit">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-mutasi-modal" class="custom-modal-overlay hidden">
+        <div class="custom-modal glass">
+            <h3>Edit Data Mutasi</h3>
+            <p class="modal-subtitle">Ubah rincian riwayat mutasi saldo.</p>
+            <div class="modal-body">
+                <input type="hidden" id="edit-mutasi-id">
+                
+                <div class="form-group">
+                    <label>Tanggal Transaksi</label>
+                    <input type="date" id="edit-mutasi-tanggal" class="glass-input">
+                </div>
+                <div class="form-group">
+                    <label>Keterangan</label>
+                    <input type="text" id="edit-mutasi-keterangan" class="glass-input">
+                </div>
+                <div class="form-group">
+                    <label>Nominal (Rp)</label>
+                    <input type="number" id="edit-mutasi-nominal" class="glass-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-cancel-mutasi-edit">Batal</button>
+                <button class="btn btn-primary" id="btn-save-mutasi-edit">Simpan Perubahan</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="duplicate-modal" class="custom-modal-overlay hidden">
+        <div class="custom-modal glass">
+            <h3>Peringatan Data Duplikat</h3>
+            <p class="modal-subtitle">Terdapat data yang sudah ada di database dari file Excel ini.</p>
+            <div class="modal-body text-center">
+                <p>Ada <strong id="duplicate-count">0</strong> pesanan yang duplikat / sudah ada.</p>
+                <p style="margin-top:12px; font-size:0.9rem; color:var(--text-muted);">Timpa data lama dengan yang baru, atau tetap gunakan data lama?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-keep-old">Gunakan Data Lama</button>
+                <button class="btn btn-primary" id="btn-overwrite-new">Timpa Data (Update)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/firebase-api.js"></script>
+    <script src="js/dashboard-charts.js"></script>
+    <script src="js/excel-parser.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

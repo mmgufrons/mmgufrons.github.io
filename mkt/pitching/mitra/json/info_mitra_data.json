@@ -1,0 +1,72 @@
+[
+  {
+    "id": "demo-plm",
+    "label": "Kota Contoh A (DEMO)",
+    "status": "Operasional Aktif",
+    "status_color": "success",
+    "pic": "Bapak Ridwan & Bapak Yusuf (DEMO)",
+    "catatan_khusus": "Contoh mitra sudah top up rutin dan bikin branding sendiri. Data ini fiktif untuk keperluan portofolio.",
+    "catatan_type": "info",
+    "next_fu_date": "2026-09-01",
+    "next_fu_note": "[SENIN] Tanyakan kendala & progres canvassing tim lapangan. [JUMAT] Motivasi tim & rekap data rekonsiliasi transaksi.",
+    "fu_by": "Winda (CS)",
+    "fu_history": [
+      {
+        "id": "fu_demo_plm_2",
+        "date": "2026-08-08",
+        "done_by": "Admin Demo",
+        "summary": "FU progress canvassing & edukasi agen. Contoh catatan follow up mitra.",
+        "response": "Mitra kirim foto titik lokasi, progres bagus."
+      },
+      {
+        "id": "fu_demo_plm_1",
+        "date": "2026-07-25",
+        "done_by": "Admin Demo",
+        "summary": "FU dokumen kerja sama & update progres edukasi agen.",
+        "response": "Mitra konfirmasi akan segera kirim dokumen."
+      }
+    ]
+  },
+  {
+    "id": "demo-bdg",
+    "label": "Kota Contoh B (DEMO)",
+    "status": "Proses Onboarding",
+    "status_color": "warning",
+    "pic": "Ibu Sari (DEMO)",
+    "catatan_khusus": "Contoh mitra baru, masih tahap pengisian dokumen kerja sama.",
+    "catatan_type": "warning",
+    "next_fu_date": "2026-09-03",
+    "next_fu_note": "Follow up kelengkapan dokumen NDA & penunjukan.",
+    "fu_by": "Dinda (CS)",
+    "fu_history": [
+      {
+        "id": "fu_demo_bdg_1",
+        "date": "2026-08-20",
+        "done_by": "Admin Demo",
+        "summary": "Kirim dokumen kerja sama & panduan pengisian.",
+        "response": "Mitra masih review internal, akan balas minggu depan."
+      }
+    ]
+  },
+  {
+    "id": "demo-sby",
+    "label": "Kota Contoh C (DEMO)",
+    "status": "Perlu Tindak Lanjut",
+    "status_color": "danger",
+    "pic": "Bapak Hasan (DEMO)",
+    "catatan_khusus": "Contoh mitra sempat komplain isu diskon, sudah diklarifikasi dan diperbaiki.",
+    "catatan_type": "danger",
+    "next_fu_date": "2026-09-05",
+    "next_fu_note": "Pastikan isu diskon sudah tidak berulang, minta konfirmasi ulang.",
+    "fu_by": "Raka (CS)",
+    "fu_history": [
+      {
+        "id": "fu_demo_sby_1",
+        "date": "2026-08-15",
+        "done_by": "Admin Demo",
+        "summary": "Klarifikasi isu diskon yang dikeluhkan mitra.",
+        "response": "Ada selisih di sistem, sudah diperbaiki dan dikonfirmasi kembali ke mitra."
+      }
+    ]
+  }
+]

@@ -1,0 +1,604 @@
+/* ============================================================
+   PT SMA Enterprise OS CLOUD v10.2
+   assets/css/app.css — All Custom Styles
+   ============================================================ */
+
+/* --- ROOT TOKENS (Dark Mode — Default) --- */
+:root {
+    --brand-color: #8B5CF6;
+    --meeting-color: #db2777;
+
+    /* Backgrounds */
+    --bg-main:      #0f0f0f;
+    --bg-sidebar:   #1a1a1a;
+    --bg-card:      #222222;
+    --bg-input:     #2a2a2a;
+    --bg-elevated:  #202020;
+
+    /* Borders */
+    --border-default: #333;
+    --border-mid:     #2f2f2f;
+    --border-subtle:  #252525;
+
+    /* Text */
+    --text-primary: #e5e5e5;
+    --text-muted:   #a3a3a3;
+    --text-faint:   #6b7280;
+
+    /* Sidebar & Header */
+    --sidebar-item-hover: #252525;
+    --header-bg: #0f0f0f;
+    --modal-bg: #161616;
+    --modal-overlay: rgba(0,0,0,0.6);
+
+    /* Chart / Canvas */
+    --chart-legend-color: #9ca3af;
+    --chart-border: #202020;
+}
+
+/* --- LIGHT MODE TOKENS (Apple/iOS style) --- */
+body.light-mode {
+    --brand-color: #7c3aed;
+    --meeting-color: #be185d;
+
+    --bg-main:      #f2f2f7;
+    --bg-sidebar:   #ffffff;
+    --bg-card:      #ffffff;
+    --bg-input:     #f2f2f7;
+    --bg-elevated:  #ffffff;
+
+    --border-default: #d1d1d6;
+    --border-mid:     #e5e5ea;
+    --border-subtle:  #ebebf0;
+
+    --text-primary: #1c1c1e;
+    --text-muted:   #6c6c70;
+    --text-faint:   #aeaeb2;
+
+    --sidebar-item-hover: #f2f2f7;
+    --header-bg: #ffffff;
+    --modal-bg: rgba(255, 255, 255, 0.95);
+    --modal-overlay: rgba(0,0,0,0.35);
+
+    --chart-legend-color: #3c3c43;
+    --chart-border: #ffffff;
+
+    color: var(--text-primary);
+    background-color: var(--bg-main);
+}
+
+/* --- BASE --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- LAYOUT COMPONENTS --- */
+.sidebar-bg  { background-color: var(--bg-sidebar); transition: background-color 0.3s ease; }
+.card-bg     { background-color: var(--bg-card); border: 1px solid var(--border-default); transition: background-color 0.3s ease, border-color 0.3s ease; }
+
+/* --- INPUTS --- */
+.input-bg { background-color: var(--bg-input); border: 1px solid #444; color: #fff; }
+.input-bg:focus          { outline: none; border-color: var(--brand-color); }
+.input-bg:disabled       { opacity: 0.6; cursor: not-allowed; background-color: #151515; }
+
+/* --- RICH TEXT --- */
+[contenteditable]:empty:before {
+    content: attr(placeholder);
+    color: #6b7280;
+    pointer-events: none;
+    display: block;
+}
+[contenteditable] a { color: #60a5fa; text-decoration: underline; cursor: pointer; }
+
+/* ============================================================
+   FULLCALENDAR OVERRIDES
+   ============================================================ */
+.fc                  { height: 100% !important; min-height: 100% !important; }
+.fc-view-harness     { height: 100% !important; background-color: var(--bg-sidebar); border-radius: 0.75rem; }
+.fc-scrollgrid       { border-color: var(--border-default) !important; }
+.fc-theme-standard td,
+.fc-theme-standard th { border-color: var(--border-default); }
+.fc-day-today        { background-color: rgba(139, 92, 246, 0.1) !important; }
+.fc-toolbar-title    { color: white; font-size: 1.1rem !important; font-weight: 700; }
+.fc-button {
+    background-color: var(--bg-input) !important;
+    border: 1px solid #444 !important;
+    font-size: 0.8rem !important;
+    color: #ccc !important;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.fc-button-active    { background-color: var(--brand-color) !important; border-color: var(--brand-color) !important; color: white !important; }
+
+/* --- Calendar Event Status Colors --- */
+.fc-event-done      { background-color: #10b981 !important; text-decoration: line-through; opacity: 0.6; font-size: 0.7rem; border: none; }
+.fc-event-cancelled { background-color: #ef4444 !important; text-decoration: line-through; opacity: 0.4; font-size: 0.7rem; border: none; }
+.fc-event-progress  { background-color: #3b82f6 !important; border-left: 3px solid #60a5fa; font-size: 0.7rem; font-weight: bold; border-top: none; border-bottom: none; border-right: none; }
+.fc-event-planning  { background-color: #4b5563 !important; border: 1px dashed #9ca3af !important; font-size: 0.7rem; }
+.fc-event-meeting   { background-color: var(--meeting-color) !important; border: none; font-size: 0.75rem; font-weight: bold; }
+.fc-event-routine   { background-color: var(--brand-color) !important; border: none; font-size: 0.7rem; opacity: 0.8; }
+.fc-event-holiday   { background-color: #7f1d1d !important; border: 1px solid #ef4444 !important; font-size: 0.7rem; font-weight: bold; opacity: 0.85; }
+
+/* ── Light Mode Calendar Overrides ── */
+body.light-mode .fc-event {
+    color: #ffffff !important;
+}
+body.light-mode .fc-event-done { opacity: 0.9; }
+body.light-mode .fc-event-cancelled { opacity: 0.8; }
+body.light-mode .fc-event-routine { opacity: 0.95; }
+body.light-mode .fc-event-holiday { opacity: 1; }
+
+/* --- Holiday Day Cell Highlight --- */
+.fc-day-holiday     { background-color: rgba(239, 68, 68, 0.08) !important; }
+
+/* ============================================================
+   PRIORITY BORDER INDICATORS
+   ============================================================ */
+.border-l-high    { border-left: 4px solid #ef4444; }
+.border-l-mid     { border-left: 4px solid #f59e0b; }
+.border-l-low     { border-left: 4px solid #3b82f6; }
+.border-l-routine { border-left: 4px solid var(--brand-color); }
+.border-l-meeting { border-left: 4px solid var(--meeting-color); }
+
+/* ============================================================
+   SIDEBAR NAVIGATION
+   ============================================================ */
+.menu-active {
+    background-color: rgba(139, 92, 246, 0.15);
+    color: var(--brand-color);
+    border-right: 3px solid var(--brand-color);
+    font-weight: 600;
+}
+.menu-inactive {
+    color: var(--text-muted);
+    border-right: 3px solid transparent;
+}
+.menu-inactive:hover { background-color: #252525; color: white; }
+
+/* Sidebar group labels */
+.sidebar-group-label {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #4b5563;
+    padding: 12px 12px 4px 12px;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: #444; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ============================================================
+   LOGIN OVERLAY
+   ============================================================ */
+#loginOverlay { background-color: var(--bg-main); z-index: 9999; }
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+.mobile-overlay { background: rgba(0,0,0,0.7);  }
+
+/* ============================================================
+   KANBAN
+   ============================================================ */
+.kanban-col {
+    background: rgba(25, 25, 25, 0.8);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+/* Drag-over highlight */
+.kanban-col.drag-over { border-color: var(--brand-color); background: rgba(139,92,246,0.08); }
+
+/* ============================================================
+   GLOBAL SEARCH MODAL
+   ============================================================ */
+#searchModal {  }
+#searchInput {
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+    color: #fff;
+    font-size: 1rem;
+}
+#searchInput:focus { outline: none; border-color: var(--brand-color); }
+.search-result-item { transition: background 0.1s; }
+.search-result-item:hover { background-color: rgba(139,92,246,0.12); }
+
+/* ============================================================
+   PWA INSTALL BANNER
+   ============================================================ */
+#pwaInstallBanner {
+    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    border-top: 1px solid rgba(139,92,246,0.3);
+    animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+/* ============================================================
+   OFFLINE INDICATOR
+   ============================================================ */
+#offlineBar {
+    background: linear-gradient(90deg, #7f1d1d, #991b1b);
+    animation: pulse 2s infinite;
+}
+
+/* ============================================================
+   MICRO-ANIMATIONS
+   ============================================================ */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fadein { animation: fadeInUp 0.2s ease forwards; }
+
+/* Card hover lift */
+.card-hover { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.card-hover:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+
+/* ============================================================
+   GLASSMORPHISM & ENTERPRISE UI
+   ============================================================ */
+.glass-panel {
+    background: rgba(30, 30, 30, 0.65) !important;
+    
+    -webkit-
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass-modal {
+    background: rgba(22, 22, 22, 0.75) !important;
+    
+    -webkit-
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Empty States */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    text-align: center;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+.empty-state:hover {
+    opacity: 1;
+}
+.empty-state i {
+    font-size: 3rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+/* ============================================================
+   LIGHT MODE — Comprehensive Apple/iOS Style Overrides
+   Approach: CSS custom properties + targeted hex overrides
+   ============================================================ */
+
+/* ── Glassmorphism panels: light adaptation ── */
+body.light-mode .glass-panel {
+    background: rgba(255,255,255,0.75) !important;
+    
+    -webkit-
+    border: 1px solid rgba(0,0,0,0.08) !important;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+body.light-mode .glass-modal {
+    background: rgba(255,255,255,0.92) !important;
+    
+    -webkit-
+    border: 1px solid rgba(0,0,0,0.1) !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+/* ── Layout elements ── */
+body.light-mode aside#sidebar {
+    background-color: #ffffff !important;
+    border-right: 1px solid #d1d1d6 !important;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.06);
+}
+body.light-mode header,
+body.light-mode header > div {
+    background-color: rgba(255,255,255,0.9) !important;
+    border-bottom-color: #d1d1d6 !important;
+    
+}
+body.light-mode main,
+body.light-mode #viewContainer {
+    background-color: var(--bg-main) !important;
+}
+
+/* ── Sidebar nav items ── */
+body.light-mode .menu-inactive {
+    color: #6c6c70 !important;
+}
+body.light-mode .menu-inactive:hover {
+    background-color: #f2f2f7 !important;
+    color: #1c1c1e !important;
+}
+body.light-mode .menu-active {
+    color: #7c3aed !important;
+    background-color: rgba(124,58,237,0.07) !important;
+}
+body.light-mode #sidebarUserName { color: #1c1c1e !important; }
+body.light-mode #sidebarUserRole { color: #6c6c70 !important; }
+
+/* ── Dark background card overrides (most common Tailwind hex classes) ── */
+body.light-mode .bg-\[\#0a0a0a\],
+body.light-mode .bg-\[\#0f0f0f\],
+body.light-mode .bg-\[\#121212\],
+body.light-mode .bg-\[\#111\],
+body.light-mode .bg-\[\#111111\],
+body.light-mode .bg-\[\#151515\],
+body.light-mode .bg-\[\#161616\],
+body.light-mode .bg-\[\#1a1a1a\],
+body.light-mode .bg-\[\#000\],
+body.light-mode .bg-\[\#000000\],
+body.light-mode .bg-\[\#0a0a0a\],
+body.light-mode .bg-\[\#1c1c1e\],
+body.light-mode .bg-\[\#1e1e1e\],
+body.light-mode .bg-\[\#202020\],
+body.light-mode .bg-\[\#222\],
+body.light-mode .bg-\[\#222222\],
+body.light-mode .bg-\[\#252525\],
+body.light-mode .bg-\[\#252526\],
+body.light-mode .bg-\[\#2a2a2a\],
+body.light-mode .bg-\[\#2f2f2f\] {
+    background-color: #ffffff !important;
+}
+/* Slightly darker surfaces for depth */
+body.light-mode .bg-\[\#333\],
+body.light-mode .bg-\[\#333333\],
+body.light-mode .bg-\[\#3f3f3f\],
+body.light-mode .bg-\[\#444\],
+body.light-mode .bg-\[\#444444\] {
+    background-color: #f2f2f7 !important;
+}
+
+/* ── Text overrides ── */
+body.light-mode .text-white { color: #1c1c1e !important; }
+/* EXCEPT solid colored elements */
+body.light-mode [class*="bg-violet-600"] .text-white,
+body.light-mode [class*="bg-violet-600"].text-white,
+body.light-mode [class*="bg-purple-600"] .text-white,
+body.light-mode [class*="bg-purple-600"].text-white,
+body.light-mode [class*="bg-blue-600"] .text-white,
+body.light-mode [class*="bg-blue-600"].text-white,
+body.light-mode [class*="bg-emerald-600"] .text-white,
+body.light-mode [class*="bg-emerald-600"].text-white,
+body.light-mode [class*="bg-red-600"] .text-white,
+body.light-mode [class*="bg-red-600"].text-white,
+body.light-mode [class*="bg-orange-600"] .text-white,
+body.light-mode [class*="bg-orange-600"].text-white,
+body.light-mode [class*="bg-pink-600"] .text-white,
+body.light-mode [class*="bg-pink-600"].text-white {
+    color: #ffffff !important;
+}
+
+body.light-mode .text-gray-100 { color: #1c1c1e !important; }
+body.light-mode .text-gray-200 { color: #2c2c2e !important; }
+body.light-mode .text-gray-300 { color: #3c3c43 !important; }
+body.light-mode .text-gray-400 { color: #6c6c70 !important; }
+body.light-mode .text-gray-500 { color: #8e8e93 !important; }
+body.light-mode .text-gray-600 { color: #aeaeb2 !important; }
+body.light-mode .text-gray-700 { color: #c7c7cc !important; }
+/* Brand / accent colors keep their hue but slightly adjusted for light backgrounds */
+body.light-mode .text-purple-400  { color: #7c3aed !important; }
+body.light-mode .text-violet-300  { color: #6d28d9 !important; }
+body.light-mode .text-violet-400  { color: #7c3aed !important; }
+body.light-mode .text-pink-400    { color: #db2777 !important; }
+body.light-mode .text-pink-500    { color: #be185d !important; }
+body.light-mode .text-emerald-400 { color: #059669 !important; }
+body.light-mode .text-blue-300    { color: #1d4ed8 !important; }
+body.light-mode .text-blue-400    { color: #2563eb !important; }
+body.light-mode .text-red-300     { color: #b91c1c !important; }
+body.light-mode .text-red-400     { color: #dc2626 !important; }
+body.light-mode .text-yellow-400  { color: #d97706 !important; }
+body.light-mode .text-orange-400  { color: #ea580c !important; }
+body.light-mode .text-cyan-400    { color: #0891b2 !important; }
+
+/* ── Border overrides ── */
+body.light-mode .border-\[\#333\],
+body.light-mode .border-\[\#2f2f2f\],
+body.light-mode .border-\[\#3f3f3f\],
+body.light-mode .border-\[\#2a2a2a\],
+body.light-mode .border-\[\#444\],
+body.light-mode .border-\[\#1a1a1a\],
+body.light-mode .border-\[\#202020\],
+body.light-mode .hover\:border-\[\#333\]:hover,
+body.light-mode .hover\:border-\[\#3f3f3f\]:hover,
+body.light-mode .hover\:border-\[\#2f2f2f\]:hover {
+    border-color: #d1d1d6 !important;
+}
+body.light-mode .border-t,
+body.light-mode .border-b {
+    border-color: #d1d1d6 !important;
+}
+
+/* ── Hover background overrides ── */
+body.light-mode .hover\:bg-\[\#1a1a1a\]:hover,
+body.light-mode .hover\:bg-\[\#202020\]:hover,
+body.light-mode .hover\:bg-\[\#252525\]:hover,
+body.light-mode .hover\:bg-\[\#252526\]:hover,
+body.light-mode .hover\:bg-\[\#2a2a2a\]:hover,
+body.light-mode .hover\:bg-\[\#2f2f2f\]:hover,
+body.light-mode .hover\:bg-\[\#333\]:hover {
+    background-color: #f2f2f7 !important;
+}
+
+/* ── Inputs & textareas ── */
+body.light-mode .input-bg,
+body.light-mode input.input-bg,
+body.light-mode select.input-bg,
+body.light-mode textarea.input-bg {
+    background-color: #f2f2f7 !important;
+    border-color: #c7c7cc !important;
+    color: #1c1c1e !important;
+}
+body.light-mode .input-bg::placeholder,
+body.light-mode input::placeholder,
+body.light-mode textarea::placeholder {
+    color: #aeaeb2 !important;
+}
+/* Inline inputs not using .input-bg */
+body.light-mode input[type="text"],
+body.light-mode input[type="email"],
+body.light-mode input[type="date"],
+body.light-mode input[type="time"],
+body.light-mode input[type="number"],
+body.light-mode input[type="search"],
+body.light-mode select,
+body.light-mode textarea {
+    background-color: #f2f2f7 !important;
+    color: #1c1c1e !important;
+    border-color: #c7c7cc !important;
+}
+
+/* ── Progress bars (overwork state) ── */
+body.light-mode .bg-gray-800 {
+    background-color: #e5e5ea !important;
+}
+
+/* ── Kanban / Board ── */
+body.light-mode #boardContent .glass-panel,
+body.light-mode #boardContent [class*="bg-"] {
+    border-color: #d1d1d6 !important;
+}
+
+/* ── Modal backdrops ── */
+body.light-mode .fixed.inset-0.bg-black,
+body.light-mode [id$="Modal"] > .fixed {
+    background-color: rgba(0,0,0,0.3) !important;
+}
+
+/* ── Toast notifications ── */
+body.light-mode #toastContainer .glass-panel {
+    background: rgba(255,255,255,0.95) !important;
+    border: 1px solid #d1d1d6 !important;
+    color: #1c1c1e !important;
+}
+
+/* ── Activity log timeline ── */
+body.light-mode .relative.border-l-2 {
+    border-color: #d1d1d6 !important;
+}
+
+/* ── Empty state icon ── */
+body.light-mode .empty-state i { color: #aeaeb2 !important; }
+
+/* ── FullCalendar ── */
+body.light-mode .fc-view-harness,
+body.light-mode .fc-scrollgrid {
+    background-color: #ffffff !important;
+}
+body.light-mode .fc-theme-standard td,
+body.light-mode .fc-theme-standard th {
+    border-color: #d1d1d6 !important;
+}
+body.light-mode .fc-toolbar-title    { color: #1c1c1e !important; }
+body.light-mode .fc-daygrid-day-number,
+body.light-mode .fc-col-header-cell-cushion { color: #1c1c1e !important; }
+body.light-mode .fc-daygrid-day-frame { background-color: #ffffff !important; }
+body.light-mode .fc-day-today { background-color: rgba(124,58,237,0.05) !important; }
+body.light-mode .fc-button {
+    background-color: #f2f2f7 !important;
+    border-color: #d1d1d6 !important;
+    color: #6c6c70 !important;
+}
+body.light-mode .fc-button-primary:not(.fc-button-active) {
+    background-color: #f2f2f7 !important;
+}
+
+/* ── Sidebar workload widget ── */
+body.light-mode #sidebar-workload .card-bg,
+body.light-mode #sidebar-workload div[class*="bg-"] {
+    background-color: #f2f2f7 !important;
+    border-color: #d1d1d6 !important;
+}
+body.light-mode #currentDateDisplay { color: #6c6c70 !important; border-color: #d1d1d6 !important; }
+
+/* ── Page title in header ── */
+body.light-mode #pageTitle { color: #1c1c1e !important; }
+
+/* ── Search modal ── */
+body.light-mode #searchModal .glass-modal,
+body.light-mode #searchModal .bg-\[\#1a1a1a\] {
+    background-color: #ffffff !important;
+}
+body.light-mode #searchResults .bg-\[\#202020\],
+body.light-mode #searchResults .bg-\[\#252525\] {
+    background-color: #f2f2f7 !important;
+}
+
+/* ── Drag-over kanban state ── */
+body.light-mode .drag-over {
+    background-color: rgba(124,58,237,0.05) !important;
+    border-color: #7c3aed !important;
+}
+
+/* ── Background overlay badges (colored pills keep their bg, we just fix contrast) ── */
+body.light-mode [class*="bg-blue-900/"], body.light-mode [class*="bg-blue-600/"] { background-color: rgba(37,99,235,0.08) !important; }
+body.light-mode [class*="bg-purple-900/"]  { background-color: rgba(124,58,237,0.08) !important; }
+body.light-mode [class*="bg-emerald-900/"], body.light-mode [class*="bg-emerald-600/"] { background-color: rgba(5,150,105,0.08) !important; }
+body.light-mode [class*="bg-red-900/"], body.light-mode [class*="bg-red-600/"] { background-color: rgba(220,38,38,0.08) !important; }
+body.light-mode [class*="bg-yellow-900/"]  { background-color: rgba(217,119,6,0.08) !important; }
+body.light-mode [class*="bg-orange-900/"]  { background-color: rgba(234,88,12,0.08) !important; }
+body.light-mode [class*="bg-cyan-900/"]    { background-color: rgba(8,145,178,0.08) !important; }
+body.light-mode [class*="bg-violet-900/"]  { background-color: rgba(124,58,237,0.08) !important; }
+body.light-mode [class*="bg-pink-900/"]    { background-color: rgba(219,39,119,0.08) !important; }
+body.light-mode [class*="bg-gray-800/"]    { background-color: rgba(156,163,175,0.15) !important; }
+body.light-mode [class*="bg-gray-900/"]    { background-color: rgba(156,163,175,0.15) !important; }
+
+/* ── Gradients ── */
+body.light-mode .from-violet-900\/30 {
+    --tw-gradient-from: rgba(124, 58, 237, 0.08) !important;
+    --tw-gradient-to: rgba(124, 58, 237, 0) !important;
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+/* ── Card hover shadow ── */
+body.light-mode .card-hover:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
+}
+
+/* ── Scrollbar ── */
+body.light-mode ::-webkit-scrollbar-track { background: #f2f2f7; }
+body.light-mode ::-webkit-scrollbar-thumb { background: #c7c7cc; border-radius: 4px; }
+body.light-mode ::-webkit-scrollbar-thumb:hover { background: #aeaeb2; }
+
+
+/* ============================================================
+   MICRO-INTERACTIONS (Enterprise UX)
+   ============================================================ */
+button, .interactive-card, a, .fc-button {
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s, opacity 0.15s, border-color 0.15s !important;
+}
+button:active:not(:disabled), a:active, .fc-button:active {
+    transform: scale(0.96) !important;
+}
+.card-bg, .interactive-card {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s, border-color 0.2s !important;
+}
+.card-bg:hover, .interactive-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.card-bg:active, .interactive-card:active {
+    transform: translateY(1px) scale(0.98);
+}

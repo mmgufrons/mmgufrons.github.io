@@ -1,0 +1,400 @@
+{
+  "penjualan": {
+    "shopee_albanistore": {
+      "demo_1": {
+        "tanggal_order": "2026-03-21T09:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 150000,
+        "biaya_admin": 7500,
+        "pendapatan_bersih": 142500,
+        "platform": "shopee_albanistore"
+      },
+      "demo_3": {
+        "tanggal_order": "2026-03-22T19:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 250000,
+        "biaya_admin": 12500,
+        "pendapatan_bersih": 237500,
+        "platform": "shopee_albanistore"
+      },
+      "demo_4": {
+        "tanggal_order": "2026-03-02T08:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Pro",
+        "harga_jual": 120000,
+        "biaya_admin": 6000,
+        "pendapatan_bersih": 114000,
+        "platform": "shopee_albanistore"
+      },
+      "demo_5": {
+        "tanggal_order": "2026-04-17T17:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 124800,
+        "biaya_admin": 6240,
+        "pendapatan_bersih": 118560,
+        "platform": "shopee_albanistore"
+      },
+      "demo_7": {
+        "tanggal_order": "2026-04-19T12:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Pro",
+        "harga_jual": 499200,
+        "biaya_admin": 24960,
+        "pendapatan_bersih": 474240,
+        "platform": "shopee_albanistore"
+      },
+      "demo_9": {
+        "tanggal_order": "2026-04-25T13:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Mini",
+        "harga_jual": 260000,
+        "biaya_admin": 13000,
+        "pendapatan_bersih": 247000,
+        "platform": "shopee_albanistore"
+      },
+      "demo_21": {
+        "tanggal_order": "2026-06-27T20:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Pro",
+        "harga_jual": 84000,
+        "biaya_admin": 4200,
+        "pendapatan_bersih": 79800,
+        "platform": "shopee_albanistore"
+      },
+      "demo_31": {
+        "tanggal_order": "2026-08-22T19:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 384000,
+        "biaya_admin": 19200,
+        "pendapatan_bersih": 364800,
+        "platform": "shopee_albanistore"
+      },
+      "demo_36": {
+        "tanggal_order": "2026-08-25T10:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 180000,
+        "biaya_admin": 9000,
+        "pendapatan_bersih": 171000,
+        "platform": "shopee_albanistore"
+      },
+      "demo_37": {
+        "tanggal_order": "2026-08-16T08:00:00.000Z",
+        "nama_produk": "Kabel Charging USB-C",
+        "harga_jual": 180000,
+        "biaya_admin": 9000,
+        "pendapatan_bersih": 171000,
+        "platform": "shopee_albanistore"
+      }
+    },
+    "shopee_bobcare": {
+      "demo_2": {
+        "tanggal_order": "2026-03-08T11:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 75000,
+        "biaya_admin": 3750,
+        "pendapatan_bersih": 71250,
+        "platform": "shopee_bobcare"
+      },
+      "demo_13": {
+        "tanggal_order": "2026-05-12T17:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 81000,
+        "biaya_admin": 4050,
+        "pendapatan_bersih": 76950,
+        "platform": "shopee_bobcare"
+      },
+      "demo_14": {
+        "tanggal_order": "2026-05-02T18:00:00.000Z",
+        "nama_produk": "Kabel Charging USB-C",
+        "harga_jual": 81000,
+        "biaya_admin": 4050,
+        "pendapatan_bersih": 76950,
+        "platform": "shopee_bobcare"
+      },
+      "demo_16": {
+        "tanggal_order": "2026-06-21T13:00:00.000Z",
+        "nama_produk": "Kabel Charging USB-C",
+        "harga_jual": 168000,
+        "biaya_admin": 8400,
+        "pendapatan_bersih": 159600,
+        "platform": "shopee_bobcare"
+      },
+      "demo_18": {
+        "tanggal_order": "2026-06-21T09:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 537600,
+        "biaya_admin": 26880,
+        "pendapatan_bersih": 510720,
+        "platform": "shopee_bobcare"
+      },
+      "demo_20": {
+        "tanggal_order": "2026-06-21T19:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 168000,
+        "biaya_admin": 8400,
+        "pendapatan_bersih": 159600,
+        "platform": "shopee_bobcare"
+      },
+      "demo_28": {
+        "tanggal_order": "2026-07-04T10:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 290000,
+        "biaya_admin": 14500,
+        "pendapatan_bersih": 275500,
+        "platform": "shopee_bobcare"
+      },
+      "demo_34": {
+        "tanggal_order": "2026-08-24T12:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 90000,
+        "biaya_admin": 4500,
+        "pendapatan_bersih": 85500,
+        "platform": "shopee_bobcare"
+      },
+      "demo_35": {
+        "tanggal_order": "2026-08-21T12:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Pro",
+        "harga_jual": 180000,
+        "biaya_admin": 9000,
+        "pendapatan_bersih": 171000,
+        "platform": "shopee_bobcare"
+      },
+      "demo_38": {
+        "tanggal_order": "2026-08-08T08:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 90000,
+        "biaya_admin": 4500,
+        "pendapatan_bersih": 85500,
+        "platform": "shopee_bobcare"
+      }
+    },
+    "soundbox": {
+      "demo_8": {
+        "tanggal_order": "2026-04-14T13:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Pro",
+        "harga_jual": 124800,
+        "biaya_admin": 6240,
+        "pendapatan_bersih": 118560,
+        "platform": "soundbox"
+      },
+      "demo_10": {
+        "tanggal_order": "2026-05-04T13:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 162000,
+        "biaya_admin": 8100,
+        "pendapatan_bersih": 153900,
+        "platform": "soundbox"
+      },
+      "demo_12": {
+        "tanggal_order": "2026-05-13T09:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 345600,
+        "biaya_admin": 17280,
+        "pendapatan_bersih": 328320,
+        "platform": "soundbox"
+      },
+      "demo_17": {
+        "tanggal_order": "2026-06-07T18:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 537600,
+        "biaya_admin": 26880,
+        "pendapatan_bersih": 510720,
+        "platform": "soundbox"
+      },
+      "demo_23": {
+        "tanggal_order": "2026-07-07T17:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Pro",
+        "harga_jual": 556800,
+        "biaya_admin": 27840,
+        "pendapatan_bersih": 528960,
+        "platform": "soundbox"
+      },
+      "demo_25": {
+        "tanggal_order": "2026-07-05T11:00:00.000Z",
+        "nama_produk": "Adaptor 5V 2A",
+        "harga_jual": 371200,
+        "biaya_admin": 18560,
+        "pendapatan_bersih": 352640,
+        "platform": "soundbox"
+      },
+      "demo_30": {
+        "tanggal_order": "2026-07-15T16:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 87000,
+        "biaya_admin": 4350,
+        "pendapatan_bersih": 82650,
+        "platform": "soundbox"
+      },
+      "demo_32": {
+        "tanggal_order": "2026-08-25T12:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Mini",
+        "harga_jual": 180000,
+        "biaya_admin": 9000,
+        "pendapatan_bersih": 171000,
+        "platform": "soundbox"
+      }
+    },
+    "tiktok_albanie": {
+      "demo_6": {
+        "tanggal_order": "2026-04-23T18:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Pro",
+        "harga_jual": 260000,
+        "biaya_admin": 13000,
+        "pendapatan_bersih": 247000,
+        "platform": "tiktok_albanie"
+      },
+      "demo_11": {
+        "tanggal_order": "2026-05-26T08:00:00.000Z",
+        "nama_produk": "Case Soundbox",
+        "harga_jual": 81000,
+        "biaya_admin": 4050,
+        "pendapatan_bersih": 76950,
+        "platform": "tiktok_albanie"
+      },
+      "demo_15": {
+        "tanggal_order": "2026-05-08T09:00:00.000Z",
+        "nama_produk": "Kabel Charging USB-C",
+        "harga_jual": 270000,
+        "biaya_admin": 13500,
+        "pendapatan_bersih": 256500,
+        "platform": "tiktok_albanie"
+      },
+      "demo_19": {
+        "tanggal_order": "2026-06-08T10:00:00.000Z",
+        "nama_produk": "Powerbank 10000mAh",
+        "harga_jual": 168000,
+        "biaya_admin": 8400,
+        "pendapatan_bersih": 159600,
+        "platform": "tiktok_albanie"
+      },
+      "demo_22": {
+        "tanggal_order": "2026-06-26T13:00:00.000Z",
+        "nama_produk": "Kabel Charging USB-C",
+        "harga_jual": 84000,
+        "biaya_admin": 4200,
+        "pendapatan_bersih": 79800,
+        "platform": "tiktok_albanie"
+      },
+      "demo_24": {
+        "tanggal_order": "2026-07-16T14:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Pro",
+        "harga_jual": 174000,
+        "biaya_admin": 8700,
+        "pendapatan_bersih": 165300,
+        "platform": "tiktok_albanie"
+      },
+      "demo_26": {
+        "tanggal_order": "2026-07-14T17:00:00.000Z",
+        "nama_produk": "Kabel Charging USB-C",
+        "harga_jual": 139200,
+        "biaya_admin": 6960,
+        "pendapatan_bersih": 132240,
+        "platform": "tiktok_albanie"
+      },
+      "demo_27": {
+        "tanggal_order": "2026-07-05T16:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Mini",
+        "harga_jual": 87000,
+        "biaya_admin": 4350,
+        "pendapatan_bersih": 82650,
+        "platform": "tiktok_albanie"
+      },
+      "demo_29": {
+        "tanggal_order": "2026-07-20T09:00:00.000Z",
+        "nama_produk": "Powerbank 10000mAh",
+        "harga_jual": 371200,
+        "biaya_admin": 18560,
+        "pendapatan_bersih": 352640,
+        "platform": "tiktok_albanie"
+      },
+      "demo_33": {
+        "tanggal_order": "2026-08-14T10:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Mini",
+        "harga_jual": 576000,
+        "biaya_admin": 28800,
+        "pendapatan_bersih": 547200,
+        "platform": "tiktok_albanie"
+      },
+      "demo_39": {
+        "tanggal_order": "2026-08-03T19:00:00.000Z",
+        "nama_produk": "Soundbox QRIS Mini",
+        "harga_jual": 384000,
+        "biaya_admin": 19200,
+        "pendapatan_bersih": 364800,
+        "platform": "tiktok_albanie"
+      }
+    }
+  },
+  "mutasi_saldo": {
+    "bobcare": {
+      "demo_1": {
+        "tanggal_transaksi": "2026-03-10T00:00:00.000Z",
+        "keterangan": "Komisi penjualan masuk (demo)",
+        "nominal": 850000,
+        "saldo_akhir": 5850000
+      },
+      "demo_2": {
+        "tanggal_transaksi": "2026-03-25T00:00:00.000Z",
+        "keterangan": "Penarikan komisi ke rekening (demo)",
+        "nominal": -1500000,
+        "saldo_akhir": 4350000
+      },
+      "demo_3": {
+        "tanggal_transaksi": "2026-04-10T00:00:00.000Z",
+        "keterangan": "Penarikan komisi ke rekening (demo)",
+        "nominal": -850000,
+        "saldo_akhir": 3500000
+      },
+      "demo_4": {
+        "tanggal_transaksi": "2026-04-25T00:00:00.000Z",
+        "keterangan": "Setor saldo tambahan (demo)",
+        "nominal": 1500000,
+        "saldo_akhir": 5000000
+      },
+      "demo_5": {
+        "tanggal_transaksi": "2026-05-10T00:00:00.000Z",
+        "keterangan": "Komisi penjualan masuk (demo)",
+        "nominal": 850000,
+        "saldo_akhir": 5850000
+      },
+      "demo_6": {
+        "tanggal_transaksi": "2026-05-25T00:00:00.000Z",
+        "keterangan": "Penarikan komisi ke rekening (demo)",
+        "nominal": -1200000,
+        "saldo_akhir": 4650000
+      },
+      "demo_7": {
+        "tanggal_transaksi": "2026-06-10T00:00:00.000Z",
+        "keterangan": "Setor saldo tambahan (demo)",
+        "nominal": 1200000,
+        "saldo_akhir": 5850000
+      },
+      "demo_8": {
+        "tanggal_transaksi": "2026-06-25T00:00:00.000Z",
+        "keterangan": "Setor saldo tambahan (demo)",
+        "nominal": 1500000,
+        "saldo_akhir": 7350000
+      },
+      "demo_9": {
+        "tanggal_transaksi": "2026-07-10T00:00:00.000Z",
+        "keterangan": "Komisi penjualan masuk (demo)",
+        "nominal": 850000,
+        "saldo_akhir": 8200000
+      },
+      "demo_10": {
+        "tanggal_transaksi": "2026-07-25T00:00:00.000Z",
+        "keterangan": "Komisi penjualan masuk (demo)",
+        "nominal": 600000,
+        "saldo_akhir": 8800000
+      },
+      "demo_11": {
+        "tanggal_transaksi": "2026-08-10T00:00:00.000Z",
+        "keterangan": "Setor saldo tambahan (demo)",
+        "nominal": 600000,
+        "saldo_akhir": 9400000
+      },
+      "demo_12": {
+        "tanggal_transaksi": "2026-08-25T00:00:00.000Z",
+        "keterangan": "Penarikan komisi ke rekening (demo)",
+        "nominal": -850000,
+        "saldo_akhir": 8550000
+      }
+    }
+  }
+}

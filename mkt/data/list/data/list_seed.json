@@ -1,0 +1,20 @@
+{
+  "accounts": [
+    { "id": "demo1", "kategori": "MARKETPLACE", "status": "Aktif", "pic": "Winda", "nama": "Akun Demo Shopee 1", "email": "demo1@contoh-perusahaan.demo", "provider": "Shopee", "brand": "Wahana", "area": "Bogor", "keterangan": "Akun contoh untuk demo" },
+    { "id": "demo2", "kategori": "MARKETPLACE", "status": "Aktif", "pic": "Raka", "nama": "Akun Demo Tokopedia 1", "email": "demo2@contoh-perusahaan.demo", "provider": "Tokopedia", "brand": "Koperasi", "area": "Depok", "keterangan": "Akun contoh untuk demo" },
+    { "id": "demo3", "kategori": "SOSIAL MEDIA", "status": "Non-Aktif", "pic": "Dinda", "nama": "Akun Demo Instagram", "email": "demo3@contoh-perusahaan.demo", "provider": "Instagram", "brand": "Wahana", "area": "Bekasi", "keterangan": "Akun contoh untuk demo" }
+  ],
+  "whatsapp_numbers": [
+    { "id": "wa1", "kategori": "CS", "status": "Aktif", "pic": "Winda", "nama": "WA CS Demo 1", "nomor": "6280000000001", "slot_wa": "1", "devices": "HP Demo", "slot_kartu": "1", "pulsa": "50000", "kuota": "10GB", "aktif": "Ya" },
+    { "id": "wa2", "kategori": "Sales", "status": "Aktif", "pic": "Raka", "nama": "WA Sales Demo 1", "nomor": "6280000000002", "slot_wa": "2", "devices": "HP Demo", "slot_kartu": "1", "pulsa": "30000", "kuota": "5GB", "aktif": "Ya" }
+  ],
+  "logs": [
+    { "id": "log1", "action": "Data demo dimuat", "created_at": "2026-08-30 08:00:00" }
+  ],
+  "category_meta": {
+    "MARKETPLACE": { "bg": "#e0f2fe", "color": "#075985" },
+    "SOSIAL MEDIA": { "bg": "#fce7f3", "color": "#9d174d" },
+    "CS": { "bg": "#dcfce7", "color": "#166534" },
+    "Sales": { "bg": "#fef9c3", "color": "#854d0e" }
+  }
+}

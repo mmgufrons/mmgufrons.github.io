@@ -1,0 +1,68 @@
+{
+  "data_panduan": [
+    {
+      "title": "1A. Data Campaign by Brand",
+      "url": "#",
+      "icon": "fas fa-table",
+      "color": "text-success"
+    },
+    {
+      "title": "1B. Data Campaign by Area",
+      "url": "#",
+      "icon": "fas fa-map-marked-alt",
+      "color": "text-danger"
+    },
+    {
+      "title": "2. Panduan Dasar Mitra Area",
+      "url": "#",
+      "icon": "fas fa-file-word",
+      "color": "text-primary"
+    },
+    {
+      "title": "6. SOP Juklak Sosmed Area",
+      "url": "#",
+      "icon": "fas fa-hashtag",
+      "color": "text-info"
+    }
+  ],
+  "aset_visual": [
+    {
+      "title": "3. Flyer A4 Siap Cetak",
+      "url": "https://www.canva.com/design/DAHA6KZRWrw/wICDE-i6h9qer1STvunffg/edit?ui=eyJBIjp7fX0",
+      "icon": "fas fa-image",
+      "color": "text-success"
+    },
+    {
+      "title": "4. Template Story (9:16)",
+      "url": "https://www.canva.com/design/DAHISXv_GVY/ZJD8xCLQ7OzNYG_M_qCcDQ/edit",
+      "icon": "fas fa-mobile-alt",
+      "color": "text-primary"
+    },
+    {
+      "title": "5. Materi Presentasi (PLG)",
+      "url": "https://canva.link/g14wran3zh2qdje",
+      "icon": "fas fa-chalkboard-teacher",
+      "color": "text-warning"
+    }
+  ],
+  "banner": [
+    {
+      "title": "Banner Ukuran 2x1 M (3 Mode)",
+      "url": "https://www.canva.com/design/DAG4RgxgAG0/Po3Ut0HzDDX8ewtRlExt6A/edit",
+      "icon": "fas fa-scroll",
+      "color": "text-danger"
+    },
+    {
+      "title": "Banner Ukuran 3x1 M (Baru)",
+      "url": "https://www.canva.com/design/DAHL8-6jEXs/uUheZwwNLMoxs1zTagMaxA/edit",
+      "icon": "fas fa-scroll",
+      "color": "text-danger"
+    },
+    {
+      "title": "X-Banner Custom (3 Mode)",
+      "url": "https://www.canva.com/design/DAGpXqdHpyQ/DPNDK8jrkTrghDTA1M_mfQ/edit",
+      "icon": "fas fa-pager",
+      "color": "text-danger"
+    }
+  ]
+}

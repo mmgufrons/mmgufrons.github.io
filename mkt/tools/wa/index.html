@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kirim WA — Pengirim Pesan WhatsApp dari Excel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --ink:#0f1f1a;
+    --paper:#f6f4ee;
+    --panel:#ffffff;
+    --line:#dcd6c6;
+    --moss:#1f5b45;
+    --moss-dark:#123b2c;
+    --signal:#ff7a45;
+    --muted:#6b7268;
+    --danger:#b3432b;
+    --radius:10px;
+    font-family:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px;}
+  header.app-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:16px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:18px;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .mark{
+    width:38px;height:38px;border-radius:9px;
+    background:var(--moss);
+    display:flex;align-items:center;justify-content:center;
+    color:#eafff2;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;
+    flex-shrink:0;
+  }
+  .brand h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:22px;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .brand p{margin:2px 0 0;color:var(--muted);font-size:13px;}
+  .status-pill{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    padding:6px 10px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--muted);
+    background:var(--panel);
+    white-space:nowrap;
+  }
+
+  nav.tabs{
+    display:flex;
+    gap:4px;
+    margin-bottom:24px;
+    border-bottom:1px solid var(--line);
+  }
+  nav.tabs button{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    background:none;
+    border:none;
+    padding:11px 16px;
+    color:var(--muted);
+    cursor:pointer;
+    border-bottom:2.5px solid transparent;
+    margin-bottom:-1px;
+    display:flex;align-items:center;gap:8px;
+  }
+  nav.tabs button .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--muted);
+  }
+  nav.tabs button.active{color:var(--ink);border-bottom-color:var(--moss);}
+  nav.tabs button.active .num{color:var(--moss);}
+  nav.tabs button:disabled{opacity:0.35;cursor:not-allowed;}
+
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px;
+    margin-bottom:20px;
+  }
+  .panel h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:17px;
+    margin:0 0 4px;
+  }
+  .panel .sub{color:var(--muted);font-size:13.5px;margin:0 0 18px;line-height:1.5;}
+
+  .dropzone{
+    border:1.5px dashed var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+    text-align:center;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .dropzone:hover, .dropzone.drag{border-color:var(--moss); background:#f2f8f4;}
+  .dropzone input{display:none;}
+  .dropzone .icon{font-size:26px;margin-bottom:8px;}
+  .dropzone .txt{font-size:14px;color:var(--ink);font-weight:500;}
+  .dropzone .txt2{font-size:12.5px;color:var(--muted);margin-top:4px;}
+
+  label.field-label{
+    display:block;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--moss-dark);
+    margin-bottom:6px;
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+  select, input[type=text], textarea{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:#fff;
+    color:var(--ink);
+  }
+  select:focus, input:focus, textarea:focus{outline:2px solid var(--moss); outline-offset:1px;}
+  textarea{resize:vertical;font-family:'IBM Plex Mono',monospace;line-height:1.6;}
+
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+  @media (max-width:600px){.row2{grid-template-columns:1fr;}}
+
+  .btn{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:10px 18px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-primary{background:var(--moss); color:#eafff2;}
+  .btn-primary:hover{background:var(--moss-dark);}
+  .btn-primary:disabled{background:#a9b8b0;cursor:not-allowed;}
+  .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink);}
+  .btn-danger{background:transparent;color:var(--danger);border:1px solid #e3c3b8;font-size:12.5px;padding:6px 10px;}
+  .btn-danger:hover{background:#fbeee9;}
+  .btn-send{background:var(--signal);color:#fff;font-size:12.5px;padding:7px 12px;border-radius:7px;}
+  .btn-send:hover{background:#e2652f;}
+  .btn-send.sent{background:#e4ede8;color:var(--moss-dark);}
+
+  table.preview{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px;}
+  table.preview th{
+    text-align:left;font-family:'IBM Plex Mono',monospace;font-size:11px;
+    color:var(--muted);text-transform:uppercase;letter-spacing:.03em;
+    border-bottom:1.5px solid var(--ink);padding:7px 10px;background:#faf9f4;
+  }
+  table.preview td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.preview tbody tr:hover{background:#faf9f4;}
+
+  .saved-list{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .saved-item{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:#fdfcf8;
+    flex-wrap:wrap;
+  }
+  .saved-item .meta{display:flex;flex-direction:column;}
+  .saved-item .meta .name{font-weight:600;font-size:14px;}
+  .saved-item .meta .count{font-size:12px;color:var(--muted);font-family:'IBM Plex Mono',monospace;}
+  .saved-item .actions{display:flex;gap:8px;align-items:center;}
+  .saved-item.active-item{border-color:var(--moss);background:#f2f8f4;}
+
+  .chip{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    background:#eef1ec;color:var(--moss-dark);border:1px solid #d7e0d9;
+    padding:3px 8px;border-radius:5px;margin:2px 4px 2px 0;cursor:pointer;
+  }
+  .chip:hover{background:#dfe9e2;}
+
+  .banner{
+    display:flex;gap:10px;align-items:flex-start;
+    padding:12px 14px;border-radius:8px;font-size:13px;line-height:1.5;margin-bottom:16px;
+  }
+  .banner.info{background:#eef4f0;color:var(--moss-dark);border:1px solid #cfe0d5;}
+  .banner.warn{background:#fdf3ea;color:#8a4c1c;border:1px solid #f0d6b8;}
+  .banner.empty{background:#faf9f4;color:var(--muted);border:1px dashed var(--line);text-align:center;padding:26px;}
+
+  .toast{
+    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+    background:var(--ink);color:#f6f4ee;padding:10px 18px;border-radius:8px;
+    font-size:13.5px;font-family:'Space Grotesk',sans-serif;font-weight:500;
+    opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;
+    z-index:50;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px);}
+
+  .footer-note{font-size:12px;color:var(--muted);text-align:center;margin-top:30px;line-height:1.6;}
+
+  .send-options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0;}
+  @media (max-width:600px){.send-options{grid-template-columns:1fr;}}
+  .send-opt{border:1px solid var(--line);border-radius:10px;padding:16px;background:#fdfcf8;}
+  .send-opt-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;margin-bottom:6px;}
+  .send-opt-desc{font-size:12.5px;color:var(--muted);line-height:1.5;margin-bottom:12px;min-height:52px;}
+
+  .seq-card{
+    border:1.5px solid var(--moss);border-radius:12px;background:#f2f8f4;
+    padding:22px;margin:18px 0;text-align:center;
+  }
+  .seq-count{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--moss-dark);margin-bottom:8px;}
+  .seq-name{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;}
+  .seq-phone{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted);margin:4px 0 14px;}
+  .seq-msg{
+    background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+    font-size:13.5px;text-align:left;white-space:pre-wrap;max-width:520px;margin:0 auto 16px;
+  }
+  .seq-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+  .attach-card{
+    display:flex;align-items:center;gap:14px;
+    border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+    background:#fdfcf8;margin-top:14px;
+  }
+  .attach-card img, .attach-card video{
+    width:64px;height:64px;object-fit:cover;border-radius:8px;flex-shrink:0;background:#000;
+  }
+  .attach-card .file-icon{
+    width:64px;height:64px;border-radius:8px;background:var(--moss);color:#eafff2;
+    display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;
+  }
+  .attach-card .info{flex:1;min-width:0;}
+  .attach-card .fname{font-weight:600;font-size:13.5px;word-break:break-all;}
+  .attach-card .fmeta{font-size:12px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-top:2px;}
+  .attach-card .fwarn{font-size:11.5px;color:var(--danger);margin-top:4px;}
+  .attach-card .actions{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;}
+  .attach-card audio{max-width:180px;}
+
+  .btn-mode{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
+    padding:9px 16px;border-radius:8px;border:1px solid var(--line);
+    background:var(--panel);color:var(--muted);cursor:pointer;
+  }
+  .btn-mode.active{background:var(--moss);color:#eafff2;border-color:var(--moss);}
+  .btn-mode:hover:not(.active){border-color:var(--moss);color:var(--moss-dark);}
+  .del-row-btn{
+    background:none;border:none;color:var(--danger);cursor:pointer;font-size:12px;
+    font-family:'IBM Plex Mono',monospace;padding:2px 4px;
+  }
+  .del-row-btn:hover{text-decoration:underline;}
+
+  .inline-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center;}
+  .progress-track{
+    height:6px;background:#e7e4d7;border-radius:4px;overflow:hidden;margin-top:14px;
+  }
+  .progress-fill{height:100%;background:var(--moss);width:0%;transition:width .25s;}
+
+  .select-toolbar{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#faf9f4;margin-top:16px;
+  }
+  .select-toolbar input[type=text]{max-width:220px;padding:7px 10px;font-size:13px;}
+  .select-toolbar .count{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--moss-dark);margin-left:auto;white-space:nowrap;
+  }
+  table.preview td.chk-col, table.preview th.chk-col{width:34px;text-align:center;padding-left:12px;padding-right:0;}
+  table.preview input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--moss);}
+  tr.row-unselected{opacity:.4;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="app-head">
+    <div class="brand">
+      <div class="mark">WA</div>
+      <div>
+        <h1>Kirim WA</h1>
+        <p>Kirim pesan personal ke banyak nomor dari daftar Excel</p>
+      </div>
+    </div>
+    <div class="status-pill" id="storageStatus">memuat data tersimpan…</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="kontak"><span class="num">01</span> Daftar Kontak</button>
+    <button class="tab-btn" data-tab="pesan"><span class="num">02</span> Tulis Pesan</button>
+    <button class="tab-btn" data-tab="kirim" id="tabKirimBtn"><span class="num">03</span> Kirim</button>
+  </nav>
+
+  <!-- TAB 1: KONTAK -->
+  <section id="tab-kontak">
+    <div class="panel" style="background:#fdfcf8;">
+      <h2>💾 Data offline (JSON)</h2>
+      <p class="sub">Kumpulan kontak, grup, dan template kamu bisa juga disimpan sebagai satu file JSON di komputer kamu — file itu bisa dibuka & diedit langsung pakai teks editor biasa, lalu dimuat lagi ke halaman ini kapan saja (misal untuk pindah ke komputer lain).</p>
+      <div class="inline-actions">
+        <button class="btn btn-primary" id="exportJsonBtn">⬇ Unduh data sebagai JSON</button>
+        <button class="btn btn-ghost" id="importJsonBtn">⬆ Muat data dari file JSON</button>
+        <input type="file" id="importJsonInput" accept=".json,application/json" style="display:none;">
+      </div>
+      <details style="margin-top:14px;">
+        <summary style="cursor:pointer;font-size:12.5px;color:var(--moss-dark);font-family:'IBM Plex Mono',monospace;">Lihat format JSON (untuk edit manual)</summary>
+        <pre style="background:#f2f1e9;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:11.5px;overflow:auto;margin-top:10px;line-height:1.5;">{
+  "pool": {
+    "headers": ["Nama", "Nomor WA", "Lokasi"],
+    "rows": [
+      { "Nama": "Budi", "Nomor WA": "0812xxxxxxx", "Lokasi": "Bogor" }
+    ]
+  },
+  "groups": {
+    "kontak:pelanggan_juli": {
+      "name": "Pelanggan Juli",
+      "headers": ["Nama", "Nomor WA", "Lokasi"],
+      "rows": [ { "Nama": "Budi", "Nomor WA": "0812xxxxxxx", "Lokasi": "Bogor" } ],
+      "colNomor": "Nomor WA",
+      "colNama": "Nama"
+    }
+  },
+  "templates": {
+    "template:promo_juli": {
+      "name": "Promo Juli",
+      "text": "Halo {{Nama}}, ada promo khusus buat kamu!",
+      "attachment": null
+    }
+  }
+}</pre>
+      </details>
+    </div>
+
+    <div class="mode-toggle" style="display:flex;gap:8px;margin-bottom:16px;">
+      <button class="btn-mode active" id="modeFileBtn" data-mode="file">📄 Unggah File</button>
+      <button class="btn-mode" id="modeManualBtn" data-mode="manual">✍️ Input Manual</button>
+    </div>
+
+    <div class="panel" id="filePanel">
+      <h2>Unggah file Excel</h2>
+      <p class="sub">File berisi kolom nomor WhatsApp dan nama (boleh ada kolom lain untuk personalisasi pesan, misalnya Produk atau Kota). Format .xlsx, .xls, atau .csv.</p>
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+        <div class="icon">📄</div>
+        <div class="txt">Klik untuk pilih file, atau seret ke sini</div>
+        <div class="txt2">Baris pertama akan dianggap sebagai judul kolom</div>
+      </div>
+    </div>
+
+    <div class="panel" id="mappingPanel" style="display:none;">
+      <h2>Cocokkan kolom</h2>
+      <p class="sub">Beri tahu mana kolom nomor WA dan nama kontak. Kolom lainnya bisa dipakai sebagai isian personalisasi pesan.</p>
+      <div class="row2">
+        <div>
+          <label class="field-label">Kolom Nomor WhatsApp</label>
+          <select id="colNomor"></select>
+        </div>
+        <div>
+          <label class="field-label">Kolom Nama</label>
+          <select id="colNama"></select>
+        </div>
+      </div>
+      <table class="preview" id="previewTable"></table>
+      <div class="inline-actions">
+        <input type="text" id="listName" placeholder="Nama daftar, contoh: Pelanggan Juli" style="max-width:280px;">
+        <button class="btn btn-primary" id="saveListBtn">Simpan daftar ini</button>
+      </div>
+    </div>
+
+    <!-- MANUAL INPUT PANEL -->
+    <div class="panel" id="manualPanel" style="display:none;">
+      <h2>Tambah kontak satu per satu</h2>
+      <p class="sub">Kontak yang kamu tambahkan di sini langsung masuk ke <strong>kumpulan kontak</strong> kamu — tidak perlu dimasukkan ke grup/daftar tertentu dulu. Grup bisa kamu buat belakangan dengan memilih kontak dari kumpulan ini.</p>
+
+      <div style="margin-bottom:16px;">
+        <label class="field-label">Kolom tambahan (opsional, berlaku untuk semua kontak di kumpulan)</label>
+        <div class="row2" style="align-items:end;">
+          <input type="text" id="manualExtraCols" placeholder="Contoh: Produk, Kota (pisahkan koma)">
+          <button class="btn btn-ghost" id="applyExtraColsBtn">Terapkan kolom</button>
+        </div>
+      </div>
+
+      <div class="row2">
+        <div>
+          <label class="field-label">Nama kontak</label>
+          <input type="text" id="manualNama" placeholder="Contoh: Budi Santoso">
+        </div>
+        <div>
+          <label class="field-label">Nomor WhatsApp</label>
+          <input type="text" id="manualNomor" placeholder="Contoh: 0812xxxxxxx">
+        </div>
+      </div>
+      <div class="row2" id="manualExtraInputs"></div>
+
+      <button class="btn btn-primary" id="manualAddBtn">+ Tambah ke kumpulan kontak</button>
+    </div>
+
+    <!-- CONTACT POOL PANEL -->
+    <div class="panel" id="poolPanel" style="display:none;">
+      <h2>Kumpulan kontak <span id="poolCountLabel" style="color:var(--muted);font-weight:500;font-size:14px;"></span></h2>
+      <p class="sub">Semua kontak yang kamu tambahkan manual ada di sini, di luar grup manapun. Centang beberapa atau semuanya, beri nama grup, lalu buat grup baru untuk dipakai mengirim pesan di tab Kirim.</p>
+
+      <div class="select-toolbar">
+        <button class="btn btn-ghost" id="poolSelectAllBtn" style="padding:7px 12px;font-size:13px;">Pilih semua</button>
+        <button class="btn btn-ghost" id="poolSelectNoneBtn" style="padding:7px 12px;font-size:13px;">Kosongkan pilihan</button>
+        <span class="count" id="poolSelectCount">0 dipilih</span>
+      </div>
+
+      <table class="preview" id="poolTable" style="margin-top:14px;"></table>
+      <div class="banner empty" id="emptyPool" style="display:none;">Belum ada kontak di kumpulan. Tambahkan lewat form di atas.</div>
+
+      <div class="inline-actions" style="margin-top:16px;">
+        <input type="text" id="groupNameInput" placeholder="Nama grup, contoh: Pelanggan Juli" style="max-width:280px;">
+        <button class="btn btn-primary" id="createGroupBtn">Buat grup dari kontak terpilih</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Daftar kontak tersimpan</h2>
+      <p class="sub">Daftar ini tersimpan di browser kamu dan bisa dipakai lagi kapan saja dengan pesan yang berbeda.</p>
+      <div class="saved-list" id="savedLists"></div>
+      <div class="banner empty" id="emptyLists" style="display:none;">Belum ada daftar kontak tersimpan. Unggah file Excel di atas untuk mulai.</div>
+    </div>
+  </section>
+
+  <!-- TAB 2: PESAN -->
+  <section id="tab-pesan" style="display:none;">
+    <div class="panel">
+      <h2>Tulis pesan</h2>
+      <p class="sub" id="pesanSub">Gunakan placeholder untuk personalisasi otomatis per kontak.</p>
+      <div class="banner warn" id="noListWarn" style="display:none;">Pilih atau unggah daftar kontak dulu di tab <strong>Daftar Kontak</strong> supaya placeholder-nya muncul di sini.</div>
+      <div id="placeholderChips" style="margin-bottom:10px;"></div>
+      <label class="field-label">Isi pesan</label>
+      <textarea id="messageBox" rows="7" placeholder="Contoh: Halo {{Nama}}, terima kasih sudah belanja di toko kami. Pesanan {{Produk}} kamu sedang diproses ya!"></textarea>
+      <p class="sub" style="margin:10px 0 0;">Pesan di atas langsung bisa dipakai di tab Kirim, tanpa harus disimpan sebagai template. Simpan sebagai template hanya kalau kamu mau memakainya lagi lain kali.</p>
+      <div class="inline-actions">
+        <input type="text" id="templateName" placeholder="Nama template, contoh: Konfirmasi Pesanan" style="max-width:280px;">
+        <button class="btn btn-ghost" id="saveTemplateBtn">Simpan sebagai template (opsional)</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Lampiran (opsional)</h2>
+      <p class="sub">Tambahkan gambar, dokumen, audio, atau video untuk dikirim bersama pesan. WhatsApp tidak mengizinkan lampiran ditempel otomatis lewat link, jadi lampiran ini akan disiapkan untuk kamu unduh dan seret ke chat saat mengirim — lihat detailnya di tab Kirim.</p>
+      <div class="dropzone" id="attachDropzone">
+        <input type="file" id="attachInput" accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar,.txt">
+        <div class="icon">📎</div>
+        <div class="txt">Klik untuk pilih file, atau seret ke sini</div>
+        <div class="txt2">Gambar, video, audio, atau dokumen — maksimal sekitar 3.5MB agar bisa tersimpan</div>
+      </div>
+      <div id="attachPreview" style="display:none;"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Template tersimpan</h2>
+      <div class="saved-list" id="savedTemplates"></div>
+      <div class="banner empty" id="emptyTemplates" style="display:none;">Belum ada template pesan tersimpan.</div>
+    </div>
+  </section>
+
+  <!-- TAB 3: KIRIM -->
+  <section id="tab-kirim" style="display:none;">
+    <div class="panel">
+      <h2>Kirim ke <span id="kirimListName">-</span></h2>
+      <p class="sub">Buka <strong>web.whatsapp.com</strong> dan login (scan QR) sekali di tab terpisah, biarkan tetap terbuka. Setelah itu, setiap kontak yang kamu kirim dari sini akan <strong>memakai tab WhatsApp Web yang sama</strong> — chat-nya berganti otomatis, tanpa membuka tab baru terus-menerus.</p>
+
+      <div class="banner warn" id="kirimAttachBanner" style="display:none;">
+        📎 Ada lampiran di pesan ini. WhatsApp tidak bisa menerima file lewat link secara otomatis — <strong>unduh file di bawah lalu seret (drag & drop) ke kotak chat WhatsApp</strong> setelah teks pesan terbuka, sebelum menekan kirim.
+      </div>
+      <div id="kirimAttachPreview" style="display:none;"></div>
+
+      <div class="send-options">
+        <div class="send-opt">
+          <div class="send-opt-title">🔁 Kirim otomatis, satu tab</div>
+          <div class="send-opt-desc">Klik mulai. Tiap beberapa detik, tab WhatsApp Web yang sama otomatis pindah ke chat kontak berikutnya dengan pesan sudah terisi. Kamu tinggal duduk di tab WhatsApp dan tekan Enter tiap kali chat berganti.</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+            <label style="font-size:12.5px;color:var(--muted);" for="autoDelay">Jeda antar kontak:</label>
+            <select id="autoDelay" style="width:auto;padding:6px 8px;font-size:13px;">
+              <option value="4">4 detik</option>
+              <option value="6" selected>6 detik</option>
+              <option value="10">10 detik</option>
+              <option value="15">15 detik</option>
+            </select>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-primary" id="autoStartBtn">Mulai Kirim Otomatis</button>
+            <button class="btn btn-ghost" id="autoStopBtn" style="display:none;">Hentikan</button>
+          </div>
+          <div id="autoStatus" style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--moss-dark);margin-top:10px;"></div>
+        </div>
+        <div class="send-opt">
+          <div class="send-opt-title">➡️ Mode berurutan (manual)</div>
+          <div class="send-opt-desc">Satu kontak ditampilkan bergantian. Klik "Kirim & Lanjut" saat kamu siap — chat tetap terbuka di tab WhatsApp Web yang sama, tidak berpindah tab baru.</div>
+          <button class="btn btn-ghost" id="sequentialModeBtn">Mulai Mode Berurutan</button>
+        </div>
+      </div>
+
+      <div class="banner info" id="popupHint" style="display:none;">
+        Pastikan tab <strong>web.whatsapp.com</strong> sudah terbuka dan sudah login sebelum mulai. Kalau muncul peringatan "pop-up diblokir" saat pertama kali, klik ikon di address bar dan pilih <strong>izinkan pop-up</strong> untuk situs ini.
+      </div>
+
+      <!-- SEQUENTIAL MODE CARD -->
+      <div class="seq-card" id="seqCard" style="display:none;">
+        <div class="seq-count" id="seqCount">Kontak 1 dari 10</div>
+        <div class="seq-name" id="seqName">Nama Kontak</div>
+        <div class="seq-phone" id="seqPhone">62812xxxxxxx</div>
+        <div class="seq-msg" id="seqMsg">Pratinjau pesan…</div>
+        <div class="seq-actions">
+          <button class="btn btn-primary" id="seqSendBtn">Kirim &amp; Lanjut →</button>
+          <button class="btn btn-ghost" id="seqSkipBtn">Lewati</button>
+          <button class="btn btn-ghost" id="seqCloseBtn">Tutup</button>
+        </div>
+      </div>
+
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);margin-top:6px;" id="progressText">0 dari 0 terkirim</div>
+
+      <div class="select-toolbar">
+        <input type="text" id="contactFilter" placeholder="Cari nama atau nomor…">
+        <button class="btn btn-ghost" id="selectAllBtn" style="padding:7px 12px;font-size:13px;">Pilih semua</button>
+        <button class="btn btn-ghost" id="selectNoneBtn" style="padding:7px 12px;font-size:13px;">Kosongkan pilihan</button>
+        <span class="count" id="selectCount">0 dipilih</span>
+      </div>
+      <p class="sub" style="margin:8px 0 0;">Hanya kontak yang dicentang yang akan dikirimi pesan — baik lewat Kirim Otomatis, Mode Berurutan, maupun tombol Kirim satuan di bawah. Tidak perlu mengirim ke seluruh daftar.</p>
+
+      <table class="preview" id="sendTable" style="margin-top:18px;"></table>
+    </div>
+  </section>
+
+  <div class="footer-note">Kontak & grup tersimpan di browser ini saja. Template pesan tersinkron ke server SIMASRIM, bisa dipakai bersama anggota tim lain.</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const toastEl = document.getElementById('toast');
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>toastEl.classList.remove('show'), 2200);
+}
+
+// ---------- State ----------
+let currentList = null;      // {name, headers, rows, colNomor, colNama}
+let currentTemplate = '';
+let sentStatus = {};         // index -> bool, per current list
+let selectedRows = {};       // index -> bool, kontak mana yang dicentang untuk dikirimi
+let contactFilterText = '';  // teks pencarian nama/nomor di tab Kirim
+
+// ---------- Tabs ----------
+const tabButtons = document.querySelectorAll('.tab-btn');
+tabButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    if(btn.disabled) return;
+    tabButtons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    ['kontak','pesan','kirim'].forEach(t=>{
+      document.getElementById('tab-'+t).style.display = (t===btn.dataset.tab) ? 'block' : 'none';
+    });
+    if(btn.dataset.tab === 'kirim') renderSendTable();
+    if(btn.dataset.tab === 'pesan') renderPlaceholders();
+  });
+});
+function goTab(name){
+  document.querySelector(`.tab-btn[data-tab="${name}"]`).click();
+}
+
+// ---------- Storage helpers ----------
+// Template pesan (dipakai bersama/lintas anggota tim & device) disimpan ke Firebase
+// yang sama dipakai campaign-tracker (lewat proxy PHP, supaya secret tidak terekspos).
+// Kontak/grup/kumpulan kontak cukup localStorage (data kerja lokal per-browser, bukan
+// data yang perlu disinkronkan tim — sumber kebenaran kontak untuk broadcast harian
+// tetap leads yang ada di campaign-tracker, dibawa masuk lewat tombol "Broadcast WA").
+const WA_PROXY_URL = '../../campaign/campaign-tracker/api/firebase_proxy.php';
+const LOCAL_PREFIX = 'wa_broadcast:';
+
+function storageReady(){ return true; } // localStorage + fetch selalu tersedia di browser modern
+
+async function fbFetch(path, options){
+  const res = await fetch(WA_PROXY_URL + '?path=' + encodeURIComponent(path), options);
+  if(!res.ok) throw new Error('Firebase proxy error ' + res.status);
+  return res.json();
+}
+
+async function storeSet(key, value){
+  if(key.startsWith('template:')){
+    const slug = key.replace(/^template:/, '');
+    try{ await fbFetch('wa_templates/' + slug, {method:'PUT', headers:{'Content-Type':'application/json'}, body:value}); return true; }
+    catch(e){ console.error('set template failed', e); toast('Gagal menyimpan template ke server'); return null; }
+  }
+  try{ localStorage.setItem(LOCAL_PREFIX + key, value); return true; }
+  catch(e){ console.error('set failed', key, e); toast('Gagal menyimpan data: ' + (e && e.message ? e.message : 'coba lagi')); return null; }
+}
+async function storeGet(key){
+  if(key.startsWith('template:')){
+    const slug = key.replace(/^template:/, '');
+    try{ const data = await fbFetch('wa_templates/' + slug); return data ? {value: JSON.stringify(data)} : null; }
+    catch(e){ return null; }
+  }
+  const v = localStorage.getItem(LOCAL_PREFIX + key);
+  return v !== null ? {value: v} : null;
+}
+async function storeDelete(key){
+  if(key.startsWith('template:')){
+    const slug = key.replace(/^template:/, '');
+    try{ await fbFetch('wa_templates/' + slug, {method:'DELETE'}); return true; }
+    catch(e){ return null; }
+  }
+  localStorage.removeItem(LOCAL_PREFIX + key);
+  return true;
+}
+async function storeList(prefix){
+  if(prefix === 'template:'){
+    try{
+      const data = await fbFetch('wa_templates');
+      return {keys: data ? Object.keys(data).map(k=>'template:'+k) : []};
+    }catch(e){ return {keys:[]}; }
+  }
+  const keys = [];
+  for(let i=0;i<localStorage.length;i++){
+    const k = localStorage.key(i);
+    if(k && k.startsWith(LOCAL_PREFIX + prefix)) keys.push(k.slice(LOCAL_PREFIX.length));
+  }
+  return {keys};
+}
+// Storage keys tidak boleh mengandung spasi, garis miring, atau tanda kutip —
+// tapi nama daftar/grup/template yang diketik user boleh. Jadi nama asli disimpan
+// di dalam payload (data.name), sedangkan key penyimpanan memakai versi "aman".
+function slugifyKey(name){
+  // Termasuk hindari karakter yang tidak valid untuk key Firebase (. # $ [ ])
+  // karena slug ini juga dipakai sebagai path node 'wa_templates/<slug>'.
+  return String(name).trim().replace(/[\s\/\\'".#$\[\]]+/g, '_').slice(0, 150) || 'tanpa_nama';
+}
+
+// ---------- Mode toggle (Unggah File / Input Manual) ----------
+const modeFileBtn = document.getElementById('modeFileBtn');
+const modeManualBtn = document.getElementById('modeManualBtn');
+modeFileBtn.addEventListener('click', ()=>setKontakMode('file'));
+modeManualBtn.addEventListener('click', ()=>setKontakMode('manual'));
+function setKontakMode(mode){
+  modeFileBtn.classList.toggle('active', mode==='file');
+  modeManualBtn.classList.toggle('active', mode==='manual');
+  document.getElementById('filePanel').style.display = mode==='file' ? 'block' : 'none';
+  document.getElementById('mappingPanel').style.display = 'none';
+  document.getElementById('manualPanel').style.display = mode==='manual' ? 'block' : 'none';
+  document.getElementById('poolPanel').style.display = mode==='manual' ? 'block' : 'none';
+  if(mode==='manual'){ renderManualExtraInputs(contactPool.headers); renderPoolTable(); }
+}
+
+// ---------- App data (kumpulan kontak, grup/daftar, template) ----------
+// Sumber kebenaran data ada di variabel-variabel ini (in-memory). Kontak/grup
+// disinkronkan ke localStorage browser ini; template pesan disinkronkan ke server
+// (Firebase, lewat proxy PHP) supaya bisa dipakai bersama anggota tim lain.
+// Data ini juga bisa disimpan/dimuat lewat file JSON (lihat tombol Unduh/Muat Data
+// di tab Daftar Kontak) untuk pindah ke komputer lain.
+let contactPool = { headers: ['Nama','Nomor WA'], rows: [] };
+let poolSelected = {}; // index -> bool, dipilih untuk dijadikan grup
+let allGroups = {};    // key (mis. "kontak:pelanggan_juli") -> {name, headers, rows, colNomor, colNama}
+let allTemplates = {}; // key (mis. "template:promo_juli") -> {name, text, attachment}
+
+async function loadFromStorageIfAvailable(){
+  if(!storageReady()) return;
+  const poolRes = await storeGet('pool');
+  if(poolRes){ try{ contactPool = JSON.parse(poolRes.value); }catch(e){} }
+  const listRes = await storeList('kontak:');
+  for(const key of (listRes && listRes.keys ? listRes.keys : [])){
+    const res = await storeGet(key);
+    if(!res) continue;
+    try{ allGroups[key] = JSON.parse(res.value); }catch(e){}
+  }
+  const tRes = await storeList('template:');
+  for(const key of (tRes && tRes.keys ? tRes.keys : [])){
+    const res = await storeGet(key);
+    if(!res) continue;
+    try{ allTemplates[key] = JSON.parse(res.value); }catch(e){ allTemplates[key] = { text: res.value, attachment: null }; }
+  }
+}
+
+document.getElementById('applyExtraColsBtn').addEventListener('click', ()=>{
+  const extra = document.getElementById('manualExtraCols').value
+    .split(',').map(s=>s.trim()).filter(Boolean);
+  contactPool.headers = ['Nama','Nomor WA', ...extra];
+  renderManualExtraInputs(contactPool.headers);
+  renderPoolTable();
+  toast('Kolom diterapkan');
+});
+
+// Renders extra input fields (beyond Nama/Nomor WA) based on the pool's header list
+function renderManualExtraInputs(headers){
+  const extras = headers.filter(h => h !== 'Nama' && h !== 'Nomor WA');
+  const box = document.getElementById('manualExtraInputs');
+  box.innerHTML = extras.map(h=>`
+    <div>
+      <label class="field-label">${escHtml(h)}</label>
+      <input type="text" class="manual-extra-field" data-col="${escAttr(h)}" placeholder="${escHtml(h)}">
+    </div>`).join('');
+}
+
+document.getElementById('manualAddBtn').addEventListener('click', async ()=>{
+  const nama = document.getElementById('manualNama').value.trim();
+  const nomor = document.getElementById('manualNomor').value.trim();
+  if(!nama || !nomor){ toast('Isi nama dan nomor WA dulu'); return; }
+  const row = { 'Nama': nama, 'Nomor WA': nomor };
+  document.getElementById('manualExtraInputs').querySelectorAll('.manual-extra-field').forEach(inp=>{
+    row[inp.dataset.col] = inp.value.trim();
+  });
+  contactPool.rows.push(row);
+  await storeSet('pool', JSON.stringify(contactPool));
+  renderPoolTable();
+  toast('Kontak ditambahkan ke kumpulan ('+contactPool.rows.length+' total)');
+  document.getElementById('manualNama').value = '';
+  document.getElementById('manualNomor').value = '';
+  document.getElementById('manualExtraInputs').querySelectorAll('.manual-extra-field').forEach(inp=>inp.value='');
+  document.getElementById('manualNama').focus();
+});
+
+function renderPoolTable(){
+  const table = document.getElementById('poolTable');
+  const empty = document.getElementById('emptyPool');
+  const label = document.getElementById('poolCountLabel');
+  label.textContent = contactPool.rows.length ? '(' + contactPool.rows.length + ' kontak)' : '';
+  if(!contactPool.rows.length){
+    table.innerHTML = '';
+    empty.style.display = 'block';
+    updatePoolSelectCount();
+    return;
+  }
+  empty.style.display = 'none';
+  const cols = contactPool.headers;
+  let html = '<thead><tr><th class="chk-col"><input type="checkbox" id="poolSelectAllChk"></th>' +
+    cols.map(c=>`<th>${escHtml(c)}</th>`).join('') + '<th></th></tr></thead><tbody>';
+  contactPool.rows.forEach((r,i)=>{
+    const checked = !!poolSelected[i];
+    html += `<tr><td class="chk-col"><input type="checkbox" class="pool-chk" data-i="${i}" ${checked?'checked':''}></td>` +
+      cols.map(c=>`<td>${escHtml(r[c]||'')}</td>`).join('') +
+      `<td><button class="del-row-btn" data-i="${i}">hapus</button></td></tr>`;
+  });
+  html += '</tbody>';
+  table.innerHTML = html;
+  table.querySelectorAll('.pool-chk').forEach(chk=>{
+    chk.addEventListener('change', ()=>{
+      poolSelected[chk.dataset.i] = chk.checked;
+      updatePoolSelectCount();
+    });
+  });
+  const selAllChk = document.getElementById('poolSelectAllChk');
+  selAllChk.checked = contactPool.rows.length>0 && contactPool.rows.every((_,i)=>poolSelected[i]);
+  selAllChk.addEventListener('change', ()=>{
+    contactPool.rows.forEach((_,i)=>{ poolSelected[i] = selAllChk.checked; });
+    renderPoolTable();
+  });
+  table.querySelectorAll('.del-row-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const i = Number(btn.dataset.i);
+      contactPool.rows.splice(i, 1);
+      const newSel = {};
+      Object.keys(poolSelected).forEach(k=>{
+        const idx = Number(k);
+        if(idx < i) newSel[idx] = poolSelected[k];
+        else if(idx > i) newSel[idx-1] = poolSelected[k];
+      });
+      poolSelected = newSel;
+      await storeSet('pool', JSON.stringify(contactPool));
+      renderPoolTable();
+      toast('Kontak dihapus dari kumpulan');
+    });
+  });
+  updatePoolSelectCount();
+}
+
+function updatePoolSelectCount(){
+  const el = document.getElementById('poolSelectCount');
+  if(!el) return;
+  const selected = contactPool.rows.filter((_,i)=>poolSelected[i]).length;
+  el.textContent = selected + ' dari ' + contactPool.rows.length + ' dipilih';
+}
+
+document.getElementById('poolSelectAllBtn').addEventListener('click', ()=>{
+  contactPool.rows.forEach((_,i)=>{ poolSelected[i] = true; });
+  renderPoolTable();
+});
+document.getElementById('poolSelectNoneBtn').addEventListener('click', ()=>{
+  poolSelected = {};
+  renderPoolTable();
+});
+
+document.getElementById('createGroupBtn').addEventListener('click', async ()=>{
+  const name = document.getElementById('groupNameInput').value.trim();
+  if(!name){ toast('Beri nama grup ini dulu'); return; }
+  const chosen = contactPool.rows.filter((_,i)=>poolSelected[i]);
+  if(!chosen.length){ toast('Pilih minimal satu kontak dari kumpulan di atas'); return; }
+  const key = 'kontak:'+slugifyKey(name);
+  const payload = { name, headers: contactPool.headers, rows: chosen.map(r=>({...r})), colNomor: 'Nomor WA', colNama: 'Nama' };
+  allGroups[key] = payload;
+  storeSet(key, JSON.stringify(payload)); // sinkronisasi opsional, tidak diblokir kalau gagal
+  toast('Grup "'+name+'" dibuat ('+chosen.length+' kontak)');
+  document.getElementById('groupNameInput').value = '';
+  renderSavedLists();
+  selectList(name, payload);
+});
+
+// ---------- Lampiran (attachment) ----------
+let currentAttachment = null; // {name, type, size, dataUrl, tooBig}
+const ATTACH_LIMIT = 3.5 * 1024 * 1024; // ~3.5MB, aman untuk penyimpanan base64
+
+function formatBytes(bytes){
+  if(bytes < 1024) return bytes + ' B';
+  if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/(1024*1024)).toFixed(2) + ' MB';
+}
+
+const attachDropzone = document.getElementById('attachDropzone');
+const attachInput = document.getElementById('attachInput');
+attachDropzone.addEventListener('click', ()=>attachInput.click());
+attachDropzone.addEventListener('dragover', e=>{e.preventDefault(); attachDropzone.classList.add('drag');});
+attachDropzone.addEventListener('dragleave', ()=>attachDropzone.classList.remove('drag'));
+attachDropzone.addEventListener('drop', e=>{
+  e.preventDefault(); attachDropzone.classList.remove('drag');
+  if(e.dataTransfer.files.length) handleAttachFile(e.dataTransfer.files[0]);
+});
+attachInput.addEventListener('change', e=>{
+  if(e.target.files.length) handleAttachFile(e.target.files[0]);
+});
+
+function handleAttachFile(file){
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    currentAttachment = {
+      name: file.name,
+      type: file.type || 'application/octet-stream',
+      size: file.size,
+      dataUrl: e.target.result,
+      tooBig: file.size > ATTACH_LIMIT
+    };
+    renderAttachPreview();
+    if(currentAttachment.tooBig){
+      toast('File terlalu besar untuk disimpan, tapi tetap bisa dipakai sekarang');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function attachKindIcon(type){
+  if(type.startsWith('image/')) return null; // handled separately
+  if(type.startsWith('video/')) return null;
+  if(type.startsWith('audio/')) return '🎵';
+  if(type.includes('pdf')) return '📕';
+  if(type.includes('word') || type.includes('doc')) return '📄';
+  if(type.includes('sheet') || type.includes('excel') || type.includes('csv')) return '📊';
+  if(type.includes('zip') || type.includes('rar')) return '🗜️';
+  return '📁';
+}
+
+function buildAttachCardHtml(att, {showRemove}){
+  let mediaHtml;
+  if(att.type.startsWith('image/')){
+    mediaHtml = `<img src="${att.dataUrl}" alt="lampiran">`;
+  } else if(att.type.startsWith('video/')){
+    mediaHtml = `<video src="${att.dataUrl}" muted></video>`;
+  } else {
+    mediaHtml = `<div class="file-icon">${attachKindIcon(att.type)}</div>`;
+  }
+  const audioPlayer = att.type.startsWith('audio/') ? `<audio controls src="${att.dataUrl}"></audio>` : '';
+  return `
+    <div class="attach-card">
+      ${mediaHtml}
+      <div class="info">
+        <div class="fname">${escHtml(att.name)}</div>
+        <div class="fmeta">${escHtml(att.type)} · ${formatBytes(att.size)}</div>
+        ${att.tooBig ? '<div class="fwarn">Terlalu besar untuk tersimpan permanen (maks ~3.5MB) — hanya berlaku untuk sesi ini</div>' : ''}
+        ${audioPlayer}
+      </div>
+      <div class="actions">
+        <a class="btn btn-ghost" style="padding:7px 12px;font-size:12.5px;" href="${att.dataUrl}" download="${escAttr(att.name)}">Unduh</a>
+        ${showRemove ? '<button class="btn btn-danger" id="removeAttachBtn">Hapus</button>' : ''}
+      </div>
+    </div>`;
+}
+
+function renderAttachPreview(){
+  const box = document.getElementById('attachPreview');
+  if(!currentAttachment){ box.style.display='none'; box.innerHTML=''; return; }
+  box.style.display = 'block';
+  box.innerHTML = buildAttachCardHtml(currentAttachment, {showRemove:true});
+  document.getElementById('removeAttachBtn').addEventListener('click', ()=>{
+    currentAttachment = null;
+    attachInput.value = '';
+    renderAttachPreview();
+  });
+}
+
+
+// ---------- File upload / parsing ----------
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+dropzone.addEventListener('click', ()=>fileInput.click());
+dropzone.addEventListener('dragover', e=>{e.preventDefault(); dropzone.classList.add('drag');});
+dropzone.addEventListener('dragleave', ()=>dropzone.classList.remove('drag'));
+dropzone.addEventListener('drop', e=>{
+  e.preventDefault(); dropzone.classList.remove('drag');
+  if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e=>{
+  if(e.target.files.length) handleFile(e.target.files[0]);
+});
+
+let parsedHeaders = [];
+let parsedRows = [];
+
+function handleFile(file){
+  const reader = new FileReader();
+  reader.onload = (e)=>{
+    try{
+      const data = new Uint8Array(e.target.result);
+      const wb = XLSX.read(data, {type:'array'});
+      const sheet = wb.Sheets[wb.SheetNames[0]];
+      const json = XLSX.utils.sheet_to_json(sheet, {defval:''});
+      if(!json.length){ toast('File kosong atau tidak terbaca'); return; }
+      parsedHeaders = Object.keys(json[0]);
+      parsedRows = json;
+      showMapping(file.name);
+    }catch(err){
+      console.error(err);
+      toast('Gagal membaca file. Pastikan formatnya benar.');
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function showMapping(filename){
+  document.getElementById('mappingPanel').style.display = 'block';
+  const colNomorSel = document.getElementById('colNomor');
+  const colNamaSel = document.getElementById('colNama');
+  colNomorSel.innerHTML = parsedHeaders.map(h=>`<option value="${escAttr(h)}">${escHtml(h)}</option>`).join('');
+  colNamaSel.innerHTML = parsedHeaders.map(h=>`<option value="${escAttr(h)}">${escHtml(h)}</option>`).join('');
+  // guess columns
+  const guessNomor = parsedHeaders.find(h=>/wa|whats?app|hp|telp|phone|nomor|no\.?$/i.test(h)) || parsedHeaders[0];
+  const guessNama = parsedHeaders.find(h=>/nama|name/i.test(h)) || parsedHeaders[0];
+  colNomorSel.value = guessNomor;
+  colNamaSel.value = guessNama;
+
+  renderPreviewTable();
+  colNomorSel.onchange = renderPreviewTable;
+  colNamaSel.onchange = renderPreviewTable;
+
+  const base = filename.replace(/\.[^.]+$/, '');
+  document.getElementById('listName').value = base;
+}
+
+function renderPreviewTable(){
+  const cols = parsedHeaders.slice(0, 5);
+  const t = document.getElementById('previewTable');
+  let html = '<thead><tr>' + cols.map(c=>`<th>${escHtml(c)}</th>`).join('') + (parsedHeaders.length>5?'<th>…</th>':'') + '</tr></thead><tbody>';
+  parsedRows.slice(0,5).forEach(r=>{
+    html += '<tr>' + cols.map(c=>`<td>${escHtml(String(r[c]))}</td>`).join('') + (parsedHeaders.length>5?'<td>…</td>':'') + '</tr>';
+  });
+  html += '</tbody>';
+  t.innerHTML = html;
+}
+
+document.getElementById('saveListBtn').addEventListener('click', async ()=>{
+  const name = document.getElementById('listName').value.trim();
+  if(!name){ toast('Beri nama daftar ini dulu'); return; }
+  const colNomor = document.getElementById('colNomor').value;
+  const colNama = document.getElementById('colNama').value;
+  const key = 'kontak:'+slugifyKey(name);
+  const payload = { name, headers: parsedHeaders, rows: parsedRows, colNomor, colNama };
+  allGroups[key] = payload;
+  storeSet(key, JSON.stringify(payload)); // sinkronisasi opsional, tidak diblokir kalau gagal
+  toast('Daftar "'+name+'" tersimpan');
+  document.getElementById('mappingPanel').style.display = 'none';
+  fileInput.value = '';
+  renderSavedLists();
+  selectList(name, payload);
+});
+
+// ---------- Saved contact lists (grup) ----------
+function renderSavedLists(){
+  const container = document.getElementById('savedLists');
+  const empty = document.getElementById('emptyLists');
+  const keys = Object.keys(allGroups);
+  if(!keys.length){
+    container.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  container.innerHTML = '';
+  for(const key of keys){
+    const data = allGroups[key];
+    if(!data) continue;
+    const item = document.createElement('div');
+    item.className = 'saved-item' + (currentList && currentList.name===data.name ? ' active-item' : '');
+    item.innerHTML = `
+      <div class="meta">
+        <div class="name">${escHtml(data.name)}</div>
+        <div class="count">${data.rows.length} kontak · nomor: ${escHtml(data.colNomor)} · nama: ${escHtml(data.colNama)}</div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" data-act="use" style="padding:7px 12px;font-size:13px;">Gunakan</button>
+        <button class="btn btn-danger" data-act="del">Hapus</button>
+      </div>`;
+    item.querySelector('[data-act="use"]').addEventListener('click', ()=>{
+      selectList(data.name, data);
+      toast('Daftar "'+data.name+'" dipilih');
+      goTab('pesan');
+    });
+    item.querySelector('[data-act="del"]').addEventListener('click', ()=>{
+      if(!confirm('Hapus daftar "'+data.name+'"?')) return;
+      delete allGroups[key];
+      storeDelete(key); // sinkronisasi opsional
+      if(currentList && currentList.name === data.name){ currentList = null; updateKirimTabState(); }
+      renderSavedLists();
+      toast('Daftar dihapus');
+    });
+    container.appendChild(item);
+  }
+}
+
+function selectList(name, data){
+  currentList = data;
+  sentStatus = {};
+  selectedRows = {};
+  data.rows.forEach((_,i)=>{ selectedRows[i] = true; }); // default: semua tercentang, tapi bisa dikosongkan lalu pilih manual
+  contactFilterText = '';
+  const filterInput = document.getElementById('contactFilter');
+  if(filterInput) filterInput.value = '';
+  updateKirimTabState();
+  renderPlaceholders();
+  document.getElementById('kirimListName').textContent = name;
+}
+
+function updateKirimTabState(){
+  document.getElementById('tabKirimBtn').disabled = !currentList;
+}
+
+// ---------- Message templates ----------
+document.getElementById('saveTemplateBtn').addEventListener('click', async ()=>{
+  const name = document.getElementById('templateName').value.trim();
+  const text = document.getElementById('messageBox').value.trim();
+  if(!name){ toast('Beri nama template ini dulu'); return; }
+  if(!text){ toast('Isi pesan masih kosong'); return; }
+  let attachToSave = null;
+  if(currentAttachment && !currentAttachment.tooBig){
+    attachToSave = currentAttachment;
+  }
+  const key = 'template:'+slugifyKey(name);
+  const payload = { name, text, attachment: attachToSave };
+  allTemplates[key] = payload;
+  storeSet(key, JSON.stringify(payload)); // sinkronisasi opsional
+  let msg = 'Template "'+name+'" tersimpan';
+  if(currentAttachment && currentAttachment.tooBig) msg += ' (lampiran tidak ikut tersimpan karena terlalu besar)';
+  toast(msg);
+  renderSavedTemplates();
+});
+
+function renderSavedTemplates(){
+  const container = document.getElementById('savedTemplates');
+  const empty = document.getElementById('emptyTemplates');
+  const keys = Object.keys(allTemplates);
+  if(!keys.length){ container.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  container.innerHTML = '';
+  for(const key of keys){
+    const data = allTemplates[key];
+    if(!data) continue;
+    const name = data.name || key.replace(/^template:/, '').replace(/_/g, ' ');
+    const item = document.createElement('div');
+    item.className = 'saved-item';
+    const attachTag = data.attachment ? ' <span class="chip" style="cursor:default;">📎 '+escHtml(data.attachment.name)+'</span>' : '';
+    item.innerHTML = `
+      <div class="meta">
+        <div class="name">${escHtml(name)}</div>
+        <div class="count">${escHtml(data.text.slice(0,60))}${data.text.length>60?'…':''}${attachTag}</div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" data-act="use" style="padding:7px 12px;font-size:13px;">Pakai</button>
+        <button class="btn btn-danger" data-act="del">Hapus</button>
+      </div>`;
+    item.querySelector('[data-act="use"]').addEventListener('click', ()=>{
+      document.getElementById('messageBox').value = data.text;
+      document.getElementById('templateName').value = name;
+      currentAttachment = data.attachment || null;
+      renderAttachPreview();
+      toast('Template "'+name+'" dimuat');
+    });
+    item.querySelector('[data-act="del"]').addEventListener('click', ()=>{
+      if(!confirm('Hapus template "'+name+'"?')) return;
+      delete allTemplates[key];
+      storeDelete(key); // sinkronisasi opsional
+      renderSavedTemplates();
+      toast('Template dihapus');
+    });
+    container.appendChild(item);
+  }
+}
+
+
+function renderPlaceholders(){
+  const warn = document.getElementById('noListWarn');
+  const chipsBox = document.getElementById('placeholderChips');
+  if(!currentList){
+    warn.style.display = 'block';
+    chipsBox.innerHTML = '';
+    document.getElementById('pesanSub').textContent = 'Gunakan placeholder untuk personalisasi otomatis per kontak.';
+    return;
+  }
+  warn.style.display = 'none';
+  document.getElementById('pesanSub').textContent = 'Klik placeholder untuk menambahkannya ke pesan. Diisi otomatis dari daftar "'+currentList.name+'".';
+  chipsBox.innerHTML = currentList.headers.map(h=>`<span class="chip" data-h="${escAttr(h)}">{{${escHtml(h)}}}</span>`).join('');
+  chipsBox.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      const box = document.getElementById('messageBox');
+      const insert = '{{'+c.dataset.h+'}}';
+      const pos = box.selectionStart || box.value.length;
+      box.value = box.value.slice(0,pos) + insert + box.value.slice(pos);
+      box.focus();
+    });
+  });
+}
+
+// ---------- Phone normalization ----------
+function normalizePhone(raw){
+  let s = String(raw).replace(/[^\d+]/g, '');
+  s = s.replace(/^\+/, '');
+  if(s.startsWith('0')) s = '62' + s.slice(1);
+  else if(!s.startsWith('62')) s = '62' + s;
+  return s;
+}
+
+function fillTemplate(template, row){
+  return template.replace(/\{\{(.+?)\}\}/g, (m, key)=>{
+    key = key.trim();
+    return (row[key] !== undefined && row[key] !== '') ? String(row[key]) : '';
+  });
+}
+
+// ---------- Send tab ----------
+const WA_TARGET = 'kirimWaTab'; // nama window tetap sama supaya link berikutnya membuka ULANG tab yang sama, bukan tab baru
+
+function getRowInfo(i){
+  const row = currentList.rows[i];
+  const template = document.getElementById('messageBox').value;
+  const phone = normalizePhone(row[currentList.colNomor]);
+  const name = row[currentList.colNama] || '(tanpa nama)';
+  const msg = fillTemplate(template, row);
+  const link = 'https://web.whatsapp.com/send?phone=' + phone + '&text=' + encodeURIComponent(msg);
+  return {phone, name, msg, link};
+}
+
+function openInWaTab(link){
+  window.open(link, WA_TARGET);
+}
+
+function renderKirimAttachment(){
+  const banner = document.getElementById('kirimAttachBanner');
+  const box = document.getElementById('kirimAttachPreview');
+  if(!currentAttachment){
+    banner.style.display = 'none';
+    box.style.display = 'none';
+    box.innerHTML = '';
+    return;
+  }
+  banner.style.display = 'block';
+  box.style.display = 'block';
+  box.innerHTML = buildAttachCardHtml(currentAttachment, {showRemove:false});
+}
+
+function matchesFilter(info){
+  if(!contactFilterText) return true;
+  const q = contactFilterText.toLowerCase();
+  return String(info.name).toLowerCase().includes(q) || info.phone.includes(q);
+}
+
+function renderSendTable(){
+  renderKirimAttachment();
+  const table = document.getElementById('sendTable');
+  if(!currentList){
+    table.innerHTML = '<tbody><tr><td>Belum ada daftar kontak dipilih.</td></tr></tbody>';
+    updateProgress();
+    updateSelectCount();
+    return;
+  }
+  document.getElementById('kirimListName').textContent = currentList.name;
+  let html = '<thead><tr><th class="chk-col"><input type="checkbox" id="selectAllChk" title="Pilih/kosongkan semua baris yang tampil"></th><th>Nama</th><th>Nomor</th><th>Pratinjau pesan</th><th>Aksi</th></tr></thead><tbody>';
+  let anyVisible = false;
+  currentList.rows.forEach((row, i)=>{
+    const info = getRowInfo(i);
+    if(!matchesFilter(info)) return;
+    anyVisible = true;
+    const isSent = !!sentStatus[i];
+    const isChecked = !!selectedRows[i];
+    html += `<tr class="${isChecked?'':'row-unselected'}">
+      <td class="chk-col"><input type="checkbox" class="row-chk" data-i="${i}" ${isChecked?'checked':''}></td>
+      <td>${escHtml(String(info.name))}</td>
+      <td style="font-family:'IBM Plex Mono',monospace;">${escHtml(info.phone)}</td>
+      <td style="max-width:280px;color:var(--muted);">${escHtml(info.msg).slice(0,90)}${info.msg.length>90?'…':''}</td>
+      <td><button class="btn-send ${isSent?'sent':''}" data-i="${i}" data-link="${escAttr(info.link)}">${isSent?'✓ Terkirim':'Kirim'}</button></td>
+    </tr>`;
+  });
+  if(!anyVisible){
+    html += '<tr><td colspan="5" style="color:var(--muted);text-align:center;padding:18px;">Tidak ada kontak yang cocok dengan pencarian.</td></tr>';
+  }
+  html += '</tbody>';
+  table.innerHTML = html;
+  table.querySelectorAll('.btn-send').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      openInWaTab(btn.dataset.link);
+      const i = btn.dataset.i;
+      sentStatus[i] = true;
+      btn.classList.add('sent');
+      btn.textContent = '✓ Terkirim';
+      updateProgress();
+    });
+  });
+  table.querySelectorAll('.row-chk').forEach(chk=>{
+    chk.addEventListener('change', ()=>{
+      const i = chk.dataset.i;
+      selectedRows[i] = chk.checked;
+      chk.closest('tr').classList.toggle('row-unselected', !chk.checked);
+      updateSelectCount();
+    });
+  });
+  const selectAllChk = document.getElementById('selectAllChk');
+  if(selectAllChk){
+    const visibleIdx = currentList.rows.map((_,i)=>i).filter(i=>matchesFilter(getRowInfo(i)));
+    selectAllChk.checked = visibleIdx.length>0 && visibleIdx.every(i=>selectedRows[i]);
+    selectAllChk.addEventListener('change', ()=>{
+      visibleIdx.forEach(i=>{ selectedRows[i] = selectAllChk.checked; });
+      renderSendTable();
+    });
+  }
+  updateProgress();
+  updateSelectCount();
+}
+
+function updateSelectCount(){
+  const el = document.getElementById('selectCount');
+  if(!el) return;
+  if(!currentList){ el.textContent = '0 dipilih'; return; }
+  const total = currentList.rows.length;
+  const selected = currentList.rows.filter((_,i)=>selectedRows[i]).length;
+  el.textContent = selected + ' dari ' + total + ' kontak dipilih';
+}
+
+document.getElementById('selectAllBtn').addEventListener('click', ()=>{
+  if(!currentList){ toast('Pilih daftar kontak dulu'); return; }
+  currentList.rows.forEach((_,i)=>{ selectedRows[i] = true; });
+  renderSendTable();
+});
+document.getElementById('selectNoneBtn').addEventListener('click', ()=>{
+  if(!currentList){ toast('Pilih daftar kontak dulu'); return; }
+  currentList.rows.forEach((_,i)=>{ selectedRows[i] = false; });
+  renderSendTable();
+});
+document.getElementById('contactFilter').addEventListener('input', (e)=>{
+  contactFilterText = e.target.value.trim();
+  renderSendTable();
+});
+
+function updateProgress(){
+  const total = currentList ? currentList.rows.map((_,i)=>i).filter(i=>selectedRows[i]).length : 0;
+  const sent = currentList ? currentList.rows.map((_,i)=>i).filter(i=>selectedRows[i] && sentStatus[i]).length : 0;
+  const pct = total ? Math.round((sent/total)*100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = sent + ' dari ' + total + ' terkirim (dari kontak yang dipilih)';
+}
+
+document.getElementById('messageBox').addEventListener('input', ()=>{
+  if(document.getElementById('tab-kirim').style.display === 'block') renderSendTable();
+});
+
+// ---------- Kirim Otomatis (satu tab, berjeda) ----------
+let autoQueue = [];
+let autoPos = 0;
+let autoTimer = null;
+let autoCountdown = 0;
+const autoStartBtn = document.getElementById('autoStartBtn');
+const autoStopBtn = document.getElementById('autoStopBtn');
+const autoStatus = document.getElementById('autoStatus');
+
+autoStartBtn.addEventListener('click', ()=>{
+  if(!currentList){ toast('Pilih daftar kontak dulu'); return; }
+  autoQueue = currentList.rows.map((_,i)=>i).filter(i=>selectedRows[i] && !sentStatus[i]);
+  if(!autoQueue.length){ toast('Tidak ada kontak terpilih yang belum dikirim. Centang kontak di tabel dulu.'); return; }
+  autoPos = 0;
+  document.getElementById('popupHint').style.display = 'block';
+  autoStartBtn.style.display = 'none';
+  autoStopBtn.style.display = 'inline-flex';
+  fireNextAuto(true); // kirim kontak pertama langsung
+});
+
+function fireNextAuto(immediate){
+  clearInterval(autoTimer);
+  if(autoPos >= autoQueue.length){
+    stopAuto('Selesai — semua kontak sudah dikirim ke tab WhatsApp.');
+    return;
+  }
+  const delaySec = immediate ? 0 : Number(document.getElementById('autoDelay').value);
+  autoCountdown = delaySec;
+  const runNow = ()=>{
+    const i = autoQueue[autoPos];
+    const info = getRowInfo(i);
+    openInWaTab(info.link);
+    sentStatus[i] = true;
+    renderSendTable();
+    autoPos++;
+    autoStatus.textContent = 'Terkirim ke tab WhatsApp (' + autoPos + '/' + autoQueue.length + '). Menyiapkan kontak berikutnya…';
+    const nextDelay = Number(document.getElementById('autoDelay').value);
+    autoCountdown = nextDelay;
+    autoTimer = setInterval(()=>{
+      autoCountdown--;
+      if(autoPos >= autoQueue.length){
+        stopAuto('Selesai — semua kontak sudah dikirim ke tab WhatsApp.');
+        return;
+      }
+      if(autoCountdown <= 0){
+        fireNextAuto(true);
+      } else {
+        autoStatus.textContent = 'Lanjut ke kontak berikutnya (' + (autoPos+1) + '/' + autoQueue.length + ') dalam ' + autoCountdown + ' detik…';
+      }
+    }, 1000);
+  };
+  if(immediate) runNow();
+}
+
+function stopAuto(msg){
+  clearInterval(autoTimer);
+  autoTimer = null;
+  autoStartBtn.style.display = 'inline-flex';
+  autoStopBtn.style.display = 'none';
+  autoStatus.textContent = msg || '';
+}
+
+autoStopBtn.addEventListener('click', ()=>stopAuto('Dihentikan. Kamu bisa lanjutkan kapan saja.'));
+
+// ---------- Mode Berurutan ----------
+let seqQueue = [];
+let seqPos = 0;
+
+document.getElementById('sequentialModeBtn').addEventListener('click', ()=>{
+  if(!currentList){ toast('Pilih daftar kontak dulu'); return; }
+  seqQueue = currentList.rows.map((_,i)=>i).filter(i=>selectedRows[i] && !sentStatus[i]);
+  seqPos = 0;
+  if(!seqQueue.length){ toast('Tidak ada kontak terpilih yang belum dikirim. Centang kontak di tabel dulu.'); return; }
+  document.getElementById('popupHint').style.display = 'block';
+  document.getElementById('seqCard').style.display = 'block';
+  renderSeqCard();
+});
+
+function renderSeqCard(){
+  if(seqPos >= seqQueue.length){
+    document.getElementById('seqCard').style.display = 'none';
+    toast('Mode berurutan selesai');
+    return;
+  }
+  const i = seqQueue[seqPos];
+  const info = getRowInfo(i);
+  document.getElementById('seqCount').textContent = 'Kontak ' + (seqPos+1) + ' dari ' + seqQueue.length;
+  document.getElementById('seqName').textContent = info.name;
+  document.getElementById('seqPhone').textContent = info.phone;
+  document.getElementById('seqMsg').textContent = info.msg;
+  document.getElementById('seqCard').dataset.currentIndex = i;
+}
+
+document.getElementById('seqSendBtn').addEventListener('click', ()=>{
+  const i = Number(document.getElementById('seqCard').dataset.currentIndex);
+  const info = getRowInfo(i);
+  openInWaTab(info.link);
+  sentStatus[i] = true;
+  renderSendTable();
+  seqPos++;
+  renderSeqCard();
+});
+document.getElementById('seqSkipBtn').addEventListener('click', ()=>{
+  seqPos++;
+  renderSeqCard();
+});
+document.getElementById('seqCloseBtn').addEventListener('click', ()=>{
+  document.getElementById('seqCard').style.display = 'none';
+});
+
+// ---------- Utils ----------
+function escHtml(s){
+  return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function escAttr(s){ return escHtml(s); }
+
+// ---------- Impor / Ekspor data (JSON, untuk pemakaian standalone) ----------
+function exportAllData(){
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    pool: contactPool,
+    groups: allGroups,
+    templates: allTemplates
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'kirim-wa-data.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('Data diunduh sebagai file JSON');
+}
+
+function importAllData(jsonText){
+  let data;
+  try{ data = JSON.parse(jsonText); }
+  catch(e){ toast('File JSON tidak valid: ' + e.message); return; }
+
+  if(data.pool && Array.isArray(data.pool.rows)){
+    contactPool = {
+      headers: Array.isArray(data.pool.headers) ? data.pool.headers : ['Nama','Nomor WA'],
+      rows: data.pool.rows
+    };
+    storeSet('pool', JSON.stringify(contactPool));
+  }
+  let groupCount = 0;
+  if(data.groups && typeof data.groups === 'object'){
+    Object.keys(data.groups).forEach(k=>{
+      const g = data.groups[k];
+      if(!g || !g.name || !Array.isArray(g.rows)) return;
+      const key = k.startsWith('kontak:') ? k : 'kontak:'+slugifyKey(g.name);
+      allGroups[key] = g;
+      storeSet(key, JSON.stringify(g));
+      groupCount++;
+    });
+  }
+  let templateCount = 0;
+  if(data.templates && typeof data.templates === 'object'){
+    Object.keys(data.templates).forEach(k=>{
+      const t = data.templates[k];
+      if(!t || !t.name || typeof t.text !== 'string') return;
+      const key = k.startsWith('template:') ? k : 'template:'+slugifyKey(t.name);
+      allTemplates[key] = t;
+      storeSet(key, JSON.stringify(t));
+      templateCount++;
+    });
+  }
+
+  poolSelected = {};
+  renderManualExtraInputs(contactPool.headers);
+  renderPoolTable();
+  renderSavedLists();
+  renderSavedTemplates();
+  toast('Data dimuat: ' + contactPool.rows.length + ' kontak, ' + groupCount + ' grup, ' + templateCount + ' template');
+}
+
+document.getElementById('exportJsonBtn').addEventListener('click', exportAllData);
+document.getElementById('importJsonBtn').addEventListener('click', ()=>{
+  document.getElementById('importJsonInput').click();
+});
+document.getElementById('importJsonInput').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=> importAllData(reader.result);
+  reader.onerror = ()=> toast('Gagal membaca file JSON');
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+// ---------- Init ----------
+async function init(){
+  updateKirimTabState();
+  await loadFromStorageIfAvailable();
+  if(!contactPool.headers) contactPool.headers = ['Nama','Nomor WA'];
+  if(!contactPool.rows) contactPool.rows = [];
+  renderSavedLists();
+  renderSavedTemplates();
+  renderManualExtraInputs(contactPool.headers);
+  renderPoolTable();
+  const statusEl = document.getElementById('storageStatus');
+  statusEl.textContent = '✓ tersimpan otomatis';
+  statusEl.title = 'Kontak & grup tersimpan di browser ini (localStorage). Template pesan tersinkron ke server, bisa dipakai anggota tim lain juga.';
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "transaksi": {
+    "DEMO-AWB0001": { "awb": "DEMO-AWB0001", "tanggal": "2026-08-05", "kurir": "Ekspedisi Demo A", "status": "Terkirim", "berat": 1.2, "ongkir": 15000, "area": "Bogor" },
+    "DEMO-AWB0002": { "awb": "DEMO-AWB0002", "tanggal": "2026-08-08", "kurir": "Ekspedisi Demo B", "status": "Proses", "berat": 0.8, "ongkir": 12000, "area": "Depok" },
+    "DEMO-AWB0003": { "awb": "DEMO-AWB0003", "tanggal": "2026-08-12", "kurir": "Ekspedisi Demo A", "status": "Retur", "berat": 2.0, "ongkir": 22000, "area": "Bekasi" },
+    "DEMO-AWB0004": { "awb": "DEMO-AWB0004", "tanggal": "2026-08-20", "kurir": "Ekspedisi Demo C", "status": "Terkirim", "berat": 1.5, "ongkir": 18000, "area": "Bandung" }
+  },
+  "transaksi_summary": {
+    "total_paket": 4,
+    "total_ongkir": 67000,
+    "per_status": { "Terkirim": 2, "Proses": 1, "Retur": 1 },
+    "updated_at": "2026-08-30"
+  }
+}

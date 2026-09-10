@@ -1,0 +1,805 @@
+<?php 
+$page_title = "B2B Progress Tracker | SIMASRIM";
+include '../includes/header.php'; 
+?>
+
+<style>
+    /* CSS Khusus Tracker B2B Enterprise */
+    body { background-color: #f0f2f5 !important; }
+    
+    .tracker-card { 
+        background: #fff; border-radius: 16px; border: 1px solid rgba(115, 53, 183, 0.1); 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 25px; transition: 0.3s; position: relative;
+    }
+    .tracker-card:hover { box-shadow: 0 10px 30px rgba(115, 53, 183, 0.12); border-color: var(--primary); }
+
+    .step-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed #eee; }
+    .step-item:last-child { border-bottom: none; }
+    
+    .btn-wa-followup { 
+        color: #25D366; background: rgba(37, 211, 102, 0.1); border-radius: 6px; padding: 4px 12px; 
+        font-size: 0.75rem; font-weight: 700; text-decoration: none; transition: 0.2s; border: 1px solid transparent; 
+        display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-wa-followup:hover { background: #25D366; color: white; transform: scale(1.05); }
+    
+    .badge-api { background: #e0f2fe; color: #0284c7; font-size: 0.7rem; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid #bae6fd; }
+    .badge-kotak { background: #fef08a; color: #a16207; font-size: 0.7rem; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid #fde047; }
+    .badge-wl-full { background: #fae8ff; color: #a21caf; font-size: 0.7rem; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid #f5d0fe; }
+    .badge-wl-half { background: #f3e8ff; color: #6b21a8; font-size: 0.7rem; padding: 4px 10px; border-radius: 6px; font-weight: 800; border: 1px solid #e9d5ff; }
+
+    /* Navigasi Reorder & Aksi */
+    .btn-action-sm { background: #f8f9fa; border: 1px solid #dee2e6; color: #6c757d; border-radius: 6px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; cursor: pointer; transition: 0.2s; }
+    .btn-action-sm:hover { background: var(--bg-soft-purple); color: var(--primary); border-color: var(--primary); }
+    .btn-action-danger:hover { background: #fee2e2; color: #dc2626; border-color: #fca5a5; }
+
+    .steps-container::-webkit-scrollbar { width: 6px; }
+    .steps-container::-webkit-scrollbar-track { background: #f8f9fa; border-radius: 10px; }
+    .steps-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    .steps-container::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+</style>
+
+<div class="hero-section px-4">
+    <div class="position-absolute" style="width: 300px; height: 300px; background: var(--accent); filter: blur(100px); opacity: 0.2; border-radius: 50%; top: -50px; right: -50px;"></div>
+    <div class="position-relative z-1 pt-2 d-flex justify-content-between align-items-end flex-wrap gap-2">
+        <div>
+            <h3 class="fw-bold mb-1">B2B Partnership Board</h3>
+            <p class="text-white-50 mb-0 small">Pantau progress akuisisi klien B2B (Inbound & Outbound) secara Real-Time.</p>
+        </div>
+        <a href="?category=Logistik" class="btn btn-outline-light rounded-pill px-4 py-2" style="border-color: rgba(255,255,255,0.2);">
+            <i class="fas fa-route me-2"></i> Filter: Partner Logistik
+        </a>
+    </div>
+</div>
+
+<div class="container-fluid px-4 pb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3" data-aos="fade-up">
+        <div>
+            <h4 class="fw-bold mb-0 text-dark">Daftar Klien B2B Aktif</h4>
+            <p class="text-muted small mb-0 mt-1"><i class="fas fa-circle text-success me-1" style="font-size:8px;"></i> Cloud Database Connected</p>
+        </div>
+        <button class="btn btn-primary rounded-pill px-4 py-2 shadow-sm fw-bold" onclick="openAddModal()">
+            <i class="fas fa-plus me-2"></i> Tambah Klien Baru
+        </button>
+    </div>
+
+    <div class="mb-4 d-flex align-items-center gap-2 flex-wrap" data-aos="fade-up">
+        <label class="small fw-bold text-muted mb-0"><i class="fas fa-filter me-1"></i> Kategori:</label>
+        <select id="categoryFilter" class="form-select form-select-sm w-auto" onchange="window.renderTracker()">
+            <option value="">Semua Kategori</option>
+        </select>
+    </div>
+
+    <div id="loadingSpinner" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+        <p class="text-muted small mt-2">Menyinkronkan data dengan Firebase...</p>
+    </div>
+
+    <div id="b2bMainContent" class="d-none">
+        <ul class="nav nav-pills mb-4 gap-2" id="b2bTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active rounded-pill fw-bold px-4" id="out-tab" data-bs-toggle="tab" data-bs-target="#outbound" type="button" role="tab">
+                    <i class="fas fa-sign-out-alt me-1"></i> B2B Outbound (Kita Supply)
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill fw-bold px-4" id="in-tab" data-bs-toggle="tab" data-bs-target="#inbound" type="button" role="tab">
+                    <i class="fas fa-sign-in-alt me-1"></i> B2B Inbound (Kita Sourcing)
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="b2bTabsContent">
+            <div class="tab-pane fade show active" id="outbound" role="tabpanel">
+                <div id="b2bContainerOut" class="row g-4"></div>
+            </div>
+            <div class="tab-pane fade" id="inbound" role="tabpanel">
+                <div id="b2bContainerIn" class="row g-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="clientModal" tabindex="-1" aria-labelledby="clientModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+      <div class="modal-header border-bottom-0 pb-0">
+        <h5 class="modal-title fw-bold" id="clientModalLabel">Form Klien B2B</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="modalKey">
+        <div class="mb-3">
+            <label class="form-label small fw-bold text-muted">Nama Klien / Perusahaan</label>
+            <input type="text" id="modalName" class="form-control" placeholder="Contoh: PT Solusi Retail / Koperasi Makmur">
+        </div>
+        <div class="mb-3">
+            <label class="form-label small fw-bold text-muted">Arah Kerjasama</label>
+            <select id="modalDirection" class="form-select">
+                <option value="OUT">B2B Outbound (Kita Supply ke Klien)</option>
+                <option value="IN">B2B Inbound (Kita Sourcing dari Partner)</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label small fw-bold text-muted">Tipe Jalur</label>
+            <select id="modalType" class="form-select" onchange="document.getElementById('modalTypeCustomWrap').classList.toggle('d-none', this.value !== 'LAINNYA')">
+                <option value="API">Jalur Integrasi API</option>
+                <option value="KOTAK">Bisnis Dalam Kotak (Non-API)</option>
+                <option value="WLFULL">White Label - Full</option>
+                <option value="WLHALF">White Label - Half</option>
+                <option value="LAINNYA">Lainnya (isi bebas)</option>
+            </select>
+        </div>
+        <div class="mb-3 d-none" id="modalTypeCustomWrap">
+            <label class="form-label small fw-bold text-muted">Nama Tipe Jalur (Bebas)</label>
+            <input type="text" id="modalTypeCustom" class="form-control" placeholder="Contoh: Kemitraan Sponsorship">
+        </div>
+        <div class="mb-3">
+            <label class="form-label small fw-bold text-muted">Kategori</label>
+            <input type="text" id="modalCategory" class="form-control" list="categoryDatalist" placeholder="Contoh: Logistik, Payment, Asuransi, Pak Enang...">
+            <datalist id="categoryDatalist"></datalist>
+        </div>
+        <div class="mb-3">
+            <label class="form-label small fw-bold text-muted">Deskripsi / Catatan Tambahan</label>
+            <textarea id="modalNotes" class="form-control" rows="2" placeholder="Contoh: Target selesai bulan depan..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer border-top-0 pt-0">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary px-4 fw-bold" onclick="saveClientData()">Simpan Data</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Aset Klien B2B -->
+<div class="modal fade" id="assetModal" tabindex="-1" aria-labelledby="assetModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+      <div class="modal-header bg-primary text-white border-0" style="border-radius: 20px 20px 0 0;">
+        <h5 class="modal-title fw-bold" id="assetModalLabel"><i class="fas fa-folder-open me-2"></i> Kelola Database Aset: <span id="assetClientName"></span></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-light">
+        <input type="hidden" id="assetClientKey">
+        
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3"><i class="fas fa-plus-circle text-success me-2"></i>Tambah Aset / Link Baru</h6>
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <input type="text" id="newAssetName" class="form-control" placeholder="Nama Dokumen (Contoh: SPK)">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="url" id="newAssetUrl" class="form-control" placeholder="https://link-dokumen...">
+                    </div>
+                    <div class="col-md-2">
+                        <button id="addAssetBtn" class="btn btn-success w-100 fw-bold" onclick="window.addAsset()"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3"><i class="fas fa-list text-primary me-2"></i>Daftar Aset Tersimpan</h6>
+        <div id="assetListContainer" class="list-group mb-3">
+            <!-- Asset items injected by JS -->
+        </div>
+
+      </div>
+      <div class="modal-footer border-0 bg-light" style="border-radius: 0 0 20px 20px;">
+        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Kontak PIC Klien B2B -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+      <div class="modal-header bg-primary text-white border-0" style="border-radius: 20px 20px 0 0;">
+        <h5 class="modal-title fw-bold" id="contactModalLabel"><i class="fas fa-address-book me-2"></i> Kelola Kontak PIC: <span id="contactClientName"></span></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-light">
+        <input type="hidden" id="contactClientKey">
+
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3"><i class="fas fa-plus-circle text-success me-2"></i>Tambah Kontak Baru</h6>
+                <div class="row g-2">
+                    <div class="col-md-3">
+                        <input type="text" id="newContactNama" class="form-control" placeholder="Nama">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" id="newContactJabatan" class="form-control" placeholder="Jabatan">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="email" id="newContactEmail" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="text" id="newContactWa" class="form-control" placeholder="No. WA">
+                    </div>
+                    <div class="col-md-1">
+                        <button id="addContactBtn" class="btn btn-success w-100 fw-bold" onclick="window.addContact()"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3"><i class="fas fa-list text-primary me-2"></i>Daftar Kontak Tersimpan</h6>
+        <div id="contactListContainer" class="list-group mb-3">
+            <!-- Contact items injected by JS -->
+        </div>
+
+      </div>
+      <div class="modal-footer border-0 bg-light" style="border-radius: 0 0 20px 20px;">
+        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Catatan Detail Klien B2B -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+      <div class="modal-header bg-primary text-white border-0" style="border-radius: 20px 20px 0 0;">
+        <h5 class="modal-title fw-bold" id="detailModalLabel"><i class="fas fa-file-lines me-2"></i> Catatan Detail: <span id="detailClientName"></span></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-light">
+        <input type="hidden" id="detailClientKey">
+        <p class="text-muted small">Untuk konteks bisnis, SOP, model kerja sama, atau catatan panjang lain (bukan link dokumen — link dokumen taruh di "Kelola Database Aset"). Mendukung baris baru biasa.</p>
+        <textarea id="detailContentInput" class="form-control" rows="14" placeholder="Tulis catatan detail di sini..."></textarea>
+      </div>
+      <div class="modal-footer border-0 bg-light" style="border-radius: 0 0 20px 20px;">
+        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+        <button type="button" class="btn btn-primary rounded-pill px-4 fw-bold" onclick="window.saveDetailContent()"><i class="fas fa-save me-1"></i> Simpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+    const b2bSteps = [
+        { id: "fase1", label: "Fase 1: Kualifikasi (Profiling)", wa: "Halo *[KLIEN]*, terima kasih atas ketertarikannya dengan SIMASRIM. Untuk menyesuaikan solusi terbaik, boleh diinfokan profil singkat dan estimasi volume transaksinya?" },
+        { id: "fase2", label: "Fase 2: Pitching & Edukasi", wa: "Halo *[KLIEN]*, berikut kami lampirkan dokumen pengenalan produk. Apakah ada waktu minggu ini untuk kita agendakan presentasi/demo sistem secara online?" },
+        { id: "fase3", label: "Fase 3: Legalitas & Pricing", wa: "Halo *[KLIEN]*, untuk melangkah ke tahap selanjutnya, mohon bantuannya melampirkan NIB, NPWP, dan KTP PIC untuk keperluan administrasi internal kami." },
+        { id: "fase4", label: "Fase 4: Go-Live Sistem", wa: "Halo *[KLIEN]*, selamat! Setup sistem sudah selesai dan siap digunakan. Akses operasional segera kami serahkan ke tim Bapak/Ibu." }
+    ];
+
+    window.b2bData = [];
+    const clientModal = new bootstrap.Modal(document.getElementById('clientModal'));
+
+    // MOCK FIREBASE SDK using PHP REST Proxy
+    async function fbUpdate(path, data) {
+        await fetch(`api_firebase.php?action=update&path=${path}`, { method: 'POST', body: JSON.stringify(data) });
+        if(window.fetchDb) window.fetchDb(); // Segera refresh setelah update
+    }
+    async function fbPush(path, data) {
+        await fetch(`api_firebase.php?action=push&path=${path}`, { method: 'POST', body: JSON.stringify(data) });
+        if(window.fetchDb) window.fetchDb();
+    }
+    async function fbRemove(path) {
+        await fetch(`api_firebase.php?action=remove&path=${path}`);
+        if(window.fetchDb) window.fetchDb();
+    }
+
+    let isFetching = false;
+
+    window.fetchDb = async function() {
+        if (isFetching) return;
+        isFetching = true;
+        
+        try {
+            const res = await fetch(`api_firebase.php?action=read&path=b2b_tracker`);
+            const data = await res.json();
+            
+            window.b2bData = [];
+            if (data && !data.error) {
+                const keys = Object.keys(data);
+                const arr = keys.map(k => ({ key: k, ...data[k] }));
+                arr.sort((a, b) => (a.order || 0) - (b.order || 0));
+                window.b2bData = arr;
+            }
+            
+            const spinner = document.getElementById('loadingSpinner');
+            if (spinner) spinner.classList.add('d-none');
+            document.getElementById('b2bMainContent').classList.remove('d-none');
+            
+            // Cek apakah user sedang fokus mengetik di input/textarea pada layar utama
+            const activeNode = document.activeElement;
+            const isEditingMain = activeNode && (activeNode.tagName === 'INPUT' || activeNode.tagName === 'TEXTAREA') && !activeNode.closest('.modal');
+            
+            // Jangan render ulang tampilan utama jika user sedang mengetik (menjaga UX)
+            if (!isEditingMain) {
+                window.renderTracker();
+            }
+            
+            // Update daftar aset jika modal sedang terbuka
+            if (window.currentAssetKey && document.getElementById('assetModal').classList.contains('show')) {
+                window.renderAssetList();
+            }
+        } catch (error) {
+            console.error("PROXY ERROR:", error);
+        } finally {
+            isFetching = false;
+        }
+    };
+
+    // Dukung filter kategori otomatis lewat URL, mis. b2b.php?category=Logistik
+    // (dipakai oleh partner/logistik.php yang redirect ke sini dengan filter Logistik).
+    function applyCategoryFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const cat = params.get('category');
+        const filterEl = document.getElementById('categoryFilter');
+        if (cat && filterEl) {
+            filterEl.value = cat;
+            // Kalau kategori dari URL belum ada di opsi (data belum sinkron saat load pertama),
+            // tetap set value-nya — renderTracker() akan menormalkan opsi begitu data siap.
+            if (filterEl.value !== cat) {
+                const opt = document.createElement('option');
+                opt.value = cat; opt.textContent = cat;
+                filterEl.appendChild(opt);
+                filterEl.value = cat;
+            }
+        }
+    }
+
+    async function startApp() {
+        applyCategoryFromUrl();
+        await window.fetchDb();
+        setInterval(window.fetchDb, 15000); // Polling cukup tiap 15 detik di background
+    }
+
+    startApp();
+
+    // =========================================================================
+    // 4. DAFTARKAN FUNGSI KE WINDOW (SYARAT WAJIB MODULE V12)
+    // =========================================================================
+    const KNOWN_TYPES = ['API', 'KOTAK', 'WLFULL', 'WLHALF'];
+
+    window.openAddModal = function() {
+        document.getElementById('modalKey').value = "";
+        document.getElementById('modalName').value = "";
+        document.getElementById('modalDirection').value = "OUT";
+        document.getElementById('modalType').value = "API";
+        document.getElementById('modalTypeCustomWrap').classList.add('d-none');
+        document.getElementById('modalTypeCustom').value = "";
+        document.getElementById('modalCategory').value = "";
+        document.getElementById('modalNotes').value = "";
+        clientModal.show();
+    };
+
+    window.openEditModal = function(key) {
+        const client = window.b2bData.find(c => c.key === key);
+        if (client) {
+            document.getElementById('modalKey').value = client.key;
+            document.getElementById('modalName').value = client.name;
+            document.getElementById('modalDirection').value = client.direction || "OUT";
+            const isKnownType = KNOWN_TYPES.includes(client.type);
+            document.getElementById('modalType').value = isKnownType ? client.type : 'LAINNYA';
+            document.getElementById('modalTypeCustomWrap').classList.toggle('d-none', isKnownType);
+            document.getElementById('modalTypeCustom').value = isKnownType ? '' : (client.type || '');
+            document.getElementById('modalCategory').value = client.category || "";
+            document.getElementById('modalNotes').value = client.notes || "";
+            clientModal.show();
+        }
+    };
+
+    window.saveClientData = function() {
+        const key = document.getElementById('modalKey').value;
+        const name = document.getElementById('modalName').value.trim();
+        const direction = document.getElementById('modalDirection').value;
+        const typeSel = document.getElementById('modalType').value;
+        const type = typeSel === 'LAINNYA' ? (document.getElementById('modalTypeCustom').value.trim() || 'LAINNYA') : typeSel;
+        const category = document.getElementById('modalCategory').value.trim();
+        const notes = document.getElementById('modalNotes').value.trim();
+
+        if (name === "") return alert("Nama Klien wajib diisi!");
+
+        if (key === "") {
+            const newProgress = {};
+            b2bSteps.forEach(s => newProgress[s.id] = false);
+            fbPush('b2b_tracker', { name: name, direction: direction, type: type, category: category, notes: notes, progress: newProgress, order: window.b2bData.length });
+        } else {
+            fbUpdate(`b2b_tracker/${key}`, { name: name, direction: direction, type: type, category: category, notes: notes });
+        }
+        clientModal.hide();
+    };
+
+    window.removeClient = function(key) {
+        if(confirm("Hapus klien ini permanen dari Cloud?")) {
+            fbRemove(`b2b_tracker/${key}`);
+        }
+    };
+
+    const assetModalInstance = new bootstrap.Modal(document.getElementById('assetModal'));
+    window.currentAssetKey = null;
+    let editAssetIndex = -1;
+
+    window.openAssetModal = function(key, name) {
+        window.currentAssetKey = key;
+        document.getElementById('assetClientName').innerText = name;
+        document.getElementById('assetClientKey').value = key;
+        document.getElementById('newAssetName').value = '';
+        document.getElementById('newAssetUrl').value = '';
+        
+        editAssetIndex = -1;
+        document.getElementById('addAssetBtn').innerHTML = '<i class="fas fa-plus"></i> Add';
+        document.getElementById('addAssetBtn').className = 'btn btn-success w-100 fw-bold';
+        
+        window.renderAssetList();
+        assetModalInstance.show();
+    };
+
+    window.renderAssetList = function() {
+        const client = window.b2bData.find(c => c.key === window.currentAssetKey);
+        const container = document.getElementById('assetListContainer');
+        container.innerHTML = '';
+        
+        if(!client || !client.assets || client.assets.length === 0) {
+            container.innerHTML = '<div class="text-muted text-center py-3 small">Belum ada aset/dokumen yang disimpan.</div>';
+            return;
+        }
+
+        client.assets.forEach((asset, index) => {
+            if (!asset) return;
+            container.innerHTML += `
+                <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                    <div>
+                        <div class="fw-bold text-dark small"><i class="fas fa-file-alt text-secondary me-2"></i>${asset.name}</div>
+                        <a href="${asset.url}" target="_blank" class="text-decoration-none small text-primary text-truncate d-inline-block" style="max-width: 400px;">${asset.url}</a>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="window.editAsset(${index})" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="window.removeAsset(${index})" title="Hapus"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+    };
+
+    window.editAsset = function(index) {
+        const client = window.b2bData.find(c => c.key === window.currentAssetKey);
+        if(client && client.assets && client.assets[index]) {
+            document.getElementById('newAssetName').value = client.assets[index].name;
+            document.getElementById('newAssetUrl').value = client.assets[index].url;
+            editAssetIndex = index;
+            document.getElementById('addAssetBtn').innerHTML = '<i class="fas fa-save"></i> Save';
+            document.getElementById('addAssetBtn').className = 'btn btn-warning w-100 fw-bold text-dark';
+        }
+    };
+
+    window.addAsset = function() {
+        const name = document.getElementById('newAssetName').value.trim();
+        let url = document.getElementById('newAssetUrl').value.trim();
+        
+        if(name === '' || url === '') {
+            alert("Nama Aset dan URL tidak boleh kosong.");
+            return;
+        }
+        if(!url.startsWith('http://') && !url.startsWith('https://')) { url = 'https://' + url; }
+
+        const client = window.b2bData.find(c => c.key === window.currentAssetKey);
+        if(client) {
+            let assets = client.assets ? [...client.assets] : [];
+            
+            if (editAssetIndex > -1) {
+                assets[editAssetIndex] = { name: name, url: url };
+            } else {
+                assets.push({ name: name, url: url });
+            }
+            
+            fbUpdate(`b2b_tracker/${window.currentAssetKey}`, { assets: assets });
+            
+            document.getElementById('newAssetName').value = '';
+            document.getElementById('newAssetUrl').value = '';
+            editAssetIndex = -1;
+            document.getElementById('addAssetBtn').innerHTML = '<i class="fas fa-plus"></i> Add';
+            document.getElementById('addAssetBtn').className = 'btn btn-success w-100 fw-bold';
+        }
+    };
+
+    window.removeAsset = function(index) {
+        if(confirm("Hapus aset ini?")) {
+            const client = window.b2bData.find(c => c.key === window.currentAssetKey);
+            if(client && client.assets) {
+                let assets = [...client.assets];
+                assets.splice(index, 1);
+                fbUpdate(`b2b_tracker/${window.currentAssetKey}`, { assets: assets });
+            }
+        }
+    };
+
+    // =========================================================================
+    // KONTAK PIC (contacts[]) — kloning pola assetModal di atas
+    // =========================================================================
+    const contactModalInstance = new bootstrap.Modal(document.getElementById('contactModal'));
+    window.currentContactKey = null;
+    let editContactIndex = -1;
+
+    window.openContactModal = function(key, name) {
+        window.currentContactKey = key;
+        document.getElementById('contactClientName').innerText = name;
+        document.getElementById('contactClientKey').value = key;
+        ['newContactNama', 'newContactJabatan', 'newContactEmail', 'newContactWa'].forEach(id => document.getElementById(id).value = '');
+
+        editContactIndex = -1;
+        document.getElementById('addContactBtn').innerHTML = '<i class="fas fa-plus"></i>';
+        document.getElementById('addContactBtn').className = 'btn btn-success w-100 fw-bold';
+
+        window.renderContactList();
+        contactModalInstance.show();
+    };
+
+    window.renderContactList = function() {
+        const client = window.b2bData.find(c => c.key === window.currentContactKey);
+        const container = document.getElementById('contactListContainer');
+        container.innerHTML = '';
+
+        if (!client || !client.contacts || client.contacts.length === 0) {
+            container.innerHTML = '<div class="text-muted text-center py-3 small">Belum ada kontak PIC yang disimpan.</div>';
+            return;
+        }
+
+        client.contacts.forEach((c, index) => {
+            if (!c) return;
+            container.innerHTML += `
+                <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                    <div>
+                        <div class="fw-bold text-dark small"><i class="fas fa-user text-secondary me-2"></i>${c.nama || '-'} ${c.jabatan ? `<span class="text-muted fw-normal">— ${c.jabatan}</span>` : ''}</div>
+                        <div class="small text-muted">${c.email ? `<i class="fas fa-envelope me-1"></i>${c.email}` : ''} ${c.wa ? `&nbsp;&nbsp;<i class="fab fa-whatsapp me-1"></i>${c.wa}` : ''}</div>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-primary me-1" onclick="window.editContact(${index})" title="Edit"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="window.removeContact(${index})" title="Hapus"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+    };
+
+    window.editContact = function(index) {
+        const client = window.b2bData.find(c => c.key === window.currentContactKey);
+        if (client && client.contacts && client.contacts[index]) {
+            const c = client.contacts[index];
+            document.getElementById('newContactNama').value = c.nama || '';
+            document.getElementById('newContactJabatan').value = c.jabatan || '';
+            document.getElementById('newContactEmail').value = c.email || '';
+            document.getElementById('newContactWa').value = c.wa || '';
+            editContactIndex = index;
+            document.getElementById('addContactBtn').innerHTML = '<i class="fas fa-save"></i>';
+            document.getElementById('addContactBtn').className = 'btn btn-warning w-100 fw-bold text-dark';
+        }
+    };
+
+    window.addContact = function() {
+        const nama = document.getElementById('newContactNama').value.trim();
+        const jabatan = document.getElementById('newContactJabatan').value.trim();
+        const email = document.getElementById('newContactEmail').value.trim();
+        const wa = document.getElementById('newContactWa').value.trim();
+
+        if (nama === '') { alert('Nama kontak tidak boleh kosong.'); return; }
+
+        const client = window.b2bData.find(c => c.key === window.currentContactKey);
+        if (client) {
+            let contacts = client.contacts ? [...client.contacts] : [];
+            const entry = { nama, jabatan, email, wa };
+
+            if (editContactIndex > -1) {
+                contacts[editContactIndex] = entry;
+            } else {
+                contacts.push(entry);
+            }
+
+            fbUpdate(`b2b_tracker/${window.currentContactKey}`, { contacts: contacts });
+
+            ['newContactNama', 'newContactJabatan', 'newContactEmail', 'newContactWa'].forEach(id => document.getElementById(id).value = '');
+            editContactIndex = -1;
+            document.getElementById('addContactBtn').innerHTML = '<i class="fas fa-plus"></i>';
+            document.getElementById('addContactBtn').className = 'btn btn-success w-100 fw-bold';
+        }
+    };
+
+    window.removeContact = function(index) {
+        if (confirm('Hapus kontak ini?')) {
+            const client = window.b2bData.find(c => c.key === window.currentContactKey);
+            if (client && client.contacts) {
+                let contacts = [...client.contacts];
+                contacts.splice(index, 1);
+                fbUpdate(`b2b_tracker/${window.currentContactKey}`, { contacts: contacts });
+            }
+        }
+    };
+
+    // =========================================================================
+    // CATATAN DETAIL (detail_content) — konten panjang, disimpan langsung di Firebase
+    // =========================================================================
+    const detailModalInstance = new bootstrap.Modal(document.getElementById('detailModal'));
+    window.currentDetailKey = null;
+
+    window.openDetailModal = function(key, name) {
+        window.currentDetailKey = key;
+        const client = window.b2bData.find(c => c.key === key);
+        document.getElementById('detailClientName').innerText = name;
+        document.getElementById('detailClientKey').value = key;
+        document.getElementById('detailContentInput').value = (client && client.detail_content) || '';
+        detailModalInstance.show();
+    };
+
+    window.saveDetailContent = function() {
+        const key = window.currentDetailKey;
+        const content = document.getElementById('detailContentInput').value;
+        if (key) {
+            fbUpdate(`b2b_tracker/${key}`, { detail_content: content });
+        }
+        detailModalInstance.hide();
+    };
+
+    window.toggleStep = function(key, stepId, currentValue) {
+        fbUpdate(`b2b_tracker/${key}/progress`, { [stepId]: !currentValue });
+    };
+
+    window.updateInlineNotes = function(key, newValue) {
+        fbUpdate(`b2b_tracker/${key}`, { notes: newValue });
+    };
+
+    window.moveOrder = function(index, direction) {
+        if (direction === 'up' && index > 0) {
+            let curr = window.b2bData[index], prev = window.b2bData[index - 1];
+            fbUpdate(`b2b_tracker/${curr.key}`, { order: index - 1 });
+            fbUpdate(`b2b_tracker/${prev.key}`, { order: index });
+        } else if (direction === 'down' && index < window.b2bData.length - 1) {
+            let curr = window.b2bData[index], next = window.b2bData[index + 1];
+            fbUpdate(`b2b_tracker/${curr.key}`, { order: index + 1 });
+            fbUpdate(`b2b_tracker/${next.key}`, { order: index });
+        }
+    };
+
+    window.renderTracker = function() {
+        const containerOut = document.getElementById('b2bContainerOut');
+        const containerIn = document.getElementById('b2bContainerIn');
+        if(!containerOut || !containerIn) return;
+
+        // Kumpulkan kategori unik dari data untuk isi datalist form & filter dropdown
+        const categories = [...new Set(window.b2bData.map(c => (c.category || '').trim()).filter(Boolean))].sort();
+        const datalistEl = document.getElementById('categoryDatalist');
+        if (datalistEl) datalistEl.innerHTML = categories.map(c => `<option value="${c}">`).join('');
+
+        const filterEl = document.getElementById('categoryFilter');
+        const categoryFilterValue = filterEl ? filterEl.value : '';
+        if (filterEl && filterEl.dataset.optionsSynced !== categories.join('|')) {
+            const currentVal = filterEl.value;
+            filterEl.innerHTML = '<option value="">Semua Kategori</option>' + categories.map(c => `<option value="${c}">${c}</option>`).join('');
+            filterEl.value = currentVal;
+            filterEl.dataset.optionsSynced = categories.join('|');
+        }
+
+        containerOut.innerHTML = '';
+        containerIn.innerHTML = '';
+
+        let outCount = 0;
+        let inCount = 0;
+
+        window.b2bData.forEach((client, index) => {
+            const direction = client.direction || 'OUT';
+            let completed = 0;
+            b2bSteps.forEach(step => { if(client.progress && client.progress[step.id]) completed++; });
+            const percent = Math.round((completed / b2bSteps.length) * 100);
+            
+            let badgeClass = 'badge-api', iconType = 'fa-code', typeLabel = 'JALUR API';
+
+            if (client.type === 'KOTAK') {
+                badgeClass = 'badge-kotak'; iconType = 'fa-box-open'; typeLabel = 'BISNIS KOTAK';
+            } else if (client.type === 'WLFULL') {
+                badgeClass = 'badge-wl-full'; iconType = 'fa-crown'; typeLabel = 'WL - FULL (BUMDES)';
+            } else if (client.type === 'WLHALF') {
+                badgeClass = 'badge-wl-half'; iconType = 'fa-gem'; typeLabel = 'WL - HALF (UTM)';
+            } else if (client.type && !['API'].includes(client.type)) {
+                badgeClass = 'badge-kotak'; iconType = 'fa-tag'; typeLabel = client.type.toUpperCase();
+            }
+
+            const category = (client.category || '').trim();
+            if (categoryFilterValue && category !== categoryFilterValue) return;
+
+            let stepsHTML = '';
+            b2bSteps.forEach(step => {
+                const isChecked = (client.progress && client.progress[step.id]) ? 'checked' : '';
+                const checkVal = isChecked ? true : false;
+                const textWA = step.wa.replace(/\[KLIEN\]/g, client.name);
+                const linkWA = `https://wa.me/?text=${encodeURIComponent(textWA)}`;
+
+                stepsHTML += `
+                    <div class="step-item">
+                        <div class="d-flex align-items-center gap-2 m-0">
+                            <input class="m-0" type="checkbox" id="step_${client.key}_${step.id}" ${isChecked} onchange="window.toggleStep('${client.key}', '${step.id}', ${checkVal})">
+                            <label class="small text-muted fw-medium mb-0" for="step_${client.key}_${step.id}" style="cursor:pointer">
+                                ${step.label}
+                            </label>
+                        </div>
+                        <a href="${linkWA}" target="_blank" class="btn-wa-followup" title="Follow Up via WA"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                `;
+            });
+
+            let assetLinksHTML = '';
+            if(client.assets && client.assets.length > 0) {
+                assetLinksHTML += '<div class="d-flex flex-wrap gap-2 mt-3 pt-3 border-top">';
+                client.assets.forEach((asset) => {
+                    if (!asset) return;
+                    assetLinksHTML += `<a href="${asset.url}" target="_blank" class="badge text-bg-primary text-decoration-none py-2 px-3 fw-normal shadow-sm"><i class="fas fa-link me-2"></i>${asset.name}</a>`;
+                });
+                assetLinksHTML += '</div>';
+            }
+
+            const cardHTML = `
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="tracker-card p-4 h-100 d-flex flex-column rounded-4 overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <span class="${badgeClass} mb-2 d-inline-block"><i class="fas ${iconType} me-1"></i> ${typeLabel}</span>
+                                ${category ? `<span class="badge bg-light text-dark border mb-2 ms-1"><i class="fas fa-folder me-1"></i>${category}</span>` : ''}
+                                <h5 class="fw-bold mb-0 text-dark lh-sm">${client.name}</h5>
+                            </div>
+                            <div class="d-flex gap-1" style="opacity: 0.5; transition: 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.5">
+                                <button class="btn-action-sm" onclick="window.moveOrder(${index}, 'up')" title="Geser ke Atas"><i class="fas fa-chevron-up"></i></button>
+                                <button class="btn-action-sm" onclick="window.moveOrder(${index}, 'down')" title="Geser ke Bawah"><i class="fas fa-chevron-down"></i></button>
+                                <button class="btn-action-sm" onclick="window.openEditModal('${client.key}')" title="Edit Data"><i class="fas fa-pen"></i></button>
+                                <button class="btn-action-sm btn-action-danger" onclick="window.removeClient('${client.key}')" title="Hapus Data"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm mb-3 shadow-sm rounded-3">
+                            <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-comment-dots"></i></span>
+                            <input type="text" class="form-control border-start-0 ps-0 bg-white small text-muted" value="${client.notes || ''}" onchange="window.updateInlineNotes('${client.key}', this.value)" placeholder="Catatan cepat operasional...">
+                        </div>
+                        <div class="mt-auto">
+                            ${direction === 'OUT' ? `
+                            <div class="d-flex justify-content-between align-items-end mb-1">
+                                <small class="text-muted fw-bold" style="font-size: 0.75rem;">PROGRESS AKUISISI</small>
+                                <small class="fw-bold text-primary" style="font-size: 0.9rem;">${percent}%</small>
+                            </div>
+                            <div class="progress mb-3 bg-light" style="height: 8px; border-radius: 10px;">
+                                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${percent}%; border-radius: 10px;"></div>
+                            </div>
+                            <div class="steps-container border rounded-3 p-3 bg-white shadow-sm mb-3" style="max-height: 220px; overflow-y: auto;">
+                                ${stepsHTML}
+                            </div>
+                            ` : ''}
+                            <div class="d-flex gap-2 mt-2">
+                                <button class="btn btn-sm btn-outline-primary w-100 fw-bold" onclick="window.openAssetModal('${client.key}', '${client.name.replace(/'/g, "\\'")}')">
+                                    <i class="fas fa-folder-open me-1"></i> Aset
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary w-100 fw-bold" onclick="window.openContactModal('${client.key}', '${client.name.replace(/'/g, "\\'")}')">
+                                    <i class="fas fa-address-book me-1"></i> Kontak${client.contacts && client.contacts.length ? ` (${client.contacts.length})` : ''}
+                                </button>
+                                <button class="btn btn-sm btn-outline-dark w-100 fw-bold" onclick="window.openDetailModal('${client.key}', '${client.name.replace(/'/g, "\\'")}')">
+                                    <i class="fas fa-file-lines me-1"></i> Detail
+                                </button>
+                            </div>
+                            ${assetLinksHTML}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            if (direction === 'OUT') {
+                containerOut.innerHTML += cardHTML;
+                outCount++;
+            } else {
+                containerIn.innerHTML += cardHTML;
+                inCount++;
+            }
+        });
+        
+        if (outCount === 0) {
+            containerOut.innerHTML = `<div class="col-12 text-center py-5"><div class="p-4 bg-white rounded-4 border"><p class="text-muted mb-0"><i>Belum ada data klien B2B Outbound.</i></p></div></div>`;
+        }
+        if (inCount === 0) {
+            containerIn.innerHTML = `<div class="col-12 text-center py-5"><div class="p-4 bg-white rounded-4 border"><p class="text-muted mb-0"><i>Belum ada data klien B2B Inbound.</i></p></div></div>`;
+        }
+    };
+</script>
+
+<?php include '../includes/footer.php'; ?>

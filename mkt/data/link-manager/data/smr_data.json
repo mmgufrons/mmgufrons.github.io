@@ -1,0 +1,59 @@
+{
+  "links": [
+    {
+      "url": "https://app.simasrim.com/register",
+      "text": "Pendaftaran Agen SIMASRIM",
+      "type": "daftar",
+      "hoverColor": "bg-accent"
+    },
+    {
+      "url": "https://sqris.smsrm.com/?ref=bio",
+      "text": "Pembelian SoundBox SQRIS",
+      "type": "pembelian",
+      "hoverColor": "bg-accent"
+    },
+    {
+      "url": "https://www.simasrim.com/edc/#produk",
+      "text": "Pembelian EDC SIMASRIM",
+      "type": "pembelian",
+      "hoverColor": "bg-accent"
+    },
+    {
+      "url": "https://docs.simasrim.com/6b5c3e7a-8f1d-4c9b-a0e2-d4f8c12e3f5a/",
+      "text": "Tutorial Aplikasi",
+      "type": "standard",
+      "hoverColor": "bg-accent"
+    },
+    {
+      "url": "https://cek.simasrim.com/",
+      "text": "Cek Ongkir & Lacak Resi",
+      "type": "standard",
+      "hoverColor": "bg-accent"
+    },
+    {
+      "url": "https://play.google.com/store/apps/details?id=com.simasrim.edc",
+      "text": "Download Aplikasi Android",
+      "type": "highlight"
+    },
+    {
+      "url": "https://api.whatsapp.com/send/?phone=6280000000000&text=Halo+kak",
+      "text": "Hubungi CS",
+      "type": "whatsapp",
+      "hoverColor": "bg-[#25D366]"
+    }
+  ],
+  "socials": [
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/simasrimapp/"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@simasrim"
+    },
+    {
+      "platform": "linkedin",
+      "url": "https://www.linkedin.com/company/simasrim/"
+    }
+  ]
+}
