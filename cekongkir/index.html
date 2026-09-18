@@ -95,20 +95,39 @@
   footer{text-align:center;color:var(--muted);font-size:12.5px;padding:28px 24px 48px;border-top:1px solid var(--border);max-width:1180px;margin:0 auto;}
   footer a{color:var(--accent);text-decoration:none;transition:all .2s ease;display:inline-block;}
   footer a:hover{color:#818cf8;transform:translateX(-2px);text-decoration:underline;}
+
+  /* Language Switcher */
+  .lang-btn{
+    background:transparent; border:none; color:var(--muted);
+    font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:99px;
+    cursor:pointer; transition:all .2s ease;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .lang-btn:hover{ color:#fff; }
+  .lang-btn.active{
+    background:#27272a; color:#fff; border:1px solid #3f3f46;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  }
+
 </style>
 </head>
 <body>
 
 <nav class="top-nav">
-  <a href="../index.html">← Portofolio Hub</a>
+  <a href="../index.html" data-i18n="back.hub">← Portofolio Hub</a>
   <span class="sep">/</span>
-  <span class="current">Purwarupa Cek Ongkir</span>
+  <span class="current" data-i18n="cek.title">Galeri Tema Cek Ongkir</span>
+  <div style="margin-left:auto;display:inline-flex;align-items:center;gap:4px;background:#121215;border:1px solid var(--border);border-radius:99px;padding:3px 6px;">
+    <button type="button" class="lang-btn active" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
+    <span style="color:#3f3f46;font-size:11px;">|</span>
+    <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
+  </div>
 </nav>
 
 <header>
-  <div class="badge">Purwarupa Desain Antarmuka</div>
-  <h1>Galeri Tema Cek Ongkir</h1>
-  <p>Kompilasi eksplorasi purwarupa UI/UX modul Cek Ongkir &amp; Tracking SiCek, mencakup varian Signature, Nova, dan implementasi Landing Page.</p>
+  <div class="badge" data-i18n="cek.badge">Purwarupa Desain Antarmuka</div>
+  <h1 data-i18n="cek.title">Galeri Tema Cek Ongkir</h1>
+  <p data-i18n="cek.desc">Kompilasi eksplorasi purwarupa UI/UX modul Cek Ongkir &amp; Tracking SiCek, mencakup varian Signature, Nova, dan implementasi Landing Page.</p>
 </header>
 
 <main>
@@ -121,7 +140,7 @@
         <div class="thumb t-signature"><div class="mock"><div class="bar" style="background:linear-gradient(90deg,#b58cff,transparent);"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip" style="background:rgba(181,140,255,.25);"></div></div></div>
         <div class="body">
           <h3>Signature</h3>
-          <p>Identitas visual khas SiCek — beranda, cek ongkir, tracking, dan halaman transaksi berhasil.</p>
+          <p data-i18n="cek.card.sig.desc">Identitas visual khas SiCek — beranda, cek ongkir, tracking, dan halaman transaksi berhasil.</p>
           <div class="pages">
             <a class="primary" href="sicek/signature/beranda/code.html">Beranda</a>
             <a href="sicek/signature/cek_ongkir/code.html">Cek Ongkir</a>
@@ -135,7 +154,7 @@
         <div class="thumb t-nova"><div class="mock"><div class="bar" style="background:linear-gradient(90deg,#7eb8ff,transparent);"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip" style="background:rgba(126,184,255,.25);"></div></div></div>
         <div class="body">
           <h3>Nova</h3>
-          <p>Iterasi lanjutan dari Signature dengan penyegaran visual & interaksi.</p>
+          <p data-i18n="cek.card.nova.desc">Iterasi lanjutan dari Signature dengan penyegaran visual & interaksi.</p>
           <div class="pages">
             <a class="primary" href="sicek/nova/beranda/code.html">Beranda</a>
             <a href="sicek/nova/cek_ongkir/code.html">Cek Ongkir</a>
@@ -168,5 +187,6 @@
   Bagian dari portofolio demo — lihat hub lengkap di <a href="../index.html">index portofolio</a>.
 </footer>
 
+<script src="../assets/js/i18n.js"></script>
 </body>
 </html>

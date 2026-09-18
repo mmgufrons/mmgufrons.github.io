@@ -20,6 +20,11 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .lang-btn.active { color: #F3700D !important; font-weight: 800 !important; }
+    </style>
+
 </head>
 <body>
 
@@ -283,7 +288,7 @@
                             <h3>📋 Data Transaksi PPOB</h3>
                             <span style="color:var(--text-muted);font-size:0.8rem;" id="trx-count"></span>
                             <select class="glass-select" id="filter-trx-kat">
-                                <option value="all">Semua Kategori</option>
+                                <option value="all" data-i18n="mkt.sub.filter.all">Semua Kategori</option>
                             </select>
                             <input type="text" class="glass-input" id="filter-trx-search" placeholder="🔍 Cari kode/produk/email...">
                         </div>
@@ -711,5 +716,6 @@
         })();
     </script>
 
+<script src="../../../assets/js/i18n.js"></script>
 </body>
 </html>
