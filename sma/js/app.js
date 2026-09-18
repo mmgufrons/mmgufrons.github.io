@@ -310,15 +310,9 @@ var deferredInstallPrompt = null;
 window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault();
     deferredInstallPrompt = e;
-    // Hanya tampilkan banner jika belum pernah di-dismiss DAN belum terinstall
-    var wasDismissed = localStorage.getItem('pwa_dismissed');
+    // Pada mode demo portofolio, tidak perlu memunculkan popup banner di bawah layar
     var wasInstalled = localStorage.getItem('pwa_installed');
     var sidebarBtn = document.getElementById('btn-install-pwa');
-    if (!wasDismissed && !wasInstalled) {
-        var banner = document.getElementById('pwaInstallBanner');
-        if (banner) banner.classList.remove('hidden');
-    }
-    // Sidebar button selalu tampil jika belum terinstall
     if (!wasInstalled && sidebarBtn) sidebarBtn.classList.remove('hidden');
 });
 

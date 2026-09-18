@@ -31,12 +31,6 @@
         <i class="fa-solid fa-arrow-left"></i> Portofolio Utama
     </a>
 
-    <!-- Widget Isi Data Dummy — melayang, tampil terus (login maupun sudah masuk) -->
-    <button onclick="window.portoResetSeedData()" title="Isi ulang data demo dari awal"
-        style="z-index:99999"
-        class="fixed bottom-4 right-4 flex items-center gap-2 bg-violet-600 hover:bg-violet-500 text-white text-xs font-bold py-2.5 px-4 rounded-full shadow-lg shadow-violet-900/40 transition">
-        <i class="fa-solid fa-rotate"></i> Isi Data Dummy
-    </button>
 
     <!-- Offline Indicator -->
     <div id="offlineBar" class="hidden fixed top-0 left-0 w-full z-[9999] bg-orange-600 text-white text-center py-1 text-[10px] font-bold uppercase tracking-widest shadow-md">
@@ -46,39 +40,75 @@
     <!-- ============================================================ -->
     <!-- LOGIN OVERLAY -->
     <!-- ============================================================ -->
-    <div id="loginOverlay" class="fixed inset-0 flex items-center justify-center p-4 bg-[#0a0a0a] z-[200]">
-        <div class="card-bg w-full max-w-sm p-8 rounded-2xl shadow-2xl text-center border border-[#333]">
-            <div class="mb-6 flex justify-center">
-                <div class="w-16 h-16 bg-violet-900/30 rounded-full flex items-center justify-center text-violet-400 text-3xl shadow-[0_0_20px_rgba(124,58,237,0.4)]">
+    <!-- ============================================================ -->
+    <!-- LOGIN OVERLAY / ROLE PICKER -->
+    <!-- ============================================================ -->
+    <div id="loginOverlay" class="fixed inset-0 flex items-center justify-center p-4 bg-[#0a0a0a]/95 backdrop-blur-md z-[200]">
+        <div class="card-bg w-full max-w-md p-6 md:p-8 rounded-2xl shadow-2xl text-center border border-[#333]">
+            <div class="mb-4 flex justify-center">
+                <div class="w-14 h-14 bg-violet-900/40 rounded-2xl flex items-center justify-center text-violet-400 text-2xl shadow-[0_0_20px_rgba(124,58,237,0.3)] border border-violet-500/30">
                     <i class="fa-solid fa-building-columns"></i>
                 </div>
             </div>
-            <h2 class="text-2xl font-bold text-white mb-1">PT SMA ERP</h2>
-            <p class="text-gray-500 text-xs mb-8 uppercase tracking-widest">PT SMA Enterprise OS CLOUD v10.3</p>
-            <div class="mb-4 text-left bg-violet-950/30 border border-violet-800/40 rounded-lg p-3 text-[11px] text-violet-200 leading-relaxed">
-                <b>Mode Demo Portofolio</b> — tidak ada koneksi ke server sungguhan.
-                Klik Login → data demo sudah otomatis terisi. Ini simulasi ERP internal tim: task,
-                notes, chat, dan direktori tools. Masuk pakai email demo apa saja, password bebas,
-                contoh: <code class="text-violet-100">dimas@contoh-perusahaan.demo</code> (SuperAdmin)
-                atau <code class="text-violet-100">bagas@contoh-perusahaan.demo</code> (Staff CS).
-            </div>
-            <div class="space-y-4">
-                <input type="email" id="loginEmail" value="dimas@contoh-perusahaan.demo" class="w-full input-bg rounded-lg p-3 text-sm placeholder-gray-500" placeholder="Email Karyawan">
-                <input type="password" id="loginPass" value="demo123" class="w-full input-bg rounded-lg p-3 text-sm placeholder-gray-500" placeholder="Password">
-                <button onclick="handleLogin()" class="w-full bg-violet-600 hover:bg-violet-500 text-white font-bold py-3 rounded-lg transition shadow-lg shadow-violet-900/30">MASUK WORKSTATION (DEMO)</button>
-                <div class="flex items-center gap-3">
-                    <div class="flex-1 h-px bg-[#333]"></div>
-                    <span class="text-gray-600 text-[10px] font-bold uppercase tracking-widest">atau</span>
-                    <div class="flex-1 h-px bg-[#333]"></div>
-                </div>
-                <button onclick="handleGoogleLogin()" class="w-full flex items-center justify-center gap-3 bg-[#1e1e1e] hover:bg-[#252525] border border-[#333] hover:border-[#444] text-white font-bold py-3 rounded-lg transition">
-                    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-                    Masuk dengan Google
+            <h2 class="text-xl md:text-2xl font-bold text-white mb-1">PT SMA Enterprise ERP</h2>
+            <p class="text-gray-400 text-[11px] mb-5 tracking-wide">Pilih Peran Demo untuk Langsung Membuka Workstation:</p>
+
+            <!-- 2 PILIHAN UTAMA: DEMO ADMIN VS DEMO USER -->
+            <div class="space-y-3 mb-5 text-left">
+                <!-- Opsi 1: Demo Admin -->
+                <button type="button" onclick="loginAsDemoRole('admin')" class="w-full group bg-gradient-to-r from-violet-900/60 to-purple-900/40 hover:from-violet-800/80 hover:to-purple-800/60 border border-violet-500/40 hover:border-violet-400 text-white p-3.5 rounded-xl transition shadow-lg flex items-center justify-between">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-10 h-10 rounded-xl bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-amber-300 text-lg shrink-0">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-xs text-white">Demo Admin</span>
+                                <span class="bg-amber-400/20 text-amber-300 text-[9px] font-bold px-1.5 py-0.2 rounded border border-amber-400/30">SuperAdmin</span>
+                            </div>
+                            <div class="text-[10.5px] text-violet-200 truncate">Dimas Pratama • Marketing Head</div>
+                            <div class="text-[9.5px] text-gray-400">Akses penuh: C-Level, Analitik, Manajemen Tim &amp; Delegasi</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-xs text-violet-300 group-hover:translate-x-1 transition ml-2"></i>
+                </button>
+
+                <!-- Opsi 2: Demo User / Staff -->
+                <button type="button" onclick="loginAsDemoRole('staff')" class="w-full group bg-[#161616] hover:bg-[#202020] border border-[#333] hover:border-emerald-500/50 text-white p-3.5 rounded-xl transition shadow-lg flex items-center justify-between">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg shrink-0">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-xs text-white">Demo User / Staff</span>
+                                <span class="bg-emerald-400/20 text-emerald-300 text-[9px] font-bold px-1.5 py-0.2 rounded border border-emerald-400/30">Staff CS</span>
+                            </div>
+                            <div class="text-[10.5px] text-gray-300 truncate">Bagas Saputra • Customer Support</div>
+                            <div class="text-[9.5px] text-gray-400">Akses operasional: Tugas Harian, Kalender, Notes &amp; Chat</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-xs text-gray-400 group-hover:translate-x-1 group-hover:text-emerald-300 transition ml-2"></i>
                 </button>
             </div>
+
+            <!-- Opsi Manual / Input Custom -->
+            <details class="text-left group text-xs">
+                <summary class="cursor-pointer text-[10.5px] text-gray-400 hover:text-violet-300 transition select-none flex items-center justify-center gap-1.5 py-1">
+                    <span>Atau coba akun kustom / form manual</span>
+                    <i class="fa-solid fa-chevron-down text-[8px] group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="mt-3 pt-3 border-t border-[#2a2a2a] space-y-2.5">
+                    <input type="email" id="loginEmail" value="dimas@contoh-perusahaan.demo" class="w-full input-bg rounded-lg p-2.5 text-xs placeholder-gray-500" placeholder="Email Karyawan">
+                    <input type="password" id="loginPass" value="demo123" class="w-full input-bg rounded-lg p-2.5 text-xs placeholder-gray-500" placeholder="Password">
+                    <button type="button" onclick="handleLogin()" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 rounded-lg text-xs transition border border-gray-600">Masuk dengan Form</button>
+                </div>
+            </details>
+
             <p id="loginError" class="text-red-400 text-[11px] mt-4 hidden bg-red-900/20 p-3 rounded-lg text-left leading-relaxed"></p>
-            <p class="text-gray-700 text-[10px] mt-6">Akun dibuat oleh Administrator. Hubungi Administrator jika ada masalah login.</p>
-            <a href="../index.html" class="block text-gray-500 hover:text-violet-400 text-[11px] mt-4 transition">← Kembali ke Portofolio Utama</a>
+            <a href="../index.html" class="inline-flex items-center gap-1.5 text-gray-400 hover:text-violet-400 text-[11px] mt-5 transition">
+                <i class="fa-solid fa-arrow-left text-[10px]"></i> Kembali ke Portofolio Utama
+            </a>
         </div>
     </div>
 
@@ -99,14 +129,21 @@
             <p class="text-[9px] text-gray-500 mt-0.5 uppercase tracking-widest font-semibold">PT SMA Enterprise OS CLOUD v10.3</p>
         </div>
 
-        <!-- User Info -->
+        <!-- User Info & Role Switcher -->
         <div class="px-4 py-3 border-b border-[#2a2a2a] bg-[#161616]">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-full bg-violet-900/40 border border-violet-500/30 flex items-center justify-center text-violet-400 text-xs font-bold shrink-0" id="sidebarAvatar">?</div>
-                <div class="min-w-0">
+                <div class="min-w-0 flex-1">
                     <p class="text-white text-xs font-semibold truncate" id="sidebarUserName">Memuat...</p>
                     <p class="text-gray-500 text-[9px] truncate" id="sidebarUserRole">—</p>
                 </div>
+            </div>
+            <!-- Quick Demo Switcher -->
+            <div class="mt-2.5 pt-2 border-t border-[#252525] flex items-center justify-between">
+                <span class="text-[9.5px] text-gray-400 font-medium">Akun Demo:</span>
+                <button type="button" onclick="window.switchDemoRole()" id="btnSwitchRole" class="text-[10px] bg-violet-950/70 hover:bg-violet-800 text-violet-300 hover:text-white border border-violet-700/50 px-2 py-0.5 rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm" title="Ganti antara SuperAdmin dan Staff">
+                    <i class="fa-solid fa-repeat text-[9px]"></i> <span id="btnSwitchRoleText">Ganti Akun</span>
+                </button>
             </div>
         </div>
 
@@ -721,17 +758,7 @@
         </div>
     </div>
 
-    <!-- PWA Install Banner -->
-    <div id="pwaInstallBanner" class="hidden fixed bottom-0 left-0 w-full z-[100] bg-[#1a1a1a] border-t border-violet-500/30 text-white p-4 flex justify-between items-center">
-        <div>
-            <h4 class="font-bold text-sm">Install PT SMA ERP</h4>
-            <p class="text-[10px] text-gray-300">Tambahkan ke layar utama untuk akses instan.</p>
-        </div>
-        <div class="flex gap-2">
-            <button onclick="dismissPWABanner()" class="px-3 py-1.5 text-xs text-gray-400 hover:text-white transition">Jangan Tampilkan Lagi</button>
-            <button onclick="installPWA()" class="bg-violet-600 hover:bg-violet-500 px-4 py-1.5 rounded-lg text-xs font-bold shadow-lg transition">Install</button>
-        </div>
-    </div>
+
 
     <!-- ============================================================ -->
     <!-- SCRIPTS — ORDER MATTERS -->

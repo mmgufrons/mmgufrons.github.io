@@ -220,7 +220,45 @@ function setupRoleBasedUI() {
         'Staff':         '🔹 Staff · ' + (currentUser.department || '')
     };
     if (roleEl) roleEl.textContent = roleLabels[role] || (role + ' — ' + (currentUser.department || ''));
+
+    // Update Quick Demo Role Switcher
+    var switchBtn = document.getElementById('btnSwitchRole');
+    var switchBtnText = document.getElementById('btnSwitchRoleText');
+    if (switchBtnText) {
+        if (role === 'SuperAdmin') {
+            switchBtnText.textContent = 'Ganti ke Demo User (Staff)';
+            if (switchBtn) {
+                switchBtn.className = 'text-[10px] bg-emerald-950/70 hover:bg-emerald-800 text-emerald-300 hover:text-white border border-emerald-700/50 px-2 py-0.5 rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm';
+            }
+        } else {
+            switchBtnText.textContent = 'Ganti ke Demo Admin';
+            if (switchBtn) {
+                switchBtn.className = 'text-[10px] bg-violet-950/70 hover:bg-violet-800 text-violet-300 hover:text-white border border-violet-700/50 px-2 py-0.5 rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm';
+            }
+        }
+    }
 }
+
+// ── Role Switcher Helpers untuk Demo Portofolio ─────────────────
+window.loginAsDemoRole = function(role) {
+    var email = (role === 'staff' || role === 'user') 
+        ? 'bagas@contoh-perusahaan.demo' 
+        : 'dimas@contoh-perusahaan.demo';
+    var emailInput = document.getElementById('loginEmail');
+    var passInput = document.getElementById('loginPass');
+    if (emailInput) emailInput.value = email;
+    if (passInput) passInput.value = 'demo123';
+    handleLogin();
+};
+
+window.switchDemoRole = function() {
+    if (!currentUser) {
+        window.loginAsDemoRole('admin');
+        return;
+    }
+    var targetRole = (currentUser.role === 'SuperAdmin') ? 'staff' : 'admin';
+    window.loginAsDemoRole(targetRole);
+};
 
 
 // ── Handle Login Form ─────────────────────────────────────────
