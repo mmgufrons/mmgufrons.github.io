@@ -414,7 +414,12 @@
                 localStorage.setItem(B2B_STORAGE_KEY, JSON.stringify(B2B_DEFAULT_SEED));
                 return JSON.parse(JSON.stringify(B2B_DEFAULT_SEED));
             }
-            return JSON.parse(raw);
+            const parsed = JSON.parse(raw);
+            if (!parsed || Object.keys(parsed).length === 0) {
+                localStorage.setItem(B2B_STORAGE_KEY, JSON.stringify(B2B_DEFAULT_SEED));
+                return JSON.parse(JSON.stringify(B2B_DEFAULT_SEED));
+            }
+            return parsed;
         } catch (e) {
             return JSON.parse(JSON.stringify(B2B_DEFAULT_SEED));
         }
@@ -517,13 +522,7 @@
         }
     }
 
-    async function startApp() {
-        applyCategoryFromUrl();
-        await window.fetchDb();
-        setInterval(window.fetchDb, 15000); // Polling cukup tiap 15 detik di background
-    }
-
-    startApp();
+    // startApp dipindahkan ke akhir script setelah seluruh fungsi terdaftar
 
     // =========================================================================
     // 4. DAFTARKAN FUNGSI KE WINDOW (SYARAT WAJIB MODULE V12)
@@ -970,6 +969,18 @@
             containerIn.innerHTML = `<div class="col-12 text-center py-5"><div class="p-4 bg-white rounded-4 border"><p class="text-muted mb-0"><i>Belum ada data klien B2B Inbound.</i></p></div></div>`;
         }
     };
+
+    async function startApp() {
+        applyCategoryFromUrl();
+        await window.fetchDb();
+        setInterval(window.fetchDb, 15000);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startApp);
+    } else {
+        startApp();
+    }
 </script>
 
 

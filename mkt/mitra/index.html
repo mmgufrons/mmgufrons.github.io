@@ -617,7 +617,9 @@ window.copyMergeWA = function() {
             document.getElementById('syncAlert').style.display = 'none';
         }
         
-        window.renderTracker();
+        if (typeof window.renderTracker === 'function') {
+            window.renderTracker();
+        }
         
         if (window.currentAssetMitraId && document.getElementById('assetModal').classList.contains('show')) {
             window.renderAssetList();
@@ -1099,6 +1101,10 @@ window.copyMergeWA = function() {
         bsToast.show();
     };
 
+    // Initial render in case data was already loaded before renderTracker was defined
+    if (typeof window.renderTracker === 'function') {
+        window.renderTracker();
+    }
 </script>
 
 

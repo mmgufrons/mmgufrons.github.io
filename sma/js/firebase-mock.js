@@ -338,6 +338,14 @@
     } catch (e) {
       currentAuthUser = null;
     }
+    // Portofolio demo: jika belum ada sesi login, otomatis login sebagai SuperAdmin demo agar tidak tertahan di form password
+    if (!currentAuthUser) {
+      var users = (TREE && TREE.users) || {};
+      var firstUid = Object.keys(users)[0] || "demoUID000001";
+      var email = (users[firstUid] && users[firstUid].email) || "dimas@contoh-perusahaan.demo";
+      currentAuthUser = { uid: firstUid, email: email };
+      saveAuthUser(currentAuthUser);
+    }
   }
   function saveAuthUser(u) {
     currentAuthUser = u;
