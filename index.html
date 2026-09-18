@@ -224,20 +224,48 @@
   .footer-link:hover{ color:#fafafa; transform:translateX(4px); }
   .footer-btn{ background:#18181c; color:#f4f4f5; border:1px solid #27272a; border-radius:8px; padding:7px 14px; font-size:12.5px; font-weight:600; cursor:pointer; font-family:inherit; transition:all .2s ease; }
   .footer-btn:hover{ background:#27272a; border-color:#3f3f46; color:#ffffff; transform:translateY(-1px); box-shadow:0 4px 12px rgba(0,0,0,0.3); }
+
+  /* Language Switcher */
+  .lang-switch{
+    position:absolute; top:24px; right:24px;
+    display:inline-flex; align-items:center; gap:4px;
+    background:#121215; border:1px solid var(--border);
+    border-radius:99px; padding:3px 6px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.35);
+    z-index:50;
+  }
+  .lang-btn{
+    background:transparent; border:none; color:var(--muted);
+    font-size:11.5px; font-weight:700; padding:5px 11px; border-radius:99px;
+    cursor:pointer; transition:all .2s ease;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .lang-btn:hover{ color:#fff; }
+  .lang-btn.active{
+    background:#27272a; color:#fff; border:1px solid #3f3f46;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  }
+  .lang-sep{ color:#3f3f46; font-size:11px; }
+
 </style>
 </head>
 <body>
 
 <header>
-  <div class="badge">Hub Portofolio Terpadu</div>
-  <h1>Portofolio — Maulana Gufron</h1>
-  <p>Eksplorasi rekam jejak digital saya: arsitektur sistem bisnis &amp; AI operations di industri, serta portofolio kreatif &amp; identitas visual brand.</p>
+  <div class="lang-switch">
+    <button type="button" class="lang-btn active" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
+    <span class="lang-sep">|</span>
+    <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
+  </div>
+  <div class="badge" data-i18n="hub.badge">Hub Portofolio Terpadu</div>
+  <h1 data-i18n="hub.title">Portofolio — Maulana Gufron</h1>
+  <p data-i18n="hub.desc">Eksplorasi rekam jejak digital saya: arsitektur sistem bisnis &amp; AI operations di industri, serta portofolio kreatif &amp; identitas visual brand.</p>
 </header>
 
 <div class="tab-nav-wrap">
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('business')">💼 Business &amp; AI Operations</button>
-    <button class="tab-btn" onclick="switchTab('creative')">🎨 Creative &amp; Visual Design</button>
+    <button class="tab-btn active" onclick="switchTab('business')" data-i18n="hub.tab.business">💼 Business &amp; AI Operations</button>
+    <button class="tab-btn" onclick="switchTab('creative')" data-i18n="hub.tab.creative">🎨 Creative &amp; Visual Design</button>
   </div>
 </div>
 
@@ -247,71 +275,71 @@
   <div id="tab-business" class="tab-content active">
 
     <section>
-      <div class="section-head"><h2>🔗 Proyek Live</h2><span>ekosistem publik yang aktif beroperasi</span></div>
+      <div class="section-head"><h2 data-i18n="sec.live.title">🔗 Proyek Live</h2><span data-i18n="sec.live.sub">ekosistem publik yang aktif beroperasi</span></div>
       <div class="live-grid">
         <a class="live-card" href="https://www.simasrim.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>simasrim.com</h3><span>Super App Logistik &amp; Bisnis Digital</span></div>
+          <div class="lc-body"><h3>simasrim.com</h3><span data-i18n="card.simasrim.sub">Super App Logistik &amp; Bisnis Digital</span></div>
         </a>
         <a class="live-card" href="https://sqris.id" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>sqris.id</h3><span>Bikin QRIS Gratis Soundbox</span></div>
+          <div class="lc-body"><h3>sqris.id</h3><span data-i18n="card.sqris.sub">Bikin QRIS Gratis Soundbox</span></div>
         </a>
         <a class="live-card" href="https://ordermudah.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>ordermudah.com</h3><span>Platform E-Commerce Cepat</span></div>
+          <div class="lc-body"><h3>ordermudah.com</h3><span data-i18n="card.order.sub">Platform E-Commerce Cepat</span></div>
         </a>
         <a class="live-card" href="https://solusimitraaplikasi.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>solusimitraaplikasi.com</h3><span>Integrated Digital Ecosystem</span></div>
+          <div class="lc-body"><h3>solusimitraaplikasi.com</h3><span data-i18n="card.solusi.sub">Integrated Digital Ecosystem</span></div>
         </a>
       </div>
     </section>
 
     <section>
-      <div class="section-head"><h2>🌐 Layanan &amp; Dokumentasi Terintegrasi</h2><span>subdomain &amp; portal operasional</span></div>
+      <div class="section-head"><h2 data-i18n="sec.docs.title">🌐 Layanan &amp; Dokumentasi Terintegrasi</h2><span data-i18n="sec.docs.sub">subdomain &amp; portal operasional</span></div>
       <div class="live-grid">
         <a class="live-card" href="panduan/index.html">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>Dokumen Panduan SIMASRIM</h3><span>Panduan per peran: Agen, Seller, B2B, Mobile</span></div>
+          <div class="lc-body"><h3>Dokumen Panduan SIMASRIM</h3><span data-i18n="card.panduan.sub">Panduan per peran: Agen, Seller, B2B, Mobile</span></div>
         </a>
         <a class="live-card" href="https://smr.smsrm.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>SMR — Pusat Informasi</h3><span>Direktori link resmi ekosistem SIMASRIM</span></div>
+          <div class="lc-body"><h3>SMR — Pusat Informasi</h3><span data-i18n="card.smr.sub">Direktori link resmi ekosistem SIMASRIM</span></div>
         </a>
         <a class="live-card" href="https://sta.smsrm.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>STA — Albani Store</h3><span>Etalase online &amp; katalog produk</span></div>
+          <div class="lc-body"><h3>STA — Albani Store</h3><span data-i18n="card.sta.sub">Etalase online &amp; katalog produk</span></div>
         </a>
         <a class="live-card" href="https://apidocs.smsrm.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>API Docs</h3><span>Dokumentasi API untuk mitra B2B</span></div>
+          <div class="lc-body"><h3>API Docs</h3><span data-i18n="card.apidocs.sub">Dokumentasi API untuk mitra B2B</span></div>
         </a>
         <a class="live-card" href="https://lpqris.smsrm.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>QRIS Statis2Dinamis</h3><span>Konversi QRIS statis ke dinamis</span></div>
+          <div class="lc-body"><h3>QRIS Statis2Dinamis</h3><span data-i18n="card.lpqris.sub">Konversi QRIS statis ke dinamis</span></div>
         </a>
         <a class="live-card" href="https://mp.smsrm.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>Data Marketplace</h3><span>Dashboard performa live shopping</span></div>
+          <div class="lc-body"><h3>Data Marketplace</h3><span data-i18n="card.mp.sub">Dashboard performa live shopping</span></div>
         </a>
         <a class="live-card" href="https://info.smsrm.com/panduan_edc_agen.php" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>Panduan EDC Agen</h3><span>Standar aktivasi mesin EDC Agen</span></div>
+          <div class="lc-body"><h3>Panduan EDC Agen</h3><span data-i18n="card.edc.sub">Standar aktivasi mesin EDC Agen</span></div>
         </a>
       </div>
     </section>
 
     <section>
-      <div class="section-head"><h2>🧪 Purwarupa &amp; Demo Interaktif</h2><span>sistem internal operasional &amp; UI</span></div>
+      <div class="section-head"><h2 data-i18n="sec.demo.title">🧪 Purwarupa &amp; Demo Interaktif</h2><span data-i18n="sec.demo.sub">sistem internal operasional &amp; UI</span></div>
       <div class="grid">
         <div class="card">
           <div class="thumb">🏢</div>
           <div class="body">
             <span class="tag demo">Enterprise OS</span>
-            <h3>SMA Internal ERP</h3>
-            <p>Sistem operasional internal: koordinasi divisi, manajemen tugas harian, pesan tim, dan direktori tools.</p>
-            <a class="cta" href="sma/index.html">Buka Aplikasi Demo</a>
+            <h3 data-i18n="card.sma.title">SMA Internal ERP</h3>
+            <p data-i18n="card.sma.desc">Sistem operasional internal: koordinasi divisi, manajemen tugas harian, pesan tim, dan direktori tools.</p>
+            <a class="cta" href="sma/index.html" data-i18n="open.demo">Buka Aplikasi Demo</a>
           </div>
         </div>
 
@@ -319,9 +347,9 @@
           <div class="thumb">📊</div>
           <div class="body">
             <span class="tag demo">Marketing Operations</span>
-            <h3>MKT Suite</h3>
-            <p>Suite aplikasi marketing &amp; kemitraan: CRM Campaign, tracker mitra B2B, legal dokumen, dan pelaporan.</p>
-            <a class="cta" href="mkt/index.html">Buka Aplikasi Demo</a>
+            <h3 data-i18n="card.mkt.title">MKT Suite</h3>
+            <p data-i18n="card.mkt.desc">Suite aplikasi marketing &amp; kemitraan: CRM Campaign, tracker mitra B2B, legal dokumen, dan pelaporan.</p>
+            <a class="cta" href="mkt/index.html" data-i18n="open.demo">Buka Aplikasi Demo</a>
           </div>
         </div>
 
@@ -329,9 +357,9 @@
           <div class="thumb">📦</div>
           <div class="body">
             <span class="tag demo">Design System</span>
-            <h3>SiCek — Cek Ongkir</h3>
-            <p>Purwarupa interaktif modul cek ongkir: Signature, Nova, dan Landing Page cekongkirmurah.</p>
-            <a class="cta" href="cekongkir/index.html">Buka Galeri Tema</a>
+            <h3 data-i18n="card.sicek.title">SiCek — Cek Ongkir</h3>
+            <p data-i18n="card.sicek.desc">Purwarupa interaktif modul cek ongkir: Signature, Nova, dan Landing Page cekongkirmurah.</p>
+            <a class="cta" href="cekongkir/index.html" data-i18n="open.gallery">Buka Galeri Tema</a>
           </div>
         </div>
       </div>
@@ -343,101 +371,101 @@
   <div id="tab-creative" class="tab-content">
 
     <section>
-      <div class="section-head"><h2>🎨 Portofolio Desain &amp; Branding</h2><span>identitas visual UMKM, periklanan, dan creative production</span></div>
+      <div class="section-head"><h2 data-i18n="sec.design.title">🎨 Portofolio Desain &amp; Branding</h2><span data-i18n="sec.design.sub">identitas visual UMKM, periklanan, dan creative production</span></div>
       <div class="design-grid">
 
         <div class="design-card">
           <div class="design-thumb"><img src="desain/images/img_1.webp" alt="Vilook" loading="lazy"></div>
           <div class="design-body">
-            <span class="tag design">Branding &amp; Media</span>
+            <span class="tag design" data-i18n="card.vilook.tag">Branding &amp; Media</span>
             <h3>Vilook</h3>
-            <p>Perancangan strategi visual konten marketing dan video editing untuk brand positioning.</p>
-            <a class="cta secondary" href="desain/portfolio-single-vilook.html">Lihat Detail Karya</a>
+            <p data-i18n="card.vilook.desc">Perancangan strategi visual konten marketing dan video editing untuk brand positioning.</p>
+            <a class="cta secondary" href="desain/portfolio-single-vilook.html" data-i18n="view.detail">Lihat Detail Karya</a>
           </div>
         </div>
 
         <div class="design-card">
           <div class="design-thumb"><img src="desain/images/img_2.webp" alt="Rumah Makan Simpang Bandara" loading="lazy"></div>
           <div class="design-body">
-            <span class="tag design">Identitas Visual</span>
+            <span class="tag design" data-i18n="card.rm.tag">Identitas Visual</span>
             <h3>RM Simpang Bandara</h3>
-            <p>Desain logo, signage fisik, dan materi promosi kuliner terintegrasi.</p>
-            <a class="cta secondary" href="desain/portfolio-single-rm.html">Lihat Detail Karya</a>
+            <p data-i18n="card.rm.desc">Desain logo, signage fisik, dan materi promosi kuliner terintegrasi.</p>
+            <a class="cta secondary" href="desain/portfolio-single-rm.html" data-i18n="view.detail">Lihat Detail Karya</a>
           </div>
         </div>
 
         <div class="design-card">
           <div class="design-thumb"><img src="desain/images/img_5.webp" alt="Kasmaranid" loading="lazy"></div>
           <div class="design-body">
-            <span class="tag design">Branding UMKM</span>
+            <span class="tag design" data-i18n="card.kasmaran.tag">Branding UMKM</span>
             <h3>Kasmaranid</h3>
-            <p>Pengembangan identitas brand, tone periklanan, serta materi grafis media sosial.</p>
-            <a class="cta secondary" href="desain/portfolio-single-kasmaran.html">Lihat Detail Karya</a>
+            <p data-i18n="card.kasmaran.desc">Pengembangan identitas brand, tone periklanan, serta materi grafis media sosial.</p>
+            <a class="cta secondary" href="desain/portfolio-single-kasmaran.html" data-i18n="view.detail">Lihat Detail Karya</a>
           </div>
         </div>
 
         <div class="design-card">
           <div class="design-thumb"><img src="desain/images/img_3.webp" alt="Gradasi 19" loading="lazy"></div>
           <div class="design-body">
-            <span class="tag design">Fotografi &amp; Media</span>
+            <span class="tag design" data-i18n="card.g19.tag">Fotografi &amp; Media</span>
             <h3>Gradasi 19</h3>
-            <p>Arahan visual fotografi komersial, penyelarasan warna brand, dan layout visual.</p>
-            <a class="cta secondary" href="desain/portfolio-single-g19.html">Lihat Detail Karya</a>
+            <p data-i18n="card.g19.desc">Arahan visual fotografi komersial, penyelarasan warna brand, dan layout visual.</p>
+            <a class="cta secondary" href="desain/portfolio-single-g19.html" data-i18n="view.detail">Lihat Detail Karya</a>
           </div>
         </div>
 
         <div class="design-card">
           <div class="design-thumb"><img src="desain/images/img_4.webp" alt="Ratunya KebabBurger" loading="lazy"></div>
           <div class="design-body">
-            <span class="tag design">Packaging &amp; Print</span>
+            <span class="tag design" data-i18n="card.rk.tag">Packaging &amp; Print</span>
             <h3>Ratunya KebabBurger</h3>
-            <p>Desain kemasan makanan, spanduk promosi, dan materi percetakan outlet gerobak.</p>
-            <a class="cta secondary" href="desain/portfolio-single-rk.html">Lihat Detail Karya</a>
+            <p data-i18n="card.rk.desc">Desain kemasan makanan, spanduk promosi, dan materi percetakan outlet gerobak.</p>
+            <a class="cta secondary" href="desain/portfolio-single-rk.html" data-i18n="view.detail">Lihat Detail Karya</a>
           </div>
         </div>
 
         <div class="design-card">
           <div class="design-thumb"><img src="desain/images/img_7.webp" alt="PT SAN" loading="lazy"></div>
           <div class="design-body">
-            <span class="tag design">Corporate Identity</span>
+            <span class="tag design" data-i18n="card.san.tag">Corporate Identity</span>
             <h3>PT SAN</h3>
-            <p>Materi presentasi perusahaan, panduan identitas korporat, dan company profile.</p>
-            <a class="cta secondary" href="desain/portfolio-single-san.html">Lihat Detail Karya</a>
+            <p data-i18n="card.san.desc">Materi presentasi perusahaan, panduan identitas korporat, dan company profile.</p>
+            <a class="cta secondary" href="desain/portfolio-single-san.html" data-i18n="view.detail">Lihat Detail Karya</a>
           </div>
         </div>
 
       </div>
 
       <div style="margin-top:24px;text-align:center;">
-        <a class="cta" style="padding:12px 28px;font-size:14px;" href="desain/index.html">Buka Galeri Desain Lengkap (Versi Klasik) ↗</a>
+        <a class="cta" style="padding:12px 28px;font-size:14px;" href="desain/index.html" data-i18n="btn.classic.gallery">Buka Galeri Desain Lengkap (Versi Klasik) ↗</a>
       </div>
     </section>
 
     <section>
-      <div class="section-head"><h2>🏆 Prestasi &amp; Penghargaan Desain</h2><span>kompetisi perancangan visual karya Maulana Gufron</span></div>
+      <div class="section-head"><h2 data-i18n="sec.awards.title">🏆 Prestasi &amp; Penghargaan Desain</h2><span data-i18n="sec.awards.sub">kompetisi perancangan visual karya Maulana Gufron</span></div>
       <div class="achieve-grid">
         
         <div class="achieve-card">
           <div class="achieve-top">
-            <span class="achieve-badge gold">Tingkat Nasional</span>
-            <span class="achieve-date">Desember 2020 • HMJ FE Akuntansi Universitas Semarang</span>
+            <span class="achieve-badge gold" data-i18n="award.nat.badge">Tingkat Nasional</span>
+            <span class="achieve-date" data-i18n="award.poster1.date">Desember 2020 • HMJ FE Akuntansi Universitas Semarang</span>
           </div>
-          <h3 class="achieve-title">Juara 1 Lomba Desain Poster — "New Normal di Masa Pandemi"</h3>
+          <h3 class="achieve-title" data-i18n="award.poster1.title">Juara 1 Lomba Desain Poster — "New Normal di Masa Pandemi"</h3>
           <div class="achieve-box">
             <div class="achieve-bullet">✦</div>
-            <p>Juara pertama dalam kompetisi desain poster digital tingkat nasional pada perhelatan <b>"Ukir Kreasi Generasi Milenial di Era 4.0"</b>, merefleksikan keahlian komunikasi visual dan desain persuasi publik di masa adaptasi kebiasaan baru.</p>
+            <p data-i18n="award.poster1.desc">Juara pertama dalam kompetisi desain poster digital tingkat nasional pada perhelatan <b>"Ukir Kreasi Generasi Milenial di Era 4.0"</b>, merefleksikan keahlian komunikasi visual dan desain persuasi publik di masa adaptasi kebiasaan baru.</p>
           </div>
         </div>
 
         <div class="achieve-card">
           <div class="achieve-top">
-            <span class="achieve-badge cyan">Pelajar se-Bogor Raya</span>
-            <span class="achieve-date">November 2016 • Science Creation Event MAN 2 Bogor</span>
+            <span class="achieve-badge cyan" data-i18n="award.bogor.badge">Pelajar se-Bogor Raya</span>
+            <span class="achieve-date" data-i18n="award.poster2.date">November 2016 • Science Creation Event MAN 2 Bogor</span>
           </div>
-          <h3 class="achieve-title">Juara 1 Lomba Desain Poster — "Miskonsepsi Fisika"</h3>
+          <h3 class="achieve-title" data-i18n="award.poster2.title">Juara 1 Lomba Desain Poster — "Miskonsepsi Fisika"</h3>
           <div class="achieve-box">
             <div class="achieve-bullet">✦</div>
-            <p>Juara pertama kompetisi kreativitas visual pembuatan poster ilmiah-edukatif tingkat pelajar, mengolah materi ilmiah abstrak menjadi infografis yang mudah dipahami, lugas, dan menarik secara visual.</p>
+            <p data-i18n="award.poster2.desc">Juara pertama kompetisi kreativitas visual pembuatan poster ilmiah-edukatif tingkat pelajar, mengolah materi ilmiah abstrak menjadi infografis yang mudah dipahami, lugas, dan menarik secara visual.</p>
           </div>
         </div>
 
@@ -445,18 +473,18 @@
     </section>
 
     <section>
-      <div class="section-head"><h2>🧠 Rekam Jejak Analitis &amp; Keilmuan</h2><span>pondasi pemikiran logis &amp; problem-solving</span></div>
+      <div class="section-head"><h2 data-i18n="sec.academic.title">🧠 Rekam Jejak Analitis &amp; Keilmuan</h2><span data-i18n="sec.academic.sub">pondasi pemikiran logis &amp; problem-solving</span></div>
       <div class="achieve-grid">
 
         <div class="achieve-card">
           <div class="achieve-top">
-            <span class="achieve-badge emerald">Tingkat Nasional</span>
-            <span class="achieve-date">2015 • Uni Konservasi Fauna (UKF) IPB University</span>
+            <span class="achieve-badge emerald" data-i18n="award.nat.badge">Tingkat Nasional</span>
+            <span class="achieve-date" data-i18n="award.ol.date">2015 • Uni Konservasi Fauna (UKF) IPB University</span>
           </div>
-          <h3 class="achieve-title">Juara 1 Cepat Tepat Konservasi — Olimpiade Lingkungan (OL)</h3>
+          <h3 class="achieve-title" data-i18n="award.ol.title">Juara 1 Cepat Tepat Konservasi — Olimpiade Lingkungan (OL)</h3>
           <div class="achieve-box">
             <div class="achieve-bullet">✦</div>
-            <p>Juara pertama tingkat nasional dalam cabang kompetisi utama perhelatan akbar tahunan <b>Olimpiade Lingkungan (OL)</b> UKF IPB University, menguji ketangkasan pemecahan masalah ekologi, regulasi konservasi keanekaragaman hayati, serta penalaran ilmiah terstruktur.</p>
+            <p data-i18n="award.ol.desc">Juara pertama tingkat nasional dalam cabang kompetisi utama perhelatan akbar tahunan <b>Olimpiade Lingkungan (OL)</b> UKF IPB University, menguji ketangkasan pemecahan masalah ekologi, regulasi konservasi keanekaragaman hayati, serta penalaran ilmiah terstruktur.</p>
           </div>
         </div>
 
@@ -469,8 +497,8 @@
 
 <div class="contact-box">
   <div class="contact-card">
-    <h2>Tertarik diskusi atau kolaborasi?</h2>
-    <p>Terbuka untuk peluang karir, perancangan produk digital, maupun konsultasi implementasi AI dan identitas desain visual.</p>
+    <h2 data-i18n="contact.title">Tertarik diskusi atau kolaborasi?</h2>
+    <p data-i18n="contact.desc">Terbuka untuk peluang karir, perancangan produk digital, maupun konsultasi implementasi AI dan identitas desain visual.</p>
     <a class="wa-cta" href="https://wa.me/6281547287125?text=Halo%20Maulana%20Gufron%2C%20saya%20tertarik%20dengan%20portofolio%20ini%20dan%20ingin%20diskusi%20lebih%20lanjut." target="_blank" rel="noopener">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="#04250f"><path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.45 1.27 4.9L2 22l5.25-1.38A9.94 9.94 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.2c-1.6 0-3.13-.43-4.46-1.24l-.32-.19-3.12.82.83-3.04-.21-.31A8.17 8.17 0 0 1 3.84 12c0-4.53 3.68-8.2 8.2-8.2s8.2 3.67 8.2 8.2-3.68 8.2-8.2 8.2zm4.5-6.13c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.96-.15.16-.29.18-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.45-1.37-1.7-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.04s.88 2.37 1 2.53c.12.16 1.73 2.65 4.2 3.71.59.25 1.05.4 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.46-.6 1.67-1.17.2-.58.2-1.08.14-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
       Chat via WhatsApp — 0815-4728-7125
@@ -485,17 +513,17 @@
         <div style="width:34px;height:34px;border-radius:10px;background:#18181c;border:1px solid #27272a;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#f4f4f5;cursor:default;" class="brand-monogram">MG</div>
         <span style="font-weight:800;font-size:16px;color:#fafafa;letter-spacing:-0.02em;">Maulana Gufron</span>
       </div>
-      <p style="color:#71717a;font-size:13.5px;line-height:1.6;margin:0 0 18px;text-align:left;">
+      <p style="color:#71717a;font-size:13.5px;line-height:1.6;margin:0 0 18px;text-align:left;" data-i18n="footer.brand.desc">
         Portofolio Terpadu: Business Development, AI-Assisted Operations, &amp; Visual Communication Design.
       </p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="footer-btn" onclick="switchTab('business');window.scrollTo({top:0,behavior:'smooth'});">⚡ Hub Bisnis &amp; AI</button>
-        <button class="footer-btn" onclick="switchTab('creative');window.scrollTo({top:0,behavior:'smooth'});">🎨 Galeri Desain</button>
+        <button class="footer-btn" onclick="switchTab('business');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.business">⚡ Hub Bisnis &amp; AI</button>
+        <button class="footer-btn" onclick="switchTab('creative');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.creative">🎨 Galeri Desain</button>
       </div>
     </div>
 
     <div style="text-align:left;">
-      <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin:0 0 14px;text-transform:uppercase;letter-spacing:0.04em;">Eksplorasi Sub-Portal</h3>
+      <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin:0 0 14px;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="footer.subportal.title">Eksplorasi Sub-Portal</h3>
       <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;">
         <li><a class="footer-link" href="desain/index.html">🎨 Galeri Desain Lengkap (Klasik 2018–2023) ↗</a></li>
         <li><a class="footer-link" href="mkt/index.html">📊 Marketing &amp; Operations Suite (MKT OS) ↗</a></li>
@@ -505,7 +533,7 @@
     </div>
 
     <div style="text-align:left;">
-      <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin:0 0 14px;text-transform:uppercase;letter-spacing:0.04em;">Saluran Komunikasi</h3>
+      <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin:0 0 14px;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="footer.contact.title">Saluran Komunikasi</h3>
       <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;">
         <li><a class="footer-link" href="https://wa.me/6281547287125?text=Halo%20Maulana%20Gufron%2C%20saya%20tertarik%20dengan%20portofolio%20ini%20dan%20ingin%20diskusi%20lebih%20lanjut." target="_blank" style="color:#10b981;">💬 WhatsApp: 0815-4728-7125 ↗</a></li>
         <li><a class="footer-link" href="mailto:mmgufron.s@gmail.com">✉️ Email: mmgufron.s@gmail.com</a></li>
@@ -516,7 +544,7 @@
   </div>
 
   <div style="max-width:1180px;margin:32px auto 0;padding-top:20px;border-top:1px solid #1f1f23;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12.5px;color:#71717a;text-align:left;">
-    <span>© 2026 Maulana Gufron. All Rights Reserved.</span>
+    <span data-i18n="footer.copyright">© 2026 Maulana Gufron. All Rights Reserved.</span>
   </div>
 </footer>
 
@@ -543,5 +571,6 @@ if (h === '#creative' || h === '#desain' || h === '#karya' || h === '#portfolio'
 }
 </script>
 
+<script src="assets/js/i18n.js"></script>
 </body>
 </html>
