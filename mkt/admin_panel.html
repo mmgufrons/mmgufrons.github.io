@@ -85,19 +85,31 @@
         .btn-primary { background-color: var(--primary); border-color: var(--primary); }
         .btn-primary:hover { background-color: var(--primary-dark); border-color: var(--primary-dark); }
     </style>
+
+    <style>
+        .lang-btn.active { color: #F3700D !important; font-weight: 800 !important; }
+    </style>
+
 </head>
 <body>
 
 <!-- Sidebar -->
 <div id="sidebar" class="sidebar">
-    <div class="px-4 pt-5 pb-3">
-        <a href="../index.html" class="d-inline-flex align-items-center gap-2 mb-3 text-white-50 text-decoration-none small fw-semibold bg-white bg-opacity-10 px-3 py-1.5 rounded-3">
-            <i class="fas fa-arrow-left fa-xs"></i> Portofolio Utama
-        </a>
+    <div class="px-4 pt-4 pb-3">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <a href="../index.html" class="d-inline-flex align-items-center gap-2 text-white-50 text-decoration-none small fw-semibold bg-white bg-opacity-10 px-3 py-1.5 rounded-3" data-i18n="mkt.sub.back">
+                <i class="fas fa-arrow-left fa-xs"></i> Portofolio Utama
+            </a>
+            <div class="d-inline-flex align-items-center gap-1 bg-black bg-opacity-25 border border-white border-opacity-10 rounded-pill px-2 py-1">
+                <button type="button" class="lang-btn border-0 bg-transparent text-white-50 p-0 fw-bold" style="font-size:10.5px;" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
+                <span class="text-white-50" style="font-size:9px;">|</span>
+                <button type="button" class="lang-btn border-0 bg-transparent text-white-50 p-0 fw-bold" style="font-size:10.5px;" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
+            </div>
+        </div>
         <a href="index.html" class="d-block text-decoration-none">
             <span class="fs-4 fw-extrabold text-white tracking-wide">MKT<span style="color:#F3700D;">.</span>OS</span>
         </a>
-        <span class="badge bg-white bg-opacity-10 text-white-50 fw-normal rounded-pill mt-1">Portofolio Demo</span>
+        <span class="badge bg-white bg-opacity-10 text-white-50 fw-normal rounded-pill mt-1" data-i18n="mkt.sub.demo.badge">Portofolio Demo</span>
     </div>
 
     <div class="flex-grow-1">
@@ -448,5 +460,6 @@
     };
 </script>
 
+<script src="../assets/js/i18n.js"></script>
 </body>
 </html>
