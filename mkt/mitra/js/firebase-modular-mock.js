@@ -42,11 +42,47 @@ async function seedIfEmpty(path) {
   if (seedUrl) {
     try {
       const r = await fetch(seedUrl);
-      value = await r.json();
+      if (r.ok) value = await r.json();
     } catch (e) {
       console.warn("[firebase-modular-mock] gagal load seed untuk", path, e);
-      value = null;
     }
+  }
+  if (!value && path === "mitra_tracker") {
+    value = {
+      "demo_t_1": {
+        "name": "Area Demo Selatan",
+        "notes": "Sudah presentasi & onboarding, tinggal finalisasi materi campaign.",
+        "assets": [],
+        "progress": {
+          "present": true, "grup": true, "nda": true, "penunjukan": true, "adendum": true,
+          "akun": true, "looker": true, "am_brand": true, "am_area": true, "am_panduan": true,
+          "am_flyer": false, "am_story": false, "am_presentasi": false, "am_sop": false, "am_banner": false,
+          "plan": false, "jalan": false
+        }
+      },
+      "demo_t_2": {
+        "name": "Area Demo Utara",
+        "notes": "Baru tahap presentasi awal & pembuatan grup WA.",
+        "assets": [],
+        "progress": {
+          "present": true, "grup": true, "nda": false, "penunjukan": false, "adendum": false,
+          "akun": false, "looker": false, "am_brand": false, "am_area": false, "am_panduan": false,
+          "am_flyer": false, "am_story": false, "am_presentasi": false, "am_sop": false, "am_banner": false,
+          "plan": false, "jalan": false
+        }
+      },
+      "demo_t_3": {
+        "name": "Area Demo Timur",
+        "notes": "Sudah operasional penuh — jadi contoh mitra paling matang.",
+        "assets": [],
+        "progress": {
+          "present": true, "grup": true, "nda": true, "penunjukan": true, "adendum": true,
+          "akun": true, "looker": true, "am_brand": true, "am_area": true, "am_panduan": true,
+          "am_flyer": true, "am_story": true, "am_presentasi": true, "am_sop": true, "am_banner": true,
+          "plan": true, "jalan": true
+        }
+      }
+    };
   }
   store[path] = value;
   saveStore(store);
