@@ -499,11 +499,11 @@
                 <!-- Jam Mulai & Jam Selesai (untuk tracking paralel) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="divTimeRange">
                     <div>
-                        <label class="block text-[10px] text-sky-400 mb-1 font-bold uppercase" id="lblTimeStart">Jam Mulai (Opsional)</label>
+                        <label class="block text-[10px] text-sky-400 mb-1 font-bold uppercase" id="lblTimeStart" data-i18n="sma.modal.task.start">Jam Mulai (Opsional)</label>
                         <input type="time" id="taskStartTime" class="w-full input-bg rounded p-2 text-xs text-gray-300" onchange="checkConflict()">
                     </div>
                     <div>
-                        <label class="block text-[10px] text-sky-400 mb-1 font-bold uppercase">Jam Selesai (Opsional)</label>
+                        <label class="block text-[10px] text-sky-400 mb-1 font-bold uppercase" data-i18n="sma.modal.task.end">Jam Selesai (Opsional)</label>
                         <input type="time" id="taskEndTime" class="w-full input-bg rounded p-2 text-xs text-gray-300" onchange="checkConflict()">
                     </div>
                 </div>
@@ -511,17 +511,17 @@
                 <!-- Durasi & Status -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-[10px] text-violet-400 mb-1 font-bold uppercase" id="lblHours">Durasi (Menit)</label>
+                        <label class="block text-[10px] text-violet-400 mb-1 font-bold uppercase" id="lblHours" data-i18n="sma.modal.task.dur">Durasi (Menit)</label>
                         <input type="number" step="5" id="taskHours" class="w-full input-bg rounded p-2 text-xs" placeholder="Misal: 30 atau 60">
                     </div>
                     <div>
-                        <label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">Status</label>
+                        <label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase" data-i18n="sma.modal.task.status">Status</label>
                         <select id="taskStatus" class="w-full input-bg rounded p-2 text-xs">
-                            <option value="Planning">Rencana</option>
-                            <option value="In Progress">Proses (Jalan)</option>
-                            <option value="On Hold">Ditunda</option>
-                            <option value="Done">Selesai</option>
-                            <option value="Cancelled">Batal</option>
+                            <option value="Planning" data-i18n="sma.modal.task.opt.plan">Rencana</option>
+                            <option value="In Progress" data-i18n="sma.modal.task.opt.prog">Proses (Jalan)</option>
+                            <option value="On Hold" data-i18n="sma.modal.task.opt.hold">Ditunda</option>
+                            <option value="Done" data-i18n="sma.modal.task.opt.done">Selesai</option>
+                            <option value="Cancelled" data-i18n="sma.modal.task.opt.cancel">Batal</option>
                         </select>
                     </div>
                 </div>
@@ -530,7 +530,7 @@
                 
                 <!-- Deskripsi -->
                 <div>
-                    <label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase mt-2" id="lblDesc">Catatan Lengkap / Deskripsi</label>
+                    <label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase mt-2" id="lblDesc" data-i18n="sma.modal.task.notes">Catatan Lengkap / Deskripsi</label>
                     <div class="flex gap-2 mb-2 border-b border-[#333] pb-2 overflow-x-auto">
                         <button type="button" onclick="document.execCommand('bold', false, null)" class="w-7 h-7 rounded bg-[#2a2a2a] hover:bg-violet-600 text-gray-300"><i class="fa-solid fa-bold text-xs"></i></button>
                         <button type="button" onclick="document.execCommand('italic', false, null)" class="w-7 h-7 rounded bg-[#2a2a2a] hover:bg-violet-600 text-gray-300"><i class="fa-solid fa-italic text-xs"></i></button>
@@ -544,12 +544,12 @@
             </div>
             <div class="px-5 py-4 border-t border-[#2f2f2f] flex justify-between bg-[#202020]">
                 <div class="flex gap-3">
-                    <button onclick="deleteTask()" id="btnDelete" class="text-red-500 text-xs font-bold hidden uppercase hover:text-red-400 transition"><i class="fa-solid fa-trash"></i> Hapus</button>
-                    <button onclick="duplicateTask()" id="btnDuplicate" class="text-blue-400 text-xs font-bold hidden uppercase hover:text-blue-300 transition"><i class="fa-regular fa-copy"></i> Duplikat</button>
+                    <button onclick="deleteTask()" id="btnDelete" class="text-red-500 text-xs font-bold hidden uppercase hover:text-red-400 transition"><i class="fa-solid fa-trash"></i> <span data-i18n="sma.modal.btn.del">Hapus</span></button>
+                    <button onclick="duplicateTask()" id="btnDuplicate" class="text-blue-400 text-xs font-bold hidden uppercase hover:text-blue-300 transition"><i class="fa-regular fa-copy"></i> <span data-i18n="sma.modal.btn.dup">Duplikat</span></button>
                 </div>
                 <div class="flex gap-2 ml-auto">
-                    <button onclick="closeModal('taskModal')" class="px-4 py-2 text-gray-500 text-xs uppercase hover:text-white transition">Batal</button>
-                    <button onclick="saveTask()" class="px-6 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-lg text-xs font-bold transition shadow-lg">SIMPAN</button>
+                    <button onclick="closeModal('taskModal')" class="px-4 py-2 text-gray-500 text-xs uppercase hover:text-white transition" data-i18n="sma.modal.btn.cancel">Batal</button>
+                    <button onclick="saveTask()" class="px-6 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-lg text-xs font-bold transition shadow-lg" data-i18n="sma.modal.btn.save">SIMPAN</button>
                 </div>
             </div>
         </div>
@@ -570,14 +570,14 @@
     <div id="routineModal" class="fixed inset-0 bg-black/80 hidden z-[110] flex items-center justify-center p-4 " onclick="handleModalClick(event)">
         <div class="glass-modal w-full max-w-sm rounded-xl overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
             <div class="px-5 py-4 border-b border-white/5 bg-black/20">
-                <h3 class="font-bold text-white text-[10px] uppercase tracking-widest">Pengaturan Rutinitas</h3>
+                <h3 class="font-bold text-white text-[10px] uppercase tracking-widest" data-i18n="sma.modal.routine.title">Pengaturan Rutinitas</h3>
             </div>
             <div class="p-5 space-y-3">
                 <input type="hidden" id="routineId">
                 <select id="routineType" class="w-full input-bg rounded p-2 text-xs" onchange="toggleRoutineDay()">
-                    <option value="daily">Harian</option>
-                    <option value="weekly">Mingguan</option>
-                    <option value="monthly">Bulanan</option>
+                    <option value="daily" data-i18n="sma.modal.routine.daily">Harian</option>
+                    <option value="weekly" data-i18n="sma.modal.routine.weekly">Mingguan</option>
+                    <option value="monthly" data-i18n="sma.modal.routine.monthly">Bulanan</option>
                 </select>
                 <div id="routineDayBox" class="hidden flex gap-2">
                     <select id="routineDay" class="w-full input-bg rounded p-2 text-xs flex-1">
@@ -595,7 +595,7 @@
                         <input type="time" id="routineStartTime" class="w-full input-bg rounded p-2 text-xs text-gray-300">
                     </div>
                     <div>
-                        <label class="block text-[10px] text-sky-400 mb-1 font-bold uppercase">Jam Selesai (Opsional)</label>
+                        <label class="block text-[10px] text-sky-400 mb-1 font-bold uppercase" data-i18n="sma.modal.task.end">Jam Selesai (Opsional)</label>
                         <input type="time" id="routineEndTime" class="w-full input-bg rounded p-2 text-xs text-gray-300">
                     </div>
                 </div>

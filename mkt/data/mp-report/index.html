@@ -36,12 +36,13 @@
             <style>
                 .btn-back-mkt {
                     display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; 
-                    background: var(--primary-light, #f3effa); color: var(--primary, #7335b7); 
-                    border: 1px solid var(--primary, #7335b7); border-radius: 8px; text-decoration: none; 
-                    font-weight: 500; font-size: 15px; transition: all 0.3s ease;
+                    background: #7335b7; color: #ffffff !important; 
+                    border: 1px solid #8e44ad; border-radius: 8px; text-decoration: none; 
+                    font-weight: 700; font-size: 14px; transition: all 0.3s ease;
+                    box-shadow: 0 2px 8px rgba(115,53,183,0.3);
                 }
                 .btn-back-mkt:hover {
-                    background: var(--primary, #7335b7); color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(115,53,183,0.2);
+                    background: #5a2a8f; color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(115,53,183,0.35);
                 }
                 .btn-back-mkt:active {
                     transform: translateY(0);
@@ -50,21 +51,21 @@
             <div style="padding: 0 14px 20px 14px;">
                 <a href="../../index.html" class="btn-back-mkt">
                     <i class='bx bx-arrow-back'></i>
-                    <span>Back to MKT Hub</span>
+                    <span data-i18n="mp.back">Back to MKT Hub</span>
                 </a>
             </div>
             <ul class="nav-links">
                 <li class="active" data-target="dashboard">
-                    <a href="#"><i class='bx bx-grid-alt'></i><span>Dashboard</span></a>
+                    <a href="#"><i class='bx bx-grid-alt'></i><span data-i18n="mp.nav.dash">Dashboard</span></a>
                 </li>
                 <li data-target="upload">
-                    <a href="#"><i class='bx bx-cloud-upload'></i><span>Upload Data</span></a>
+                    <a href="#"><i class='bx bx-cloud-upload'></i><span data-i18n="mp.nav.upload">Upload Data</span></a>
                 </li>
                 <li data-target="data-table">
-                    <a href="#"><i class='bx bx-table'></i><span>Tabel Data</span></a>
+                    <a href="#"><i class='bx bx-table'></i><span data-i18n="mp.nav.table">Tabel Data</span></a>
                 </li>
                 <li data-target="mutasi-saldo">
-                    <a href="#"><i class='bx bx-transfer'></i><span>Mutasi Saldo</span></a>
+                    <a href="#"><i class='bx bx-transfer'></i><span data-i18n="mp.nav.mutasi">Mutasi Saldo</span></a>
                 </li>
             </ul>
         </aside>
@@ -73,11 +74,18 @@
         <main class="main-content">
             <header class="top-nav">
                 <div class="header-title">
-                    <h1 id="page-title">Dashboard Analytics</h1>
+                    <h1 id="page-title" data-i18n="mp.header.title">Dashboard Analytics</h1>
                 </div>
-                <div class="user-profile">
-                    <div class="avatar"><i class='bx bx-store'></i></div>
-                    <span>Albani Store</span>
+                <div style="display:flex;align-items:center;gap:14px;">
+                    <div class="lang-switch-container" style="display:inline-flex;align-items:center;background:#f3effa;border:1px solid rgba(115,53,183,0.2);border-radius:6px;padding:2px 4px;font-size:11px;font-weight:700;">
+                        <button type="button" class="lang-btn" data-lang-btn="id" onclick="setLanguage('id')" style="background:transparent;border:none;color:#6b7280;padding:2px 6px;cursor:pointer;border-radius:4px;font-weight:700;">ID</button>
+                        <span style="color:#9ca3af;">|</span>
+                        <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')" style="background:transparent;border:none;color:#6b7280;padding:2px 6px;cursor:pointer;border-radius:4px;font-weight:700;">EN</button>
+                    </div>
+                    <div class="user-profile">
+                        <div class="avatar"><i class='bx bx-store'></i></div>
+                        <span>Albani Store</span>
+                    </div>
                 </div>
             </header>
 
@@ -88,35 +96,35 @@
                         <div class="card glass">
                             <div class="card-icon"><i class='bx bx-dollar-circle'></i></div>
                             <div class="card-info">
-                                <h3>Total Omzet</h3>
+                                <h3 data-i18n="mp.card.omzet">Total Omzet</h3>
                                 <h2 id="total-omzet">Rp 0</h2>
                             </div>
                         </div>
                         <div class="card glass">
                             <div class="card-icon green"><i class='bx bx-wallet'></i></div>
                             <div class="card-info">
-                                <h3>Total Profit (Bersih)</h3>
+                                <h3 data-i18n="mp.card.profit">Total Profit (Bersih)</h3>
                                 <h2 id="total-profit">Rp 0</h2>
                             </div>
                         </div>
                         <div class="card glass">
                             <div class="card-icon" style="background: #fdeded; color: var(--danger);"><i class='bx bx-trending-down'></i></div>
                             <div class="card-info">
-                                <h3>Total Biaya Admin</h3>
+                                <h3 data-i18n="mp.card.admin">Total Biaya Admin</h3>
                                 <h2 id="total-admin">Rp 0</h2>
                             </div>
                         </div>
                         <div class="card glass">
                             <div class="card-icon blue"><i class='bx bx-money-withdraw'></i></div>
                             <div class="card-info">
-                                <h3>Mutasi Saldo Bobcare</h3>
+                                <h3 data-i18n="mp.card.mutasi">Mutasi Saldo Bobcare</h3>
                                 <h2 id="total-mutasi">Rp 0</h2>
                             </div>
                         </div>
                         <div class="card glass">
                             <div class="card-icon orange"><i class='bx bx-shopping-bag'></i></div>
                             <div class="card-info">
-                                <h3>Total Pesanan</h3>
+                                <h3 data-i18n="mp.card.orders">Total Pesanan</h3>
                                 <h2 id="total-pesanan">0</h2>
                             </div>
                         </div>
@@ -143,7 +151,7 @@
                     <div class="upload-container glass">
                         <div class="upload-header">
                             <i class='bx bx-cloud-upload'></i>
-                            <h2>Upload Laporan Penjualan</h2>
+                            <h2 data-i18n="mp.modal.upload.title">Upload Laporan Penjualan</h2>
                             <p>Upload satu file Excel (.xlsx/.xls) yang mengandung sheet: SHOPEE BOBCARE, SHOPEE ALBANISTORE, SOUNDBOX QRIS, TIKTOKSHOP TOKO ALBANIE</p>
                         </div>
                         
@@ -289,8 +297,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" id="btn-cancel-edit">Batal</button>
-                <button class="btn btn-primary" id="btn-save-edit">Simpan Perubahan</button>
+                <button class="btn btn-secondary" id="btn-cancel-edit" data-i18n="mp.btn.cancel">Batal</button>
+                <button class="btn btn-primary" id="btn-save-edit" data-i18n="mp.btn.save">Simpan Perubahan</button>
             </div>
         </div>
     </div>

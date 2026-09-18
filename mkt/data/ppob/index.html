@@ -47,46 +47,44 @@
 
             <p class="nav-section-label">Navigasi</p>
             <ul class="nav-links">
-                <li style="margin-bottom: 8px;">
-                    <a href="../../index.html" style="background: rgba(115,53,183,0.15); color: #7335B7; border: 1px solid rgba(115,53,183,0.3); border-radius: 8px; padding: 8px 12px; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:0.85rem; font-weight:600;">
-                        <i class='bx bx-arrow-back'></i>
-                        <span>Back to MKT Hub</span>
+                <li style="margin-bottom: 12px;">
+                    <a href="../../index.html" style="background: #7335B7; color: #ffffff !important; border: 1px solid #8e44ad; border-radius: 8px; padding: 9px 14px; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:0.85rem; font-weight:700; box-shadow: 0 2px 8px rgba(115,53,183,0.35);">
+                        <i class='bx bx-arrow-back' style="font-size:1rem;"></i>
+                        <span data-i18n="ppob.back">Back to MKT Hub</span>
                     </a>
                 </li>
                 <li class="active" data-target="dashboard">
                     <a href="#">
                         <i class='bx bx-grid-alt'></i>
-                        <span>Dashboard</span>
+                        <span data-i18n="ppob.nav.dash">Dashboard</span>
                     </a>
                 </li>
                 <li data-target="crm">
                     <a href="#">
                         <i class='bx bx-user-pin'></i>
-                        <span>CRM & Segmentasi</span>
+                        <span data-i18n="ppob.nav.user">CRM & Segmentasi</span>
                         <span class="nav-badge" id="badge-crm">–</span>
                     </a>
                 </li>
                 <li data-target="transaksi">
                     <a href="#">
                         <i class='bx bx-receipt'></i>
-                        <span>Data Transaksi</span>
+                        <span data-i18n="ppob.nav.trx">Data Transaksi</span>
                     </a>
                 </li>
                 <li data-target="upload">
                     <a href="#">
                         <i class='bx bx-cloud-upload'></i>
-                        <span>Upload Data</span>
+                        <span data-i18n="mp.nav.upload">Upload Data</span>
                     </a>
                 </li>
                 <li data-target="tutorial">
                     <a href="#">
                         <i class='bx bx-book-open'></i>
-                        <span>Tutorial Penggunaan</span>
+                        <span data-i18n="camp.nav.tutorial">Tutorial Penggunaan</span>
                     </a>
                 </li>
             </ul>
-
-
 
             <div class="sidebar-footer">
                 <p>SIMASRIM PPOB Dashboard</p>
@@ -100,10 +98,15 @@
             <!-- Top Bar -->
             <div class="top-bar">
                 <div class="page-header">
-                    <h1 id="page-title">Dashboard Analytics</h1>
-                    <p id="page-sub">Ringkasan performa transaksi PPOB SIMASRIM</p>
+                    <h1 id="page-title" data-i18n="mp.header.title">Dashboard Analytics</h1>
+                    <p id="page-sub" data-i18n="mkt.ppob.hero.desc">Ringkasan performa transaksi PPOB SIMASRIM</p>
                 </div>
                 <div class="top-bar-actions">
+                    <div class="lang-switch-container" style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:2px 4px;font-size:11px;font-weight:700;">
+                        <button type="button" class="lang-btn" data-lang-btn="id" onclick="setLanguage('id')" style="background:transparent;border:none;color:#94a3b8;padding:2px 6px;cursor:pointer;border-radius:4px;font-weight:700;">ID</button>
+                        <span style="color:#64748b;">|</span>
+                        <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')" style="background:transparent;border:none;color:#94a3b8;padding:2px 6px;cursor:pointer;border-radius:4px;font-weight:700;">EN</button>
+                    </div>
                     <select class="glass-select" id="filter-period" title="Filter Periode">
                         <option value="all">Semua Waktu</option>
                         <option value="7d">7 Hari Terakhir</option>
@@ -111,10 +114,10 @@
                         <option value="90d">90 Hari Terakhir</option>
                     </select>
                     <button class="btn btn-ghost btn-sm" id="btn-refresh" title="Refresh dari Firebase">
-                        <i class='bx bx-refresh'></i> Refresh
+                        <i class='bx bx-refresh'></i> <span data-i18n="camp.btn.refresh">Refresh</span>
                     </button>
                     <div id="db-status" class="badge-status success">
-                        <span class="dot"></span>Database Terhubung
+                        <span class="dot"></span><span data-i18n="b2b.status.cloud">Database Terhubung</span>
                     </div>
                 </div>
             </div>
@@ -132,34 +135,34 @@
                             <div class="metric-card purple">
                                 <div class="card-icon-wrap purple"><i class='bx bx-receipt'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Total Transaksi</div>
+                                    <div class="card-label" data-i18n="ppob.metric.trx">Total Transaksi</div>
                                     <div class="card-value" id="card-total-trx">0</div>
-                                    <div class="card-sub">PPOB berhasil diproses</div>
+                                    <div class="card-sub" data-i18n="ppob.metric.sub.trx">PPOB berhasil diproses</div>
                                 </div>
                                 <span class="card-trend up" id="card-trx-trend" style="display:none;"></span>
                             </div>
                             <div class="metric-card orange">
                                 <div class="card-icon-wrap orange"><i class='bx bx-dollar-circle'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Total Volume</div>
+                                    <div class="card-label" data-i18n="ppob.metric.omzet">Total Volume</div>
                                     <div class="card-value" id="card-total-volume">Rp 0</div>
-                                    <div class="card-sub">Total tagihan user</div>
+                                    <div class="card-sub" data-i18n="ppob.metric.sub.vol">Total tagihan user</div>
                                 </div>
                             </div>
                             <div class="metric-card green">
                                 <div class="card-icon-wrap green"><i class='bx bx-wallet'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Total Profit Bersih</div>
+                                    <div class="card-label" data-i18n="ppob.metric.profit">Total Profit Bersih</div>
                                     <div class="card-value" id="card-total-profit">Rp 0</div>
-                                    <div class="card-sub">(Tagihan − Cashback) − Bayar Mitra</div>
+                                    <div class="card-sub" data-i18n="ppob.metric.sub.profit">(Tagihan − Cashback) − Bayar Mitra</div>
                                 </div>
                             </div>
                             <div class="metric-card blue">
                                 <div class="card-icon-wrap blue"><i class='bx bx-group'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">User Aktif PPOB</div>
+                                    <div class="card-label" data-i18n="ppob.metric.active">User Aktif PPOB</div>
                                     <div class="card-value" id="card-user-aktif">0</div>
-                                    <div class="card-sub">Email unik bertransaksi</div>
+                                    <div class="card-sub" data-i18n="ppob.metric.sub.active">Email unik bertransaksi</div>
                                 </div>
                             </div>
                         </div>
@@ -169,8 +172,8 @@
                             <div class="chart-card">
                                 <div class="chart-card-header">
                                     <div>
-                                        <h3>Tren Transaksi & Profit</h3>
-                                        <p>Pergerakan jumlah transaksi dan profit per bulan</p>
+                                        <h3 data-i18n="ppob.chart.trend.title">Tren Transaksi & Profit</h3>
+                                        <p data-i18n="ppob.chart.trend.sub">Pergerakan jumlah transaksi dan profit per bulan</p>
                                     </div>
                                 </div>
                                 <div style="position:relative;height:280px;">
@@ -180,8 +183,8 @@
                             <div class="chart-card">
                                 <div class="chart-card-header">
                                     <div>
-                                        <h3>Top Kategori</h3>
-                                        <p>Distribusi berdasarkan jenis layanan PPOB</p>
+                                        <h3 data-i18n="ppob.chart.topcat.title">Top Kategori</h3>
+                                        <p data-i18n="ppob.chart.topcat.sub">Distribusi berdasarkan jenis layanan PPOB</p>
                                     </div>
                                 </div>
                                 <div style="position:relative;height:280px;">
@@ -195,8 +198,8 @@
                             <div class="chart-card">
                                 <div class="chart-card-header">
                                     <div>
-                                        <h3>Profit per Bulan</h3>
-                                        <p>Ungu = ganjil, Oranye = genap</p>
+                                        <h3 data-i18n="ppob.chart.profit.title">Profit per Bulan</h3>
+                                        <p data-i18n="ppob.chart.profit.sub">Ungu = ganjil, Oranye = genap</p>
                                     </div>
                                 </div>
                                 <div style="position:relative;height:220px;">
@@ -206,8 +209,8 @@
                             <div class="chart-card">
                                 <div class="chart-card-header">
                                     <div>
-                                        <h3>Top 10 Produk Terlaris</h3>
-                                        <p>Berdasarkan jumlah transaksi</p>
+                                        <h3 data-i18n="ppob.chart.top.title">Top 10 Produk Terlaris</h3>
+                                        <p data-i18n="ppob.chart.top.sub">Berdasarkan jumlah transaksi</p>
                                     </div>
                                 </div>
                                 <div style="position:relative;height:220px;">
@@ -217,8 +220,8 @@
                             <div class="chart-card">
                                 <div class="chart-card-header">
                                     <div>
-                                        <h3>Distribusi Segmen CRM</h3>
-                                        <p>Komposisi user berdasarkan perilaku</p>
+                                        <h3 data-i18n="ppob.chart.crm.title">Distribusi Segmen CRM</h3>
+                                        <p data-i18n="ppob.chart.crm.sub">Komposisi user berdasarkan perilaku</p>
                                     </div>
                                 </div>
                                 <div style="position:relative;height:220px;">
@@ -236,7 +239,7 @@
                 <section id="crm" class="tab-pane">
                     <div class="content-area">
                         <div class="table-toolbar">
-                            <h3>🎯 Leaderboard & CRM Target</h3>
+                            <h3 data-i18n="ppob.crm.title">🎯 Leaderboard & CRM Target</h3>
                             <span style="color:var(--text-muted);font-size:0.8rem;" id="crm-count"></span>
                             <select class="glass-select" id="filter-segmen">
                                 <option value="all">Semua Segmen</option>
@@ -254,13 +257,13 @@
                                 <thead>
                                     <tr>
                                         <th style="width:50px;">#</th>
-                                        <th>Nama User</th>
-                                        <th>Email</th>
-                                        <th>Segmen</th>
-                                        <th style="text-align:right;">Transaksi</th>
-                                        <th style="text-align:right;">Volume</th>
-                                        <th style="text-align:right;">Profit</th>
-                                        <th>Aksi</th>
+                                        <th data-i18n="ppob.crm.th.user">Nama User</th>
+                                        <th data-i18n="ppob.crm.th.email">Email</th>
+                                        <th data-i18n="ppob.crm.th.seg">Segmen</th>
+                                        <th style="text-align:right;" data-i18n="ppob.crm.th.trx">Transaksi</th>
+                                        <th style="text-align:right;" data-i18n="ppob.crm.th.vol">Volume</th>
+                                        <th style="text-align:right;" data-i18n="ppob.crm.th.profit">Profit</th>
+                                        <th data-i18n="ppob.crm.th.action">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="crm-tbody">
@@ -268,8 +271,8 @@
                                         <td colspan="8">
                                             <div class="empty-state">
                                                 <i class='bx bx-user-pin'></i>
-                                                <h3>Data CRM Belum Tersedia</h3>
-                                                <p>Upload Data Master User dan Transaksi PPOB untuk melihat segmentasi</p>
+                                                <h3 data-i18n="ppob.crm.empty.title">Data CRM Belum Tersedia</h3>
+                                                <p data-i18n="ppob.crm.empty.sub">Upload Data Master User dan Transaksi PPOB untuk melihat segmentasi</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -285,7 +288,7 @@
                 <section id="transaksi" class="tab-pane">
                     <div class="content-area">
                         <div class="table-toolbar">
-                            <h3>📋 Data Transaksi PPOB</h3>
+                            <h3 data-i18n="ppob.trx.title">📋 Data Transaksi PPOB</h3>
                             <span style="color:var(--text-muted);font-size:0.8rem;" id="trx-count"></span>
                             <select class="glass-select" id="filter-trx-kat">
                                 <option value="all" data-i18n="mkt.sub.filter.all">Semua Kategori</option>
@@ -297,14 +300,14 @@
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th>Tanggal</th>
-                                        <th>Kode Transaksi</th>
-                                        <th>Kategori</th>
-                                        <th>Nama Produk</th>
-                                        <th style="text-align:right;">Tagihan User</th>
-                                        <th style="text-align:right;">Cashback</th>
-                                        <th style="text-align:right;">Profit</th>
-                                        <th>Status</th>
+                                        <th data-i18n="ppob.trx.th.date">Tanggal</th>
+                                        <th data-i18n="ppob.trx.th.code">Kode Transaksi</th>
+                                        <th data-i18n="ppob.trx.th.cat">Kategori</th>
+                                        <th data-i18n="ppob.trx.th.prod">Nama Produk</th>
+                                        <th style="text-align:right;" data-i18n="ppob.trx.th.bill">Tagihan User</th>
+                                        <th style="text-align:right;" data-i18n="ppob.trx.th.cb">Cashback</th>
+                                        <th style="text-align:right;" data-i18n="ppob.crm.th.profit">Profit</th>
+                                        <th data-i18n="ppob.trx.th.status">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody id="trx-tbody">
@@ -312,8 +315,8 @@
                                         <td colspan="8">
                                             <div class="empty-state">
                                                 <i class='bx bx-receipt'></i>
-                                                <h3>Belum Ada Transaksi</h3>
-                                                <p>Upload file transaksi PPOB dari menu Upload Data</p>
+                                                <h3 data-i18n="ppob.trx.empty.title">Belum Ada Transaksi</h3>
+                                                <p data-i18n="ppob.trx.empty.sub">Upload file transaksi PPOB dari menu Upload Data</p>
                                             </div>
                                         </td>
                                     </tr>
@@ -333,13 +336,13 @@
                             <!-- Upload Tabs -->
                             <div class="upload-tabs">
                                 <button class="upload-tab-btn active" data-panel="master">
-                                    <i class='bx bx-user'></i> Data Master User
+                                    <i class='bx bx-user'></i> <span data-i18n="ppob.upload.tab.user">Data Master User</span>
                                 </button>
                                 <button class="upload-tab-btn" data-panel="ppob">
-                                    <i class='bx bx-bolt-circle'></i> Transaksi PPOB
+                                    <i class='bx bx-bolt-circle'></i> <span data-i18n="ppob.upload.tab.ppob">Transaksi PPOB</span>
                                 </button>
                                 <button class="upload-tab-btn" data-panel="logistik">
-                                    <i class='bx bx-package'></i> Logistik (Opsional)
+                                    <i class='bx bx-package'></i> <span data-i18n="ppob.upload.tab.log">Logistik (Opsional)</span>
                                 </button>
                             </div>
 
@@ -451,11 +454,11 @@
                             <div style="margin-bottom:16px;padding:16px 20px;background:linear-gradient(135deg,var(--primary-light),var(--accent-light));border:1px solid var(--primary);border-radius:var(--radius-lg);display:flex;align-items:center;gap:16px;">
                                 <div style="font-size:2rem;">📊</div>
                                 <div style="flex:1;">
-                                    <div style="font-weight:800;font-size:0.9rem;color:var(--primary);margin-bottom:3px;">Coba dengan Data Demo</div>
-                                    <div style="font-size:0.8rem;color:var(--text-muted);">Muat data contoh untuk melihat dashboard langsung bekerja sebelum upload file asli.</div>
+                                    <div style="font-weight:800;font-size:0.9rem;color:var(--primary);margin-bottom:3px;" data-i18n="ppob.demo.title">Coba dengan Data Demo</div>
+                                    <div style="font-size:0.8rem;color:var(--text-muted);" data-i18n="ppob.demo.sub">Muat data contoh untuk melihat dashboard langsung bekerja sebelum upload file asli.</div>
                                 </div>
                                 <button class="btn btn-ghost" onclick="loadDemoData()" style="flex-shrink:0;">
-                                    <i class='bx bx-play-circle'></i> Muat Demo
+                                    <i class='bx bx-play-circle'></i> <span data-i18n="ppob.demo.btn">Muat Demo</span>
                                 </button>
                             </div>
 

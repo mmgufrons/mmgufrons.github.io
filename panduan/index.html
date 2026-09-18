@@ -89,48 +89,55 @@
 <body>
 
 <nav class="top-nav">
-  <a href="../index.html">← Portofolio Hub</a>
+  <a href="../index.html" data-i18n="guide.back">← Portofolio Hub</a>
   <span class="sep">/</span>
-  <span class="current">Dokumen Panduan SIMASRIM</span>
+  <span class="current" data-i18n="guide.title">Dokumen Panduan SIMASRIM</span>
+  <div style="margin-left:auto;" class="lang-toggle-wrap">
+    <div style="display:inline-flex;align-items:center;gap:4px;background:#18181c;border:1px solid #27272a;border-radius:99px;padding:3px 6px;">
+      <button type="button" class="lang-btn" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
+      <span style="color:#3f3f46;font-size:11px;">|</span>
+      <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
+    </div>
+  </div>
 </nav>
 
 <header>
-  <div class="badge">Dokumentasi SOP &amp; Modul Operasional</div>
+  <div class="badge" data-i18n="guide.badge">Dokumentasi SOP &amp; Modul Operasional</div>
   <h1 data-i18n="guide.title">Dokumen Panduan SIMASRIM</h1>
-  <p>Kompilasi panduan teknis dan alur operasional SIMASRIM yang distrukturkan per peran pengguna. Pilih modul peran untuk mengakses dokumentasi resmi.</p>
+  <p data-i18n="guide.subtitle">Kompilasi panduan teknis dan alur operasional SIMASRIM yang distrukturkan per peran pengguna. Pilih modul peran untuk mengakses dokumentasi resmi.</p>
 </header>
 
 <main>
   <div class="grid">
     <a class="role-card" href="https://docs.simasrim.com/47b87a54-5442-4d95-872d-2824a7f4fd5b/" target="_blank" rel="noopener">
       <div class="role-icon">🧑‍💼</div>
-      <h3>Agen</h3>
-      <span>Panduan operasional untuk agen SIMASRIM.</span>
-      <span class="go">Buka Dokumen →</span>
+      <h3 data-i18n="guide.role.agent">Agen</h3>
+      <span data-i18n="guide.role.agent.desc">Panduan operasional untuk agen SIMASRIM.</span>
+      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
     </a>
     <a class="role-card" href="https://docs.simasrim.com/53b8f03d-66ee-46a8-94fc-ac7338e03948/" target="_blank" rel="noopener">
       <div class="role-icon">🛍️</div>
-      <h3>Seller</h3>
-      <span>Panduan untuk penjual/mitra seller.</span>
-      <span class="go">Buka Dokumen →</span>
+      <h3 data-i18n="guide.role.seller">Seller</h3>
+      <span data-i18n="guide.role.seller.desc">Panduan untuk penjual/mitra seller.</span>
+      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
     </a>
     <a class="role-card" href="https://docs.simasrim.com/76e9ef88-742c-46f8-af58-e924e34c5f9c/" target="_blank" rel="noopener">
       <div class="role-icon">🏢</div>
-      <h3>B2B's User</h3>
-      <span>Panduan untuk pengguna korporat/B2B.</span>
-      <span class="go">Buka Dokumen →</span>
+      <h3 data-i18n="guide.role.b2b">B2B's User</h3>
+      <span data-i18n="guide.role.b2b.desc">Panduan untuk pengguna korporat/B2B.</span>
+      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
     </a>
     <a class="role-card" href="https://docs.simasrim.com/6b5c3e7a-8f1d-4c9b-a0e2-d4f8c12e3f5a/" target="_blank" rel="noopener">
       <div class="role-icon">📱</div>
-      <h3>Mobile</h3>
-      <span>Panduan aplikasi mobile versi terbaru.</span>
-      <span class="go">Buka Dokumen →</span>
+      <h3 data-i18n="guide.role.mobile">Mobile</h3>
+      <span data-i18n="guide.role.mobile.desc">Panduan aplikasi mobile versi terbaru.</span>
+      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
     </a>
     <a class="role-card" href="https://docs.simasrim.com/1c2e4f5a-3d7b-9c8a-6b5c-2d1e7a3f8c/" target="_blank" rel="noopener">
       <div class="role-icon">📲</div>
-      <h3>Mobile (v1)</h3>
-      <span>Panduan aplikasi mobile versi sebelumnya.</span>
-      <span class="go">Buka Dokumen →</span>
+      <h3 data-i18n="guide.role.mobile_v1">Mobile (v1)</h3>
+      <span data-i18n="guide.role.mobile_v1.desc">Panduan aplikasi mobile versi sebelumnya.</span>
+      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
     </a>
   </div>
 </main>
