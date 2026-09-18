@@ -1,10 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['login_simasrim']) || $_SESSION['login_simasrim'] !== true) {
-    header("Location: ../../login.php");
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -153,7 +146,7 @@ if (!isset($_SESSION['login_simasrim']) || $_SESSION['login_simasrim'] !== true)
 <body>
 
 <div style="position:fixed;top:16px;left:16px;z-index:9999;">
-    <a href="../../index.php" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:#7335B7;color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:0.85rem;padding:9px 16px;border-radius:8px;box-shadow:0 4px 12px rgba(115,53,183,0.25);">
+    <a href="../../index.html" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;background:#7335B7;color:#fff;font-family:'Poppins',sans-serif;font-weight:600;font-size:0.85rem;padding:9px 16px;border-radius:8px;box-shadow:0 4px 12px rgba(115,53,183,0.25);">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         Back to MKT Hub
     </a>

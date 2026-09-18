@@ -129,14 +129,13 @@ async function loadAllData() {
         processAndRender();
         updateDbStatus('ok');
 
-        // Jika Firebase masih kosong → tampilkan saran demo
+        // Jika Firebase masih kosong -> otomatis muat data demo untuk portofolio publik
         if (AppState.transactions.length === 0 && Object.keys(AppState.users).length === 0) {
-            showEmptyFirebaseBanner();
+            loadDemoData();
         }
     } catch (err) {
-        console.error('Load Error:', err);
-        showToast('Gagal memuat data dari Firebase. Cek koneksi.', 'error');
-        updateDbStatus('error');
+        console.warn('Load Firebase Error (falling back to demo data):', err);
+        loadDemoData();
     }
 }
 

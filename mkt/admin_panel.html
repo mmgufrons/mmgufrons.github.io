@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Panel MKT Hub — Portofolio Maulana Gufron">
+    <meta name="theme-color" content="#7335B7">
+    <title>Admin Panel | SIMASRIM Operations</title>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SheetJS (XLSX) -->
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #7335B7;
+            --primary-dark: #5A2A8F;
+            --accent: #F3700D;
+            --bg-soft-purple: #f3effa;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8f9fa;
+            color: #1e1e2f;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        #sidebar {
+            width: 280px; height: 100vh; position: fixed; left: 0; top: 0;
+            background: linear-gradient(180deg, #3A1B5E, #1F0D3D);
+            color: #fff; transition: 0.3s; z-index: 1040; overflow-y: auto;
+            border-right: 1px solid rgba(255,255,255,0.05);
+            display: flex; flex-direction: column;
+        }
+        #sidebar::-webkit-scrollbar { width: 6px; }
+        #sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        .nav-section-label {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.4); font-weight: 700; margin: 0.8rem 1.5rem 0.3rem;
+            display: block;
+        }
+        .nav-item-link {
+            display: flex; align-items: center; gap: 12px; padding: 10px 24px;
+            color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.88rem; font-weight: 600;
+            transition: 0.2s ease;
+        }
+        .nav-item-link:hover { color: #fff; background: rgba(255,255,255,0.08); }
+        .nav-item-link.active { color: #fff; background: rgba(243,112,13,0.25); border-left: 4px solid var(--accent); }
+        .nav-item-link .icon { width: 20px; text-align: center; }
+        .nav-divider { border-color: rgba(255,255,255,0.08); margin: 0.5rem 0; }
+
+        #mainContent {
+            margin-left: 280px; min-height: 100vh;
+            display: flex; flex-direction: column; transition: 0.3s;
+        }
+        .mobile-navbar {
+            display: none; background: white; padding: 1rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1035;
+            align-items: center; justify-content: space-between;
+        }
+        .mobile-navbar .btn-menu { background: none; border: none; font-size: 1.25rem; color: #1e1e2f; cursor: pointer; }
+        .sidebar-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+            z-index: 1039; display: none; backdrop-filter: blur(4px); opacity: 0; transition: opacity 0.3s;
+        }
+        .sidebar-overlay.show { display: block; opacity: 1; }
+
+        @media (max-width: 991.98px) {
+            #sidebar { transform: translateX(-100%); }
+            #sidebar.show { transform: translateX(0); }
+            #mainContent { margin-left: 0; }
+            .mobile-navbar { display: flex; }
+        }
+
+        #adminTabs .nav-link.active {
+            background-color: var(--primary) !important;
+            color: white !important;
+        }
+        .btn-primary { background-color: var(--primary); border-color: var(--primary); }
+        .btn-primary:hover { background-color: var(--primary-dark); border-color: var(--primary-dark); }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+    <div class="px-4 pt-5 pb-3">
+        <a href="../index.html" class="d-inline-flex align-items-center gap-2 mb-3 text-white-50 text-decoration-none small fw-semibold bg-white bg-opacity-10 px-3 py-1.5 rounded-3">
+            <i class="fas fa-arrow-left fa-xs"></i> Portofolio Utama
+        </a>
+        <a href="index.html" class="d-block text-decoration-none">
+            <span class="fs-4 fw-extrabold text-white tracking-wide">MKT<span style="color:#F3700D;">.</span>OS</span>
+        </a>
+        <span class="badge bg-white bg-opacity-10 text-white-50 fw-normal rounded-pill mt-1">Portofolio Demo</span>
+    </div>
+
+    <div class="flex-grow-1">
+        <p class="nav-section-label">Pintu Masuk</p>
+        <a href="index.html" class="nav-item-link">
+            <span class="icon"><i class="fas fa-home"></i></span> Beranda MKT
+        </a>
+
+        <hr class="nav-divider">
+        <p class="nav-section-label">7 Modul Portofolio</p>
+
+        <a href="admin_panel.html" class="nav-item-link active">
+            <span class="icon"><i class="fas fa-cogs"></i></span> 1. Admin Panel
+        </a>
+        <a href="partner/b2b.html" class="nav-item-link">
+            <span class="icon"><i class="fas fa-handshake"></i></span> 2. Partner B2B
+        </a>
+        <a href="mitra/tracker.html" class="nav-item-link">
+            <span class="icon"><i class="fas fa-route"></i></span> 3. Mitra Tracker
+        </a>
+        <a href="campaign/campaign-tracker/index.html" class="nav-item-link">
+            <span class="icon"><i class="fas fa-bullhorn"></i></span> 4. Campaign Tracker
+        </a>
+        <a href="data/ppob/index.html" class="nav-item-link">
+            <span class="icon"><i class="fas fa-bolt"></i></span> 5. PPOB Dashboard
+        </a>
+        <a href="data/mp-report/index.html" class="nav-item-link">
+            <span class="icon"><i class="fas fa-store"></i></span> 6. MP Report
+        </a>
+        <a href="tools/legal/index.html" class="nav-item-link">
+            <span class="icon"><i class="fas fa-file-contract"></i></span> 7. Legal Tools
+        </a>
+    </div>
+
+    <hr class="nav-divider mt-auto">
+    <a href="../index.html" class="nav-item-link mb-3 text-success bg-success bg-opacity-10">
+        <span class="icon"><i class="fas fa-arrow-circle-left"></i></span> Portofolio Utama
+    </a>
+</div>
+
+<!-- Mobile Navbar -->
+<div class="mobile-navbar">
+    <div style="font-weight:800;font-size:1.25rem;letter-spacing:-0.025em;color:#7335B7;">SIMASRIM<span style="color:#F3700D;">.</span></div>
+    <button class="btn-menu" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<div id="mainContent">
+
+    <!-- Hero Header -->
+    <div class="px-4 pt-5 pb-4 mb-4 shadow-sm" style="background: radial-gradient(circle at top right, #3A1B5E, #1F0D3D, #0f0c29); color: white; border-radius: 0 0 30px 30px; position: relative; overflow: hidden;">
+        <div class="position-absolute" style="width: 300px; height: 300px; background: rgba(255,255,255,0.08); border-radius: 50%; top: -50px; right: -50px;"></div>
+        <div class="position-relative z-1 pt-lg-2">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <span class="badge bg-white bg-opacity-25 text-white rounded-pill px-3 py-2"><i class="fas fa-cogs me-2 text-warning"></i>Admin Only</span>
+                <span class="badge bg-success bg-opacity-75 text-white rounded-pill px-3 py-2"><i class="fas fa-check-circle me-1"></i>Portofolio Demo Online</span>
+            </div>
+            <h2 class="fw-bold mb-2">Admin Panel ⚙️</h2>
+            <p class="text-white-50 mb-0">Manajemen Data Ekosistem dan Sinkronisasi Operasional.</p>
+        </div>
+    </div>
+
+    <div class="container-fluid px-4 pb-5">
+        <div class="card border-0 shadow-sm rounded-4 mb-5 overflow-hidden" style="background: rgba(255, 255, 255, 0.98);">
+            <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                <h5 class="fw-bold text-dark mb-0"><i class="fas fa-database me-2 text-primary"></i>Manajemen Data Ekosistem</h5>
+                <div>
+                    <button class="btn btn-warning btn-sm fw-bold shadow-sm" onclick="syncLocal()" id="btnSyncLocal" style="color: #856404;">
+                        <i class="fas fa-cloud-download-alt me-1"></i> Sync Data Awal (Dari File)
+                    </button>
+                    <a href="index.html" class="btn btn-outline-secondary btn-sm fw-bold ms-2"><i class="fas fa-arrow-left me-1"></i>Kembali</a>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <ul class="nav nav-pills p-3 bg-light border-bottom gap-2" id="adminTabs">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-bold px-4 rounded-pill shadow-sm" data-bs-toggle="pill" href="#mitra"><i class="fas fa-users me-2"></i>Mitra Area</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold px-4 rounded-pill shadow-sm text-secondary" data-bs-toggle="pill" href="#marketing"><i class="fas fa-bullhorn me-2"></i>Marketing Kit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-bold px-4 rounded-pill shadow-sm text-secondary" data-bs-toggle="pill" href="#coverage"><i class="fas fa-map-marked-alt me-2"></i>Coverage Ekspedisi</a>
+                    </li>
+                </ul>
+                
+                <div class="tab-content p-4 p-md-5">
+                    <!-- MITRA AREA TAB -->
+                    <div class="tab-pane fade show active" id="mitra">
+                        <div class="alert border-0 rounded-3 small mb-4" style="background-color: var(--bg-soft-purple); color: var(--primary-dark); border-left: 4px solid var(--primary) !important;">
+                            <i class="fas fa-info-circle me-2"></i><strong>Petunjuk:</strong> Data tersimpan di <code>localStorage</code> browser Anda. Klik <strong>Simpan Perubahan</strong> untuk menyimpan atau <strong>Sync Data Awal</strong> untuk reset.
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <h6 class="fw-bold mb-3 text-success"><i class="fas fa-file-excel me-2"></i>Spreadsheets Mitra</h6>
+                                <div class="table-responsive border rounded-4 shadow-sm">
+                                    <table class="table table-hover mb-0 align-middle" id="tableSpreadsheets">
+                                        <thead class="table-light"><tr><th class="ps-4">Nama / Kategori</th><th>URL Link</th><th width="80" class="text-center">Aksi</th></tr></thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-sm btn-light border text-success mt-3 fw-bold rounded-pill px-3 shadow-sm" onclick="addRow('tableSpreadsheets')"><i class="fas fa-plus me-1"></i> Tambah Baris Baru</button>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="fw-bold mb-3 text-info"><i class="fas fa-chart-pie me-2"></i>Looker Studio Mitra</h6>
+                                <div class="table-responsive border rounded-4 shadow-sm">
+                                    <table class="table table-hover mb-0 align-middle" id="tableLookers">
+                                        <thead class="table-light"><tr><th class="ps-4">Nama / Kategori</th><th>URL Link</th><th width="80" class="text-center">Aksi</th></tr></thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-sm btn-light border text-info mt-3 fw-bold rounded-pill px-3 shadow-sm" onclick="addRow('tableLookers')"><i class="fas fa-plus me-1"></i> Tambah Baris Baru</button>
+                            </div>
+                        </div>
+                        <hr class="my-5 border-light">
+                        <div class="text-end">
+                            <button class="btn btn-primary fw-bold px-5 py-2 rounded-pill shadow-sm" id="btnSaveMitra" onclick="saveMitra()"><i class="fas fa-save me-2"></i>Simpan Perubahan Mitra</button>
+                        </div>
+                    </div>
+                    
+                    <!-- MARKETING KIT TAB -->
+                    <div class="tab-pane fade" id="marketing">
+                        <h6 class="fw-bold mb-3" style="color: #8e44ad;"><i class="fas fa-palette me-2"></i>Daftar Marketing Kit (EDC)</h6>
+                        <div class="table-responsive border rounded-4 shadow-sm">
+                            <table class="table table-hover mb-0 align-middle" id="tableMarketing">
+                                <thead class="table-light"><tr><th class="ps-4">Nama Item (ex: X-Banner)</th><th>URL Canva / Drive</th><th width="80" class="text-center">Aksi</th></tr></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-sm btn-light border mt-3 fw-bold rounded-pill px-3 shadow-sm" style="color: #8e44ad;" onclick="addRow('tableMarketing')"><i class="fas fa-plus me-1"></i> Tambah Baris Baru</button>
+                        
+                        <hr class="my-5 border-light">
+                        <div class="text-end">
+                            <button class="btn btn-primary fw-bold px-5 py-2 rounded-pill shadow-sm" id="btnSaveMarketing" onclick="saveMarketing()"><i class="fas fa-save me-2"></i>Simpan Perubahan Marketing Kit</button>
+                        </div>
+                    </div>
+                    
+                    <!-- COVERAGE TAB -->
+                    <div class="tab-pane fade" id="coverage">
+                        <h6 class="fw-bold mb-3 text-warning text-darken-2"><i class="fas fa-map-marked-alt me-2"></i>Update Coverage Ekspedisi (Via Excel)</h6>
+                        <div class="alert alert-warning border-warning border-opacity-50 bg-warning bg-opacity-10 rounded-4 p-4 mb-4">
+                            <div class="d-flex">
+                                <i class="fas fa-info-circle fs-3 me-3 text-warning mt-1"></i>
+                                <div>
+                                    <h6 class="fw-bold text-dark">Cara Update Coverage:</h6>
+                                    <p class="small text-dark mb-0">Upload file Excel (.xlsx / .xls) data coverage baru. Sistem membaca file langsung di browser secara otomatis berdasarkan Provinsi, Kota, dan Kecamatan.</p>
+                                    <p class="small text-danger mt-2 mb-0 fw-bold"><i class="fas fa-exclamation-triangle me-1"></i> Format baris pertama adalah Header: <strong>Provinsi, Kota, Kecamatan, Bits, Kategori.</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-light border-0 rounded-4 p-4 text-center mb-4 border" style="border: 2px dashed #dee2e6 !important;">
+                            <i class="fas fa-file-excel fs-1 text-success mb-3"></i>
+                            <h6 class="fw-bold">Pilih File Excel Coverage</h6>
+                            <input type="file" id="excelCoverage" class="form-control form-control-lg mx-auto shadow-sm mt-3" accept=".xlsx, .xls" style="max-width: 500px;">
+                        </div>
+                        
+                        <div class="text-center">
+                            <button class="btn btn-warning fw-bold px-5 py-3 rounded-pill shadow-sm text-dark" id="btnUploadCoverage" onclick="uploadCoverage()">
+                                <i class="fas fa-cloud-upload-alt me-2"></i>Mulai Upload & Merge Data
+                            </button>
+                        </div>
+                        <div id="coverageResult" class="mt-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-4 text-center" style="border-top:1px solid rgba(0,0,0,0.05);background:transparent;">
+        <p class="text-muted small mb-0">
+            &copy; 2026 <strong style="color:#7335B7;">SIMASRIM</strong> — PT Solusi Mitra Aplikasi.<br>
+            <span style="font-size:0.75rem;opacity:0.7;">Marketing OS Hub — Bagian dari Portofolio Digital Maulana Gufron.</span>
+        </p>
+    </footer>
+
+</div><!-- end #mainContent -->
+
+<!-- Bootstrap Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const STORAGE_KEY = 'porto_admin_panel_data_v1';
+
+    const DEFAULT_DATA = {
+        spreadsheets: {
+            "DEMO-1 - Kota Contoh A (PIC Demo)": "https://docs.google.com/spreadsheets/d/demo1",
+            "DEMO-2 - Kota Contoh B (PIC Demo)": "https://docs.google.com/spreadsheets/d/demo2",
+            "DEMO-3 - Kota Contoh C (PIC Demo)": "https://docs.google.com/spreadsheets/d/demo3"
+        },
+        lookers: {
+            "DEMO-1 - Kota Contoh A (PIC Demo)": "https://lookerstudio.google.com/reporting/demo1",
+            "DEMO-2 - Kota Contoh B (PIC Demo)": "https://lookerstudio.google.com/reporting/demo2",
+            "DEMO-3 - Kota Contoh C (PIC Demo)": "https://lookerstudio.google.com/reporting/demo3"
+        },
+        marketing: {
+            "X-Banner EDC": "https://www.canva.com/design/DAG1qcadvPM/0n7VEz7oh5Rcw90cQU60iQ/edit",
+            "Spanduk 2x1 M": "https://www.canva.com/design/DAGzyZPoop8/pqa42vO38tiLfnuiupbTLw/edit",
+            "Spanduk 3x1 M": "https://www.canva.com/design/DAG1phnvTeU/y7ODED4jLeRtP0XX2j6dVw/edit"
+        },
+        coverageCount: 142
+    };
+
+    function getStore() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            return raw ? JSON.parse(raw) : JSON.parse(JSON.stringify(DEFAULT_DATA));
+        } catch(e) {
+            return JSON.parse(JSON.stringify(DEFAULT_DATA));
+        }
+    }
+
+    function saveStore(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    function createRowHtml(k = '', v = '') {
+        return `<tr>
+            <td><input type="text" class="form-control bg-light border-0" value="${escapeHtml(k)}" placeholder="Nama"></td>
+            <td><input type="text" class="form-control bg-light border-0" value="${escapeHtml(v)}" placeholder="https://..."></td>
+            <td class="text-center align-middle"><button class="btn btn-sm btn-outline-danger border-0" onclick="this.closest('tr').remove()"><i class="fa fa-times"></i></button></td>
+        </tr>`;
+    }
+
+    function escapeHtml(str) {
+        return (str || '').replace(/"/g, '&quot;');
+    }
+    
+    function addRow(tableId) {
+        document.querySelector(`#${tableId} tbody`).insertAdjacentHTML('beforeend', createRowHtml());
+    }
+    
+    function extractTableData(tableId) {
+        const data = {};
+        document.querySelectorAll(`#${tableId} tbody tr`).forEach(tr => {
+            const inputs = tr.querySelectorAll('input');
+            const k = inputs[0].value.trim();
+            const v = inputs[1].value.trim();
+            if (k && v) data[k] = v;
+        });
+        return data;
+    }
+
+    function syncLocal() {
+        if(!confirm("Apakah kamu yakin ingin me-reset data ke data awal bawaan sistem?")) return;
+        saveStore(DEFAULT_DATA);
+        loadMitra();
+        loadMarketing();
+        alert("Data awal berhasil di-reset!");
+    }
+
+    function loadMitra() {
+        const store = getStore();
+        const tbodyS = document.querySelector('#tableSpreadsheets tbody');
+        tbodyS.innerHTML = '';
+        for (const [k, v] of Object.entries(store.spreadsheets || {})) {
+            tbodyS.insertAdjacentHTML('beforeend', createRowHtml(k, v));
+        }
+        if (Object.keys(store.spreadsheets || {}).length === 0) addRow('tableSpreadsheets');
+        
+        const tbodyL = document.querySelector('#tableLookers tbody');
+        tbodyL.innerHTML = '';
+        for (const [k, v] of Object.entries(store.lookers || {})) {
+            tbodyL.insertAdjacentHTML('beforeend', createRowHtml(k, v));
+        }
+        if (Object.keys(store.lookers || {}).length === 0) addRow('tableLookers');
+    }
+
+    function saveMitra() {
+        const store = getStore();
+        store.spreadsheets = extractTableData('tableSpreadsheets');
+        store.lookers = extractTableData('tableLookers');
+        saveStore(store);
+        alert('Berhasil menyimpan data Mitra di browser (localStorage)!');
+    }
+
+    function loadMarketing() {
+        const store = getStore();
+        const tbodyM = document.querySelector('#tableMarketing tbody');
+        tbodyM.innerHTML = '';
+        for (const [k, v] of Object.entries(store.marketing || {})) {
+            tbodyM.insertAdjacentHTML('beforeend', createRowHtml(k, v));
+        }
+        if (Object.keys(store.marketing || {}).length === 0) addRow('tableMarketing');
+    }
+
+    function saveMarketing() {
+        const store = getStore();
+        store.marketing = extractTableData('tableMarketing');
+        saveStore(store);
+        alert('Berhasil menyimpan Marketing Kit di browser (localStorage)!');
+    }
+
+    function uploadCoverage() {
+        const fileInput = document.getElementById('excelCoverage');
+        if (!fileInput.files.length) {
+            alert('Pilih file Excel terlebih dahulu!');
+            return;
+        }
+        
+        const btn = document.getElementById('btnUploadCoverage');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Membaca Excel...'; 
+        btn.disabled = true;
+        
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            try {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, {type: 'array'});
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                const jsonArr = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+                
+                if (jsonArr.length > 0 && isNaN(parseInt(jsonArr[0][3]))) {
+                    jsonArr.shift();
+                }
+                
+                const validData = jsonArr.filter(row => row.length >= 3 && row[0] && row[1] && row[2]);
+                const store = getStore();
+                const total = (store.coverageCount || 100) + validData.length;
+                store.coverageCount = total;
+                saveStore(store);
+
+                document.getElementById('coverageResult').innerHTML = `<div class="alert alert-success fw-bold"><i class="fas fa-check-circle me-2"></i>Berhasil! File Excel berhasil diproses di browser. Total coverage: ${total} baris.</div>`;
+                fileInput.value = '';
+            } catch(err) {
+                alert("Gagal membaca Excel: " + err.message);
+            } finally {
+                btn.innerHTML = originalText; 
+                btn.disabled = false;
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    }
+
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('show');
+        document.getElementById('sidebarOverlay').classList.toggle('show');
+    }
+
+    window.onload = () => {
+        loadMitra();
+        loadMarketing();
+    };
+</script>
+
+</body>
+</html>

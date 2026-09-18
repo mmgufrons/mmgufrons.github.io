@@ -209,13 +209,11 @@ async function loadAllData() {
 
         updateDbStatus('ok');
         
-        // Cek Firebase kosong
+        // Cek Firebase kosong -> otomatis muat data demo untuk portofolio publik
         const isEmpty = Object.keys(AppState.leads_wa).length === 0 && Object.keys(AppState.leads_email).length === 0;
-        const banner = document.getElementById('demo-banner');
         if (isEmpty) {
-            if (banner) banner.style.display = 'flex';
-        } else {
-            if (banner) banner.style.display = 'none';
+            loadDemoData();
+            return;
         }
 
         CRMTracker.buildHeader(AppState.mode);
@@ -225,9 +223,8 @@ async function loadAllData() {
         renderLeadsTable();
 
     } catch (err) {
-        console.error('Load Error:', err);
-        showToast('Gagal memuat data dari Firebase.', 'error');
-        updateDbStatus('error');
+        console.warn('Load Firebase Error (falling back to demo data):', err);
+        loadDemoData();
     }
 }
 

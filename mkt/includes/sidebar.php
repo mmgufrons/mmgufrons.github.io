@@ -24,7 +24,7 @@ $base_path = isset($base_path) ? $base_path : '';
     <div class="flex-grow-1" style="display: block;">
         <!-- Dashboard Utama -->
         <p class="nav-section-label">Pintu Masuk</p>
-        <a href="<?= $base_path ?>index.php" class="nav-item <?= $current_page == 'index.php' && $current_dir == 'mkt' ? 'active' : '' ?>">
+        <a href="<?= $base_path ?>index.html" class="nav-item <?= ($current_page == 'index.php' || $current_page == 'index.html') && $current_dir == 'mkt' ? 'active' : '' ?>">
             <span class="icon"><i class="fas fa-home"></i></span> Beranda MKT
         </a>
 
@@ -32,31 +32,31 @@ $base_path = isset($base_path) ? $base_path : '';
         <hr class="nav-divider">
         <p class="nav-section-label">7 Modul Portofolio</p>
 
-        <a href="<?= $base_path ?>admin_panel.php" class="nav-item <?= $current_page == 'admin_panel.php' ? 'active' : '' ?>">
+        <a href="<?= $base_path ?>admin_panel.html" class="nav-item <?= $current_page == 'admin_panel.php' || $current_page == 'admin_panel.html' ? 'active' : '' ?>">
             <span class="icon"><i class="fas fa-cogs"></i></span> 1. Admin Panel
         </a>
 
-        <a href="<?= $base_path ?>partner/b2b.php" class="nav-item <?= $current_page == 'b2b.php' && $current_dir == 'partner' ? 'active' : '' ?>">
+        <a href="<?= $base_path ?>partner/b2b.html" class="nav-item <?= ($current_page == 'b2b.php' || $current_page == 'b2b.html') && $current_dir == 'partner' ? 'active' : '' ?>">
             <span class="icon"><i class="fas fa-handshake"></i></span> 2. Partner B2B
         </a>
 
-        <a href="<?= $base_path ?>mitra/tracker.php" class="nav-item <?= $current_page == 'tracker.php' && $current_dir == 'mitra' ? 'active' : '' ?>">
+        <a href="<?= $base_path ?>mitra/tracker.html" class="nav-item <?= ($current_page == 'tracker.php' || $current_page == 'tracker.html') && $current_dir == 'mitra' ? 'active' : '' ?>">
             <span class="icon"><i class="fas fa-route"></i></span> 3. Mitra Tracker
         </a>
 
-        <a href="<?= $base_path ?>campaign/campaign-tracker/index.php" class="nav-item <?= $current_dir == 'campaign-tracker' ? 'active' : '' ?>">
+        <a href="<?= $base_path ?>campaign/campaign-tracker/index.html" class="nav-item <?= $current_dir == 'campaign-tracker' ? 'active' : '' ?>">
             <span class="icon"><i class="fas fa-bullhorn"></i></span> 4. Campaign Tracker
         </a>
 
-        <a href="<?= $base_path ?>data/ppob/index.php" class="nav-item <?= $current_dir == 'ppob' ? 'active' : '' ?>">
+        <a href="<?= $base_path ?>data/ppob/index.html" class="nav-item <?= $current_dir == 'ppob' ? 'active' : '' ?>">
             <span class="icon"><i class="fas fa-bolt"></i></span> 5. PPOB Dashboard
         </a>
 
-        <a href="<?= $base_path ?>data/mp-report/index.php" class="nav-item <?= $current_dir == 'mp-report' ? 'active' : '' ?>">
+        <a href="<?= $base_path ?>data/mp-report/index.html" class="nav-item <?= $current_dir == 'mp-report' ? 'active' : '' ?>">
             <span class="icon"><i class="fas fa-store"></i></span> 6. MP Report
         </a>
 
-        <a href="<?= $base_path ?>tools/legal/index.php" class="nav-item <?= $current_dir == 'legal' ? 'active' : '' ?>">
+        <a href="<?= $base_path ?>tools/legal/index.html" class="nav-item <?= $current_dir == 'legal' ? 'active' : '' ?>">
             <span class="icon"><i class="fas fa-file-contract"></i></span> 7. Legal Tools
         </a>
     </div>
