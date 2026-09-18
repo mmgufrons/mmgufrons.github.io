@@ -84,13 +84,13 @@
 <div id="sidebar" class="sidebar">
     <div class="px-4 pt-4 pb-3">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <a href="../../index.html" class="d-inline-flex align-items-center gap-2 text-white-50 text-decoration-none small fw-semibold bg-white bg-opacity-10 px-3 py-1.5 rounded-3" data-i18n="mkt.sub.back">
+            <a href="../../index.html" class="d-inline-flex align-items-center gap-2 text-white text-decoration-none small fw-bold bg-white bg-opacity-20 px-3 py-1.5 rounded-3 border border-white border-opacity-25 shadow-sm" data-i18n="mkt.sub.back">
                 <i class="fas fa-arrow-left fa-xs"></i> Portofolio Utama
             </a>
             <div class="d-inline-flex align-items-center gap-1 bg-black bg-opacity-25 border border-white border-opacity-10 rounded-pill px-2 py-1">
-                <button type="button" class="lang-btn border-0 bg-transparent text-white-50 p-0 fw-bold" style="font-size:10.5px;" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
+                <button type="button" class="lang-btn border-0 bg-transparent text-white text-opacity-75 p-0 fw-bold" style="font-size:10.5px;" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
                 <span class="text-white-50" style="font-size:9px;">|</span>
-                <button type="button" class="lang-btn border-0 bg-transparent text-white-50 p-0 fw-bold" style="font-size:10.5px;" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
+                <button type="button" class="lang-btn border-0 bg-transparent text-white text-opacity-75 p-0 fw-bold" style="font-size:10.5px;" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
             </div>
         </div>
         <a href="../index.html" class="d-block text-decoration-none">
@@ -100,40 +100,40 @@
     </div>
 
     <div class="flex-grow-1">
-        <p class="nav-section-label">Pintu Masuk</p>
+        <p class="nav-section-label" data-i18n="adm.nav.entry">Pintu Masuk</p>
         <a href="../index.html" class="nav-item-link">
-            <span class="icon"><i class="fas fa-home"></i></span> Beranda MKT
+            <span class="icon"><i class="fas fa-home"></i></span> <span data-i18n="adm.nav.home">Beranda MKT</span>
         </a>
 
         <hr class="nav-divider">
-        <p class="nav-section-label">7 Modul Portofolio</p>
+        <p class="nav-section-label" data-i18n="adm.nav.modules">7 Modul Portofolio</p>
 
         <a href="../admin_panel.html" class="nav-item-link">
-            <span class="icon"><i class="fas fa-cogs"></i></span> 1. Admin Panel
+            <span class="icon"><i class="fas fa-cogs"></i></span> <span data-i18n="adm.nav.m1">1. Admin Panel</span>
         </a>
         <a href="b2b.html" class="nav-item-link active">
-            <span class="icon"><i class="fas fa-handshake"></i></span> 2. Partner B2B
+            <span class="icon"><i class="fas fa-handshake"></i></span> <span data-i18n="adm.nav.m2">2. Partner B2B</span>
         </a>
         <a href="../mitra/tracker.html" class="nav-item-link">
-            <span class="icon"><i class="fas fa-route"></i></span> 3. Mitra Tracker
+            <span class="icon"><i class="fas fa-route"></i></span> <span data-i18n="adm.nav.m3">3. Mitra Tracker</span>
         </a>
         <a href="../campaign/campaign-tracker/index.html" class="nav-item-link">
-            <span class="icon"><i class="fas fa-bullhorn"></i></span> 4. Campaign Tracker
+            <span class="icon"><i class="fas fa-bullhorn"></i></span> <span data-i18n="adm.nav.m4">4. Campaign Tracker</span>
         </a>
         <a href="../data/ppob/index.html" class="nav-item-link">
-            <span class="icon"><i class="fas fa-bolt"></i></span> 5. PPOB Dashboard
+            <span class="icon"><i class="fas fa-bolt"></i></span> <span data-i18n="adm.nav.m5">5. PPOB Dashboard</span>
         </a>
         <a href="../data/mp-report/index.html" class="nav-item-link">
-            <span class="icon"><i class="fas fa-store"></i></span> 6. MP Report
+            <span class="icon"><i class="fas fa-store"></i></span> <span data-i18n="adm.nav.m6">6. MP Report</span>
         </a>
         <a href="../tools/legal/index.html" class="nav-item-link">
-            <span class="icon"><i class="fas fa-file-contract"></i></span> 7. Legal Tools
+            <span class="icon"><i class="fas fa-file-contract"></i></span> <span data-i18n="adm.nav.m7">7. Legal Tools</span>
         </a>
     </div>
 
     <hr class="nav-divider mt-auto">
-    <a href="../../index.html" class="nav-item-link mb-3 text-success bg-success bg-opacity-10">
-        <span class="icon"><i class="fas fa-arrow-circle-left"></i></span> Portofolio Utama
+    <a href="../../index.html" class="nav-item-link mb-3 fw-bold" style="color:#4ade80 !important;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25);border-radius:10px;margin:0 16px 16px 16px;">
+        <span class="icon"><i class="fas fa-arrow-circle-left"></i></span> <span data-i18n="common.back.hub">Portofolio Utama</span>
     </a>
 </div>
 
@@ -199,15 +199,15 @@
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-3" data-aos="fade-up">
         <div>
             <h4 class="fw-bold mb-0 text-dark" data-i18n="mkt.b2b.list.title">Daftar Klien B2B Aktif</h4>
-            <p class="text-muted small mb-0 mt-1"><i class="fas fa-circle text-success me-1" style="font-size:8px;"></i> Cloud Database Connected</p>
+            <p class="text-muted small mb-0 mt-1"><i class="fas fa-circle text-success me-1" style="font-size:8px;"></i> <span data-i18n="b2b.status.cloud">Cloud Database Connected</span></p>
         </div>
         <button class="btn btn-primary rounded-pill px-4 py-2 shadow-sm fw-bold" onclick="openAddModal()">
-            <i class="fas fa-plus me-2"></i> Tambah Klien Baru
+            <i class="fas fa-plus me-2"></i> <span data-i18n="b2b.btn.add">Tambah Klien Baru</span>
         </button>
     </div>
 
     <div class="mb-4 d-flex align-items-center gap-2 flex-wrap" data-aos="fade-up">
-        <label class="small fw-bold text-muted mb-0"><i class="fas fa-filter me-1"></i> Kategori:</label>
+        <label class="small fw-bold text-muted mb-0"><i class="fas fa-filter me-1"></i> <span data-i18n="b2b.filter.label">Kategori:</span></label>
         <select id="categoryFilter" class="form-select form-select-sm w-auto" onchange="window.renderTracker()">
             <option value="" data-i18n="mkt.sub.filter.all">Semua Kategori</option>
         </select>
@@ -215,7 +215,7 @@
 
     <div id="loadingSpinner" class="text-center py-5">
         <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
-        <p class="text-muted small mt-2">Menyinkronkan data dengan Firebase...</p>
+        <p class="text-muted small mt-2" data-i18n="b2b.syncing">Menyinkronkan data dengan Firebase...</p>
     </div>
 
     <div id="b2bMainContent" class="d-none">
@@ -247,30 +247,30 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
       <div class="modal-header border-bottom-0 pb-0">
-        <h5 class="modal-title fw-bold" id="clientModalLabel">Form Klien B2B</h5>
+        <h5 class="modal-title fw-bold" id="clientModalLabel" data-i18n="b2b.modal.title">Form Klien B2B</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <input type="hidden" id="modalKey">
         <div class="mb-3">
-            <label class="form-label small fw-bold text-muted">Nama Klien / Perusahaan</label>
+            <label class="form-label small fw-bold text-muted" data-i18n="b2b.modal.name">Nama Klien / Perusahaan</label>
             <input type="text" id="modalName" class="form-control" placeholder="Contoh: PT Solusi Retail / Koperasi Makmur">
         </div>
         <div class="mb-3">
-            <label class="form-label small fw-bold text-muted">Arah Kerjasama</label>
+            <label class="form-label small fw-bold text-muted" data-i18n="b2b.modal.dir">Arah Kerjasama</label>
             <select id="modalDirection" class="form-select">
-                <option value="OUT">B2B Outbound (Kita Supply ke Klien)</option>
-                <option value="IN">B2B Inbound (Kita Sourcing dari Partner)</option>
+                <option value="OUT" data-i18n="b2b.modal.dir.out">B2B Outbound (Kita Supply ke Klien)</option>
+                <option value="IN" data-i18n="b2b.modal.dir.in">B2B Inbound (Kita Sourcing dari Partner)</option>
             </select>
         </div>
         <div class="mb-3">
-            <label class="form-label small fw-bold text-muted">Tipe Jalur</label>
+            <label class="form-label small fw-bold text-muted" data-i18n="b2b.modal.type">Tipe Jalur</label>
             <select id="modalType" class="form-select" onchange="document.getElementById('modalTypeCustomWrap').classList.toggle('d-none', this.value !== 'LAINNYA')">
-                <option value="API">Jalur Integrasi API</option>
-                <option value="KOTAK">Bisnis Dalam Kotak (Non-API)</option>
-                <option value="WLFULL">White Label - Full</option>
-                <option value="WLHALF">White Label - Half</option>
-                <option value="LAINNYA">Lainnya (isi bebas)</option>
+                <option value="API" data-i18n="b2b.modal.type.api">Jalur Integrasi API</option>
+                <option value="KOTAK" data-i18n="b2b.modal.type.kotak">Bisnis Dalam Kotak (Non-API)</option>
+                <option value="WLFULL" data-i18n="b2b.modal.type.wlfull">White Label - Full</option>
+                <option value="WLHALF" data-i18n="b2b.modal.type.wlhalf">White Label - Half</option>
+                <option value="LAINNYA" data-i18n="b2b.modal.type.other">Lainnya (isi bebas)</option>
             </select>
         </div>
         <div class="mb-3 d-none" id="modalTypeCustomWrap">
@@ -278,18 +278,18 @@
             <input type="text" id="modalTypeCustom" class="form-control" placeholder="Contoh: Kemitraan Sponsorship">
         </div>
         <div class="mb-3">
-            <label class="form-label small fw-bold text-muted">Kategori</label>
+            <label class="form-label small fw-bold text-muted" data-i18n="b2b.modal.cat">Kategori</label>
             <input type="text" id="modalCategory" class="form-control" list="categoryDatalist" placeholder="Contoh: Logistik, Payment, Asuransi, Pak Enang...">
             <datalist id="categoryDatalist"></datalist>
         </div>
         <div class="mb-3">
-            <label class="form-label small fw-bold text-muted">Deskripsi / Catatan Tambahan</label>
+            <label class="form-label small fw-bold text-muted" data-i18n="b2b.modal.notes">Deskripsi / Catatan Tambahan</label>
             <textarea id="modalNotes" class="form-control" rows="2" placeholder="Contoh: Target selesai bulan depan..."></textarea>
         </div>
       </div>
       <div class="modal-footer border-top-0 pt-0">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-        <button type="button" class="btn btn-primary px-4 fw-bold" onclick="saveClientData()">Simpan Data</button>
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal" data-i18n="b2b.modal.cancel">Batal</button>
+        <button type="button" class="btn btn-primary px-4 fw-bold" onclick="saveClientData()" data-i18n="b2b.modal.save">Simpan Data</button>
       </div>
     </div>
   </div>

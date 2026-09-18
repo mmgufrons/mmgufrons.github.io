@@ -50,61 +50,61 @@
             </div>
 
             <!-- Mode Switcher: WhatsApp / Email -->
-            <p class="nav-section-label">Mode Campaign</p>
+            <p class="nav-section-label" data-i18n="camp.mode.title">Mode Campaign</p>
             <div class="mode-tabs" id="mode-tabs">
                 <button class="mode-tab-btn active wa" data-mode="wa" id="mode-btn-wa">
-                    <i class='bx bxl-whatsapp'></i> WA
+                    <i class='bx bxl-whatsapp'></i> <span data-i18n="camp.mode.wa">WA Mode</span>
                 </button>
                 <button class="mode-tab-btn email" data-mode="email" id="mode-btn-email">
-                    <i class='bx bx-envelope'></i> Email
+                    <i class='bx bx-envelope'></i> <span data-i18n="camp.mode.email">Email Mode</span>
                 </button>
             </div>
 
             <!-- Navigasi Pages -->
-            <p class="nav-section-label">Halaman</p>
+            <p class="nav-section-label" data-i18n="camp.nav.title">Halaman</p>
             <ul class="nav-links" id="nav-links">
-                <li style="margin-bottom: 8px;">
-                    <a href="../../index.html" style="background: rgba(243,112,13,0.15); color: #F3700D; border: 1px solid rgba(243,112,13,0.3); border-radius: 8px; padding: 8px 12px; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:0.85rem; font-weight:600;">
-                        <i class='bx bx-arrow-back'></i>
-                        <span>Back to MKT Hub</span>
+                <li style="margin-bottom: 12px;">
+                    <a href="../../index.html" style="background: #F3700D; color: #ffffff !important; border: 1px solid #ff8826; border-radius: 8px; padding: 9px 14px; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:0.85rem; font-weight:700; box-shadow: 0 2px 8px rgba(243,112,13,0.35);">
+                        <i class='bx bx-arrow-back' style="font-size:1rem;"></i>
+                        <span data-i18n="camp.back">Back to MKT Hub</span>
                     </a>
                 </li>
                 <li class="active" data-target="dashboard">
                     <a href="#">
                         <i class='bx bx-grid-alt'></i>
-                        <span>Dashboard</span>
+                        <span data-i18n="camp.nav.dash">Dashboard</span>
                         <span class="nav-badge" id="badge-dashboard" style="display:none;"></span>
                     </a>
                 </li>
                 <li data-target="leads">
                     <a href="#">
                         <i class='bx bx-spreadsheet'></i>
-                        <span>Master Leads</span>
+                        <span data-i18n="camp.nav.leads">Master Leads</span>
                         <span class="nav-badge" id="badge-leads">–</span>
                     </a>
                 </li>
                 <li data-target="upload">
                     <a href="#">
                         <i class='bx bx-cloud-upload'></i>
-                        <span>Upload & Cleansing</span>
+                        <span data-i18n="camp.nav.upload">Upload & Cleansing</span>
                     </a>
                 </li>
                 <li data-target="broadcast">
                     <a href="#">
                         <i class='bx bxl-whatsapp'></i>
-                        <span>WA Broadcast</span>
+                        <span data-i18n="camp.nav.broadcast">WA Broadcast</span>
                     </a>
                 </li>
                 <li data-target="leadgen">
                     <a href="#">
                         <i class='bx bx-radar'></i>
-                        <span>Cari Leads Baru</span>
+                        <span data-i18n="camp.nav.leadgen">Cari Leads Baru</span>
                     </a>
                 </li>
                 <li data-target="tutorial">
                     <a href="#">
                         <i class='bx bx-book-open'></i>
-                        <span>Panduan</span>
+                        <span data-i18n="camp.nav.tutorial">Panduan</span>
                     </a>
                 </li>
             </ul>
@@ -122,18 +122,23 @@
             <!-- Top Bar -->
             <div class="top-bar">
                 <div class="page-header">
-                    <h1 id="page-title">Dashboard Campaign</h1>
-                    <p id="page-sub">Ringkasan performa leads SIMASRIM</p>
+                    <h1 id="page-title" data-i18n="camp.header.title">Dashboard Campaign</h1>
+                    <p id="page-sub" data-i18n="camp.header.sub">Ringkasan performa leads SIMASRIM</p>
                 </div>
                 <div class="top-bar-actions">
+                    <div class="lang-switch-container" style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:2px 4px;font-size:11px;font-weight:700;">
+                        <button type="button" class="lang-btn" data-lang-btn="id" onclick="setLanguage('id')" style="background:transparent;border:none;color:#94a3b8;padding:2px 6px;cursor:pointer;border-radius:4px;font-weight:700;">ID</button>
+                        <span style="color:#64748b;">|</span>
+                        <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')" style="background:transparent;border:none;color:#94a3b8;padding:2px 6px;cursor:pointer;border-radius:4px;font-weight:700;">EN</button>
+                    </div>
                     <div id="mode-badge-topbar" class="mode-badge wa">
                         <i class='bx bxl-whatsapp'></i> WhatsApp Mode
                     </div>
                     <button class="btn btn-ghost btn-sm" id="btn-refresh" title="Refresh dari Firebase">
-                        <i class='bx bx-refresh'></i> Refresh
+                        <i class='bx bx-refresh'></i> <span data-i18n="camp.btn.refresh">Refresh</span>
                     </button>
                     <div id="db-status" class="badge-status">
-                        <span class="dot"></span>Menghubungkan...
+                        <span class="dot"></span><span data-i18n="b2b.status.cloud">Menghubungkan...</span>
                     </div>
                 </div>
             </div>
@@ -150,32 +155,31 @@
                         <div id="demo-banner" class="demo-banner" style="display:none;">
                             <div class="db-icon">🎯</div>
                             <div style="flex:1;">
-                                <div class="db-title">Selamat Datang di SIMASRIM Campaign Dashboard!</div>
-                                <div class="db-sub">Database masih kosong. Upload data leads dari menu <strong style="color:var(--accent);">Upload & Cleansing</strong>, atau coba lihat demo dengan data contoh.</div>
+                                <div class="db-title" data-i18n="camp.banner.title">Selamat Datang di SIMASRIM Campaign Dashboard!</div>
+                                <div class="db-sub" data-i18n="camp.banner.sub">Database masih kosong. Upload data leads dari menu <strong style="color:var(--accent);">Upload & Cleansing</strong>, atau coba lihat demo dengan data contoh.</div>
                             </div>
                             <div class="db-actions">
                                 <button onclick="switchTab('upload')" class="btn btn-accent btn-sm">
-                                    <i class='bx bx-upload'></i> Upload Leads
+                                    <i class='bx bx-upload'></i> <span data-i18n="camp.banner.btn.upload">Upload Leads</span>
                                 </button>
                                 <button onclick="loadDemoData()" class="btn btn-sm" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.2);">
-                                    <i class='bx bx-play-circle'></i> Lihat Demo
+                                    <i class='bx bx-play-circle'></i> <span data-i18n="camp.banner.btn.demo">Lihat Demo</span>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Filter Dashboard — sama seperti Master Leads, supaya bisa lihat performa
-                             per brand/produk/wilayah/PIC/periode, bukan cuma total keseluruhan -->
+                        <!-- Filter Dashboard -->
                         <div class="filter-bar" id="dashboard-filter-bar">
                             <i class='bx bx-filter-alt' style="color:var(--primary);font-size:1.1rem; flex-shrink: 0;"></i>
-                            <select class="glass-select" id="dash-filter-brand"><option value="">Semua Brand</option></select>
-                            <select class="glass-select" id="dash-filter-produk"><option value="">Semua Produk</option></select>
-                            <select class="glass-select" id="dash-filter-provinsi"><option value="">Semua Area Utama</option></select>
-                            <select class="glass-select" id="dash-filter-area"><option value="">Semua Sub Area</option></select>
-                            <select class="glass-select" id="dash-filter-pic"><option value="">Semua PIC</option></select>
+                            <select class="glass-select" id="dash-filter-brand"><option value="" data-i18n="camp.filter.brand">Semua Brand</option></select>
+                            <select class="glass-select" id="dash-filter-produk"><option value="" data-i18n="camp.filter.prod">Semua Produk</option></select>
+                            <select class="glass-select" id="dash-filter-provinsi"><option value="" data-i18n="camp.filter.prov">Semua Area Utama</option></select>
+                            <select class="glass-select" id="dash-filter-area"><option value="" data-i18n="camp.filter.area">Semua Sub Area</option></select>
+                            <select class="glass-select" id="dash-filter-pic"><option value="" data-i18n="camp.filter.pic">Semua PIC</option></select>
                             <div class="filter-divider"></div>
-                            <label style="font-size:0.76rem;color:var(--text-muted);white-space:nowrap;">Dari:</label>
+                            <label style="font-size:0.76rem;color:var(--text-muted);white-space:nowrap;" data-i18n="camp.filter.from">Dari:</label>
                             <input type="date" class="glass-input" id="dash-filter-date-from" style="max-width:145px;">
-                            <label style="font-size:0.76rem;color:var(--text-muted);white-space:nowrap;">Sampai:</label>
+                            <label style="font-size:0.76rem;color:var(--text-muted);white-space:nowrap;" data-i18n="camp.filter.to">Sampai:</label>
                             <input type="date" class="glass-input" id="dash-filter-date-to" style="max-width:145px;">
                             <button class="btn btn-ghost btn-sm" id="btn-reset-dash-filter" title="Reset Filter" style="padding: 7px 10px;">
                                 <i class='bx bx-refresh' style="font-size: 1.2rem; margin: 0;"></i>
@@ -190,7 +194,7 @@
                             <div class="metric-card purple">
                                 <div class="card-icon-wrap purple"><i class='bx bx-group'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Total Leads</div>
+                                    <div class="card-label" data-i18n="camp.metric.total">Total Leads</div>
                                     <div class="card-value" id="card-total">0</div>
                                     <div class="card-sub" id="card-total-sub">Semua mode aktif</div>
                                 </div>
@@ -198,7 +202,7 @@
                             <div class="metric-card red">
                                 <div class="card-icon-wrap red"><i class='bx bxs-flame'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Hot Leads 🔴</div>
+                                    <div class="card-label" data-i18n="camp.card.hot">Hot Leads 🔴</div>
                                     <div class="card-value" id="card-hot">0</div>
                                     <div class="card-sub">Siap closing</div>
                                 </div>
@@ -206,7 +210,7 @@
                             <div class="metric-card orange">
                                 <div class="card-icon-wrap orange"><i class='bx bx-trending-up'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Warm Leads 🟡</div>
+                                    <div class="card-label" data-i18n="camp.card.warm">Warm Leads 🟡</div>
                                     <div class="card-value" id="card-warm">0</div>
                                     <div class="card-sub">Sedang dijajaki</div>
                                 </div>
@@ -214,7 +218,7 @@
                             <div class="metric-card blue">
                                 <div class="card-icon-wrap blue"><i class='bx bx-minus-circle'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Cold / Dead 🔵</div>
+                                    <div class="card-label" data-i18n="camp.card.cold">Cold / Dead 🔵</div>
                                     <div class="card-value" id="card-cold">0</div>
                                     <div class="card-sub">Tidak merespon</div>
                                 </div>
@@ -222,7 +226,7 @@
                             <div class="metric-card green">
                                 <div class="card-icon-wrap green"><i class='bx bx-time-five'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Belum Direspon</div>
+                                    <div class="card-label" data-i18n="camp.card.noresponse">Belum Direspon</div>
                                     <div class="card-value" id="card-noresponse">0</div>
                                     <div class="card-sub">Menunggu follow-up</div>
                                 </div>
@@ -230,7 +234,7 @@
                             <div class="metric-card teal">
                                 <div class="card-icon-wrap teal"><i class='bx bx-check-shield'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Sudah Dikirim Pesan</div>
+                                    <div class="card-label" data-i18n="camp.card.sent">Sudah Dikirim Pesan</div>
                                     <div class="card-value" id="card-sent">0</div>
                                     <div class="card-sub">Tahap 1+</div>
                                 </div>
@@ -238,7 +242,7 @@
                             <div class="metric-card red">
                                 <div class="card-icon-wrap red"><i class='bx bx-bell'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">🔔 Perlu Follow-Up</div>
+                                    <div class="card-label" data-i18n="camp.card.fu">🔔 Perlu Follow-Up</div>
                                     <div class="card-value" id="card-fu-needed">0</div>
                                     <div class="card-sub">Hot/Warm, belum closing, &gt;=3 hari tanpa update</div>
                                 </div>
@@ -246,7 +250,7 @@
                             <div class="metric-card green">
                                 <div class="card-icon-wrap green"><i class='bx bx-pulse'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Aktivitas Hari Ini</div>
+                                    <div class="card-label" data-i18n="camp.card.today">Aktivitas Hari Ini</div>
                                     <div class="card-value" id="card-active-today">0</div>
                                     <div class="card-sub">Leads di-update hari ini</div>
                                 </div>
@@ -254,7 +258,7 @@
                             <div class="metric-card teal">
                                 <div class="card-icon-wrap teal"><i class='bx bx-link'></i></div>
                                 <div class="card-body">
-                                    <div class="card-label">Kontak Lengkap (WA+Email)</div>
+                                    <div class="card-label" data-i18n="camp.card.dual">Kontak Lengkap (WA+Email)</div>
                                     <div class="card-value" id="card-dual-contact">0</div>
                                     <div class="card-sub" id="card-dual-contact-sub">Lead dengan 2 kanal kontak</div>
                                 </div>
@@ -333,8 +337,8 @@
                             <div class="chart-card">
                                 <div class="chart-card-header">
                                     <div>
-                                        <h3>Tren Leads Masuk & Closing</h3>
-                                        <p>14 hari terakhir, berdasar tanggal dibuat/update</p>
+                                        <h3><span data-i18n="camp.chart.trend">Tren Leads Masuk & Closing</span></h3>
+                                        <p><span data-i18n="camp.chart.trend.sub">14 hari terakhir, berdasar tanggal dibuat/update</span></p>
                                     </div>
                                 </div>
                                 <div style="position:relative;height:220px;">
