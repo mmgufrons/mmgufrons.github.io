@@ -74,8 +74,49 @@
         }
     </style>
 
-    <style>
-        .lang-btn.active { color: #F3700D !important; font-weight: 800 !important; }
+        <style>
+        .lang-btn.active { color: #F3700D !important; font-weight: 800 !important; text-shadow: 0 0 10px rgba(243,112,13,0.4); }
+        .btn-back-main-porto {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 7px !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            font-size: 0.8rem !important;
+            font-weight: 700 !important;
+            background: #140927 !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            border-radius: 8px !important;
+            padding: 7px 13px !important;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .btn-back-main-porto i {
+            color: #F3700D !important;
+            font-size: 0.75rem !important;
+            transition: transform 0.2s ease, color 0.2s ease !important;
+        }
+        .btn-back-main-porto:hover {
+            background: #F3700D !important;
+            border-color: #ff852e !important;
+            color: #ffffff !important;
+            transform: translateX(-3px) !important;
+            box-shadow: 0 6px 18px rgba(243, 112, 13, 0.55) !important;
+        }
+        .btn-back-main-porto:hover i {
+            color: #ffffff !important;
+            transform: translateX(-2px) !important;
+        }
+        .btn-back-main-porto:active {
+            transform: translateX(0) !important;
+            background: #d85c00 !important;
+        }
+        .nav-item-link.btn-bottom-porto:hover {
+            background: rgba(74, 222, 128, 0.22) !important;
+            border-color: rgba(74, 222, 128, 0.5) !important;
+            color: #86efac !important;
+            transform: translateX(-2px);
+        }
     </style>
 
 </head>
@@ -84,8 +125,8 @@
 <div id="sidebar" class="sidebar">
     <div class="px-4 pt-4 pb-3">
         <div class="d-flex align-items-center justify-content-between mb-3">
-            <a href="../../index.html" class="d-inline-flex align-items-center gap-2 text-white text-decoration-none small fw-bold bg-white bg-opacity-20 px-3 py-1.5 rounded-3 border border-white border-opacity-25 shadow-sm" data-i18n="mkt.sub.back">
-                <i class="fas fa-arrow-left fa-xs"></i> Portofolio Utama
+            <a href="../../index.html" class="btn-back-main-porto">
+                <i class="fas fa-arrow-left fa-xs"></i> <span data-i18n="mkt.sub.back">Portofolio Utama</span>
             </a>
             <div class="d-inline-flex align-items-center gap-1 bg-black bg-opacity-25 border border-white border-opacity-10 rounded-pill px-2 py-1">
                 <button type="button" class="lang-btn border-0 bg-transparent text-white text-opacity-75 p-0 fw-bold" style="font-size:10.5px;" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
@@ -96,7 +137,7 @@
         <a href="../index.html" class="d-block text-decoration-none">
             <span class="fs-4 fw-extrabold text-white tracking-wide">MKT<span style="color:#F3700D;">.</span>OS</span>
         </a>
-        <span class="badge bg-white bg-opacity-10 text-white-50 fw-normal rounded-pill mt-1" data-i18n="mkt.sub.demo.badge">Portofolio Demo</span>
+        <span class="badge rounded-pill mt-1 fw-semibold" style="background: rgba(255, 255, 255, 0.1); color: #cbd5e1 !important; border: 1px solid rgba(255, 255, 255, 0.15);" data-i18n="mkt.sub.demo.badge">Portofolio Demo</span>
     </div>
 
     <div class="flex-grow-1">
@@ -132,7 +173,7 @@
     </div>
 
     <hr class="nav-divider mt-auto">
-    <a href="../../index.html" class="nav-item-link mb-3 fw-bold" style="color:#4ade80 !important;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25);border-radius:10px;margin:0 16px 16px 16px;">
+    <a href="../../index.html" class="nav-item-link btn-bottom-porto mb-3 fw-bold" style="color:#4ade80 !important;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.25);border-radius:10px;margin:0 16px 16px 16px;transition:all 0.2s ease;">
         <span class="icon"><i class="fas fa-arrow-circle-left"></i></span> <span data-i18n="common.back.hub">Portofolio Utama</span>
     </a>
 </div>
@@ -191,7 +232,7 @@
 
 <div class="container-fluid px-4 pb-5">
     <!-- Section: Sync Alert (Menampilkan data JSON lokal ke Firebase) -->
-    <div id="syncAlert" class="sync-alert shadow-sm mb-4" data-aos="fade-down">
+    <div id="syncAlert" class="sync-alert shadow-sm mb-4" style="display:none;" data-aos="fade-down">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
             <span>
                 <i class="fas fa-exclamation-triangle text-warning me-2"></i> 

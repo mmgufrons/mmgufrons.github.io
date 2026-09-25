@@ -21,8 +21,73 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
+        <style>
         .lang-btn.active { color: #F3700D !important; font-weight: 800 !important; }
+        .btn-back-mkt-hub {
+            background: linear-gradient(135deg, #7335B7, #592494);
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 9px;
+            padding: 9px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none !important;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(115, 53, 183, 0.35);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-back-mkt-hub:hover {
+            background: linear-gradient(135deg, #873ed6, #7335B7);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(115, 53, 183, 0.55);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff !important;
+        }
+        .btn-back-mkt-hub:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(115, 53, 183, 0.3);
+        }
+    
+        .btn-back-main-porto {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 7px !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            font-size: 0.8rem !important;
+            font-weight: 700 !important;
+            background: #140927 !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            border-radius: 8px !important;
+            padding: 7px 13px !important;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .btn-back-main-porto i {
+            color: #F3700D !important;
+            font-size: 0.75rem !important;
+            transition: transform 0.2s ease, color 0.2s ease !important;
+        }
+        .btn-back-main-porto:hover {
+            background: #F3700D !important;
+            border-color: #ff852e !important;
+            color: #ffffff !important;
+            transform: translateX(-3px) !important;
+            box-shadow: 0 6px 18px rgba(243, 112, 13, 0.55) !important;
+        }
+        .btn-back-main-porto:hover i {
+            color: #ffffff !important;
+            transform: translateX(-2px) !important;
+        }
+        .btn-bottom-porto:hover {
+            background: rgba(74, 222, 128, 0.22) !important;
+            border-color: rgba(74, 222, 128, 0.5) !important;
+            color: #86efac !important;
+            transform: translateX(-2px);
+        }
+    
     </style>
 
 </head>
@@ -38,6 +103,11 @@
         <!-- ──────── SIDEBAR ──────── -->
         <aside class="sidebar">
             <div class="sidebar-header">
+                <div style="margin-bottom:12px;">
+                    <a href="../../../index.html" class="btn-back-main-porto">
+                        <i class='bx bx-arrow-back'></i> <span data-i18n="mkt.sub.back">Portofolio Utama</span>
+                    </a>
+                </div>
                 <div class="logo-box"><i class='bx bx-bolt-circle'></i></div>
                 <div class="sidebar-brand">
                     <h2>SIMASRIM</h2>
@@ -48,7 +118,7 @@
             <p class="nav-section-label">Navigasi</p>
             <ul class="nav-links">
                 <li style="margin-bottom: 12px;">
-                    <a href="../../index.html" style="background: #7335B7; color: #ffffff !important; border: 1px solid #8e44ad; border-radius: 8px; padding: 9px 14px; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:0.85rem; font-weight:700; box-shadow: 0 2px 8px rgba(115,53,183,0.35);">
+                    <a href="../../index.html" class="btn-back-mkt-hub">
                         <i class='bx bx-arrow-back' style="font-size:1rem;"></i>
                         <span data-i18n="ppob.back">Back to MKT Hub</span>
                     </a>
@@ -353,8 +423,8 @@
                                         <div class="uc-icon" style="background:var(--primary-light);color:var(--primary);">
                                             <i class='bx bx-user'></i>
                                         </div>
-                                        <h2>Upload Data Master User</h2>
-                                        <p>File Excel/CSV berisi profil semua user SIMASRIM.<br>Data ini akan menjadi referensi kontak (No WA) untuk fitur CRM.</p>
+                                        <h2 data-i18n="ppob.upload.master.title">Upload Data Master User</h2>
+                                        <p data-i18n="ppob.upload.master.desc">File Excel/CSV berisi profil semua user SIMASRIM.<br>Data ini akan menjadi referensi kontak (No WA) untuk fitur CRM.</p>
                                         <div class="field-tags">
                                             <span class="field-tag">EMAIL</span>
                                             <span class="field-tag">ID USER</span>
@@ -367,24 +437,24 @@
                                     <div class="drop-zone" id="drop-master">
                                         <input type="file" id="file-master" accept=".xlsx,.xls,.csv">
                                         <i class='bx bx-cloud-upload'></i>
-                                        <h4>Klik atau Drag & Drop File</h4>
-                                        <p>Format: .xlsx, .xls, atau .csv</p>
+                                        <h4 data-i18n="ppob.upload.drop.title">Klik atau Drag &amp; Drop File</h4>
+                                        <p data-i18n="ppob.upload.drop.sub">Format: .xlsx, .xls, atau .csv</p>
                                     </div>
                                     <div class="file-selected" id="file-sel-master">
                                         <i class='bx bxs-file-blank' style="color:var(--primary);"></i>
                                         <div>
                                             <div class="fn" id="fname-master">–</div>
-                                            <div class="fs">Siap diproses</div>
+                                            <div class="fs" data-i18n="ppob.upload.ready">Siap diproses</div>
                                         </div>
                                     </div>
                                     <div class="upload-actions">
                                         <button class="btn btn-primary btn-lg" id="btn-upload-master" disabled>
-                                            <i class='bx bx-upload'></i> Proses & Sinkronisasi ke Firebase
+                                            <i class='bx bx-upload'></i> <span data-i18n="ppob.upload.btn.sync">Proses &amp; Sinkronisasi ke Firebase</span>
                                         </button>
                                     </div>
                                     <div class="progress-wrap" id="prog-master" style="display:none;">
                                         <div class="progress-label">
-                                            <span id="plabel-master">Memproses...</span>
+                                            <span id="plabel-master" data-i18n="ppob.upload.processing">Memproses...</span>
                                             <span id="ppct-master">0%</span>
                                         </div>
                                         <div class="progress-bar">
@@ -401,8 +471,8 @@
                                         <div class="uc-icon" style="background:var(--accent-light);color:var(--accent);">
                                             <i class='bx bx-bolt-circle'></i>
                                         </div>
-                                        <h2>Upload Transaksi PPOB</h2>
-                                        <p>File ekspor transaksi PPOB. Sistem akan otomatis menghitung <strong>PROFIT</strong> per transaksi dan mencegah duplikasi menggunakan <strong>KODE TRANSAKSI</strong>.</p>
+                                        <h2 data-i18n="ppob.upload.ppob.title">Upload Transaksi PPOB</h2>
+                                        <p data-i18n="ppob.upload.ppob.desc">File ekspor transaksi PPOB. Sistem akan otomatis menghitung <strong>PROFIT</strong> per transaksi dan mencegah duplikasi menggunakan <strong>KODE TRANSAKSI</strong>.</p>
                                         <div class="field-tags">
                                             <span class="field-tag">EMAIL</span>
                                             <span class="field-tag">KODE TRANSAKSI</span>
@@ -418,24 +488,24 @@
                                     <div class="drop-zone" id="drop-ppob">
                                         <input type="file" id="file-ppob" accept=".xlsx,.xls,.csv">
                                         <i class='bx bx-cloud-upload'></i>
-                                        <h4>Klik atau Drag & Drop File</h4>
-                                        <p>Format: .xlsx, .xls, atau .csv</p>
+                                        <h4 data-i18n="ppob.upload.drop.title">Klik atau Drag &amp; Drop File</h4>
+                                        <p data-i18n="ppob.upload.drop.sub">Format: .xlsx, .xls, atau .csv</p>
                                     </div>
                                     <div class="file-selected" id="file-sel-ppob">
                                         <i class='bx bxs-file-blank' style="color:var(--accent);"></i>
                                         <div>
                                             <div class="fn" id="fname-ppob">–</div>
-                                            <div class="fs">Siap diproses • Profit akan dihitung otomatis</div>
+                                            <div class="fs" data-i18n="ppob.upload.ppob.ready">Siap diproses • Profit akan dihitung otomatis</div>
                                         </div>
                                     </div>
                                     <div class="upload-actions">
                                         <button class="btn btn-accent btn-lg" id="btn-upload-ppob" disabled>
-                                            <i class='bx bx-upload'></i> Proses, Hitung Profit & Sinkronisasi
+                                            <i class='bx bx-upload'></i> <span data-i18n="ppob.upload.btn.ppob">Proses, Hitung Profit &amp; Sinkronisasi</span>
                                         </button>
                                     </div>
                                     <div class="progress-wrap" id="prog-ppob" style="display:none;">
                                         <div class="progress-label">
-                                            <span id="plabel-ppob">Memproses...</span>
+                                            <span id="plabel-ppob" data-i18n="ppob.upload.processing">Memproses...</span>
                                         </div>
                                         <div class="progress-bar">
                                             <div class="progress-fill" id="pfill-ppob"></div>
@@ -469,8 +539,8 @@
                                         <div class="uc-icon" style="background:var(--success-light);color:var(--success);">
                                             <i class='bx bx-package'></i>
                                         </div>
-                                        <h2>Upload Data Logistik (Opsional)</h2>
-                                        <p>Data pengiriman paket. Digunakan untuk segmentasi <strong>Cross-Sell Target</strong> — mengidentifikasi user yang aktif di PPOB tapi belum pakai Logistik (atau sebaliknya).</p>
+                                        <h2 data-i18n="ppob.upload.log.title">Upload Data Logistik (Opsional)</h2>
+                                        <p data-i18n="ppob.upload.log.desc">Data pengiriman paket. Digunakan untuk segmentasi <strong>Cross-Sell Target</strong> — mengidentifikasi user yang aktif di PPOB tapi belum pakai Logistik (atau sebaliknya).</p>
                                         <div class="field-tags">
                                             <span class="field-tag">ID USER</span>
                                             <span class="field-tag">NAMA USER</span>
@@ -483,20 +553,20 @@
                                     <div class="drop-zone" id="drop-logistik">
                                         <input type="file" id="file-logistik" accept=".xlsx,.xls,.csv">
                                         <i class='bx bx-cloud-upload'></i>
-                                        <h4>Klik atau Drag & Drop File</h4>
-                                        <p>Format: .xlsx, .xls, atau .csv</p>
+                                        <h4 data-i18n="ppob.upload.drop.title">Klik atau Drag &amp; Drop File</h4>
+                                        <p data-i18n="ppob.upload.drop.sub">Format: .xlsx, .xls, atau .csv</p>
                                     </div>
                                     <div class="file-selected" id="file-sel-logistik">
                                         <i class='bx bxs-file-blank' style="color:var(--success);"></i>
                                         <div>
                                             <div class="fn" id="fname-logistik">–</div>
-                                            <div class="fs">Siap diproses</div>
+                                            <div class="fs" data-i18n="ppob.upload.ready">Siap diproses</div>
                                         </div>
                                     </div>
                                     <div class="upload-actions">
                                         <button class="btn btn-lg" id="btn-upload-logistik" disabled
                                             style="background:linear-gradient(135deg,var(--success),#4ade80);color:#fff;box-shadow:0 4px 16px rgba(34,197,94,0.3);">
-                                            <i class='bx bx-upload'></i> Proses & Sinkronisasi Logistik
+                                            <i class='bx bx-upload'></i> <span data-i18n="ppob.upload.btn.log">Proses &amp; Sinkronisasi Logistik</span>
                                         </button>
                                     </div>
                                     <div class="progress-wrap" id="prog-logistik" style="display:none;">
@@ -521,10 +591,10 @@
                     <div class="content-area">
                         <div style="background:var(--bg-card);border-radius:var(--radius-lg);padding:30px;box-shadow:var(--shadow-md);">
                             <h2 style="margin-bottom:20px;color:var(--primary);font-size:1.5rem;font-weight:800;">
-                                <i class='bx bx-book-open'></i> Panduan Penggunaan SIMASRIM Dashboard
+                                <i class='bx bx-book-open'></i> <span data-i18n="ppob.tutorial.title">Panduan Penggunaan SIMASRIM Dashboard</span>
                             </h2>
                             <p style="color:var(--text-muted);margin-bottom:30px;line-height:1.6;">
-                                Selamat datang di SIMASRIM PPOB Dashboard! Halaman ini dibuat untuk membantu tim operasional memahami dan menggunakan semua fitur yang ada dengan mudah dan praktis.
+                                <span data-i18n="ppob.tutorial.intro">Selamat datang di SIMASRIM PPOB Dashboard! Halaman ini dibuat untuk membantu tim operasional memahami dan menggunakan semua fitur yang ada dengan mudah dan praktis.</span>
                             </p>
 
                             <div style="display:grid;grid-template-columns:1fr;gap:20px;">
@@ -532,17 +602,17 @@
                                 <div style="border-left:4px solid var(--accent);padding:16px 20px;background:var(--bg);border-radius:var(--radius-sm);">
                                     <h3 style="font-size:1.1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
                                         <i class='bx bx-cloud-upload' style="color:var(--accent);font-size:1.4rem;"></i> 
-                                        1. Cara Mengupload Data
+                                        <span data-i18n="ppob.tutorial.s1.title">1. Cara Mengupload Data</span>
                                     </h3>
-                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);" data-i18n="ppob.tutorial.s1.goal">
                                         <strong>Tujuan:</strong> Memasukkan data transaksi dan data pelanggan agar dashboard bisa menampilkan laporan terbaru.
                                     </p>
                                     <ol style="margin-left:20px;margin-top:10px;font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
-                                        <li style="margin-bottom:6px;">Buka menu <strong>Upload Data</strong> di menu sebelah kiri.</li>
-                                        <li style="margin-bottom:6px;">Akan muncul tiga kotak upload: <strong>Master User</strong>, <strong>Transaksi PPOB</strong>, dan <strong>Logistik</strong>.</li>
-                                        <li style="margin-bottom:6px;">Klik kotak tersebut atau seret (drag & drop) file Excel (.xlsx) atau CSV ke dalamnya.</li>
-                                        <li style="margin-bottom:6px;">Setelah file terpilih, klik tombol berwarna <strong>"Proses & Sinkronisasi"</strong> yang muncul di bawahnya.</li>
-                                        <li style="margin-bottom:6px;">Tunggu hingga loading selesai dan muncul notifikasi sukses. Lakukan hal yang sama untuk kotak lainnya jika diperlukan.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s1.step1">Buka menu <strong>Upload Data</strong> di menu sebelah kiri.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s1.step2">Akan muncul tiga kotak upload: <strong>Master User</strong>, <strong>Transaksi PPOB</strong>, dan <strong>Logistik</strong>.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s1.step3">Klik kotak tersebut atau seret (drag & drop) file Excel (.xlsx) atau CSV ke dalamnya.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s1.step4">Setelah file terpilih, klik tombol berwarna <strong>"Proses & Sinkronisasi"</strong> yang muncul di bawahnya.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s1.step5">Tunggu hingga loading selesai dan muncul notifikasi sukses. Lakukan hal yang sama untuk kotak lainnya jika diperlukan.</li>
                                     </ol>
                                 </div>
 
@@ -550,15 +620,15 @@
                                 <div style="border-left:4px solid var(--primary);padding:16px 20px;background:var(--bg);border-radius:var(--radius-sm);">
                                     <h3 style="font-size:1.1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
                                         <i class='bx bx-grid-alt' style="color:var(--primary);font-size:1.4rem;"></i> 
-                                        2. Membaca Laporan & Grafik
+                                        <span data-i18n="ppob.tutorial.s2.title">2. Membaca Laporan &amp; Grafik</span>
                                     </h3>
-                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);" data-i18n="ppob.tutorial.s2.goal">
                                         <strong>Tujuan:</strong> Melihat rangkuman bisnis secara cepat (berapa banyak transaksi, pendapatan, dll).
                                     </p>
                                     <ul style="margin-left:20px;margin-top:10px;font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
-                                        <li style="margin-bottom:6px;">Buka menu <strong>Dashboard</strong>. Di bagian atas, bisa dilihat Total Transaksi, Total Uang Masuk (Volume), dan Profit Bersih.</li>
-                                        <li style="margin-bottom:6px;"><strong>Filter waktu</strong> bisa diubah di pojok kanan atas (misalnya: <strong>7 Hari Terakhir</strong> atau <strong>30 Hari Terakhir</strong>) untuk melihat perkembangan terbaru saja.</li>
-                                        <li style="margin-bottom:6px;">Grafik di bawahnya menunjukkan produk apa saja yang paling laku (Top Produk) dan seberapa aktif pelanggan.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s2.step1">Buka menu <strong>Dashboard</strong>. Di bagian atas, bisa dilihat Total Transaksi, Total Uang Masuk (Volume), dan Profit Bersih.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s2.step2"><strong>Filter waktu</strong> bisa diubah di pojok kanan atas (misalnya: <strong>7 Hari Terakhir</strong> atau <strong>30 Hari Terakhir</strong>) untuk melihat perkembangan terbaru saja.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s2.step3">Grafik di bawahnya menunjukkan produk apa saja yang paling laku (Top Produk) dan seberapa aktif pelanggan.</li>
                                     </ul>
                                 </div>
 
@@ -566,17 +636,17 @@
                                 <div style="border-left:4px solid var(--success);padding:16px 20px;background:var(--bg);border-radius:var(--radius-sm);">
                                     <h3 style="font-size:1.1rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;">
                                         <i class='bx bx-user-pin' style="color:var(--success);font-size:1.4rem;"></i> 
-                                        3. Mengelola Pelanggan (CRM & WhatsApp)
+                                        <span data-i18n="ppob.tutorial.s3.title">3. Mengelola Pelanggan (CRM &amp; WhatsApp)</span>
                                     </h3>
-                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
+                                    <p style="font-size:0.9rem;line-height:1.6;color:var(--text-muted);" data-i18n="ppob.tutorial.s3.goal">
                                         <strong>Tujuan:</strong> Menghubungi pelanggan berdasarkan kebiasaan mereka secara tepat sasaran (misal: menyapa pelanggan VIP, atau merayu pelanggan yang sudah lama tidak beli).
                                     </p>
                                     <ol style="margin-left:20px;margin-top:10px;font-size:0.9rem;line-height:1.6;color:var(--text-muted);">
-                                        <li style="margin-bottom:6px;">Buka menu <strong>CRM & Segmentasi</strong>. Di sini pelanggan sudah dikelompokkan otomatis oleh sistem (contoh: <strong>Champion/VIP 👑</strong> untuk pelanggan setia, <strong>At Risk ⚠️</strong> untuk pelanggan yang sudah lebih dari 30 hari tidak transaksi).</li>
-                                        <li style="margin-bottom:6px;">Gunakan kotak pencarian atau pilihan dropdown kategori untuk memfilter data.</li>
-                                        <li style="margin-bottom:6px;">Klik pada baris/nama salah satu pelanggan untuk membuka detailnya.</li>
-                                        <li style="margin-bottom:6px;">Sistem sudah menyiapkan pesan WhatsApp (Template) yang kata-katanya disesuaikan otomatis dengan kebiasaan pelanggan tersebut!</li>
-                                        <li style="margin-bottom:6px;">Klik tombol hijau <strong>"Hubungi via WhatsApp"</strong> untuk langsung membuka obrolan ke nomor pelanggan bersangkutan tanpa perlu repot mengetik/copy paste.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s3.step1">Buka menu <strong>CRM & Segmentasi</strong>. Di sini pelanggan sudah dikelompokkan otomatis oleh sistem (contoh: <strong>Champion/VIP 👑</strong> untuk pelanggan setia, <strong>At Risk ⚠️</strong> untuk pelanggan yang sudah lebih dari 30 hari tidak transaksi).</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s3.step2">Gunakan kotak pencarian atau pilihan dropdown kategori untuk memfilter data.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s3.step3">Klik pada baris/nama salah satu pelanggan untuk membuka detailnya.</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s3.step4">Sistem sudah menyiapkan pesan WhatsApp (Template) yang kata-katanya disesuaikan otomatis dengan kebiasaan pelanggan tersebut!</li>
+                                        <li style="margin-bottom:6px;" data-i18n="ppob.tutorial.s3.step5">Klik tombol hijau <strong>"Hubungi via WhatsApp"</strong> untuk langsung membuka obrolan ke nomor pelanggan bersangkutan tanpa perlu repot mengetik/copy paste.</li>
                                     </ol>
                                 </div>
 
@@ -617,40 +687,40 @@
                 <div class="crm-stat-row">
                     <div class="crm-stat-item">
                         <div class="cs-val" id="modal-stat-trx">0</div>
-                        <div class="cs-lbl">Transaksi</div>
+                        <div class="cs-lbl" data-i18n="ppob.crm.modal.trx">Transaksi</div>
                     </div>
                     <div class="crm-stat-item">
                         <div class="cs-val" id="modal-stat-volume">Rp 0</div>
-                        <div class="cs-lbl">Total Volume</div>
+                        <div class="cs-lbl" data-i18n="ppob.crm.modal.vol">Total Volume</div>
                     </div>
                     <div class="crm-stat-item">
                         <div class="cs-val" id="modal-stat-profit">Rp 0</div>
-                        <div class="cs-lbl">Profit Bersih</div>
+                        <div class="cs-lbl" data-i18n="ppob.crm.modal.profit">Profit Bersih</div>
                     </div>
                 </div>
 
                 <!-- Detail Info -->
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;font-size:0.82rem;">
                     <div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);">
-                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;">ORIGIN</div>
+                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;" data-i18n="ppob.crm.modal.origin">ORIGIN</div>
                         <div id="modal-origin" style="font-weight:700;">–</div>
                     </div>
                     <div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);">
-                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;">KATEGORI USER</div>
+                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;" data-i18n="ppob.crm.modal.category">KATEGORI USER</div>
                         <div id="modal-kategori" style="font-weight:700;">–</div>
                     </div>
                     <div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);">
-                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;">PRODUK FAVORIT</div>
+                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;" data-i18n="ppob.crm.modal.fav">PRODUK FAVORIT</div>
                         <div id="modal-fav-produk" style="font-weight:700;">–</div>
                     </div>
                     <div style="background:var(--bg);padding:10px;border-radius:var(--radius-sm);">
-                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;">TRANSAKSI TERAKHIR</div>
+                        <div style="color:var(--text-muted);font-weight:600;font-size:0.72rem;margin-bottom:3px;" data-i18n="ppob.crm.modal.last">TRANSAKSI TERAKHIR</div>
                         <div id="modal-last-trx" style="font-weight:700;">–</div>
                     </div>
                 </div>
 
                 <!-- WhatsApp Template -->
-                <div style="margin-bottom:6px;font-size:0.8rem;font-weight:700;color:var(--text-muted);">
+                <div style="margin-bottom:6px;font-size:0.8rem;font-weight:700;color:var(--text-muted);" data-i18n="ppob.crm.modal.wa.title">
                     📝 Template WhatsApp (Auto-Generated):
                 </div>
                 <div class="wa-template-box">
@@ -660,10 +730,10 @@
                 <!-- Action Buttons -->
                 <div class="modal-footer-btns">
                     <button class="btn btn-ghost" onclick="closeCRMModal()">
-                        <i class='bx bx-x'></i> Tutup
+                        <i class='bx bx-x'></i> <span data-i18n="ppob.crm.modal.close">Tutup</span>
                     </button>
                     <a id="modal-wa-btn" class="btn btn-wa" href="#" target="_blank">
-                        <i class='bx bxl-whatsapp'></i> Hubungi via WhatsApp
+                        <i class='bx bxl-whatsapp'></i> <span data-i18n="ppob.crm.modal.wa.btn">Hubungi via WhatsApp</span>
                     </a>
                 </div>
             </div>
@@ -694,29 +764,35 @@
     <!-- Badge counter update — runs after all scripts loaded -->
     <script>
         // Patch processAndRender to also update the CRM badge counter
-        // This runs AFTER app.js so processAndRender is already defined
         (function patchBadge() {
             const _orig = window.processAndRender;
-            if (typeof _orig !== 'function') {
-                // Retry on next tick if app.js not yet finished
-                return setTimeout(patchBadge, 50);
-            }
+            if (typeof _orig !== 'function') return setTimeout(patchBadge, 50);
             window.processAndRender = function() {
                 _orig.call(this);
-                // Update badge CRM
                 const badge = document.getElementById('badge-crm');
                 if (badge && window.AppState && AppState.segmented) {
                     const active = AppState.segmented.filter(u => u.total_trx > 0 || u.has_logistic).length;
                     badge.textContent = active > 0 ? active : '–';
                 }
-                // Update page subtitle
-                const sub = document.getElementById('page-sub');
-                if (sub && window.AppState) {
-                    const s = AppState.summary || {};
-                    sub.textContent = `${(s.totalTrx||0).toLocaleString('id-ID')} transaksi · ${(s.totalUserAktif||0)} user aktif · Profit ${fmtShort(s.totalProfit||0)}`;
-                }
+                updatePPOBSubtitle();
             };
         })();
+
+        function updatePPOBSubtitle() {
+            const sub = document.getElementById('page-sub');
+            if (!sub || !window.AppState) return;
+            const s = AppState.summary || {};
+            const lang = (function(){ try { return localStorage.getItem('porto_user_lang_pref') === 'en' ? 'en' : 'id'; } catch(e){ return 'id'; } })();
+            if (lang === 'en') {
+                sub.textContent = `${(s.totalTrx||0).toLocaleString('en-US')} transactions · ${(s.totalUserAktif||0)} active users · Profit ${fmtShort(s.totalProfit||0)}`;
+            } else {
+                sub.textContent = `${(s.totalTrx||0).toLocaleString('id-ID')} transaksi · ${(s.totalUserAktif||0)} user aktif · Profit ${fmtShort(s.totalProfit||0)}`;
+            }
+        }
+
+        window.addEventListener('languageChanged', () => {
+            updatePPOBSubtitle();
+        });
     </script>
 
 <script src="../../../assets/js/i18n.js"></script>
