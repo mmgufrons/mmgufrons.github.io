@@ -57,13 +57,28 @@ function showToast(msg, type = 'info') {
 function fmt(num) { return PPOBParser.formatRupiah(num); }
 
 // ================================================================
-// UTILITY: Format angka singkat (1jt, 500rb)
+// UTILITY: Format angka singkat — locale-aware (EN: M/K, ID: jt/rb)
 // ================================================================
 function fmtShort(num) {
-    if (num >= 1_000_000_000) return 'Rp ' + (num / 1_000_000_000).toFixed(1) + 'M';
-    if (num >= 1_000_000)     return 'Rp ' + (num / 1_000_000).toFixed(1) + 'jt';
-    if (num >= 1_000)         return 'Rp ' + (num / 1_000).toFixed(0) + 'rb';
-    return fmt(num);
+    if (num === null || num === undefined || isNaN(num)) return 'Rp 0';
+    const isNeg = num < 0;
+    const abs = Math.abs(num);
+    const lang = (function(){
+        try { const s = localStorage.getItem('porto_user_lang_pref'); return (s === 'en') ? 'en' : 'id'; } catch(e){ return 'id'; }
+    })();
+    let str = '';
+    if (lang === 'en') {
+        if (abs >= 1_000_000_000) str = (abs / 1_000_000_000).toFixed(1) + 'B';
+        else if (abs >= 1_000_000) str = (abs / 1_000_000).toFixed(1) + 'M';
+        else if (abs >= 1_000)     str = (abs / 1_000).toFixed(0) + 'K';
+        else return fmt(num);
+    } else {
+        if (abs >= 1_000_000_000) str = (abs / 1_000_000_000).toFixed(1) + 'M';
+        else if (abs >= 1_000_000) str = (abs / 1_000_000).toFixed(1) + 'jt';
+        else if (abs >= 1_000)     str = (abs / 1_000).toFixed(0) + 'rb';
+        else return fmt(num);
+    }
+    return (isNeg ? '-Rp ' : 'Rp ') + str;
 }
 
 // ================================================================
@@ -88,12 +103,13 @@ function switchTab(tabId) {
     if (navItem) navItem.classList.add('active');
     if (tabPane) tabPane.classList.add('active');
 
+    const lang = (function(){ try { return localStorage.getItem('porto_user_lang_pref') === 'en' ? 'en' : 'id'; } catch(e){ return 'id'; } })();
     const titles = {
-        'dashboard': 'Dashboard Analytics',
-        'upload':    'Upload Data',
-        'crm':       'CRM & Segmentasi User',
-        'transaksi': 'Data Transaksi PPOB',
-        'tutorial':  'Tutorial Penggunaan'
+        'dashboard': lang === 'en' ? 'Dashboard Analytics' : 'Dashboard Analytics',
+        'upload':    lang === 'en' ? 'Data Upload & Sync' : 'Upload Data',
+        'crm':       lang === 'en' ? 'User CRM & Segmentation' : 'CRM & Segmentasi User',
+        'transaksi': lang === 'en' ? 'PPOB Transaction Data' : 'Data Transaksi PPOB',
+        'tutorial':  lang === 'en' ? 'User Guide & Tutorial' : 'Panduan Penggunaan'
     };
     const el = document.getElementById('page-title');
     if (el) el.textContent = titles[tabId] || tabId;
@@ -225,22 +241,33 @@ function processAndRender() {
 // ================================================================
 function renderDashboard() {
     const s = AppState.summary;
+    if (!s) return;
+
+    const lang = (function(){
+        try { return localStorage.getItem('porto_user_lang_pref') === 'en' ? 'en' : 'id'; } catch(e){ return 'id'; }
+    })();
 
     // Cards
-    document.getElementById('card-total-trx').textContent    = s.totalTrx.toLocaleString('id-ID');
-    document.getElementById('card-total-volume').textContent  = fmtShort(s.totalVolume);
-    document.getElementById('card-total-profit').textContent  = fmtShort(s.totalProfit);
-    document.getElementById('card-user-aktif').textContent    = s.totalUserAktif.toLocaleString('id-ID');
+    const totalTrxEl = document.getElementById('card-total-trx');
+    const totalVolEl = document.getElementById('card-total-volume');
+    const totalProfEl = document.getElementById('card-total-profit');
+    const userAktifEl = document.getElementById('card-user-aktif');
+
+    if (totalTrxEl) totalTrxEl.textContent    = (s.totalTrx || 0).toLocaleString(lang === 'en' ? 'en-US' : 'id-ID');
+    if (totalVolEl) totalVolEl.textContent    = fmtShort(s.totalVolume || 0);
+    if (totalProfEl) totalProfEl.textContent  = fmtShort(s.totalProfit || 0);
+    if (userAktifEl) userAktifEl.textContent  = (s.totalUserAktif || 0).toLocaleString(lang === 'en' ? 'en-US' : 'id-ID');
 
     // Trend sub info
     const trend = AppState.trendData;
-    if (trend.length >= 2) {
+    if (trend && trend.length >= 2) {
         const last = trend[trend.length - 1];
         const prev = trend[trend.length - 2];
         const pct  = prev.count > 0 ? (((last.count - prev.count) / prev.count) * 100).toFixed(1) : 0;
         const trendEl = document.getElementById('card-trx-trend');
         if (trendEl) {
-            trendEl.textContent = `${pct >= 0 ? '+' : ''}${pct}% vs bulan lalu`;
+            const vsText = lang === 'en' ? 'vs last month' : 'vs bulan lalu';
+            trendEl.textContent = `${pct >= 0 ? '+' : ''}${pct}% ${vsText}`;
             trendEl.className   = `card-trend ${pct >= 0 ? 'up' : 'down'}`;
         }
     }
@@ -429,10 +456,12 @@ function openCRMModal(key) {
         waBtn.style.opacity = '0.4';
     }
 
+    AppState.activeCRMKey = key;
     document.getElementById('crm-modal-overlay').classList.remove('hidden');
 }
 
 function closeCRMModal() {
+    AppState.activeCRMKey = null;
     document.getElementById('crm-modal-overlay').classList.add('hidden');
 }
 
@@ -648,4 +677,20 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavigation();
     initUpload();
     initFilters();
+});
+
+// Real-time language listener: updates metrics, tables, active modal, and tab titles instantly
+window.addEventListener('languageChanged', () => {
+    if (AppState.summary) {
+        renderDashboard();
+        renderCRMTable();
+        renderTransaksiTable();
+    }
+    if (AppState.activeCRMKey) {
+        openCRMModal(AppState.activeCRMKey);
+    }
+    const activeNav = document.querySelector('.nav-links li.active');
+    if (activeNav && activeNav.dataset.target) {
+        switchTab(activeNav.dataset.target);
+    }
 });

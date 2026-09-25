@@ -23,8 +23,73 @@
     <!-- WA Broadcast tool CSS (scoped dalam .wa-scope) -->
     <link rel="stylesheet" href="css/wa-broadcast.css">
 
-    <style>
+        <style>
         .lang-btn.active { color: #F3700D !important; font-weight: 800 !important; }
+        .btn-back-mkt-hub {
+            background: linear-gradient(135deg, #F3700D, #d85c00);
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 9px;
+            padding: 9px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none !important;
+            font-size: 0.85rem;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(243, 112, 13, 0.35);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-back-mkt-hub:hover {
+            background: linear-gradient(135deg, #ff8324, #F3700D);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(243, 112, 13, 0.55);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #ffffff !important;
+        }
+        .btn-back-mkt-hub:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(243, 112, 13, 0.3);
+        }
+    
+        .btn-back-main-porto {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 7px !important;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            font-size: 0.8rem !important;
+            font-weight: 700 !important;
+            background: #140927 !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            border-radius: 8px !important;
+            padding: 7px 13px !important;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        .btn-back-main-porto i {
+            color: #F3700D !important;
+            font-size: 0.75rem !important;
+            transition: transform 0.2s ease, color 0.2s ease !important;
+        }
+        .btn-back-main-porto:hover {
+            background: #F3700D !important;
+            border-color: #ff852e !important;
+            color: #ffffff !important;
+            transform: translateX(-3px) !important;
+            box-shadow: 0 6px 18px rgba(243, 112, 13, 0.55) !important;
+        }
+        .btn-back-main-porto:hover i {
+            color: #ffffff !important;
+            transform: translateX(-2px) !important;
+        }
+        .btn-bottom-porto:hover {
+            background: rgba(74, 222, 128, 0.22) !important;
+            border-color: rgba(74, 222, 128, 0.5) !important;
+            color: #86efac !important;
+            transform: translateX(-2px);
+        }
+    
     </style>
 
 </head>
@@ -42,6 +107,11 @@
         <!-- ──────── SIDEBAR ──────── -->
         <aside class="sidebar">
             <div class="sidebar-header">
+                <div style="margin-bottom:12px;">
+                    <a href="../../../index.html" class="btn-back-main-porto">
+                        <i class='bx bx-arrow-back'></i> <span data-i18n="mkt.sub.back">Portofolio Utama</span>
+                    </a>
+                </div>
                 <div class="logo-box"><i class='bx bx-target-lock'></i></div>
                 <div class="sidebar-brand">
                     <h2>SIMASRIM</h2>
@@ -64,7 +134,7 @@
             <p class="nav-section-label" data-i18n="camp.nav.title">Halaman</p>
             <ul class="nav-links" id="nav-links">
                 <li style="margin-bottom: 12px;">
-                    <a href="../../index.html" style="background: #F3700D; color: #ffffff !important; border: 1px solid #ff8826; border-radius: 8px; padding: 9px 14px; display:flex; align-items:center; gap:8px; text-decoration:none; font-size:0.85rem; font-weight:700; box-shadow: 0 2px 8px rgba(243,112,13,0.35);">
+                    <a href="../../index.html" class="btn-back-mkt-hub">
                         <i class='bx bx-arrow-back' style="font-size:1rem;"></i>
                         <span data-i18n="camp.back">Back to MKT Hub</span>
                     </a>
