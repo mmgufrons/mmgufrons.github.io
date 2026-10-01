@@ -19,7 +19,8 @@
 
       // Root Hub — Header
       'hub.badge': 'Hub Portofolio Terpadu',
-      'hub.title': 'Portofolio Maulana Gufron — Business & Marketing Professional with AI-Assisted Systems',
+      'hub.title': 'Portofolio — Maulana Gufron',
+      'hub.role': 'Business & Marketing Professional with AI-Assisted Systems',
       'hub.desc': 'Rekam jejak strategi komersial, growth marketing terukur, sistem operasional berbantuan AI, serta arsitektur kreatif & identitas visual brand.',
       'hub.tab.business': '💼 Business & AI Operations',
       'hub.tab.creative': '🎨 Creative & Visual Design',
@@ -786,7 +787,8 @@
 
       // Root Hub — Header
       'hub.badge': 'Integrated Portfolio Hub',
-      'hub.title': 'Maulana Gufron Portfolio — Business & Marketing Professional with AI-Assisted Systems',
+      'hub.title': 'Portfolio — Maulana Gufron',
+      'hub.role': 'Business & Marketing Professional with AI-Assisted Systems',
       'hub.desc': 'Track record in commercial strategy, calibrated growth marketing, AI-assisted operational systems, and brand creative architecture.',
       'hub.tab.business': '💼 Business & AI Operations',
       'hub.tab.creative': '🎨 Creative & Visual Design',
