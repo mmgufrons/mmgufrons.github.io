@@ -247,6 +247,103 @@
   }
   .lang-sep{ color:#3f3f46; font-size:11px; }
 
+
+  /* Growth Marketing & Showcase */
+  .growth-hero{
+    background:linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(16,185,129,0.05) 50%, rgba(24,24,28,0.6) 100%);
+    border:1px solid rgba(99,102,241,0.25); border-radius:20px; padding:28px 32px; margin-bottom:36px;
+    box-shadow:0 8px 30px -6px rgba(0,0,0,0.6); position:relative; overflow:hidden;
+  }
+  .growth-hero-badge{
+    display:inline-flex; align-items:center; gap:6px; background:rgba(99,102,241,0.15);
+    color:#a5b4fc; border:1px solid rgba(99,102,241,0.35); padding:4px 14px; border-radius:99px;
+    font-size:11.5px; font-weight:700; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    text-transform:uppercase; letter-spacing:.04em; margin-bottom:12px;
+  }
+  .growth-hero h2{ margin:0 0 10px; font-size:23px; font-weight:800; color:#fafafa; letter-spacing:-0.02em; }
+  .growth-hero p{ margin:0; color:#a1a1aa; font-size:14px; line-height:1.65; max-width:860px; }
+
+  .growth-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:22px; }
+  .growth-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:18px;
+    padding:24px; display:flex; flex-direction:column; gap:14px;
+    transition:all .22s cubic-bezier(0.16, 1, 0.3, 1); box-shadow:var(--shadow-card);
+    position:relative;
+  }
+  .growth-card:hover{
+    border-color:var(--border-hover); background:var(--panel-2); transform:translateY(-3px);
+    box-shadow:var(--shadow-hover);
+  }
+  .growth-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+  .growth-tag{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.04em;
+    text-transform:uppercase; padding:3px 9px; border-radius:6px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .growth-tag.analytics{ background:rgba(56,189,248,0.12); color:#38bdf8; border:1px solid rgba(56,189,248,0.25); }
+  .growth-tag.community{ background:rgba(245,158,11,0.12); color:#fbbf24; border:1px solid rgba(245,158,11,0.25); }
+  .growth-tag.margin{ background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25); }
+  .growth-tag.fintech{ background:rgba(139,92,246,0.12); color:#c084fc; border:1px solid rgba(139,92,246,0.25); }
+  .growth-tag.b2b{ background:rgba(99,102,241,0.12); color:#818cf8; border:1px solid rgba(99,102,241,0.25); }
+  .growth-tag.retention{ background:rgba(236,72,153,0.12); color:#f472b6; border:1px solid rgba(236,72,153,0.25); }
+
+  .growth-metric-pill{
+    font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:8px;
+    background:#18181c; border:1px solid var(--border); color:#f4f4f5;
+    display:inline-flex; align-items:center; gap:6px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .growth-metric-pill.gold{ background:rgba(245,158,11,0.12); color:#fbbf24; border-color:rgba(245,158,11,0.3); }
+  .growth-metric-pill.cyan{ background:rgba(56,189,248,0.12); color:#38bdf8; border-color:rgba(56,189,248,0.3); }
+  .growth-metric-pill.emerald{ background:rgba(16,185,129,0.12); color:#34d399; border-color:rgba(16,185,129,0.3); }
+  .growth-metric-pill.purple{ background:rgba(139,92,246,0.12); color:#c084fc; border-color:rgba(139,92,246,0.3); }
+  .growth-metric-pill.indigo{ background:rgba(99,102,241,0.12); color:#a5b4fc; border-color:rgba(99,102,241,0.3); }
+
+  .growth-attribution{
+    font-size:11px; font-weight:700; color:#818cf8; background:rgba(99,102,241,0.08);
+    border:1px solid rgba(99,102,241,0.2); border-radius:6px; padding:3px 8px; width:fit-content;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; text-transform:uppercase;
+  }
+  .growth-card h3{ margin:0; font-size:16px; font-weight:700; color:#fafafa; line-height:1.4; }
+  .growth-card p{ margin:0; color:var(--muted); font-size:13px; line-height:1.6; flex:1; }
+  .growth-actions{ display:flex; gap:10px; margin-top:auto; padding-top:8px; flex-wrap:wrap; }
+  .growth-actions .cta{ flex:1.1; padding:9px 12px; font-size:12.5px; cursor:pointer; }
+  .growth-actions .cta.secondary{ flex:1; }
+
+  /* Modal Deep Dive */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    z-index:9999; display:none; align-items:center; justify-content:center; padding:20px;
+    animation:fadeInOverlay .2s ease-out;
+  }
+  @keyframes fadeInOverlay{ from{opacity:0;} to{opacity:1;} }
+  .modal-card{
+    background:#121215; border:1px solid #27272a; border-radius:20px;
+    max-width:760px; width:100%; max-height:88vh; overflow-y:auto;
+    padding:32px 32px 28px; box-shadow:0 24px 60px rgba(0,0,0,0.85), 0 0 35px rgba(99,102,241,0.18);
+    display:flex; flex-direction:column; gap:18px; position:relative;
+    animation:slideUpModal .25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes slideUpModal{ from{opacity:0;transform:translateY(12px) scale(0.98);} to{opacity:1;transform:translateY(0) scale(1);} }
+  .modal-close-btn{
+    position:absolute; top:20px; right:20px; background:#18181c; border:1px solid #27272a;
+    color:#a1a1aa; width:34px; height:34px; border-radius:50%; font-size:18px; font-weight:700;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s ease;
+  }
+  .modal-close-btn:hover{ color:#fff; background:#27272a; border-color:#3f3f46; transform:scale(1.06); }
+  .modal-header{ padding-right:40px; display:flex; flex-direction:column; gap:8px; }
+  .modal-sec-box{
+    background:#18181c; border:1px solid #27272a; border-radius:12px; padding:15px 18px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .modal-sec-label{
+    font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
+    color:#818cf8; display:flex; align-items:center; gap:8px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .modal-sec-content{ margin:0; font-size:13px; color:#d4d4d8; line-height:1.65; }
+  .modal-sec-content b{ color:#f4f4f5; }
+
 </style>
 </head>
 <body>
@@ -264,15 +361,132 @@
 
 <div class="tab-nav-wrap">
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('business')" data-i18n="hub.tab.business">💼 Business &amp; AI Operations</button>
+    <button class="tab-btn active" onclick="switchTab('growth')" data-i18n="hub.tab.growth">🚀 Growth Marketing</button>
+    <button class="tab-btn" onclick="switchTab('business')" data-i18n="hub.tab.business">💼 Business &amp; AI Operations</button>
     <button class="tab-btn" onclick="switchTab('creative')" data-i18n="hub.tab.creative">🎨 Creative &amp; Visual Design</button>
   </div>
 </div>
 
 <main>
 
-  <!-- TAB 1: BUSINESS & AI OPERATIONS -->
-  <div id="tab-business" class="tab-content active">
+  <!-- TAB 1: GROWTH MARKETING & COMMERCIAL STRATEGY -->
+  <div id="tab-growth" class="tab-content active">
+
+    <div class="growth-hero">
+      <div class="growth-hero-badge" data-i18n="growth.hero.badge">5-Funnel Growth Framework</div>
+      <h2 data-i18n="growth.hero.title">Pertumbuhan Bisnis, Strategi Komersial &amp; AI-Assisted Operations</h2>
+      <p data-i18n="growth.hero.desc">Pembuktian keahlian pertumbuhan terukur dari inisiasi 0-ke-1 hingga skala korporat: analitik data komersial, akuisisi komunitas organik, optimasi margin unit economics, peluncuran FinTech, hingga rekayasa funnel B2B berbantuan AI.</p>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <h2 data-i18n="growth.sec.title">📊 Studi Kasus Growth Marketing Terkalibrasi</h2>
+        <span data-i18n="growth.sec.sub">metrik faktual, atribusi peran transparan, dan sinergi tools nyata</span>
+      </div>
+
+      <div class="growth-grid">
+
+        <!-- Case 1: Toko Zoom -->
+        <div class="growth-card">
+          <div class="growth-top">
+            <span class="growth-tag analytics" data-i18n="growth.c1.tag">Commercial Analytics</span>
+            <span class="growth-metric-pill cyan" data-i18n="growth.c1.metric">Q1 Sales Sweet Spot</span>
+          </div>
+          <span class="growth-attribution" data-i18n="growth.c1.badge">OWNED • Analisis &amp; Rekomendasi</span>
+          <h3 data-i18n="growth.c1.title">Toko Zoom — Analisis Data Penjualan Q1 &amp; Realokasi Stok Komersial</h3>
+          <p data-i18n="growth.c1.desc">Membedah data transaksi 3 segmen (B2C, B2B, B2G) menemukan sweet spot laptop Ryzen 5/i5 512GB untuk mencegah dead stock, dipresentasikan ke direksi, diperkuat 22 artikel SEO dan 100+ tata letak katalog.</p>
+          <div class="growth-actions">
+            <button type="button" class="cta" onclick="openGrowthModal(1)" data-i18n="growth.btn.read">Pelajari Studi Kasus</button>
+            <a class="cta secondary" href="mkt/data/mp-report/index.html" data-i18n="growth.btn.engine">Coba Engine-nya ↗</a>
+          </div>
+        </div>
+
+        <!-- Case 2: Spot Kuliner & FJK -->
+        <div class="growth-card">
+          <div class="growth-top">
+            <span class="growth-tag community" data-i18n="growth.c2.tag">Organic &amp; Community</span>
+            <span class="growth-metric-pill gold" data-i18n="growth.c2.metric">122K+ Followers Organik</span>
+          </div>
+          <span class="growth-attribution" data-i18n="growth.c2.badge">OWNED Materi • CONTRIBUTED Event</span>
+          <h3 data-i18n="growth.c2.title">Spot Kuliner &amp; FJK — Viral Community Scaling &amp; KOL Management Engine</h3>
+          <p data-i18n="growth.c2.desc">Membangun komunitas kuliner 0 ➔ 122.000+ followers organik via database &amp; brief KOL terstruktur, sales kit tenant (pitch deck, pricelist sewa v1-v7, site plan), serta aktivasi festival sponsor Rp22M &amp; omzet Rp36M.</p>
+          <div class="growth-actions">
+            <button type="button" class="cta" onclick="openGrowthModal(2)" data-i18n="growth.btn.read">Pelajari Studi Kasus</button>
+            <a class="cta secondary" href="mkt/campaign/campaign-tracker/index.html" data-i18n="growth.btn.engine">Coba Engine-nya ↗</a>
+          </div>
+        </div>
+
+        <!-- Case 3: Stokmakan & FITCLEAN -->
+        <div class="growth-card">
+          <div class="growth-top">
+            <span class="growth-tag margin" data-i18n="growth.c3.tag">Unit Economics &amp; Margin</span>
+            <span class="growth-metric-pill emerald" data-i18n="growth.c3.metric">4.8★ GoFood &amp; Safe Margin</span>
+          </div>
+          <span class="growth-attribution" data-i18n="growth.c3.badge">OWNED • Brand Led by Gufron</span>
+          <h3 data-i18n="growth.c3.title">Stokmakan &amp; FITCLEAN — Optimasi Margin HPP, Cashback 100% &amp; Bundling</h3>
+          <p data-i18n="growth.c3.desc">Menghitung ulang HPP untuk mengamankan batas diskon dari potongan komisi aplikasi 20%+, paket hemat vs jumbo, flash sale, voucher cashback 100%, serta optimasi kata kunci dan bundling grosir marketplace.</p>
+          <div class="growth-actions">
+            <button type="button" class="cta" onclick="openGrowthModal(3)" data-i18n="growth.btn.read">Pelajari Studi Kasus</button>
+            <a class="cta secondary" href="mkt/data/mp-report/index.html" data-i18n="growth.btn.engine">Coba Engine-nya ↗</a>
+          </div>
+        </div>
+
+        <!-- Case 4: SQRIS Soundbox Launch -->
+        <div class="growth-card">
+          <div class="growth-top">
+            <span class="growth-tag fintech" data-i18n="growth.c4.tag">FinTech &amp; GTM</span>
+            <span class="growth-metric-pill purple" data-i18n="growth.c4.metric">16/30 Merchant Aktif</span>
+          </div>
+          <span class="growth-attribution" data-i18n="growth.c4.badge">CONTRIBUTED Lapangan • SYSTEMIZED SOP</span>
+          <h3 data-i18n="growth.c4.title">SQRIS Soundbox — 0-to-1 FinTech Merchant GTM &amp; Hardware Activation</h3>
+          <p data-i18n="growth.c4.desc">Terjun langsung mencari &amp; onboarding merchant di awal untuk memvalidasi alur lapangan, menyusun skema pricing MDR, SOP onboarding admin langkah-demi-langkah, sales deck, dan stiker kit EDC kasir.</p>
+          <div class="growth-actions">
+            <button type="button" class="cta" onclick="openGrowthModal(4)" data-i18n="growth.btn.read">Pelajari Studi Kasus</button>
+            <a class="cta secondary" href="mkt/mitra/tracker.html" data-i18n="growth.btn.engine">Coba Engine-nya ↗</a>
+          </div>
+        </div>
+
+        <!-- Case 5: SIMASRIM B2B Lead Engine -->
+        <div class="growth-card">
+          <div class="growth-top">
+            <span class="growth-tag b2b" data-i18n="growth.c5.tag">B2B Outreach &amp; Partner</span>
+            <span class="growth-metric-pill cyan" data-i18n="growth.c5.metric">435 Leads • 14+ Mitra Aktif</span>
+          </div>
+          <span class="growth-attribution" data-i18n="growth.c5.badge">SYSTEMIZED Scraper • CONTRIBUTED Partner</span>
+          <h3 data-i18n="growth.c5.title">SIMASRIM B2B — Lead Scraper Koperasi &amp; Ekspansi Jaringan Mitra 1 → 14+</h3>
+          <p data-i18n="growth.c5.desc">Vibe coding scraper 435 data legal koperasi KDKMP Bogor, smart lead cleanser anti-duplikasi, cold outreach berjenjang, menangani 208 tugas mitra, dan menyusun sales kit White Label &amp; Chapter Area 7 kota.</p>
+          <div class="growth-actions">
+            <button type="button" class="cta" onclick="openGrowthModal(5)" data-i18n="growth.btn.read">Pelajari Studi Kasus</button>
+            <a class="cta secondary" href="mkt/campaign/campaign-tracker/index.html" data-i18n="growth.btn.engine">Coba Engine-nya ↗</a>
+          </div>
+        </div>
+
+        <!-- Case 6: Lifecycle Campaigns & CS AI -->
+        <div class="growth-card">
+          <div class="growth-top">
+            <span class="growth-tag retention" data-i18n="growth.c6.tag">Retention &amp; AI Support</span>
+            <span class="growth-metric-pill gold" data-i18n="growth.c6.metric">±30% Kontribusi User Aktif</span>
+          </div>
+          <span class="growth-attribution" data-i18n="growth.c6.badge">SYSTEMIZED Alur • TEAM RESULT Hasil</span>
+          <h3 data-i18n="growth.c6.title">Lifecycle Campaigns &amp; Evolusi Automasi CS AI</h3>
+          <p data-i18n="growth.c6.desc">Alur kampanye terjadwal (targeting → segmentasi → blast → follow-up → evaluasi) berkontribusi ±30% user aktif dan ±20% transaksi, serta evolusi pesan dari Bablast ke asisten CS AI terintegrasi.</p>
+          <div class="growth-actions">
+            <button type="button" class="cta" onclick="openGrowthModal(6)" data-i18n="growth.btn.read">Pelajari Studi Kasus</button>
+            <a class="cta secondary" href="mkt/data/ppob/index.html" data-i18n="growth.btn.engine">Coba Engine-nya ↗</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:28px;text-align:center;">
+        <a class="cta" style="padding:12px 28px;font-size:14px;background:#18181c;color:#f4f4f5;border:1px solid #3f3f46;" href="growth/index.html" data-i18n="footer.link.growth">🚀 Buka Showcase Growth Marketing Lengkap &amp; Metrik ↗</a>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- TAB 2: BUSINESS & AI OPERATIONS -->
+  <div id="tab-business" class="tab-content">
 
     <section>
       <div class="section-head"><h2 data-i18n="sec.live.title">🔗 Proyek Live</h2><span data-i18n="sec.live.sub">ekosistem publik yang aktif beroperasi</span></div>
@@ -504,6 +718,62 @@
       Chat via WhatsApp — 0815-4728-7125
     </a>
   </div>
+
+<!-- Modal Detail Studi Kasus Growth Marketing -->
+<div id="growthModalOverlay" class="modal-overlay" onclick="handleModalBackdropClick(event)" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-card" id="growthModalCard">
+    <button type="button" class="modal-close-btn" onclick="closeGrowthModal()" aria-label="Tutup Modal" data-i18n-title="growth.modal.close">&times;</button>
+    
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span class="growth-tag" id="modalTag"></span>
+        <span class="growth-metric-pill" id="modalMetric"></span>
+      </div>
+      <h2 id="modalTitle" style="margin:6px 0 0;font-size:20px;font-weight:800;color:#fafafa;line-height:1.35;"></h2>
+    </div>
+
+    <!-- 1. Tantangan Bisnis -->
+    <div class="modal-sec-box">
+      <span class="modal-sec-label"><span style="color:#ef4444;">⚡</span> <span data-i18n="growth.modal.label.challenge">Tantangan Bisnis</span></span>
+      <p class="modal-sec-content" id="modalChallenge"></p>
+    </div>
+
+    <!-- 2. Strategi & Eksekusi -->
+    <div class="modal-sec-box">
+      <span class="modal-sec-label"><span style="color:#6366f1;">🎯</span> <span data-i18n="growth.modal.label.strategy">Strategi &amp; Eksekusi</span></span>
+      <p class="modal-sec-content" id="modalStrategy"></p>
+    </div>
+
+    <!-- 3. Hasil Terukur (Faktual) -->
+    <div class="modal-sec-box">
+      <span class="modal-sec-label"><span style="color:#10b981;">📈</span> <span data-i18n="growth.modal.label.results">Hasil Terukur (Faktual)</span></span>
+      <p class="modal-sec-content" id="modalResults"></p>
+    </div>
+
+    <!-- 4. Rekayasa Sistem & SOP Tim -->
+    <div class="modal-sec-box">
+      <span class="modal-sec-label"><span style="color:#f59e0b;">⚙️</span> <span data-i18n="growth.modal.label.system">Rekayasa Sistem &amp; SOP Tim</span></span>
+      <p class="modal-sec-content" id="modalSystem"></p>
+    </div>
+
+    <!-- 5. Protokol Atribusi & Sumber Bukti -->
+    <div class="modal-sec-box" style="background:#151518;border-color:#3f3f46;">
+      <span class="modal-sec-label"><span style="color:#38bdf8;">🛡️</span> <span data-i18n="growth.modal.label.attribution">Atribusi Peran (Protokol)</span></span>
+      <p class="modal-sec-content" id="modalAttribution" style="font-size:12.5px;color:#a1a1aa;"></p>
+      <div style="margin-top:6px;padding-top:6px;border-top:1px dashed #27272a;font-size:11.5px;color:#71717a;">
+        <b style="color:#a1a1aa;" data-i18n="growth.modal.label.source">Sumber Bukti Terverifikasi:</b> <span id="modalSource"></span>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:6px;flex-wrap:wrap;">
+      <a id="modalEngineBtn" class="cta" href="#" target="_blank" rel="noopener" style="flex:1;text-align:center;padding:11px 20px;">
+        <span data-i18n="growth.btn.engine">Coba Engine-nya ↗</span>
+      </a>
+      <button type="button" class="cta secondary" onclick="closeGrowthModal()" style="padding:11px 24px;" data-i18n="growth.modal.close">Tutup</button>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <footer style="border-top:1px solid var(--border);padding:54px 24px 36px;background:#09090b;margin-top:60px;text-align:left;">
@@ -517,6 +787,7 @@
         Portofolio Terpadu: Business Development, AI-Assisted Operations, &amp; Visual Communication Design.
       </p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="footer-btn" onclick="switchTab('growth');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.growth">🚀 Growth Marketing</button>
         <button class="footer-btn" onclick="switchTab('business');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.business">⚡ Hub Bisnis &amp; AI</button>
         <button class="footer-btn" onclick="switchTab('creative');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.creative">🎨 Galeri Desain</button>
       </div>
@@ -525,6 +796,7 @@
     <div style="text-align:left;">
       <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin:0 0 14px;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="footer.subportal.title">Eksplorasi Sub-Portal</h3>
       <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;">
+        <li><a class="footer-link" href="growth/index.html" data-i18n="footer.link.growth">🚀 Portofolio Growth Marketing &amp; Studi Kasus ↗</a></li>
         <li><a class="footer-link" href="desain/index.html">🎨 Galeri Desain Lengkap (Klasik 2018–2023) ↗</a></li>
         <li><a class="footer-link" href="mkt/index.html">📊 Marketing &amp; Operations Suite (MKT OS) ↗</a></li>
         <li><a class="footer-link" href="panduan/index.html">📘 Dokumentasi SOP &amp; Modul SIMASRIM ↗</a></li>
@@ -554,20 +826,195 @@ function switchTab(tab) {
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
   if (tab === 'creative') {
-    document.querySelectorAll('.tab-btn')[1].classList.add('active');
+    document.querySelectorAll('.tab-btn')[2].classList.add('active');
     document.getElementById('tab-creative').classList.add('active');
+  } else if (tab === 'business') {
+    document.querySelectorAll('.tab-btn')[1].classList.add('active');
+    document.getElementById('tab-business').classList.add('active');
   } else {
     document.querySelectorAll('.tab-btn')[0].classList.add('active');
-    document.getElementById('tab-business').classList.add('active');
+    document.getElementById('tab-growth').classList.add('active');
   }
 }
 
-// Default halaman selalu ke Business & AI kecuali URL hash mengarah ke tab kreatif
+// Modal Data Registry
+const GROWTH_MODAL_DATA = {
+  1: {
+    tagKey: 'growth.c1.tag',
+    tagClass: 'growth-tag analytics',
+    metricKey: 'growth.c1.metric',
+    metricClass: 'growth-metric-pill cyan',
+    titleKey: 'growth.c1.title',
+    challengeKey: 'growth.m1.challenge',
+    strategyKey: 'growth.m1.strategy',
+    resultsKey: 'growth.m1.results',
+    systemKey: 'growth.m1.system',
+    attributionKey: 'growth.m1.attribution',
+    sourceKey: 'growth.m1.source',
+    engineUrl: 'mkt/data/mp-report/index.html'
+  },
+  2: {
+    tagKey: 'growth.c2.tag',
+    tagClass: 'growth-tag community',
+    metricKey: 'growth.c2.metric',
+    metricClass: 'growth-metric-pill gold',
+    titleKey: 'growth.c2.title',
+    challengeKey: 'growth.m2.challenge',
+    strategyKey: 'growth.m2.strategy',
+    resultsKey: 'growth.m2.results',
+    systemKey: 'growth.m2.system',
+    attributionKey: 'growth.m2.attribution',
+    sourceKey: 'growth.m2.source',
+    engineUrl: 'mkt/campaign/campaign-tracker/index.html'
+  },
+  3: {
+    tagKey: 'growth.c3.tag',
+    tagClass: 'growth-tag margin',
+    metricKey: 'growth.c3.metric',
+    metricClass: 'growth-metric-pill emerald',
+    titleKey: 'growth.c3.title',
+    challengeKey: 'growth.m3.challenge',
+    strategyKey: 'growth.m3.strategy',
+    resultsKey: 'growth.m3.results',
+    systemKey: 'growth.m3.system',
+    attributionKey: 'growth.m3.attribution',
+    sourceKey: 'growth.m3.source',
+    engineUrl: 'mkt/data/mp-report/index.html'
+  },
+  4: {
+    tagKey: 'growth.c4.tag',
+    tagClass: 'growth-tag fintech',
+    metricKey: 'growth.c4.metric',
+    metricClass: 'growth-metric-pill purple',
+    titleKey: 'growth.c4.title',
+    challengeKey: 'growth.m4.challenge',
+    strategyKey: 'growth.m4.strategy',
+    resultsKey: 'growth.m4.results',
+    systemKey: 'growth.m4.system',
+    attributionKey: 'growth.m4.attribution',
+    sourceKey: 'growth.m4.source',
+    engineUrl: 'mkt/mitra/tracker.html'
+  },
+  5: {
+    tagKey: 'growth.c5.tag',
+    tagClass: 'growth-tag b2b',
+    metricKey: 'growth.c5.metric',
+    metricClass: 'growth-metric-pill cyan',
+    titleKey: 'growth.c5.title',
+    challengeKey: 'growth.m5.challenge',
+    strategyKey: 'growth.m5.strategy',
+    resultsKey: 'growth.m5.results',
+    systemKey: 'growth.m5.system',
+    attributionKey: 'growth.m5.attribution',
+    sourceKey: 'growth.m5.source',
+    engineUrl: 'mkt/campaign/campaign-tracker/index.html'
+  },
+  6: {
+    tagKey: 'growth.c6.tag',
+    tagClass: 'growth-tag retention',
+    metricKey: 'growth.c6.metric',
+    metricClass: 'growth-metric-pill gold',
+    titleKey: 'growth.c6.title',
+    challengeKey: 'growth.m6.challenge',
+    strategyKey: 'growth.m6.strategy',
+    resultsKey: 'growth.m6.results',
+    systemKey: 'growth.m6.system',
+    attributionKey: 'growth.m6.attribution',
+    sourceKey: 'growth.m6.source',
+    engineUrl: 'mkt/data/ppob/index.html'
+  }
+};
+
+let currentModalCaseId = null;
+
+function renderModalContent(id) {
+  const data = GROWTH_MODAL_DATA[id];
+  if (!data) return;
+
+  const tagEl = document.getElementById('modalTag');
+  const metricEl = document.getElementById('modalMetric');
+  const titleEl = document.getElementById('modalTitle');
+  const challengeEl = document.getElementById('modalChallenge');
+  const strategyEl = document.getElementById('modalStrategy');
+  const resultsEl = document.getElementById('modalResults');
+  const systemEl = document.getElementById('modalSystem');
+  const attributionEl = document.getElementById('modalAttribution');
+  const sourceEl = document.getElementById('modalSource');
+  const engineBtn = document.getElementById('modalEngineBtn');
+
+  tagEl.className = data.tagClass;
+  tagEl.setAttribute('data-i18n', data.tagKey);
+
+  metricEl.className = data.metricClass;
+  metricEl.setAttribute('data-i18n', data.metricKey);
+
+  titleEl.setAttribute('data-i18n', data.titleKey);
+  challengeEl.setAttribute('data-i18n-html', data.challengeKey);
+  challengeEl.setAttribute('data-i18n', data.challengeKey);
+
+  strategyEl.setAttribute('data-i18n-html', data.strategyKey);
+  strategyEl.setAttribute('data-i18n', data.strategyKey);
+
+  resultsEl.setAttribute('data-i18n-html', data.resultsKey);
+  resultsEl.setAttribute('data-i18n', data.resultsKey);
+
+  systemEl.setAttribute('data-i18n-html', data.systemKey);
+  systemEl.setAttribute('data-i18n', data.systemKey);
+
+  attributionEl.setAttribute('data-i18n', data.attributionKey);
+  sourceEl.setAttribute('data-i18n', data.sourceKey);
+
+  engineBtn.href = data.engineUrl;
+
+  // Re-apply language translations
+  if (typeof window.setLanguage === 'function' && typeof window.getSavedLanguage === 'function') {
+    window.setLanguage(window.getSavedLanguage());
+  }
+}
+
+function openGrowthModal(id) {
+  currentModalCaseId = id;
+  renderModalContent(id);
+  const overlay = document.getElementById('growthModalOverlay');
+  overlay.style.display = 'flex';
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGrowthModal() {
+  const overlay = document.getElementById('growthModalOverlay');
+  overlay.style.display = 'none';
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  currentModalCaseId = null;
+}
+
+function handleModalBackdropClick(e) {
+  if (e.target && e.target.id === 'growthModalOverlay') {
+    closeGrowthModal();
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeGrowthModal();
+  }
+});
+
+window.addEventListener('languageChanged', function() {
+  if (currentModalCaseId !== null) {
+    renderModalContent(currentModalCaseId);
+  }
+});
+
+// Default tab selection
 const h = (window.location.hash || '').toLowerCase();
 if (h === '#creative' || h === '#desain' || h === '#karya' || h === '#portfolio') {
   switchTab('creative');
-} else {
+} else if (h === '#business' || h === '#ops' || h === '#erp') {
   switchTab('business');
+} else {
+  switchTab('growth');
 }
 </script>
 

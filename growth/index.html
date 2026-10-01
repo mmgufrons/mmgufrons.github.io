@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth Marketing &amp; Strategi Komersial — Maulana Gufron</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0d12'/%3E%3Ctext x='32' y='43' font-family='Arial, sans-serif' font-weight='700' font-size='26' fill='%23818cf8' text-anchor='middle'%3EMG%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Portofolio Growth Marketing & Strategi Komersial Maulana Gufron: Pembuktian pertumbuhan dari 0-to-1 hingga skala enterprise dengan analitik data, GTM FinTech, optimasi margin, dan rekayasa funnel B2B.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#09090b; --panel:#121215; --panel-2:#18181c; --border:#27272a;
+    --border-hover:#3f3f46; --text:#f4f4f5; --muted:#a1a1aa;
+    --accent:#6366f1; --accent-2:#10b981; --accent-3:#f59e0b;
+    --shadow-card:0 4px 20px -4px rgba(0,0,0,0.5);
+    --shadow-hover:0 12px 30px -6px rgba(0,0,0,0.7), 0 0 20px -4px rgba(99,102,241,0.12);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size:24px 24px;
+  }
+
+  /* Top Bar */
+  .top-bar{
+    border-bottom:1px solid rgba(255,255,255,0.06); background:rgba(18,18,21,0.8);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    position:sticky; top:0; z-index:100;
+  }
+  .top-bar-inner{
+    max-width:1180px; margin:0 auto; padding:12px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .nav-left{ display:flex; align-items:center; gap:16px; }
+  .back-btn{
+    display:inline-flex; align-items:center; gap:8px; color:var(--muted);
+    font-size:13px; font-weight:600; text-decoration:none;
+    padding:6px 12px; border-radius:8px; border:1px solid var(--border);
+    background:#18181c; transition:all .2s ease;
+  }
+  .back-btn:hover{ color:#fff; border-color:var(--border-hover); background:#27272a; transform:translateX(-2px); }
+  .brand-chip{ font-size:13px; font-weight:700; color:#fafafa; }
+
+  /* Language Switcher */
+  .lang-switch{
+    display:inline-flex; align-items:center; gap:4px;
+    background:#121215; border:1px solid var(--border);
+    border-radius:99px; padding:3px 6px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.35);
+  }
+  .lang-btn{
+    background:transparent; border:none; color:var(--muted);
+    font-size:11.5px; font-weight:700; padding:5px 11px; border-radius:99px;
+    cursor:pointer; transition:all .2s ease;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .lang-btn:hover{ color:#fff; }
+  .lang-btn.active{
+    background:#27272a; color:#fff; border:1px solid #3f3f46;
+    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  }
+  .lang-sep{ color:#3f3f46; font-size:11px; }
+
+  /* Header Hero */
+  header{
+    padding:60px 24px 40px; text-align:center;
+    background:radial-gradient(circle at 50% 0%, rgba(99,102,241,0.08) 0%, transparent 70%);
+    border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  header .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:#18181c; color:#d4d4d8;
+    border:1px solid var(--border); padding:6px 16px; border-radius:99px;
+    font-size:12px; font-weight:700; letter-spacing:.04em; margin-bottom:18px;
+    text-transform:uppercase; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  header .badge::before{
+    content:''; width:6px; height:6px; border-radius:50%; background:#6366f1;
+    box-shadow:0 0 8px #6366f1;
+  }
+  header h1{
+    margin:0 0 16px; font-size:clamp(30px,5vw,46px); font-weight:800;
+    letter-spacing:-0.03em; line-height:1.15; color:#fafafa;
+  }
+  header p{
+    margin:0 auto 28px; max-width:760px; color:var(--muted);
+    font-size:15.5px; line-height:1.7; font-weight:400;
+  }
+
+  /* Framework Callout Banner */
+  .framework-box{
+    max-width:920px; margin:0 auto; background:#121215; border:1px solid rgba(99,102,241,0.25);
+    border-radius:18px; padding:22px 28px; display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; text-align:left;
+    box-shadow:0 8px 30px rgba(0,0,0,0.5);
+  }
+  .fw-item h4{ margin:0 0 6px; font-size:14px; font-weight:700; color:#fafafa; display:flex; align-items:center; gap:8px; }
+  .fw-item p{ margin:0; font-size:12.5px; line-height:1.6; color:#a1a1aa; }
+
+  /* Filters */
+  .filter-wrap{
+    max-width:1180px; margin:36px auto 32px; padding:0 24px;
+    display:flex; justify-content:center; flex-wrap:wrap; gap:8px;
+  }
+  .filter-btn{
+    background:#121215; border:1px solid var(--border); color:var(--muted);
+    font-size:12.5px; font-weight:600; padding:8px 16px; border-radius:10px;
+    cursor:pointer; transition:all .2s ease; font-family:'Plus Jakarta Sans',sans-serif;
+  }
+  .filter-btn:hover{ color:var(--text); border-color:var(--border-hover); background:#18181c; }
+  .filter-btn.active{
+    background:#27272a; color:#fff; border-color:#3f3f46;
+    box-shadow:0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  /* Main Container & Case Cards */
+  main{ max-width:1180px; margin:0 auto; padding:0 24px 80px; }
+  .case-list{ display:flex; flex-direction:column; gap:36px; }
+
+  .case-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:20px;
+    padding:32px; display:flex; flex-direction:column; gap:20px;
+    box-shadow:var(--shadow-card); transition:all .25s ease; position:relative;
+  }
+  .case-card:hover{
+    border-color:var(--border-hover); background:var(--panel-2);
+    box-shadow:var(--shadow-hover);
+  }
+
+  .case-header{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; }
+  .case-meta{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .case-tag{
+    font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:4px 10px; border-radius:6px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .case-tag.analytics{ background:rgba(56,189,248,0.12); color:#38bdf8; border:1px solid rgba(56,189,248,0.25); }
+  .case-tag.community{ background:rgba(245,158,11,0.12); color:#fbbf24; border:1px solid rgba(245,158,11,0.25); }
+  .case-tag.margin{ background:rgba(16,185,129,0.12); color:#34d399; border:1px solid rgba(16,185,129,0.25); }
+  .case-tag.fintech{ background:rgba(139,92,246,0.12); color:#c084fc; border:1px solid rgba(139,92,246,0.25); }
+  .case-tag.b2b{ background:rgba(99,102,241,0.12); color:#818cf8; border:1px solid rgba(99,102,241,0.25); }
+  .case-tag.retention{ background:rgba(236,72,153,0.12); color:#f472b6; border:1px solid rgba(236,72,153,0.25); }
+
+  .case-attribution{
+    font-size:11px; font-weight:700; color:#818cf8; background:rgba(99,102,241,0.08);
+    border:1px solid rgba(99,102,241,0.2); border-radius:6px; padding:4px 10px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; text-transform:uppercase;
+  }
+
+  .case-metric-pill{
+    font-size:12px; font-weight:700; padding:5px 12px; border-radius:8px;
+    background:#18181c; border:1px solid var(--border); color:#f4f4f5;
+    display:inline-flex; align-items:center; gap:6px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .case-metric-pill.cyan{ background:rgba(56,189,248,0.12); color:#38bdf8; border-color:rgba(56,189,248,0.3); }
+  .case-metric-pill.gold{ background:rgba(245,158,11,0.12); color:#fbbf24; border-color:rgba(245,158,11,0.3); }
+  .case-metric-pill.emerald{ background:rgba(16,185,129,0.12); color:#34d399; border-color:rgba(16,185,129,0.3); }
+  .case-metric-pill.purple{ background:rgba(139,92,246,0.12); color:#c084fc; border-color:rgba(139,92,246,0.3); }
+
+  .case-card h2{ margin:0; font-size:20px; font-weight:800; color:#fafafa; line-height:1.35; letter-spacing:-0.01em; }
+  .case-summary{ margin:0; font-size:14px; color:#d4d4d8; line-height:1.65; }
+
+  /* 4-Box Deep Breakdown */
+  .breakdown-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;
+  }
+  .breakdown-box{
+    background:#18181c; border:1px solid var(--border); border-radius:14px; padding:16px 18px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .breakdown-box.highlight{
+    background:rgba(16,185,129,0.04); border-color:rgba(16,185,129,0.25);
+  }
+  .bb-label{
+    font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
+    color:#818cf8; display:flex; align-items:center; gap:8px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .breakdown-box.highlight .bb-label{ color:#34d399; }
+  .bb-content{ margin:0; font-size:13px; color:#d4d4d8; line-height:1.65; }
+  .bb-content b{ color:#f4f4f5; }
+
+  /* Footer of Case Card */
+  .case-footer{
+    display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+    padding-top:16px; border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .case-evidence{ font-size:12px; color:#71717a; }
+  .case-evidence b{ color:#a1a1aa; }
+
+  .cta-link{
+    display:inline-flex; align-items:center; gap:8px;
+    background:#fafafa; color:#09090b; font-weight:700; font-size:13px;
+    padding:10px 18px; border-radius:8px; text-decoration:none; transition:all .2s ease;
+  }
+  .cta-link:hover{ opacity:.9; transform:translateY(-1px); box-shadow:0 4px 14px rgba(255,255,255,0.15); }
+  .cta-link.secondary{
+    background:#18181c; color:#f4f4f5; border:1px solid var(--border);
+  }
+  .cta-link.secondary:hover{
+    border-color:var(--border-hover); background:#27272a; box-shadow:none;
+  }
+
+  /* Contact & Footer */
+  .contact-box{ max-width:1180px; margin:0 auto; padding:0 24px; }
+  .contact-card{
+    background:#121215; border:1px solid var(--border); border-radius:20px;
+    padding:40px 32px; text-align:center; box-shadow:var(--shadow-card);
+  }
+  .contact-card h2{ margin:0 0 10px; font-size:22px; font-weight:800; color:#fafafa; }
+  .contact-card p{ margin:0 auto 24px; max-width:580px; color:var(--muted); font-size:14px; line-height:1.65; }
+  .wa-cta{
+    display:inline-flex; align-items:center; gap:10px; background:#10b981;
+    color:#04250f; font-weight:800; font-size:13.5px; padding:12px 24px;
+    border-radius:10px; text-decoration:none; transition:all .2s ease;
+    box-shadow:0 4px 16px rgba(16,185,129,0.25);
+  }
+  .wa-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 20px rgba(16,185,129,0.35); }
+
+  footer{ border-top:1px solid var(--border); padding:40px 24px; background:#09090b; margin-top:60px; text-align:center; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--muted); text-decoration:none; transition:color .2s; }
+  footer a:hover{ color:#fff; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="nav-left">
+      <a class="back-btn" href="../index.html" data-i18n="back.hub">← Portofolio Hub</a>
+      <span class="brand-chip">Maulana Gufron • Growth Showcase</span>
+    </div>
+    <div class="lang-switch">
+      <button type="button" class="lang-btn active" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
+      <span class="lang-sep">|</span>
+      <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="badge" data-i18n="growth.hero.badge">5-Funnel Growth Framework</div>
+  <h1 data-i18n="growth.page.title">Growth Marketing &amp; Strategi Komersial — Maulana Gufron</h1>
+  <p data-i18n="growth.hero.desc">Pembuktian keahlian pertumbuhan terukur dari inisiasi 0-ke-1 hingga skala korporat: analitik data komersial, akuisisi komunitas organik, optimasi margin unit economics, peluncuran FinTech, hingga rekayasa funnel B2B berbantuan AI.</p>
+
+  <div class="framework-box">
+    <div class="fw-item">
+      <h4><span>📈</span> 1. Commercial Analytics</h4>
+      <p>Data-driven decision making: bedah data penjualan Q1, kalkulasi HPP, dan pencegahan dead stock.</p>
+    </div>
+    <div class="fw-item">
+      <h4><span>📣</span> 2. Organic Community &amp; KOL</h4>
+      <p>Scaling komunitas 122K+ followers, database &amp; ratecard KOL, dan penyelenggaraan event beromzet Rp36M.</p>
+    </div>
+    <div class="fw-item">
+      <h4><span>⚙️</span> 3. Rapid AI Systemization</h4>
+      <p>Vibe coding custom tools (scraper, leads cleanser, MKT Hub, CS AI) agar tim dapat mengeksekusi secara mandiri.</p>
+    </div>
+  </div>
+</header>
+
+<div class="filter-wrap">
+  <button type="button" class="filter-btn active" onclick="filterCases('all')" data-i18n="growth.filter.all">Semua Kasus (6)</button>
+  <button type="button" class="filter-btn" onclick="filterCases('analytics')" data-i18n="growth.filter.analytics">Commercial Analytics</button>
+  <button type="button" class="filter-btn" onclick="filterCases('community')" data-i18n="growth.filter.community">Organic &amp; KOL</button>
+  <button type="button" class="filter-btn" onclick="filterCases('margin')" data-i18n="growth.filter.margin">Unit Economics</button>
+  <button type="button" class="filter-btn" onclick="filterCases('fintech')" data-i18n="growth.filter.fintech">FinTech GTM</button>
+  <button type="button" class="filter-btn" onclick="filterCases('b2b')" data-i18n="growth.filter.b2b">B2B &amp; Partner</button>
+  <button type="button" class="filter-btn" onclick="filterCases('retention')" data-i18n="growth.filter.retention">Retention &amp; CRM</button>
+</div>
+
+<main>
+  <div class="case-list">
+
+    <!-- Case 1: Toko Zoom -->
+    <article class="case-card" data-category="analytics">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-tag analytics" data-i18n="growth.c1.tag">Commercial Analytics</span>
+          <span class="case-attribution" data-i18n="growth.c1.badge">OWNED • Analisis &amp; Rekomendasi</span>
+        </div>
+        <span class="case-metric-pill cyan" data-i18n="growth.c1.metric">Q1 Sales Sweet Spot</span>
+      </div>
+
+      <h2 data-i18n="growth.c1.title">Toko Zoom — Analisis Data Penjualan Q1 &amp; Realokasi Stok Komersial</h2>
+      <p class="case-summary" data-i18n="growth.c1.desc">Membedah data transaksi 3 segmen (B2C, B2B, B2G) menemukan sweet spot laptop Ryzen 5/i5 512GB untuk mencegah dead stock, dipresentasikan ke direksi, diperkuat 22 artikel SEO dan 100+ tata letak katalog.</p>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#ef4444;">⚡</span> <span data-i18n="growth.modal.label.challenge">Tantangan Bisnis</span></span>
+          <p class="bb-content" data-i18n="growth.m1.challenge">Diversifikasi penjualan multi-segmen dengan perputaran stok cepat berisiko menimbulkan dead stock puluhan juta.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#6366f1;">🎯</span> <span data-i18n="growth.modal.label.strategy">Strategi &amp; Eksekusi</span></span>
+          <p class="bb-content" data-i18n-html="growth.m1.strategy">Analisis Q1, presentasi rekomendasi ke Direksi, 22 artikel SEO di tokozoom.com, 100+ tata letak katalog Canva-Figma terhubung QuickBooks.</p>
+        </div>
+        <div class="breakdown-box highlight">
+          <span class="bb-label"><span style="color:#10b981;">📈</span> <span data-i18n="growth.modal.label.results">Hasil Terukur (Faktual)</span></span>
+          <p class="bb-content" data-i18n-html="growth.m1.results">Rekomendasi alokasi stok diadopsi pengadaan Q2; 100+ katalog sales; 22 artikel SEO mendatangkan traffic organik lokal.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#f59e0b;">⚙️</span> <span data-i18n="growth.modal.label.system">Rekayasa Sistem &amp; SOP</span></span>
+          <p class="bb-content" data-i18n="growth.m1.system">Standarisasi penarikan data QuickBooks ke Figma dan berbagi cara editing kepada rekan tim marketing baru.</p>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <div class="case-evidence">
+          <b data-i18n="growth.modal.label.source">Sumber Bukti:</b> Timeline Zoom 2024, Dokumen Analisis Q1, MASTER_V2_STATE_v2.3.md (§7B ACH-Z05, Z01, Z02, Z09).
+        </div>
+        <a class="cta-link secondary" href="../mkt/data/mp-report/index.html" data-i18n="growth.btn.engine">Lihat Dashboard Analitik ↗</a>
+      </div>
+    </article>
+
+    <!-- Case 2: Spot Kuliner & FJK -->
+    <article class="case-card" data-category="community">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-tag community" data-i18n="growth.c2.tag">Organic &amp; Community</span>
+          <span class="case-attribution" data-i18n="growth.c2.badge">OWNED Materi • CONTRIBUTED Event</span>
+        </div>
+        <span class="case-metric-pill gold" data-i18n="growth.c2.metric">122K+ Followers Organik</span>
+      </div>
+
+      <h2 data-i18n="growth.c2.title">Spot Kuliner &amp; FJK — Viral Community Scaling &amp; KOL Management Engine</h2>
+      <p class="case-summary" data-i18n="growth.c2.desc">Membangun komunitas kuliner 0 ➔ 122.000+ followers organik via database &amp; brief KOL terstruktur, sales kit tenant (pitch deck, pricelist sewa v1-v7, site plan), serta aktivasi festival sponsor Rp22M &amp; omzet Rp36M.</p>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#ef4444;">⚡</span> <span data-i18n="growth.modal.label.challenge">Tantangan Bisnis</span></span>
+          <p class="bb-content" data-i18n="growth.m2.challenge">Membangun awareness masif destinasi kuliner baru di Bogor dari nol tanpa biaya iklan berbayar mahal.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#6366f1;">🎯</span> <span data-i18n="growth.modal.label.strategy">Strategi &amp; Eksekusi</span></span>
+          <p class="bb-content" data-i18n-html="growth.m2.strategy">Database KOL kuliner lokal, materi tenant (pitch deck, pricelist v1-v7, site plan Illustrator), koordinasi Peletakan Batu Pertama &amp; FJK Dispora.</p>
+        </div>
+        <div class="breakdown-box highlight">
+          <span class="bb-label"><span style="color:#10b981;">📈</span> <span data-i18n="growth.modal.label.results">Hasil Terukur (Faktual)</span></span>
+          <p class="bb-content" data-i18n-html="growth.m2.results">Pertumbuhan 0 ➔ 122.000+ followers organik; FJK Dispora sponsor ±Rp22M (22 tenant &amp; nasional), 1.500 pengunjung, omzet ±Rp36M (hasil tim).</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#f59e0b;">⚙️</span> <span data-i18n="growth.modal.label.system">Rekayasa Sistem &amp; SOP</span></span>
+          <p class="bb-content" data-i18n="growth.m2.system">Dokumen serah-terima langkah-demi-langkah (step-by-step handoff) database KOL &amp; template sewa untuk tim canvassing.</p>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <div class="case-evidence">
+          <b data-i18n="growth.modal.label.source">Sumber Bukti:</b> DAP WRC 2023, Deck Portofolio Marketing 2024, MASTER_V2_STATE_v2.3.md (§7C ACH-W04, ACH-W05, §7 ACH-08).
+        </div>
+        <a class="cta-link secondary" href="../mkt/campaign/campaign-tracker/index.html" data-i18n="growth.btn.engine">Buka Campaign Tracker ↗</a>
+      </div>
+    </article>
+
+    <!-- Case 3: Stokmakan & FITCLEAN -->
+    <article class="case-card" data-category="margin">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-tag margin" data-i18n="growth.c3.tag">Unit Economics &amp; Margin</span>
+          <span class="case-attribution" data-i18n="growth.c3.badge">OWNED • Brand Led by Gufron</span>
+        </div>
+        <span class="case-metric-pill emerald" data-i18n="growth.c3.metric">4.8★ GoFood &amp; Safe Margin</span>
+      </div>
+
+      <h2 data-i18n="growth.c3.title">Stokmakan &amp; FITCLEAN — Optimasi Margin HPP, Cashback 100% &amp; Bundling</h2>
+      <p class="case-summary" data-i18n="growth.c3.desc">Menghitung ulang HPP untuk mengamankan batas diskon dari potongan komisi aplikasi 20%+, paket hemat vs jumbo, flash sale, voucher cashback 100%, serta optimasi kata kunci dan bundling grosir marketplace.</p>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#ef4444;">⚡</span> <span data-i18n="growth.modal.label.challenge">Tantangan Bisnis</span></span>
+          <p class="bb-content" data-i18n="growth.m3.challenge">Komisi platform pesan-antar 20%+ dan sensitivitas harga tinggi pada makanan siap saji &amp; pembersih curah.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#6366f1;">🎯</span> <span data-i18n="growth.modal.label.strategy">Strategi &amp; Eksekusi</span></span>
+          <p class="bb-content" data-i18n-html="growth.m3.strategy">Kalkulasi ulang HPP batas diskon, paket kombo hemat vs jumbo, voucher cashback 100%, optimasi judul &amp; grosir twinpack/triplepack FITCLEAN.</p>
+        </div>
+        <div class="breakdown-box highlight">
+          <span class="bb-label"><span style="color:#10b981;">📈</span> <span data-i18n="growth.modal.label.results">Hasil Terukur (Faktual)</span></span>
+          <p class="bb-content" data-i18n-html="growth.m3.results">Rating 4.8★ di GoFood; pesanan grosir multi-pack meningkat; margin keuntungan bersih terlindungi dari komisi aplikasi.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#f59e0b;">⚙️</span> <span data-i18n="growth.modal.label.system">Rekayasa Sistem &amp; SOP</span></span>
+          <p class="bb-content" data-i18n="growth.m3.system">Template database pesanan CRM, alur auto-text Selly CS, dan kalkulator HPP dinamis untuk peluncuran menu baru.</p>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <div class="case-evidence">
+          <b data-i18n="growth.modal.label.source">Sumber Bukti:</b> DAP Perwira Food Team &amp; WRC 2023, Deck Portofolio 2024, MASTER_V2_STATE_v2.3.md (§7C ACH-W02, W03, W11).
+        </div>
+        <a class="cta-link secondary" href="../mkt/data/mp-report/index.html" data-i18n="growth.btn.engine">Lihat MP Report ↗</a>
+      </div>
+    </article>
+
+    <!-- Case 4: SQRIS Soundbox Launch -->
+    <article class="case-card" data-category="fintech">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-tag fintech" data-i18n="growth.c4.tag">FinTech &amp; GTM</span>
+          <span class="case-attribution" data-i18n="growth.c4.badge">CONTRIBUTED Lapangan • SYSTEMIZED SOP</span>
+        </div>
+        <span class="case-metric-pill purple" data-i18n="growth.c4.metric">16/30 Merchant Aktif</span>
+      </div>
+
+      <h2 data-i18n="growth.c4.title">SQRIS Soundbox — 0-to-1 FinTech Merchant GTM &amp; Hardware Activation</h2>
+      <p class="case-summary" data-i18n="growth.c4.desc">Terjun langsung mencari &amp; onboarding merchant di awal untuk memvalidasi alur lapangan, menyusun skema pricing MDR, SOP onboarding admin langkah-demi-langkah, sales deck, dan stiker kit EDC kasir.</p>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#ef4444;">⚡</span> <span data-i18n="growth.modal.label.challenge">Tantangan Bisnis</span></span>
+          <p class="bb-content" data-i18n="growth.m4.challenge">Resistensi pedagang tradisional terhadap transaksi nontunai karena kekhawatiran MDR dan proses verifikasi rumit.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#6366f1;">🎯</span> <span data-i18n="growth.modal.label.strategy">Strategi &amp; Eksekusi</span></span>
+          <p class="bb-content" data-i18n-html="growth.m4.strategy">Terjun langsung mencari merchant di awal untuk validasi lapangan, merumuskan skema pricing, draft PKS merchant, SOP onboarding admin, dan stiker kit EDC.</p>
+        </div>
+        <div class="breakdown-box highlight">
+          <span class="bb-label"><span style="color:#10b981;">📈</span> <span data-i18n="growth.modal.label.results">Hasil Terukur (Faktual)</span></span>
+          <p class="bb-content" data-i18n-html="growth.m4.results">16 dari 30 target merchant awal berhasil diaktivasi pada fase peluncuran (hasil tim dengan sistem onboarding Gufron).</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#f59e0b;">⚙️</span> <span data-i18n="growth.modal.label.system">Rekayasa Sistem &amp; SOP</span></span>
+          <p class="bb-content" data-i18n="growth.m4.system">Standarisasi SOP onboarding operasional admin, alur registrasi EDC, dan format PKS legal kemitraan.</p>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <div class="case-evidence">
+          <b data-i18n="growth.modal.label.source">Sumber Bukti:</b> Operasional PT SMA, Dokumen PKS Merchant, MASTER_V2_STATE_v2.3.md (§7 ACH-07).
+        </div>
+        <a class="cta-link secondary" href="../mkt/mitra/tracker.html" data-i18n="growth.btn.engine">Lihat Tracker Mitra ↗</a>
+      </div>
+    </article>
+
+    <!-- Case 5: SIMASRIM B2B Lead Engine -->
+    <article class="case-card" data-category="b2b">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-tag b2b" data-i18n="growth.c5.tag">B2B Outreach &amp; Partner</span>
+          <span class="case-attribution" data-i18n="growth.c5.badge">SYSTEMIZED Scraper • CONTRIBUTED Partner</span>
+        </div>
+        <span class="case-metric-pill cyan" data-i18n="growth.c5.metric">435 Leads • 14+ Mitra Aktif</span>
+      </div>
+
+      <h2 data-i18n="growth.c5.title">SIMASRIM B2B — Lead Scraper Koperasi &amp; Ekspansi Jaringan Mitra 1 → 14+</h2>
+      <p class="case-summary" data-i18n="growth.c5.desc">Vibe coding scraper 435 data legal koperasi KDKMP Bogor, smart lead cleanser anti-duplikasi, cold outreach berjenjang, menangani 208 tugas mitra, dan menyusun sales kit White Label &amp; Chapter Area 7 kota.</p>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#ef4444;">⚡</span> <span data-i18n="growth.modal.label.challenge">Tantangan Bisnis</span></span>
+          <p class="bb-content" data-i18n="growth.m5.challenge">Mengakuisisi ratusan prospek B2B (koperasi, BUMDes, entitas bisnis) tanpa biaya langganan database komersial mahal.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#6366f1;">🎯</span> <span data-i18n="growth.modal.label.strategy">Strategi &amp; Eksekusi</span></span>
+          <p class="bb-content" data-i18n-html="growth.m5.strategy">Membangun script web scraper untuk 435 legal koperasi KDKMP Bogor, validasi anti-duplikasi WA, cold outreach berjenjang, menangani 208 tugas kemitraan di sistem internal.</p>
+        </div>
+        <div class="breakdown-box highlight">
+          <span class="bb-label"><span style="color:#10b981;">📈</span> <span data-i18n="growth.modal.label.results">Hasil Terukur (Faktual)</span></span>
+          <p class="bb-content" data-i18n-html="growth.m5.results">435 prospek B2B terverifikasi; ekspansi jaringan 1 → 14+ mitra logistik &amp; PPOB aktif; penandatanganan kerja sama BUMDes Bimatera.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#f59e0b;">⚙️</span> <span data-i18n="growth.modal.label.system">Rekayasa Sistem &amp; SOP</span></span>
+          <p class="bb-content" data-i18n="growth.m5.system">Pembangunan Campaign Tracker, Smart Lead Cleanser, dan sales kit White Label &amp; Chapter Area 7 kota.</p>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <div class="case-evidence">
+          <b data-i18n="growth.modal.label.source">Sumber Bukti:</b> Ekspor SMA-OS (208 tugas mitra), File Scraper Koperasi, MASTER_V2_STATE_v2.3.md (§7 ACH-01, ACH-09, §17.11).
+        </div>
+        <a class="cta-link secondary" href="../mkt/campaign/campaign-tracker/index.html" data-i18n="growth.btn.engine">Buka Campaign Tracker ↗</a>
+      </div>
+    </article>
+
+    <!-- Case 6: Lifecycle Campaigns & CS AI -->
+    <article class="case-card" data-category="retention">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-tag retention" data-i18n="growth.c6.tag">Retention &amp; AI Support</span>
+          <span class="case-attribution" data-i18n="growth.c6.badge">SYSTEMIZED Alur • TEAM RESULT Hasil</span>
+        </div>
+        <span class="case-metric-pill gold" data-i18n="growth.c6.metric">±30% Kontribusi User Aktif</span>
+      </div>
+
+      <h2 data-i18n="growth.c6.title">Lifecycle Campaigns &amp; Evolusi Automasi CS AI</h2>
+      <p class="case-summary" data-i18n="growth.c6.desc">Alur kampanye terjadwal (targeting → segmentasi → blast → follow-up → evaluasi) berkontribusi ±30% user aktif dan ±20% transaksi, serta evolusi pesan dari Bablast ke asisten CS AI terintegrasi.</p>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#ef4444;">⚡</span> <span data-i18n="growth.modal.label.challenge">Tantangan Bisnis</span></span>
+          <p class="bb-content" data-i18n="growth.m6.challenge">Mencegah churn pengguna dan mengaktifkan kembali agen tidak aktif di tengah tren penurunan jumlah basis pengguna alami.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#6366f1;">🎯</span> <span data-i18n="growth.modal.label.strategy">Strategi &amp; Eksekusi</span></span>
+          <p class="bb-content" data-i18n-html="growth.m6.strategy">Alur kampanye berjenjang (WA/Email), evolusi pesan dari Bablast ke CS AI terintegrasi (prompt &amp; FAQ database), pemantauan kohort transaksi harian.</p>
+        </div>
+        <div class="breakdown-box highlight">
+          <span class="bb-label"><span style="color:#10b981;">📈</span> <span data-i18n="growth.modal.label.results">Hasil Terukur (Faktual)</span></span>
+          <p class="bb-content" data-i18n-html="growth.m6.results">Kampanye berkontribusi ±30% dari pengguna aktif dan ±20% dari transaksi berjalan saat ini (hasil tim dengan sistem Gufron); CS AI menjawab FAQ berulang.</p>
+        </div>
+        <div class="breakdown-box">
+          <span class="bb-label"><span style="color:#f59e0b;">⚙️</span> <span data-i18n="growth.modal.label.system">Rekayasa Sistem &amp; SOP</span></span>
+          <p class="bb-content" data-i18n-html="growth.m6.system">Penerapan siklus kerja terstandarisasi: Inisiasi Sistem ➔ Tim Jalankan ➔ Umpan Balik Tim ➔ Evaluasi &amp; Upgrade Sistem.</p>
+        </div>
+      </div>
+
+      <div class="case-footer">
+        <div class="case-evidence">
+          <b data-i18n="growth.modal.label.source">Sumber Bukti:</b> Ekspor MKT (140K transaksi), Dashboard Looker Studio, MASTER_V2_STATE_v2.3.md (§7 ACH-02, ACH-05, ACH-06).
+        </div>
+        <a class="cta-link secondary" href="../mkt/data/ppob/index.html" data-i18n="growth.btn.engine">Buka PPOB Dashboard ↗</a>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<div class="contact-box">
+  <div class="contact-card">
+    <h2 data-i18n="contact.title">Tertarik diskusi atau kolaborasi?</h2>
+    <p data-i18n="contact.desc">Terbuka untuk peluang karir, perancangan produk digital, maupun konsultasi implementasi AI dan identitas desain visual.</p>
+    <a class="wa-cta" href="https://wa.me/6281547287125?text=Halo%20Maulana%20Gufron%2C%20saya%20tertarik%20dengan%20portofolio%20Growth%20Marketing%20ini%20dan%20ingin%20diskusi%20lebih%20lanjut." target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#04250f"><path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.45 1.27 4.9L2 22l5.25-1.38A9.94 9.94 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10zm0 18.2c-1.6 0-3.13-.43-4.46-1.24l-.32-.19-3.12.82.83-3.04-.21-.31A8.17 8.17 0 0 1 3.84 12c0-4.53 3.68-8.2 8.2-8.2s8.2 3.67 8.2 8.2-3.68 8.2-8.2 8.2zm4.5-6.13c-.25-.12-1.46-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.96-.15.16-.29.18-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.45-1.37-1.7-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42h-.48c-.16 0-.43.06-.65.31-.23.25-.86.84-.86 2.04s.88 2.37 1 2.53c.12.16 1.73 2.65 4.2 3.71.59.25 1.05.4 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.46-.6 1.67-1.17.2-.58.2-1.08.14-1.18-.06-.1-.23-.16-.48-.28z"/></svg>
+      Chat via WhatsApp — 0815-4728-7125
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p data-i18n="footer.copyright">© 2026 Maulana Gufron. All Rights Reserved.</p>
+  <p><a href="../index.html" data-i18n="back.hub">← Kembali ke Portofolio Hub Utama</a></p>
+</footer>
+
+<script>
+function filterCases(category) {
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const cards = document.querySelectorAll('.case-card');
+  cards.forEach(card => {
+    if (category === 'all' || card.getAttribute('data-category') === category) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+
+<script src="../assets/js/i18n.js"></script>
+</body>
+</html>
