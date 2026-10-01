@@ -171,6 +171,12 @@
 </head>
 <body>
 
+<div style="position:fixed;top:16px;right:16px;z-index:9999;display:inline-flex;align-items:center;background:#ffffff;border:1px solid #d1d5db;border-radius:99px;padding:3px 8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+    <button type="button" class="lang-btn" data-lang-btn="id" onclick="setLanguage('id')" style="background:transparent;border:none;color:#6b7280;font-size:11.5px;font-weight:700;padding:3px 6px;border-radius:99px;cursor:pointer;">ID</button>
+    <span style="color:#d1d5db;font-size:11px;margin:0 2px;">|</span>
+    <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')" style="background:transparent;border:none;color:#6b7280;font-size:11.5px;font-weight:700;padding:3px 6px;border-radius:99px;cursor:pointer;">EN</button>
+</div>
+
 <div style="position:fixed;top:16px;left:16px;z-index:9999;">
     <a href="../../index.html" class="btn-back-banner">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -179,37 +185,37 @@
 </div>
 
 <div class="container">
-    <h1>Banner Agen SIMASRIM</h1>
+    <h1 data-i18n="banner.title">Banner Agen SIMASRIM</h1>
     <div class="main-content">
         <div class="form-section">
             <form id="banner-form">
                 <div class="form-group">
-                    <label for="banner-file">1. Pilih File Banner (JPG/PNG)</label>
+                    <label for="banner-file" data-i18n="banner.lbl.file">1. Pilih File Banner (JPG/PNG)</label>
                     <input type="file" id="banner-file" accept="image/jpeg, image/png" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="nama-toko">2. Isi Nama Toko</label>
+                    <label for="nama-toko" data-i18n="banner.lbl.store">2. Isi Nama Toko</label>
                     <input type="text" id="nama-toko" value="Toko Indah Jaya" required>
                 </div>
                 <div class="form-group">
-                    <label for="nomor-wa">3. Isi Nomor WhatsApp</label>
+                    <label for="nomor-wa" data-i18n="banner.lbl.wa">3. Isi Nomor WhatsApp</label>
                     <input type="text" id="nomor-wa" value="0812 3456 7890" required>
                 </div>
                 <div class="form-group">
-                    <label for="alamat-toko">4. Isi Alamat Toko</label>
+                    <label for="alamat-toko" data-i18n="banner.lbl.address">4. Isi Alamat Toko</label>
                     <input type="text" id="alamat-toko" value="Jl. Raya Sejahtera No. 42, Kota Bahagia" required>
                 </div>
                 <button type="submit" id="generate-btn" disabled>
-                    <span id="btn-text">Pilih File Banner Dahulu</span>
+                    <span id="btn-text" data-i18n="banner.btn.choose_first">Pilih File Banner Dahulu</span>
                     <span id="btn-loader" class="loader" style="display: none;"></span>
                 </button>
             </form>
         </div>
         <div class="preview-section">
-            <h2>Pratinjau</h2>
+            <h2 data-i18n="banner.preview.title">Pratinjau</h2>
             <div id="banner-preview">
-                <span id="preview-placeholder">Banner akan tampil di sini</span>
+                <span id="preview-placeholder" data-i18n="banner.preview.placeholder">Banner akan tampil di sini</span>
                 <img id="preview-img" src="" alt="Pratinjau Banner">
             </div>
         </div>

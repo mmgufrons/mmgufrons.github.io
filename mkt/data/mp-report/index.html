@@ -171,15 +171,15 @@
 
                     <div class="charts-grid">
                         <div class="chart-container glass main-chart">
-                            <h3>Tren Pendapatan Bulanan</h3>
+                            <h3 data-i18n="mp.chart.trend">Tren Pendapatan Bulanan</h3>
                             <div id="trendChart" class="css-chart-container"></div>
                         </div>
                         <div class="chart-container glass side-chart">
-                            <h3>Kontribusi Platform</h3>
+                            <h3 data-i18n="mp.chart.platform">Kontribusi Platform</h3>
                             <div id="platformChart" class="css-chart-container"></div>
                         </div>
                         <div class="chart-container glass full-chart">
-                            <h3>Penjualan Berdasarkan Kategori/Produk</h3>
+                            <h3 data-i18n="mp.chart.category">Penjualan Berdasarkan Kategori/Produk</h3>
                             <div id="productChart" class="css-chart-container"></div>
                         </div>
                     </div>
@@ -191,14 +191,14 @@
                         <div class="upload-header">
                             <i class='bx bx-cloud-upload'></i>
                             <h2 data-i18n="mp.modal.upload.title">Upload Laporan Penjualan</h2>
-                            <p>Upload satu file Excel (.xlsx/.xls) yang mengandung sheet: SHOPEE BOBCARE, SHOPEE ALBANISTORE, SOUNDBOX QRIS, TIKTOKSHOP TOKO ALBANIE</p>
+                            <p data-i18n="mp.upload.desc">Upload satu file Excel (.xlsx/.xls) yang mengandung sheet: SHOPEE BOBCARE, SHOPEE ALBANISTORE, SOUNDBOX QRIS, TIKTOKSHOP TOKO ALBANIE</p>
                         </div>
                         
                         <div class="upload-area" id="drop-zone">
                             <input type="file" id="file-input" accept=".xlsx, .xls" hidden>
                             <div class="upload-prompt">
                                 <i class='bx bx-folder-open'></i>
-                                <p>Klik atau Drag & Drop file Excel ke area ini</p>
+                                <p data-i18n="mp.upload.drag">Klik atau Drag & Drop file Excel ke area ini</p>
                             </div>
                             <div class="file-details hidden" id="file-details">
                                 <i class='bx bxs-file-blank'></i>
@@ -208,7 +208,7 @@
                         </div>
 
                         <div class="upload-actions">
-                            <button class="btn btn-primary" id="btn-process" disabled>Proses & Upload ke Database</button>
+                            <button class="btn btn-primary" id="btn-process" disabled data-i18n="mp.btn.process">Proses & Upload ke Database</button>
                         </div>
 
                         <div class="upload-status hidden" id="upload-status">
@@ -224,20 +224,20 @@
                 <section id="data-table" class="tab-pane">
                     <div class="table-container glass">
                         <div class="table-header">
-                            <h3>Data Penjualan Keseluruhan</h3>
+                            <h3 data-i18n="mp.table.title">Data Penjualan Keseluruhan</h3>
                             <div class="table-actions">
                                 <input type="date" id="filter-date-start" class="glass-input" title="Dari Tanggal">
                                 <input type="date" id="filter-date-end" class="glass-input" title="Sampai Tanggal">
                                 <select id="filter-date-preset" class="glass-select">
-                                    <option value="">Semua Waktu</option>
-                                    <option value="today">Hari Ini</option>
-                                    <option value="this_week">Minggu Ini</option>
-                                    <option value="this_month">Bulan Ini</option>
-                                    <option value="last_1_month">1 Bulan Terakhir</option>
-                                    <option value="last_3_months">3 Bulan Terakhir</option>
+                                    <option value="" data-i18n="mp.opt.all_time">Semua Waktu</option>
+                                    <option value="today" data-i18n="mp.opt.today">Hari Ini</option>
+                                    <option value="this_week" data-i18n="mp.opt.this_week">Minggu Ini</option>
+                                    <option value="this_month" data-i18n="mp.opt.this_month">Bulan Ini</option>
+                                    <option value="last_1_month" data-i18n="mp.opt.last_1_month">1 Bulan Terakhir</option>
+                                    <option value="last_3_months" data-i18n="mp.opt.last_3_months">3 Bulan Terakhir</option>
                                 </select>
                                 <select id="filter-platform" class="glass-select">
-                                    <option value="all">Semua Platform</option>
+                                    <option value="all" data-i18n="mp.opt.all_platforms">Semua Platform</option>
                                     <option value="shopee_albanistore">Shopee Albanistore</option>
                                     <option value="shopee_bobcare">Shopee Bobcare</option>
                                     <option value="soundbox">Soundbox QRIS</option>
@@ -251,13 +251,13 @@
                             <table class="data-table">
                                 <thead>
                                     <tr>
-                                        <th data-sort="date" style="cursor:pointer">Tanggal <i class='bx bx-sort'></i></th>
-                                        <th data-sort="id" style="cursor:pointer">No Pesanan/ID <i class='bx bx-sort'></i></th>
-                                        <th data-sort="platform" style="cursor:pointer">Platform <i class='bx bx-sort'></i></th>
-                                        <th data-sort="product" style="cursor:pointer">Nama Produk <i class='bx bx-sort'></i></th>
-                                        <th data-sort="price" style="cursor:pointer">Harga Jual <i class='bx bx-sort'></i></th>
-                                        <th data-sort="admin_fee" style="cursor:pointer">Biaya Admin <i class='bx bx-sort'></i></th>
-                                        <th data-sort="income" style="cursor:pointer">Pendapatan Bersih <i class='bx bx-sort'></i></th>
+                                        <th data-sort="date" style="cursor:pointer"><span data-i18n="mp.th.date">Tanggal</span> <i class='bx bx-sort'></i></th>
+                                        <th data-sort="id" style="cursor:pointer"><span data-i18n="mp.th.order_id">No Pesanan/ID</span> <i class='bx bx-sort'></i></th>
+                                        <th data-sort="platform" style="cursor:pointer"><span data-i18n="mp.th.platform">Platform</span> <i class='bx bx-sort'></i></th>
+                                        <th data-sort="product" style="cursor:pointer"><span data-i18n="mp.th.product">Nama Produk</span> <i class='bx bx-sort'></i></th>
+                                        <th data-sort="price" style="cursor:pointer"><span data-i18n="mp.th.price">Harga Jual</span> <i class='bx bx-sort'></i></th>
+                                        <th data-sort="admin_fee" style="cursor:pointer"><span data-i18n="mp.th.admin_fee">Biaya Admin</span> <i class='bx bx-sort'></i></th>
+                                        <th data-sort="income" style="cursor:pointer"><span data-i18n="mp.th.net_income">Pendapatan Bersih</span> <i class='bx bx-sort'></i></th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
