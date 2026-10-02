@@ -860,7 +860,7 @@ window.copyMergeWA = function() {
                 } else if (step.wa_template) {
                     textWA = window.buildMergedWA(mitra.name, [step.id]);
                 }
-                const linkWA = textWA ? `<a href="https://wa.me/?text=${encodeURIComponent(textWA)}" target="_blank" class="btn-wa-followup ms-2" title="Kirim Follow Up WA"><i class="fab fa-whatsapp"></i></a>` : '';
+                const linkWA = textWA ? `<a href="https://wa.me/?text=${encodeURIComponent(textWA)}" target="_blank" class="btn-wa-followup ms-2" title="Kirim Follow Up WA" rel="noopener"><i class="fab fa-whatsapp"></i></a>` : '';
 
                 stepsHTML += `
                     <div class="step-item ${indentClass}">

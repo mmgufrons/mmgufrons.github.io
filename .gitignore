@@ -1,0 +1,11 @@
+# Private & Internal Project Documents (Not for public repo)
+HANDOVER_STATE.md
+PORTFOLIO_FIX_BRIEF_*.md
+*BRIEF*.md
+*brief*.md
+
+# Local Scratch & System Files
+scratch/
+.DS_Store
+Thumbs.db
+*.log
