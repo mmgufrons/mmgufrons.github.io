@@ -155,6 +155,66 @@
     box-shadow:none;
   }
 
+  
+  /* Tab 2 Contextual Sub-Group Headers */
+  .subgroup-head{
+    margin: 28px 0 16px;
+    padding: 16px 20px;
+    background: rgba(24, 24, 28, 0.7);
+    border: 1px solid var(--border);
+    border-left: 3px solid #6366f1;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .subgroup-head.live{
+    border-left-color: #10b981;
+    background: rgba(16, 185, 129, 0.04);
+  }
+  .subgroup-top{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .subgroup-badge{
+    font-size: 10.5px;
+    font-weight: 700;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .subgroup-badge.internal{
+    background: rgba(99, 102, 241, 0.12);
+    color: #818cf8;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+  }
+  .subgroup-badge.live{
+    background: rgba(16, 185, 129, 0.12);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+  .subgroup-badge.docs{
+    background: rgba(56, 189, 248, 0.12);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+  }
+  .subgroup-head h4{
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fafafa;
+  }
+  .subgroup-head p{
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
   /* Creative Showcase Cards */
   .design-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
   .design-card{
@@ -387,9 +447,9 @@
   <div id="tab-growth" class="tab-content active">
 
     <div class="growth-hero">
-      <div class="growth-hero-badge" data-i18n="growth.hero.badge">5-Funnel Growth Framework</div>
+      <div class="growth-hero-badge" data-i18n="growth.hero.badge">Kerangka Strategi Komersial</div>
       <h2 data-i18n="growth.hero.title">Pertumbuhan Bisnis, Strategi Komersial &amp; AI-Assisted Operations</h2>
-      <p data-i18n="growth.hero.desc">Pembuktian keahlian pertumbuhan terukur dari inisiasi 0-ke-1 hingga skala korporat: analitik data komersial, akuisisi komunitas organik, optimasi margin unit economics, peluncuran FinTech, hingga rekayasa funnel B2B berbantuan AI.</p>
+      <p data-i18n="growth.hero.desc">Rekam jejak strategi komersial, kampanye pertumbuhan bisnis, optimasi margin unit economics, peluncuran FinTech, hingga rekayasa kemitraan B2B berbantuan AI.</p>
     </div>
 
     <section>
@@ -419,14 +479,14 @@
         <div class="growth-card">
           <div class="growth-top">
             <span class="growth-tag community" data-i18n="growth.c2.tag">Community &amp; KOL Strategy</span>
-            <span class="growth-metric-pill gold" data-i18n="growth.c2.metric">120K+ Komunitas (Arsip 2024)</span>
+            <span class="growth-metric-pill gold" data-i18n="growth.c2.metric">117K+ Komunitas Aktif</span>
           </div>
           <span class="growth-attribution" data-i18n="growth.c2.badge">OWNED Materi • CONTRIBUTED Event</span>
           <h3 data-i18n="growth.c2.title">Spot Kuliner &amp; FJK — Arsitektur Komunitas Kuliner &amp; Manajemen KOL</h3>
-          <p data-i18n="growth.c2.desc">Membangun komunitas kuliner 0 ➔ 122.000+ followers organik via database &amp; brief KOL terstruktur, sales kit tenant (pitch deck, pricelist sewa v1-v7, site plan), serta aktivasi festival sponsor Rp22M &amp; omzet Rp36M.</p>
+          <p data-i18n="growth.c2.desc">Membangun arsitektur komunitas kuliner publik Bogor sejak inisiasi awal via riset KOL, jadwal konten, kolaborasi tim pubdok, sales kit tenant (deck, pricelist v1-v7, site plan), dan event FJK. Basis komunitas berkembang hingga 122K (arsip 2024 / kini stabil di ~117K pengikut).</p>
           <div class="growth-actions">
             <button type="button" class="cta" onclick="openGrowthModal(2)" data-i18n="growth.btn.read">Pelajari Kasus</button>
-            <a class="cta secondary" href="https://www.instagram.com/spotkulinerbogor/" target="_blank" rel="noopener" data-i18n="growth.btn.visit_ig">Instagram 122K ↗</a>
+            <a class="cta secondary" href="https://www.instagram.com/spotkulinerbogor/" target="_blank" rel="noopener" data-i18n="growth.btn.visit_ig">IG @spotkulinerbogor ↗</a>
           </div>
         </div>
 
@@ -436,9 +496,9 @@
             <span class="growth-tag margin" data-i18n="growth.c3.tag">Unit Economics &amp; Margin</span>
             <span class="growth-metric-pill emerald" data-i18n="growth.c3.metric">4.8★ GoFood &amp; Unit Economics</span>
           </div>
-          <span class="growth-attribution" data-i18n="growth.c3.badge">OWNED • Brand Led by Gufron</span>
+          <span class="growth-attribution" data-i18n="growth.c3.badge">OWNED • Direct In-House Leadership</span>
           <h3 data-i18n="growth.c3.title">Stokmakan &amp; FITCLEAN — Optimasi Margin HPP, Promo Cashback 100% &amp; Bundling</h3>
-          <p data-i18n="growth.c3.desc">Menghitung ulang HPP untuk mengamankan batas diskon dari potongan komisi aplikasi 20%+, paket hemat vs jumbo, flash sale, voucher cashback 100%, serta optimasi kata kunci dan bundling grosir marketplace.</p>
+          <p data-i18n="growth.c3.desc">Optimasi margin laba bersih dari potongan komisi platform pesan-antar makanan, perancangan promo bundling hemat vs jumbo, voucher cashback 100%, serta rating 4.8★ GoFood saat operasional aktif 2023 (arsip portofolio 2024).</p>
           <div class="growth-actions">
             <button type="button" class="cta" onclick="openGrowthModal(3)" data-i18n="growth.btn.read">Pelajari Kasus</button>
             <button type="button" class="cta secondary" onclick="openGrowthModal(3)" data-i18n="growth.btn.view_visuals">Galeri Visual ↗</button>
@@ -453,10 +513,10 @@
           </div>
           <span class="growth-attribution" data-i18n="growth.c4.badge">CONTRIBUTED Lapangan • SYSTEMIZED SOP</span>
           <h3 data-i18n="growth.c4.title">SQRIS Soundbox — Pilot Peluncuran FinTech &amp; Standarisasi Onboarding Merchant</h3>
-          <p data-i18n="growth.c4.desc">Terjun langsung mencari &amp; onboarding merchant di awal untuk memvalidasi alur lapangan, menyusun skema pricing MDR, SOP onboarding admin langkah-demi-langkah, sales deck, dan stiker kit EDC kasir.</p>
+          <p data-i18n="growth.c4.desc">Ikut onboarding sebagian merchant di fase pilot untuk memvalidasi alur lapangan, menyusun skema harga merchant, SOP onboarding admin langkah-demi-langkah, sales deck, dan stiker kit EDC kasir.</p>
           <div class="growth-actions">
             <button type="button" class="cta" onclick="openGrowthModal(4)" data-i18n="growth.btn.read">Pelajari Kasus</button>
-            <a class="cta secondary" href="mkt/mitra/tracker.html" data-i18n="growth.btn.engine_sqris">Simulator SQRIS ↗</a>
+            <a class="cta secondary" href="mkt/mitra/" data-i18n="growth.btn.engine_sqris">Simulator SQRIS ↗</a>
           </div>
         </div>
 
@@ -468,10 +528,10 @@
           </div>
           <span class="growth-attribution" data-i18n="growth.c5.badge">SYSTEMIZED Data • EXECUTED Partner</span>
           <h3 data-i18n="growth.c5.title">SIMASRIM B2B — Integrasi Kemitraan 1 → 14+ &amp; Vibe Coding Scraper Koperasi</h3>
-          <p data-i18n="growth.c5.desc">Vibe coding scraper 435 data legal koperasi KDKMP Bogor, smart lead cleanser anti-duplikasi, cold outreach berjenjang, menangani 208 tugas mitra, dan menyusun sales kit White Label &amp; Chapter Area 7 kota.</p>
+          <p data-i18n="growth.c5.desc">Vibe coding scraper 435 data legal koperasi KDKMP Bogor, smart lead cleanser anti-duplikasi, rancangan alur cold outreach berjenjang (hasil konversi belum diukur), menangani 208 tugas mitra di SMA-OS, dan menyusun sales kit White Label &amp; Chapter Area 7 kota.</p>
           <div class="growth-actions">
             <button type="button" class="cta" onclick="openGrowthModal(5)" data-i18n="growth.btn.read">Pelajari Kasus</button>
-            <a class="cta secondary" href="mkt/campaign/campaign-tracker/index.html" data-i18n="growth.btn.engine_simasrim">Simulator B2B ↗</a>
+            <a class="cta secondary" href="mkt/campaign/campaign-tracker/" data-i18n="growth.btn.engine_simasrim">Simulator B2B ↗</a>
           </div>
         </div>
 
@@ -483,17 +543,17 @@
           </div>
           <span class="growth-attribution" data-i18n="growth.c6.badge">SYSTEMIZED Alur • CO-DEVELOPED AI</span>
           <h3 data-i18n="growth.c6.title">Lifecycle Campaigns &amp; Arsitektur Asisten CS AI Terintegrasi</h3>
-          <p data-i18n="growth.c6.desc">Alur kampanye terjadwal (targeting → segmentasi → blast → follow-up → evaluasi) berkontribusi ±30% user aktif dan ±20% transaksi, serta evolusi pesan dari Bablast ke asisten CS AI terintegrasi.</p>
+          <p data-i18n="growth.c6.desc">Alur kampanye terjadwal (targeting → segmentasi → blast → follow-up → evaluasi) berkontribusi ±30% user aktif dan ±20% transaksi di tengah restrukturisasi basis pengguna lama; hasil tim.</p>
           <div class="growth-actions">
             <button type="button" class="cta" onclick="openGrowthModal(6)" data-i18n="growth.btn.read">Pelajari Kasus</button>
-            <a class="cta secondary" href="mkt/data/ppob/index.html" data-i18n="growth.btn.engine_lifecycle">Analisis PPOB ↗</a>
+            <a class="cta secondary" href="mkt/data/ppob/" data-i18n="growth.btn.engine_lifecycle">Analisis PPOB ↗</a>
           </div>
         </div>
 
       </div>
 
       <div style="margin-top:28px;text-align:center;">
-        <a class="cta" style="padding:12px 28px;font-size:14px;background:#18181c;color:#f4f4f5;border:1px solid #3f3f46;" href="growth/index.html" data-i18n="footer.link.growth">🚀 Buka Showcase Growth Marketing Lengkap &amp; Metrik ↗</a>
+        <a class="cta" style="padding:12px 28px;font-size:14px;background:#18181c;color:#f4f4f5;border:1px solid #3f3f46;" href="growth/" data-i18n="footer.link.growth">🚀 Buka Showcase Growth Marketing Lengkap &amp; Metrik ↗</a>
       </div>
     </section>
 
@@ -525,64 +585,115 @@
   <!-- TAB 2: BUSINESS & AI OPERATIONS -->
   <div id="tab-business" class="tab-content">
 
+    <!-- SUB-ZONA A: B2B COMMERCIAL PARTNERSHIPS & MERCHANT GTM (Jalur CV 2: BD & Kemitraan) -->
     <section>
-      <div class="section-head"><h2 data-i18n="sec.live.title">🔗 Proyek Live</h2><span data-i18n="sec.live.sub">ekosistem publik yang aktif beroperasi</span></div>
+      <div class="section-head">
+        <h2 data-i18n="biz.zoneA.title">🤝 Kemitraan B2B &amp; Ekspansi Komersial</h2>
+        <span data-i18n="biz.zoneA.sub">ekosistem 14+ ekspedisi, PKS kemitraan institusi, dan manajemen 208 tugas operasional B2B di SMA-OS</span>
+      </div>
+
+      <!-- Group 1: Sistem Kerja Internal & Modul Operasional -->
+      <div class="subgroup-head">
+        <div class="subgroup-top">
+          <span class="subgroup-badge internal" data-i18n="biz.subgroup.a1.badge">📋 Sistem Kerja Internal</span>
+        </div>
+        <h4 data-i18n="biz.subgroup.a1.title">Workstation Kemitraan &amp; Integrasi B2B</h4>
+        <p data-i18n="biz.subgroup.a1.desc">Modul operasional dan sistem pelacak kemitraan internal di SMA-OS untuk memonitor 208 tugas integrasi 14+ ekspedisi, PKS kemitraan institusi BUMDes, serta standarisasi alur mitra.</p>
+      </div>
+
+      <!-- Core B2B Portals & Trackers -->
+      <div class="grid" style="margin-bottom:28px;">
+        <div class="card">
+          <div class="thumb">🤝</div>
+          <div class="body">
+            <span class="tag demo" data-i18n="biz.card.b2b.tag">B2B Strategic Partnership</span>
+            <h3 data-i18n="biz.card.b2b.title">Portal Kemitraan &amp; Integrasi B2B</h3>
+            <p data-i18n="biz.card.b2b.desc">Dokumentasi penawaran white-label, skema ekspedisi logistik, PKS BUMDes Bimatera, dan alur integrasi API mitra.</p>
+            <a class="cta" href="mkt/partner/" data-i18n="open.demo">Buka Portal Kemitraan ↗</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="thumb">📋</div>
+          <div class="body">
+            <span class="tag demo" data-i18n="biz.card.tracker.tag">Operational BD &amp; CRM</span>
+            <h3 data-i18n="biz.card.tracker.title">Pelacak Ekosistem &amp; Tugas Kemitraan</h3>
+            <p data-i18n="biz.card.tracker.desc">Monitoring penanganan tugas 14+ mitra ekspedisi &amp; PPOB (SPX, Lion Parcel, Paxel, J&amp;T, JNE, Kiosbank) dengan rekam jejak 208 tugas operasional di SMA-OS.</p>
+            <a class="cta" href="mkt/mitra/" data-i18n="open.demo">Buka Pelacak Kemitraan ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 2: Platform Live Komersial & Produk Eksternal -->
+      <div class="subgroup-head live">
+        <div class="subgroup-top">
+          <span class="subgroup-badge live" data-i18n="biz.subgroup.a2.badge">🌐 Platform Komersial Live</span>
+        </div>
+        <h4 data-i18n="biz.subgroup.a2.title">Ekosistem Produk &amp; Layanan Publik</h4>
+        <p data-i18n="biz.subgroup.a2.desc">Platform komersial skala produksi yang aktif beroperasi, mencakup rekam jejak strategi ekspansi kemitraan B2B, onboarding merchant FinTech, integrasi ekspedisi logistik, dan penyusunan dokumentasi teknis mitra.</p>
+      </div>
+
+      <!-- Live B2B & Merchant Ecosystem -->
       <div class="live-grid">
         <a class="live-card" href="https://www.simasrim.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>simasrim.com</h3><span data-i18n="card.simasrim.sub">Super App Logistik &amp; Bisnis Digital</span></div>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>simasrim.com</h3>
+              <span style="font-size:10px;font-weight:700;color:#34d399;background:rgba(16,185,129,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(16,185,129,0.25);">LIVE ↗</span>
+            </div>
+            <span data-i18n="card.simasrim.sub">Super App Logistik &amp; Bisnis Digital</span>
+          </div>
         </a>
         <a class="live-card" href="https://sqris.id" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>sqris.id</h3><span data-i18n="card.sqris.sub">Bikin QRIS Gratis Soundbox</span></div>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>sqris.id</h3>
+              <span style="font-size:10px;font-weight:700;color:#34d399;background:rgba(16,185,129,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(16,185,129,0.25);">LIVE ↗</span>
+            </div>
+            <span data-i18n="card.sqris.sub">Bikin QRIS Gratis Soundbox</span>
+          </div>
         </a>
         <a class="live-card" href="https://ordermudah.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>ordermudah.com</h3><span data-i18n="card.order.sub">Platform E-Commerce Cepat</span></div>
-        </a>
-        <a class="live-card" href="https://solusimitraaplikasi.com" target="_blank" rel="noopener">
-          <span class="live-dot"></span>
-          <div class="lc-body"><h3>solusimitraaplikasi.com</h3><span data-i18n="card.solusi.sub">Integrated Digital Ecosystem</span></div>
-        </a>
-      </div>
-    </section>
-
-    <section>
-      <div class="section-head"><h2 data-i18n="sec.docs.title">🌐 Layanan &amp; Dokumentasi Terintegrasi</h2><span data-i18n="sec.docs.sub">subdomain &amp; portal operasional</span></div>
-      <div class="live-grid">
-        <a class="live-card" href="panduan/index.html">
-          <span class="live-dot"></span>
-          <div class="lc-body"><h3>Dokumen Panduan SIMASRIM</h3><span data-i18n="card.panduan.sub">Panduan per peran: Agen, Seller, B2B, Mobile</span></div>
-        </a>
-        <a class="live-card" href="https://smr.smsrm.com" target="_blank" rel="noopener">
-          <span class="live-dot"></span>
-          <div class="lc-body"><h3>SMR — Pusat Informasi</h3><span data-i18n="card.smr.sub">Direktori link resmi ekosistem SIMASRIM</span></div>
-        </a>
-        <a class="live-card" href="https://sta.smsrm.com" target="_blank" rel="noopener">
-          <span class="live-dot"></span>
-          <div class="lc-body"><h3>STA — Albani Store</h3><span data-i18n="card.sta.sub">Etalase online &amp; katalog produk</span></div>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>ordermudah.com</h3>
+              <span style="font-size:10px;font-weight:700;color:#34d399;background:rgba(16,185,129,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(16,185,129,0.25);">LIVE ↗</span>
+            </div>
+            <span data-i18n="card.order.sub">Platform E-Commerce Cepat</span>
+          </div>
         </a>
         <a class="live-card" href="https://apidocs.smsrm.com" target="_blank" rel="noopener">
           <span class="live-dot"></span>
-          <div class="lc-body"><h3>API Docs</h3><span data-i18n="card.apidocs.sub">Dokumentasi API untuk mitra B2B</span></div>
-        </a>
-        <a class="live-card" href="https://lpqris.smsrm.com" target="_blank" rel="noopener">
-          <span class="live-dot"></span>
-          <div class="lc-body"><h3>QRIS Statis2Dinamis</h3><span data-i18n="card.lpqris.sub">Konversi QRIS statis ke dinamis</span></div>
-        </a>
-        <a class="live-card" href="https://mp.smsrm.com" target="_blank" rel="noopener">
-          <span class="live-dot"></span>
-          <div class="lc-body"><h3>Data Marketplace</h3><span data-i18n="card.mp.sub">Dashboard performa live shopping</span></div>
-        </a>
-        <a class="live-card" href="https://info.smsrm.com/panduan_edc_agen.php" target="_blank" rel="noopener">
-          <span class="live-dot"></span>
-          <div class="lc-body"><h3>Panduan EDC Agen</h3><span data-i18n="card.edc.sub">Standar aktivasi mesin EDC Agen</span></div>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>API Docs B2B</h3>
+              <span style="font-size:10px;font-weight:700;color:#34d399;background:rgba(16,185,129,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(16,185,129,0.25);">LIVE ↗</span>
+            </div>
+            <span data-i18n="card.apidocs.sub">Dokumentasi API untuk mitra B2B</span>
+          </div>
         </a>
       </div>
     </section>
 
+    <!-- SUB-ZONA B: AI OPERATIONS, AUTOMATION & SYSTEMS ENGINEERING (Jalur CV 3: AI, Sistem & BizOps) -->
     <section>
-      <div class="section-head"><h2 data-i18n="sec.demo.title">🧪 Purwarupa &amp; Demo Interaktif</h2><span data-i18n="sec.demo.sub">sistem internal operasional &amp; UI</span></div>
+      <div class="section-head">
+        <h2 data-i18n="biz.zoneB.title">⚙️ AI Operations, Automasi &amp; Rekayasa Sistem</h2>
+        <span data-i18n="biz.zoneB.sub">arsitektur ERP internal SMA-OS, automasi data marketing, live engine simulasi, dan vibe coding tools</span>
+      </div>
+
+      <!-- Group 1: Workstation Operasional & Demo Interaktif -->
+      <div class="subgroup-head">
+        <div class="subgroup-top">
+          <span class="subgroup-badge internal" data-i18n="biz.subgroup.b1.badge">🧪 Workstation Operasional</span>
+        </div>
+        <h4 data-i18n="biz.subgroup.b1.title">Automasi, Purwarupa ERP &amp; Engine Simulasi</h4>
+        <p data-i18n="biz.subgroup.b1.desc">Aplikasi internal, engine kalkulasi margin, dan automasi data berbantuan AI (vibe coding) yang dirancang untuk mendukung operasional divisi marketing, monitoring transaksi, dan efisiensi alur kerja.</p>
+      </div>
+
       <div class="grid">
         <div class="card">
           <div class="thumb">🏢</div>
@@ -590,7 +701,7 @@
             <span class="tag demo">Enterprise OS</span>
             <h3 data-i18n="card.sma.title">SMA Internal ERP</h3>
             <p data-i18n="card.sma.desc">Sistem operasional internal: koordinasi divisi, manajemen tugas harian, pesan tim, dan direktori tools.</p>
-            <a class="cta" href="sma/index.html" data-i18n="open.demo">Buka Aplikasi Demo</a>
+            <a class="cta" href="sma/" data-i18n="open.demo">Buka Aplikasi Demo</a>
           </div>
         </div>
 
@@ -600,7 +711,7 @@
             <span class="tag demo">Marketing Operations</span>
             <h3 data-i18n="card.mkt.title">MKT Suite</h3>
             <p data-i18n="card.mkt.desc">Suite aplikasi marketing &amp; kemitraan: CRM Campaign, tracker mitra B2B, legal dokumen, dan pelaporan.</p>
-            <a class="cta" href="mkt/index.html" data-i18n="open.demo">Buka Aplikasi Demo</a>
+            <a class="cta" href="mkt/" data-i18n="open.demo">Buka Aplikasi Demo</a>
           </div>
         </div>
 
@@ -610,9 +721,92 @@
             <span class="tag demo">Design System</span>
             <h3 data-i18n="card.sicek.title">SiCek — Cek Ongkir</h3>
             <p data-i18n="card.sicek.desc">Purwarupa interaktif modul cek ongkir: Signature, Nova, dan Landing Page cekongkirmurah.</p>
-            <a class="cta" href="cekongkir/index.html" data-i18n="open.gallery">Buka Galeri Tema</a>
+            <a class="cta" href="cekongkir/" data-i18n="open.gallery">Buka Galeri Tema</a>
           </div>
         </div>
+
+        <div class="card">
+          <div class="thumb">💳</div>
+          <div class="body">
+            <span class="tag demo">PPOB &amp; Billing</span>
+            <h3 data-i18n="growth.c6.title">PPOB Engine &amp; Simulator</h3>
+            <p data-i18n="card.ppob.desc">Purwarupa engine transaksi PPOB terintegrasi, visualisasi margin per produk, dan pemantauan kohort transaksi.</p>
+            <a class="cta" href="mkt/data/ppob/" data-i18n="open.demo">Buka Simulator PPOB</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 2: Portal SOP & Subdomain Terintegrasi -->
+      <div class="subgroup-head live" style="margin-top:28px;">
+        <div class="subgroup-top">
+          <span class="subgroup-badge docs" data-i18n="biz.subgroup.b2.badge">📖 Portal Operasional</span>
+        </div>
+        <h4 data-i18n="biz.subgroup.b2.title">Dokumentasi SOP, Subdomain &amp; Micro-Services</h4>
+        <p data-i18n="biz.subgroup.b2.desc">Portal standarisasi panduan operasional (SOP per peran agen/seller/B2B), direktori ekosistem resmi, dan layanan konversi digital yang dirancang untuk mempermudah adopsi pengguna.</p>
+      </div>
+
+      <!-- Integrated Docs & Micro-Services -->
+      <div class="live-grid">
+        <a class="live-card" href="panduan/">
+          <span class="live-dot" style="background:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,0.6);"></span>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>Dokumen Panduan SIMASRIM</h3>
+              <span style="font-size:10px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(56,189,248,0.25);">SOP ↗</span>
+            </div>
+            <span data-i18n="card.panduan.sub">Panduan per peran: Agen, Seller, B2B, Mobile</span>
+          </div>
+        </a>
+        <a class="live-card" href="https://smr.smsrm.com" target="_blank" rel="noopener">
+          <span class="live-dot" style="background:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,0.6);"></span>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>SMR — Pusat Informasi</h3>
+              <span style="font-size:10px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(56,189,248,0.25);">PORTAL ↗</span>
+            </div>
+            <span data-i18n="card.smr.sub">Direktori link resmi ekosistem SIMASRIM</span>
+          </div>
+        </a>
+        <a class="live-card" href="https://sta.smsrm.com" target="_blank" rel="noopener">
+          <span class="live-dot"></span>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>STA — Albani Store</h3>
+              <span style="font-size:10px;font-weight:700;color:#34d399;background:rgba(16,185,129,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(16,185,129,0.25);">LIVE ↗</span>
+            </div>
+            <span data-i18n="card.sta.sub">Etalase online &amp; katalog produk</span>
+          </div>
+        </a>
+        <a class="live-card" href="https://lpqris.smsrm.com" target="_blank" rel="noopener">
+          <span class="live-dot" style="background:#818cf8;box-shadow:0 0 8px rgba(129,140,248,0.6);"></span>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>QRIS Statis2Dinamis</h3>
+              <span style="font-size:10px;font-weight:700;color:#818cf8;background:rgba(129,140,248,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(129,140,248,0.25);">TOOL ↗</span>
+            </div>
+            <span data-i18n="card.lpqris.sub">Konversi QRIS statis ke dinamis</span>
+          </div>
+        </a>
+        <a class="live-card" href="https://mp.smsrm.com" target="_blank" rel="noopener">
+          <span class="live-dot" style="background:#fbbf24;box-shadow:0 0 8px rgba(251,191,36,0.6);"></span>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>Data Marketplace</h3>
+              <span style="font-size:10px;font-weight:700;color:#fbbf24;background:rgba(251,191,36,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(251,191,36,0.25);">DATA ↗</span>
+            </div>
+            <span data-i18n="card.mp.sub">Dashboard performa live shopping</span>
+          </div>
+        </a>
+        <a class="live-card" href="https://info.smsrm.com/panduan_edc_agen.php" target="_blank" rel="noopener">
+          <span class="live-dot" style="background:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,0.6);"></span>
+          <div class="lc-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <h3>Panduan EDC Agen</h3>
+              <span style="font-size:10px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,0.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(56,189,248,0.25);">SOP ↗</span>
+            </div>
+            <span data-i18n="card.edc.sub">Standar aktivasi mesin EDC Agen</span>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -658,9 +852,9 @@
         <div class="design-card">
           <div class="design-thumb"><img src="desain/images/img_3.webp" alt="Gradasi 19" loading="lazy"></div>
           <div class="design-body">
-            <span class="tag design" data-i18n="card.g19.tag">Fotografi &amp; Media</span>
+            <span class="tag design" data-i18n="card.g19.tag">Event Alumni SMA</span>
             <h3>Gradasi 19</h3>
-            <p data-i18n="card.g19.desc">Arahan visual fotografi komersial, penyelarasan warna brand, dan layout visual.</p>
+            <p data-i18n="card.g19.desc">Dokumentasi visual &amp; materi publikasi event pengenalan kampus oleh ikatan alumni SMA: 2 periode sebagai panitia kreatif (Gradasi 19) dan pembina (Gradasi 20).</p>
             <a class="cta secondary" href="desain/portfolio-single-g19.html" data-i18n="view.detail">Lihat Detail Karya</a>
           </div>
         </div>
@@ -688,12 +882,12 @@
       </div>
 
       <div style="margin-top:24px;text-align:center;">
-        <a class="cta" style="padding:12px 28px;font-size:14px;" href="desain/index.html" data-i18n="btn.classic.gallery">Buka Galeri Desain Lengkap (Versi Klasik) ↗</a>
+        <a class="cta" style="padding:12px 28px;font-size:14px;" href="desain/" data-i18n="btn.classic.gallery">Buka Galeri Desain Lengkap (Versi Klasik) ↗</a>
       </div>
     </section>
 
     <section>
-      <div class="section-head"><h2 data-i18n="sec.awards.title">🏆 Prestasi &amp; Penghargaan Desain</h2><span data-i18n="sec.awards.sub">kompetisi perancangan visual karya Maulana Gufron</span></div>
+      <div class="section-head"><h2 data-i18n="sec.awards.title">🏆 Prestasi &amp; Penghargaan Desain</h2><span data-i18n="sec.awards.sub">kompetisi perancangan visual dan desain poster tingkat nasional</span></div>
       <div class="achieve-grid">
         
         <div class="achieve-card">
@@ -808,21 +1002,21 @@
     <div style="text-align:left;">
       <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin:0 0 14px;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="footer.subportal.title">Eksplorasi Sub-Portal</h3>
       <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;">
-        <li><a class="footer-link" href="growth/index.html" data-i18n="footer.link.growth">🚀 Portofolio Growth Marketing &amp; Studi Kasus ↗</a></li>
-        <li><a class="footer-link" href="desain/index.html">🎨 Galeri Desain Lengkap (Klasik 2018–2023) ↗</a></li>
-        <li><a class="footer-link" href="mkt/index.html">📊 Marketing &amp; Operations Suite (MKT OS) ↗</a></li>
-        <li><a class="footer-link" href="panduan/index.html">📘 Dokumentasi SOP &amp; Modul SIMASRIM ↗</a></li>
-        <li><a class="footer-link" href="cekongkir/index.html">🧭 Galeri Purwarupa Cek Ongkir SiCek ↗</a></li>
+        <li><a class="footer-link" href="growth/" data-i18n="footer.link.growth">🚀 Portofolio Growth Marketing &amp; Studi Kasus ↗</a></li>
+        <li><a class="footer-link" href="desain/">🎨 Galeri Desain Lengkap (Klasik 2018–2023) ↗</a></li>
+        <li><a class="footer-link" href="mkt/">📊 Marketing &amp; Operations Suite (MKT OS) ↗</a></li>
+        <li><a class="footer-link" href="panduan/">📘 Dokumentasi SOP &amp; Modul SIMASRIM ↗</a></li>
+        <li><a class="footer-link" href="cekongkir/">🧭 Galeri Purwarupa Cek Ongkir SiCek ↗</a></li>
       </ul>
     </div>
 
     <div style="text-align:left;">
       <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin:0 0 14px;text-transform:uppercase;letter-spacing:0.04em;" data-i18n="footer.contact.title">Saluran Komunikasi</h3>
       <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:13.5px;">
-        <li><a class="footer-link" href="https://wa.me/6281547287125?text=Halo%20Maulana%20Gufron%2C%20saya%20tertarik%20dengan%20portofolio%20ini%20dan%20ingin%20diskusi%20lebih%20lanjut." target="_blank" style="color:#10b981;">💬 WhatsApp: 0815-4728-7125 ↗</a></li>
+        <li><a class="footer-link" href="https://wa.me/6281547287125?text=Halo%20Maulana%20Gufron%2C%20saya%20tertarik%20dengan%20portofolio%20ini%20dan%20ingin%20diskusi%20lebih%20lanjut." target="_blank" style="color:#10b981;" rel="noopener">💬 WhatsApp: 0815-4728-7125 ↗</a></li>
         <li><a class="footer-link" href="mailto:mmgufron.s@gmail.com">✉️ Email: mmgufron.s@gmail.com</a></li>
-        <li><a class="footer-link" href="https://www.linkedin.com/in/mmgufron/" target="_blank">🔗 LinkedIn: in/mmgufron ↗</a></li>
-        <li><a class="footer-link" href="https://instagram.com/mmgufron" target="_blank">📷 Instagram: @mmgufron ↗</a></li>
+        <li><a class="footer-link" href="https://www.linkedin.com/in/mmgufron/" target="_blank" rel="noopener">🔗 LinkedIn: in/mmgufron ↗</a></li>
+        <li><a class="footer-link" href="https://instagram.com/mmgufron" target="_blank" rel="noopener">📷 Instagram: @mmgufron ↗</a></li>
       </ul>
     </div>
   </div>
@@ -918,7 +1112,7 @@ const GROWTH_MODAL_DATA = {
     resultKey: 'growth.m4.result',
     attributionKey: 'growth.m4.attribution',
     sourceKey: 'growth.m4.source',
-    engineUrl: 'mkt/mitra/tracker.html',
+    engineUrl: 'mkt/mitra/',
     engineLabelKey: 'growth.btn.engine_sqris',
     images: []
   },
@@ -933,7 +1127,7 @@ const GROWTH_MODAL_DATA = {
     resultKey: 'growth.m5.result',
     attributionKey: 'growth.m5.attribution',
     sourceKey: 'growth.m5.source',
-    engineUrl: 'mkt/campaign/campaign-tracker/index.html',
+    engineUrl: 'mkt/campaign/campaign-tracker/',
     engineLabelKey: 'growth.btn.engine_simasrim',
     images: []
   },
@@ -948,7 +1142,7 @@ const GROWTH_MODAL_DATA = {
     resultKey: 'growth.m6.result',
     attributionKey: 'growth.m6.attribution',
     sourceKey: 'growth.m6.source',
-    engineUrl: 'mkt/data/ppob/index.html',
+    engineUrl: 'mkt/data/ppob/',
     engineLabelKey: 'growth.btn.engine_lifecycle',
     images: []
   }
@@ -1066,15 +1260,18 @@ window.addEventListener('languageChanged', function() {
   }
 });
 
-// Default tab selection
-const h = (window.location.hash || '').toLowerCase();
-if (h === '#creative' || h === '#desain' || h === '#karya' || h === '#portfolio') {
-  switchTab('creative');
-} else if (h === '#business' || h === '#ops' || h === '#erp') {
-  switchTab('business');
-} else {
-  switchTab('growth');
+function applyHashTab() {
+  const h = (window.location.hash || '').toLowerCase();
+  if (h === '#creative' || h === '#desain' || h === '#karya' || h === '#portfolio') {
+    switchTab('creative');
+  } else if (h === '#business' || h === '#ops' || h === '#erp') {
+    switchTab('business');
+  } else if (h === '#growth' || h === '#marketing') {
+    switchTab('growth');
+  }
 }
+applyHashTab();
+window.addEventListener('hashchange', applyHashTab);
 </script>
 
 <script src="assets/js/i18n.js"></script>
