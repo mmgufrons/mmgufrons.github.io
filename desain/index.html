@@ -35,9 +35,10 @@
   <!-- Enterprise Top Navigation Bar -->
   <div class="enterprise-nav-top" style="background:#09090b;border-bottom:1px solid #27272a;padding:12px 24px;position:sticky;top:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Poppins',sans-serif;">
     <div style="display:flex;align-items:center;gap:12px;">
-      <a href="../#creative" style="display:inline-flex;align-items:center;gap:6px;background:#18181b;color:#f4f4f5;border:1px solid #27272a;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all .2s ease;">
-        <span>←</span> <span data-i18n="desain.hub">Hub Utama</span>
+      <a href="../#creative" data-kembali style="display:inline-flex;align-items:center;gap:6px;background:#18181b;color:#f4f4f5;border:1px solid #27272a;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all .2s ease;">
+        <span aria-hidden="true">←</span> <span data-i18n="nav.back">Kembali</span>
       </a>
+      <a href="../#creative" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);color:#a1a1aa;border:1px solid #27272a;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:500;text-decoration:none;transition:all .2s ease;"><span data-i18n="desain.hub">Hub Utama</span></a>
       <span style="color:#3f3f46;font-size:13px;">/</span>
       <span style="color:#a1a1aa;font-size:12.5px;font-weight:500;" data-i18n="desain.title">Galeri Karya Desain &amp; Web (2018–2026)</span>
     </div>
@@ -756,6 +757,7 @@
 
     <script src="js/custom.js"></script>
     <script src="../assets/js/i18n.js"></script>
+    <script src="../assets/js/kembali.js"></script>
   </body>
 
   </html>
