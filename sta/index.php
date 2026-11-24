@@ -22,114 +22,133 @@ if (!$data) {
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <style>
         :root {
-            --primary-color: #129649; /* Hijau Albani sesuai logo */
-            --secondary-color: #FFFFFF; /* Putih */
-            --text-color: #333333; /* Abu Gelap */
-            --link-color: #F8F8F8; /* Background Tombol default */
-            --border-radius: 12px;
-            --light-green-bg: #e8f5e9; /* Hijau Sangat Muda */
+            --primary-color: #129649;   /* Hijau Albani sesuai logo (garis & cincin logo) */
+            --hijau-teks: #0a6630;      /* Hijau yang sama, digelapkan supaya teks lolos AAA (7:1) */
+            --hijau-tekan: #08552a;
+            --secondary-color: #FFFFFF;
+            --text-color: #1f2937;
+            --teks-redup: #4b5563;      /* 7.5:1 di atas putih */
+            --link-color: #F8F8F8;
+            --light-green-bg: #e8f5e9;
+            --radius: 12px;
+            --gerak-cepat: 120ms;
+            --gerak-normal: 200ms;
+            --ease-keluar: cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        * { box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 1rem;
+            line-height: 1.5;
             background-color: var(--secondary-color);
             color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 24px 16px;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            
-            /* Ornamen Background CSS */
-            background-image: 
+            min-height: 100svh;
+            background-image:
                 radial-gradient(circle at top left, var(--light-green-bg) 1px, transparent 1px),
                 radial-gradient(circle at bottom right, var(--light-green-bg) 1px, transparent 1px);
-            background-size: 30px 30px; 
-            background-position: 0 0, 15px 15px; 
-            background-attachment: fixed; 
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            background-attachment: fixed;
         }
 
         .container {
             width: 100%;
-            max-width: 450px; 
+            max-width: 448px;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.95); 
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.96);
+            padding: 32px 24px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         }
 
         .logo {
-            width: 100px;
-            height: 100px;
+            width: 96px;
+            height: 96px;
             border-radius: 50%;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             object-fit: cover;
             border: 4px solid var(--primary-color);
         }
 
         h1 {
-            color: var(--primary-color);
-            font-size: 1.5em;
-            margin: 5px 0 5px 0;
+            color: var(--hijau-teks);
+            font-size: clamp(1.5rem, 1.25rem + 1vw, 1.75rem);
+            line-height: 1.25;
+            margin: 8px 0;
         }
 
         .subtitle {
-            font-size: 1em;
-            color: #666;
-            margin-bottom: 20px;
+            font-size: 1rem;
+            color: var(--teks-redup);
+            margin: 0 0 16px;
         }
-        
+
         .usp-text {
-            font-size: 0.85em;
+            font-size: 1rem;
             color: var(--text-color);
-            background-color: var(--light-green-bg); 
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin-bottom: 25px;
+            background-color: var(--light-green-bg);
+            padding: 8px 16px;
+            border-radius: 24px;
+            margin: 0 0 24px;
             display: inline-block;
             font-weight: 600;
         }
 
         .link-button {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 56px;
             background-color: var(--link-color);
             color: var(--text-color);
             text-decoration: none;
-            padding: 15px 20px;
-            margin: 12px 0;
-            border-radius: var(--border-radius);
+            padding: 16px 24px;
+            margin: 8px 0;
+            border-radius: var(--radius);
             font-weight: 600;
-            transition: background-color 0.2s, transform 0.2s;
+            font-size: 1rem;
             border: 2px solid var(--primary-color);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            font-size: 0.95em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: background-color var(--gerak-normal) var(--ease-keluar), transform var(--gerak-cepat) var(--ease-keluar);
+            -webkit-tap-highlight-color: transparent;
         }
+        .link-button:active { transform: scale(0.97); }
+        .link-button:focus-visible { outline: 3px solid var(--hijau-teks); outline-offset: 4px; }
 
-        .link-button:hover {
-            background-color: #e0e0e0; 
-            transform: translateY(-2px);
-        }
-        
         .main-link {
-            background-color: var(--primary-color);
+            background-color: var(--hijau-teks);
+            border-color: var(--hijau-teks);
             color: var(--secondary-color);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
-        .main-link:hover {
-            background-color: #0c7336; 
+        @media (hover: hover) and (pointer: fine) {
+            .link-button:hover { background-color: #e5e7eb; }
+            .main-link:hover { background-color: var(--hijau-tekan); }
         }
 
         .category-label {
-            font-size: 0.8em;
+            font-size: 0.8125rem;
             text-align: left;
-            margin: 20px 0 5px 5px;
-            color: var(--primary-color);
-            font-weight: bold;
+            margin: 24px 0 8px 4px;
+            color: var(--hijau-teks);
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .link-button { transition: background-color 1ms; }
+            .link-button:active { transform: none; }
         }
     </style>
 </head>
@@ -144,7 +163,8 @@ if (!$data) {
     <p class="usp-text"><?php echo htmlspecialchars($data['uspText'] ?? ''); ?></p>
 
     <?php if (!empty($data['mainLink']['url']) && !empty($data['mainLink']['text'])): ?>
-    <a href="<?php echo htmlspecialchars($data['mainLink']['url']); ?>" target="_blank" class="link-button main-link">
+    <?php $u = $data['mainLink']['url']; ?>
+    <a href="<?php echo htmlspecialchars($u); ?>"<?php if (preg_match('#^https?://#', $u)) echo ' target="_blank" rel="noopener"'; ?> class="link-button main-link">
         <?php echo htmlspecialchars($data['mainLink']['text']); ?>
     </a>
     <?php endif; ?>
@@ -156,7 +176,7 @@ if (!$data) {
         
         <?php foreach ($cat['links'] as $link): ?>
             <?php if (!empty($link['text'])): ?>
-            <a href="<?php echo htmlspecialchars($link['url']); ?>" target="_blank" class="link-button">
+            <a href="<?php echo htmlspecialchars($link['url']); ?>"<?php if (preg_match('#^https?://#', $link['url'])) echo ' target="_blank" rel="noopener"'; ?> class="link-button">
                 <?php echo htmlspecialchars($link['text']); ?>
             </a>
             <?php endif; ?>
