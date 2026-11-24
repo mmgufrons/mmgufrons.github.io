@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portofolio — Maulana Gufron</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b0d12'/%3E%3Ctext x='32' y='43' font-family='Arial, sans-serif' font-weight='700' font-size='26' fill='%236ea8fe' text-anchor='middle'%3EMG%3C/text%3E%3C/svg%3E">
-<meta name="description" content="Hub Portofolio Maulana Gufron: Business, AI Operations & Systems, dan Creative & Visual Design.">
+<meta name="description" content="Hub Portofolio Maulana Gufron: Growth Marketing, Business &amp; AI Operations, UI/UX &amp; Web Development, serta Creative &amp; Visual Design.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -77,6 +77,14 @@
     font-family:'Plus Jakarta Sans',sans-serif;
   }
   .tab-btn:hover{ color:var(--text); background:rgba(255,255,255,0.03); }
+  /* Tab 4 kolom */
+  .tab-btn{ min-height:44px; }
+  .tab-btn:active{ transform:scale(0.97); }
+  .tab-btn:focus-visible{ outline:2px solid #fbbf24; outline-offset:2px; }
+  @media (max-width:640px){
+    .tab-nav{ display:grid; grid-template-columns:1fr 1fr; width:100%; }
+    .tab-btn{ padding:10px 12px; }
+  }
   .tab-btn.active{
     background:#27272a; color:#ffffff;
     border:1px solid #3f3f46;
@@ -429,15 +437,16 @@
   </div>
   <div class="badge" data-i18n="hub.badge">Hub Portofolio Terpadu</div>
   <h1 data-i18n="hub.title">Portofolio — Maulana Gufron</h1>
-  <div class="hub-role" data-i18n="hub.role">Business &amp; Marketing Professional with AI-Assisted Systems</div>
-  <p data-i18n="hub.desc">Rekam jejak strategi komersial, growth marketing terukur, sistem operasional berbantuan AI, serta arsitektur kreatif &amp; identitas visual brand.</p>
+  <div class="hub-role" data-i18n="hub.role">Business, Marketing &amp; Web Professional with AI-Assisted Systems</div>
+  <p data-i18n="hub.desc">Rekam jejak strategi komersial, kampanye pertumbuhan bisnis, sistem operasional berbantuan AI, desain UI/UX &amp; pengembangan web, serta identitas visual brand.</p>
 </header>
 
 <div class="tab-nav-wrap">
   <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('growth')" data-i18n="hub.tab.growth">🚀 Growth Marketing</button>
-    <button class="tab-btn" onclick="switchTab('business')" data-i18n="hub.tab.business">💼 Business &amp; AI Operations</button>
-    <button class="tab-btn" onclick="switchTab('creative')" data-i18n="hub.tab.creative">🎨 Creative &amp; Visual Design</button>
+    <button class="tab-btn active" data-tab="growth" onclick="switchTab('growth')" data-i18n="hub.tab.growth">🚀 Growth Marketing</button>
+    <button class="tab-btn" data-tab="business" onclick="switchTab('business')" data-i18n="hub.tab.business">💼 Business &amp; AI Operations</button>
+    <button class="tab-btn" data-tab="web" onclick="switchTab('web')" data-i18n="hub.tab.web">💻 UI/UX &amp; Web Development</button>
+    <button class="tab-btn" data-tab="creative" onclick="switchTab('creative')" data-i18n="hub.tab.creative">🎨 Creative &amp; Visual Design</button>
   </div>
 </div>
 
@@ -729,7 +738,7 @@
           <div class="thumb">💳</div>
           <div class="body">
             <span class="tag demo">PPOB &amp; Billing</span>
-            <h3 data-i18n="growth.c6.title">PPOB Engine &amp; Simulator</h3>
+            <h3 data-i18n="card.ppob.title">PPOB Engine &amp; Simulator</h3>
             <p data-i18n="card.ppob.desc">Purwarupa engine transaksi PPOB terintegrasi, visualisasi margin per produk, dan pemantauan kohort transaksi.</p>
             <a class="cta" href="mkt/data/ppob/" data-i18n="open.demo">Buka Simulator PPOB</a>
           </div>
@@ -813,6 +822,101 @@
   </div>
 
   <!-- TAB 2: CREATIVE & VISUAL DESIGN -->
+  <div id="tab-web" class="tab-content">
+
+    <section>
+      <div class="section-head"><h2 data-i18n="sec.web.title">💻 Karya UI/UX &amp; Pengembangan Web</h2><span data-i18n="sec.web.sub">situs dan aplikasi web 2026: perjalanan, penginapan, hotel, dan pembayaran digital</span></div>
+      <div class="design-grid">
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/tsa-roomora_1.webp" alt="Roomora" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.web.tag">Web App</span>
+            <h3>Roomora</h3>
+            <p data-i18n="desain.p.roomora.desc">Platform kurasi penginapan, aktivitas, dan kartu hadiah digital dengan nuansa editorial. Bilingual (ID/EN), pencarian destinasi, dan alur pesan tanpa ribet.</p>
+            <a class="cta secondary" href="desain/portfolio-single-roomora.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/tsa-inapqu_1.webp" alt="InapQu" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.web.tag">Web App</span>
+            <h3>InapQu</h3>
+            <p data-i18n="desain.p.inapqu.desc">Pemesanan homestay dan tiket acara dalam satu tempat: filter kota, promo, gift pass, dan pusat bantuan. Harga transparan sudah termasuk pajak.</p>
+            <a class="cta secondary" href="desain/portfolio-single-inapqu.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/tsa-swissbel_1.webp" alt="Swiss-Belcourt Bogor" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.web.tag">Web App</span>
+            <h3>Swiss-Belcourt Bogor</h3>
+            <p data-i18n="desain.p.swissbel.desc">Situs hotel bintang 4 satu halaman: kamar &amp; suite, paket promo, galeri interior, fasilitas, dan reservasi. Peningkatan tampilan tanpa mengubah alur pemesanan.</p>
+            <a class="cta secondary" href="desain/portfolio-single-swissbel.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/tsa-travelone_1.webp" alt="TravelOne" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.web.tag">Web App</span>
+            <h3>TravelOne</h3>
+            <p data-i18n="desain.p.travelone.desc">Agen perjalanan: paket wisata domestik, internasional, dan korporat, serta tiket bus, kereta, dan pesawat dengan rincian harga yang jelas.</p>
+            <a class="cta secondary" href="desain/portfolio-single-travelone.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/tsa-glampora_1.webp" alt="Glampora" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.web.tag.draft">Web App · Draft</span>
+            <h3>Glampora</h3>
+            <p data-i18n="desain.p.glampora.desc">Reservasi glamping, cabin, villa, dan resort di Bogor Raya: katalog dengan filter, cek status pesanan, dan e-voucher ber-QR.</p>
+            <a class="cta secondary" href="desain/portfolio-single-glampora.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/tsa-vilanusa_1.webp" alt="VilaNusa" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.web.tag.draft">Web App · Draft</span>
+            <h3>VilaNusa</h3>
+            <p data-i18n="desain.p.vilanusa.desc">Sewa villa, homestay, dan resort pilihan: cari per kota, bandingkan harga per malam atau paket durasi, pesan tanpa membuat akun.</p>
+            <a class="cta secondary" href="desain/portfolio-single-vilanusa.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/tsa-kelanaqu_1.webp" alt="KelanaQu" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.web.tag.draft">Web App · Draft</span>
+            <h3>KelanaQu</h3>
+            <p data-i18n="desain.p.kelanaqu.desc">Paket tour, island hopping, charter, dan MICE untuk perjalanan kelompok: filter jenis, tujuan, harga, dan durasi, pesan tanpa akun.</p>
+            <a class="cta secondary" href="desain/portfolio-single-kelanaqu.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/tsa-ppob_1.webp" alt="Platform PPOB" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.web.tag.draft">Web App · Draft</span>
+            <h3>Platform PPOB</h3>
+            <p data-i18n="desain.p.ppob.desc">Platform top-up game, pulsa, token listrik, dan pembayaran tagihan tanpa daftar akun. Masih draft: pratinjau sengaja diburamkan.</p>
+            <a class="cta secondary" href="desain/portfolio-single-ppob.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="margin-top:24px;text-align:center;">
+        <a class="cta" style="padding:12px 28px;font-size:14px;" href="desain/" data-i18n="btn.web.gallery">Lihat Semua Karya Web di Galeri ↗</a>
+      </div>
+    </section>
+
+  </div>
+
   <div id="tab-creative" class="tab-content">
 
     <section>
@@ -879,6 +983,16 @@
           </div>
         </div>
 
+
+        <div class="design-card">
+          <div class="design-thumb"><img src="desain/images/konten_1.webp" alt="Kreasi Konten 2018–2021" loading="lazy"></div>
+          <div class="design-body">
+            <span class="tag design" data-i18n="card.konten.tag">Konten Video</span>
+            <h3>Kreasi Konten 2018–2021</h3>
+            <p data-i18n="desain.p.kreasikonten.desc">Cuplikan video kreasi konten: dokumentasi penyuluhan pertanian (irigasi, hama, panen, kompos), Kelas Berkebun di sekolah dasar, dan video kampus. Wajah anak sengaja diburamkan.</p>
+            <a class="cta secondary" href="desain/portfolio-single-kreasikonten.html" data-i18n="view.detail">Lihat Detail Karya</a>
+          </div>
+        </div>
       </div>
 
       <div style="margin-top:24px;text-align:center;">
@@ -990,11 +1104,12 @@
         <span style="font-weight:800;font-size:16px;color:#fafafa;letter-spacing:-0.02em;">Maulana Gufron</span>
       </div>
       <p style="color:#71717a;font-size:13.5px;line-height:1.6;margin:0 0 18px;text-align:left;" data-i18n="footer.brand.desc">
-        Portofolio Terpadu: Business Development, AI-Assisted Operations, &amp; Visual Communication Design.
+        Portofolio Terpadu: Growth Marketing, Business Development, AI-Assisted Operations, UI/UX &amp; Web Development, serta Visual Communication Design.
       </p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <button class="footer-btn" onclick="switchTab('growth');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.growth">🚀 Growth Marketing</button>
         <button class="footer-btn" onclick="switchTab('business');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.business">⚡ Hub Bisnis &amp; AI</button>
+        <button class="footer-btn" onclick="switchTab('web');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.web">💻 Karya Web</button>
         <button class="footer-btn" onclick="switchTab('creative');window.scrollTo({top:0,behavior:'smooth'});" data-i18n="footer.btn.creative">🎨 Galeri Desain</button>
       </div>
     </div>
@@ -1028,19 +1143,10 @@
 
 <script>
 function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-  if (tab === 'creative') {
-    document.querySelectorAll('.tab-btn')[2].classList.add('active');
-    document.getElementById('tab-creative').classList.add('active');
-  } else if (tab === 'business') {
-    document.querySelectorAll('.tab-btn')[1].classList.add('active');
-    document.getElementById('tab-business').classList.add('active');
-  } else {
-    document.querySelectorAll('.tab-btn')[0].classList.add('active');
-    document.getElementById('tab-growth').classList.add('active');
-  }
+  // Tab dikenali lewat data-tab, jadi urutan tombol boleh berubah tanpa merusak fungsi.
+  if (!document.getElementById('tab-' + tab)) tab = 'growth';
+  document.querySelectorAll('.tab-btn').forEach(b => { const on = b.dataset.tab === tab; b.classList.toggle('active', on); b.setAttribute('aria-selected', on); });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + tab));
 }
 
 // Modal Data Registry
@@ -1264,6 +1370,8 @@ function applyHashTab() {
   const h = (window.location.hash || '').toLowerCase();
   if (h === '#creative' || h === '#desain' || h === '#karya' || h === '#portfolio') {
     switchTab('creative');
+  } else if (h === '#web' || h === '#uiux' || h === '#webdev') {
+    switchTab('web');
   } else if (h === '#business' || h === '#ops' || h === '#erp') {
     switchTab('business');
   } else if (h === '#growth' || h === '#marketing') {

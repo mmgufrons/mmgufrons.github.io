@@ -305,8 +305,8 @@ $(function(){
 			e.preventDefault();
 			var filterValue = $(this).attr('data-filter');
 			$container.isotope({ filter: filterValue });
-			$('#filters a').removeClass('active');
-			$(this).addClass('active');
+			$('#filters a').removeClass('active').attr('aria-pressed', 'false');
+			$(this).addClass('active').attr('aria-pressed', 'true');
 		});
 
 		$container.imagesLoaded()
