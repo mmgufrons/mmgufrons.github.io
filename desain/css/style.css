@@ -1743,3 +1743,18 @@ figure.dotted-bg {
   transform: translateX(4px) !important;
   filter: brightness(1.25);
 }
+
+/* Blok galeri yang langsung di dalam .row tidak punya padding kolom, sehingga
+   .row.gallery di dalamnya (margin -15px) meluber 15px dan halaman bisa digeser ke samping di HP. */
+.row > .custom-block {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Animasi masuk (AOS fade-left, tirai .reveal-wrap .cover) sempat berada di luar layar
+   sehingga halaman bisa digeser ke samping di HP. clip (bukan hidden) agar header sticky tetap jalan. */
+.mg_co-section,
+.reveal-wrap {
+  overflow-x: clip;
+}

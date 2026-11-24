@@ -100,7 +100,7 @@
       'card.rk.desc': 'Proyek freelance kemasan & cetak: desain kemasan makanan, spanduk promosi, dan materi outlet kuliner.',
       'card.san.tag': 'Corporate Identity',
       'card.san.desc': 'Identitas visual & materi bisnis untuk 17 klien korporat/UMKM (Des 2022 – Feb 2023), serta rebrand SANCorp (brand guidelines 17+1 bagian).',
-      'btn.classic.gallery': 'Buka Galeri Desain Lengkap (Versi Klasik) ↗',
+      'btn.classic.gallery': 'Buka Galeri Karya Desain & Web Lengkap ↗',
 
       // Awards
       'award.nat.badge': 'Tingkat Nasional',
@@ -245,7 +245,7 @@
 
       // Desain Gallery (/desain/index.html)
       'desain.hub': 'Hub Utama',
-      'desain.title': 'Galeri Desain Klasik (2018–2023)',
+      'desain.title': 'Galeri Karya Desain & Web (2018–2026)',
       'desain.wa': 'Chat WhatsApp',
       'desain.nav.home': 'Beranda',
       'desain.nav.porto': 'Portofolio',
@@ -593,7 +593,7 @@
       'desain.p.ppob.desc': 'Platform top-up game, pulsa, token listrik, dan pembayaran tagihan tanpa daftar akun. Masih draft: pratinjau sengaja diburamkan.',
       'desain.detail.status': 'Status',
       'desain.draft': 'Draft — dapat berubah',
-      'desain.role.web': 'UI/UX & Pengembangan Web (dibantu AI)',
+      'desain.role.web': 'Desain UI/UX & Pengembangan Web',
       'desain.klien.tsa': 'PT TSA',
       'desain.klien.pribadi': 'Proyek pribadi',
       'desain.klien.perusahaan': 'Perusahaan saya',
@@ -636,8 +636,8 @@
       'ppob.crm.modal.wa.btn': 'Hubungi via WhatsApp',
       'desain.hub': 'Hub Utama (Desain)',
       'desain.detail.karya': 'Detail Karya',
-      'desain.footer.title': 'Galeri Desain Klasik — Maulana Gufron',
-      'desain.footer.desc': 'Koleksi arsip portofolio desain visual, periklanan, dan identitas brand periode 2018–2023.',
+      'desain.footer.title': 'Galeri Karya Desain & Web — Maulana Gufron',
+      'desain.footer.desc': 'Koleksi karya desain visual, periklanan, identitas brand, dan situs web periode 2018–2026.',
       'desain.footer.hub': '↗ Ke Hub Portofolio Utama (Kreatif &amp; AI)',
       'desain.footer.nav': 'Navigasi Halaman',
       'desain.footer.cat': 'Katalog Portofolio',
@@ -910,7 +910,7 @@
       'card.rk.desc': 'Freelance packaging & print project: food packaging design, promo banners, and culinary outlet print collateral.',
       'card.san.tag': 'Corporate Identity',
       'card.san.desc': 'Visual identity & business collateral for 17 corporate/SME clients (Dec 2022 – Feb 2023), plus SANCorp rebranding (17+1 brand guidelines).',
-      'btn.classic.gallery': 'Open Complete Design Gallery (Classic Version) ↗',
+      'btn.classic.gallery': 'Open Complete Design & Web Gallery ↗',
 
       // Awards
       'award.nat.badge': 'National Level',
@@ -1055,7 +1055,7 @@
 
       // Desain Gallery (/desain/index.html)
       'desain.hub': 'Main Hub',
-      'desain.title': 'Classic Design Gallery (2018–2023)',
+      'desain.title': 'Design & Web Work Gallery (2018–2026)',
       'desain.wa': 'WhatsApp Chat',
       'desain.nav.home': 'Home',
       'desain.nav.porto': 'Portfolio',
@@ -1440,14 +1440,14 @@
       'desain.p.ppob.desc': 'Platform for game top-ups, mobile credit, electricity tokens, and bill payments without sign-up. Still a draft: previews are intentionally blurred.',
       'desain.detail.status': 'Status',
       'desain.draft': 'Draft — subject to change',
-      'desain.role.web': 'UI/UX & Web Development (AI-assisted)',
+      'desain.role.web': 'UI/UX Design & Web Development',
       'desain.klien.tsa': 'PT TSA',
       'desain.klien.pribadi': 'Personal project',
       'desain.klien.perusahaan': 'My company',
       'desain.status.draft': 'Draft, local version',
       'desain.status.lokal': 'Local version (not yet public)',
-      'desain.footer.title': 'Classic Design Gallery — Maulana Gufron',
-      'desain.footer.desc': 'Archival collection of visual design, advertising, and brand identity portfolios (2018–2023).',
+      'desain.footer.title': 'Design & Web Work Gallery — Maulana Gufron',
+      'desain.footer.desc': 'Collection of visual design, advertising, brand identity, and website work (2018–2026).',
       'desain.footer.hub': '↗ To Main Portfolio Hub (Creative &amp; AI)',
       'desain.footer.nav': 'Page Navigation',
       'desain.footer.cat': 'Portfolio Catalog',
