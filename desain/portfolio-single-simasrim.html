@@ -7,7 +7,7 @@
   <meta name="author" content="mmgufron">
   <link rel="shortcut icon" href="favicon.png">
 
-  <meta name="description" content="Tiga situs dalam satu ekosistem PT SMA: profil perusahaan Solusi Mitra Aplikasi, SIMASRIM (super-app logistik multi kurir, PPOB, tiket, dan kasir), serta SQRIS.id (QRIS dengan soundbox gratis). Saya kelola dan kembangkan agar pesan, tampilan, dan alur daftarnya selaras." />
+  <meta name="description" content="SIMASRIM, super-app logistik multi kurir, PPOB, dan tiket dari PT SMA: desain UI/UX sejak Agu 2024, lalu simasrim.com saya bangun ulang sendiri sejak Mar 2026." />
   <meta name="keywords" content="" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,11 +24,43 @@
   <link rel="stylesheet" href="css/aos.css">
   <link rel="stylesheet" href="css/style.css">
 
-  <title>Ekosistem Web SIMASRIM — MMGufron</title>
+  <title>SIMASRIM — MMGufron</title>
   <style>
     .lang-btn.active { color: #f59e0b !important; font-weight: 800 !important; }
     .btn-desain-back:hover { background: #27272a !important; color: #fff !important; transform: translateX(-2px); }
   </style>
+  <style>
+  /* Gaya bersama halaman PT SMA. Jarak 8-pt, huruf dari skala, hover hanya untuk pointer presisi. */
+  .ps-lead{color:#3f3f46;font-size:1.125rem;line-height:1.7;max-width:46rem;margin:0 0 32px}
+  .ps-blok{border:1px solid #e4e4e7;border-radius:16px;padding:32px 24px;background:#fafafa;margin-top:32px;scroll-margin-top:96px}
+  .ps-over{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#52525b;margin:0 0 8px}
+  .ps-h3{font-size:1.5rem;font-weight:700;color:#18181b;margin:0 0 16px}
+  .ps-h4{font-size:1.125rem;font-weight:700;color:#18181b;margin:0 0 8px}
+  .ps-p{color:#3f3f46;font-size:1rem;line-height:1.7;margin:0 0 16px}
+  .ps-ket{color:#52525b;font-size:.875rem;line-height:1.6}
+  .ps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:16px}
+  .ps-kartu{display:flex;flex-direction:column;background:#fff;border:1px solid #e4e4e7;border-radius:12px;overflow:hidden;color:inherit;text-decoration:none;transition:transform 120ms cubic-bezier(0.16,1,0.3,1)}
+  .ps-kartu img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#ebe9e4}
+  .ps-kartu .isi{padding:24px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .ps-kartu .tgl{font-size:.8125rem;font-weight:600;color:#52525b}
+  .ps-tombol{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid #d4d4d8;background:#fff;color:#18181b;font-size:.875rem;font-weight:600;text-decoration:none;transition:transform 120ms cubic-bezier(0.16,1,0.3,1),background-color 200ms ease}
+  .ps-tombol.utama{background:#18181b;border-color:#18181b;color:#fff}
+  .ps-kartu .ps-tombol{margin-top:auto;align-self:flex-start}
+  .ps-kartu:active,.ps-tombol:active{transform:scale(.97)}
+  .ps-kartu:focus-visible,.ps-tombol:focus-visible,.ps-live:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+  @media (hover:hover) and (pointer:fine){.ps-kartu:hover{border-color:#a1a1aa}.ps-tombol:hover{background:#f4f4f5}.ps-tombol.utama:hover{background:#3f3f46}}
+  .ps-garis{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .ps-garis li{display:grid;grid-template-columns:8.5rem 1fr;gap:16px;padding:16px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;font-size:1rem;line-height:1.6;color:#27272a}
+  .ps-garis b{font-size:.875rem;color:#18181b}
+  @media (max-width:575.98px){.ps-garis li{grid-template-columns:1fr;gap:4px}}
+  .ps-angka{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:16px}
+  .ps-angka div{background:#fff;border:1px solid #e4e4e7;border-radius:12px;padding:24px}
+  .ps-angka strong{display:block;font-size:1.75rem;font-weight:800;color:#18181b;line-height:1.2;margin-bottom:8px}
+  .ps-lencana{display:inline-block;font-size:.75rem;font-weight:700;color:#3f3f46;background:#f4f4f5;border:1px solid #e4e4e7;border-radius:4px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+  .ps-live{color:#18181b;font-weight:700;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px}
+  .ps-aksi{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  @media (prefers-reduced-motion:reduce){.ps-kartu,.ps-tombol{transition:none}.ps-kartu:active,.ps-tombol:active{transform:none}}
+</style>
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="100">
@@ -44,6 +76,8 @@
       <a href="./#portfolio-section" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);color:#a1a1aa;border:1px solid #27272a;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;text-decoration:none;transition:all .2s ease;">
         <span data-i18n="desain.back.gallery.text">Galeri Desain</span>
       </a>
+      <span style="color:#3f3f46;font-size:13px;">/</span>
+      <a href="portfolio-single-ptsma.html" style="color:#a1a1aa;font-size:12px;font-weight:500;padding:6px 4px;text-decoration:none;" data-i18n="desain.ptsma.crumb">Ekosistem PT SMA</a>
       <span style="color:#3f3f46;font-size:13px;">/</span>
       <span style="color:#f4f4f5;font-size:12px;font-weight:600;padding:6px 4px;" data-i18n="desain.detail.karya">Detail Karya</span>
     </div>
@@ -89,93 +123,40 @@
   
 
 
-  <div class="mg_co-section mg_co-section-4 pb-0"  id="portfolio-section">
+
+  <div class="mg_co-section mg_co-section-4 pb-0" id="portfolio-section">
     <div class="container">
       <div class="portfolio-single-wrap unslate_co--section" id="portfolio-single-section">
-
         <div class="portfolio-single-inner">
-          <h2 class="heading-portfolio-single-h2 text-black">Ekosistem Web SIMASRIM</h2>
-
+          <h2 class="heading-portfolio-single-h2 text-black">SIMASRIM</h2>
           <div class="row justify-content-between mb-5">
-            <div class="col-12 mb-4"><p style="color:#a1a1aa;font-size:16px;line-height:1.7;max-width:720px;margin-top:12px;" data-i18n="desain.p.simasrim.desc">Tiga situs dalam satu ekosistem PT SMA: profil perusahaan Solusi Mitra Aplikasi, SIMASRIM (super-app logistik multi kurir, PPOB, tiket, dan kasir), serta SQRIS.id (QRIS dengan soundbox gratis). Saya kelola dan kembangkan agar pesan, tampilan, dan alur daftarnya selaras.</p></div>
-            <div class="custom-block" data-aos="fade-up">
-              <div class="row gutter-v2 gallery">
-                <div class="col-6 col-md-4">
-                  <a href="images/eko-simasrim-1.webp" class="gal-item" data-fancybox="gal-simasrim"><img src="images/eko-simasrim_1.webp" alt="SIMASRIM — tampilan" class="img-fluid" loading="lazy"></a>
-                </div>
-                <div class="col-6 col-md-4">
-                  <a href="images/eko-simasrim-2.webp" class="gal-item" data-fancybox="gal-simasrim"><img src="images/eko-simasrim_2.webp" alt="SQRIS.id — tampilan" class="img-fluid" loading="lazy"></a>
-                </div>
-                <div class="col-6 col-md-4">
-                  <a href="images/eko-simasrim-3.webp" class="gal-item" data-fancybox="gal-simasrim"><img src="images/eko-simasrim_3.webp" alt="Solusi Mitra Aplikasi — tampilan" class="img-fluid" loading="lazy"></a>
-                </div>
-                <div class="col-6 col-md-4">
-                  <a href="images/eko-simasrim-4.webp" class="gal-item" data-fancybox="gal-simasrim"><img src="images/eko-simasrim_4.webp" alt="SIMASRIM (HP) — tampilan" class="img-fluid" loading="lazy"></a>
-                </div>
-                <div class="col-6 col-md-4">
-                  <a href="images/eko-simasrim-5.webp" class="gal-item" data-fancybox="gal-simasrim"><img src="images/eko-simasrim_5.webp" alt="SQRIS.id (HP) — tampilan" class="img-fluid" loading="lazy"></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 my-5">
-              <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                  <div class="detail-v1">
-                    <span class="detail-label" data-i18n="desain.detail.date">Tanggal Proyek</span>
-                    <span class="detail-val">Agu 2024–Agu 2026</span>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                  <div class="detail-v1">
-                    <span class="detail-label" data-i18n="desain.detail.role">Peran</span>
-                    <span class="detail-val" data-i18n="desain.role.kelola">Desain UI/UX, lalu Pengembangan Web</span>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                  <div class="detail-v1">
-                    <span class="detail-label" data-i18n="desain.detail.client">Klien</span>
-                    <span class="detail-val" data-i18n="desain.klien.sma">PT SMA</span>
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                  <div class="detail-v1">
-                    <span class="detail-label" data-i18n="desain.detail.status">Status</span>
-                    <span class="detail-val" data-i18n="desain.status.tayang">Tayang; gambar dari versi lokal saya</span>
-                  </div>
-                </div>
-              </div>
-            <section class="mt-5" id="ordermudah" aria-labelledby="om-judul" style="scroll-margin-top:96px;">
-              <div style="border:1px solid #e4e4e7;border-radius:16px;padding:32px 24px;background:#fafafa;">
-                <p style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#52525b;margin:0 0 8px;" data-i18n="desain.om.label">Bagian dari ekosistem · Arsip</p>
-                <h3 id="om-judul" style="font-size:24px;font-weight:700;color:#18181b;margin:0 0 16px;">OrderMudah</h3>
-                <div class="row align-items-center">
-                  <div class="col-md-5 mb-4 mb-md-0">
-                    <div style="background:#fff;border:1px solid #e4e4e7;border-radius:12px;padding:32px 24px;display:flex;align-items:center;justify-content:center;">
-                      <img src="images/ordermudah-logo.webp" alt="Logo OrderMudah" class="img-fluid" loading="lazy" width="720" height="235" style="width:100%;max-width:320px;height:auto;">
-                    </div>
-                  </div>
-                  <div class="col-md-7">
-                    <p style="color:#3f3f46;font-size:16px;line-height:1.7;margin:0 0 16px;" data-i18n="desain.om.desc">Platform toko online cepat untuk UMKM di bawah PT SMA. Saya merancang UI/UX-nya; versi awal dibangun tim IT, dan versi terakhir ikut saya kembangkan. Situsnya sudah tidak aktif, jadi yang ditampilkan di sini identitas merek dan fitur utama yang dirancang.</p>
-                    <p style="color:#27272a;font-size:15px;margin:0;"><strong data-i18n="desain.detail.role">Peran</strong>: <span data-i18n="desain.om.role">Desain UI/UX; ikut mengembangkan versi terakhir</span></p>
-                  </div>
-                </div>
-                <ul style="list-style:none;padding:0;margin:24px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;" aria-label="OrderMudah">
-                  <li style="display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#27272a;font-size:15px;"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#fbb517;flex:none;"></span><span data-i18n="desain.om.f1">Manajemen produk &amp; katalog</span></li>
-                  <li style="display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#27272a;font-size:15px;"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#fbb517;flex:none;"></span><span data-i18n="desain.om.f2">Tampilan toko yang bisa diatur</span></li>
-                  <li style="display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#27272a;font-size:15px;"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#fbb517;flex:none;"></span><span data-i18n="desain.om.f3">Pengiriman JNE &amp; pelacakan</span></li>
-                  <li style="display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#27272a;font-size:15px;"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#fbb517;flex:none;"></span><span data-i18n="desain.om.f4">Ragam metode pembayaran</span></li>
-                  <li style="display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#27272a;font-size:15px;"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#fbb517;flex:none;"></span><span data-i18n="desain.om.f5">Notifikasi pesanan otomatis</span></li>
-                  <li style="display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid #e4e4e7;border-radius:8px;background:#fff;color:#27272a;font-size:15px;"><span aria-hidden="true" style="width:8px;height:8px;border-radius:50%;background:#fbb517;flex:none;"></span><span data-i18n="desain.om.f6">Laporan penjualan &amp; dashboard</span></li>
-                </ul>
-              </div>
-            </section>
+            <div class="col-12"><p data-i18n="desain.ptsma.sim.lead" class="ps-lead">Super-app untuk agen: kirim paket multi kurir dengan kepastian pickup, PPOB, tiket, dan kasir. Saya mulai dari desain UI/UX, lalu sejak Maret 2026 membangun ulang simasrim.com sendiri dengan vibe coding sampai tayang.</p></div>
+            <div class="custom-block" data-aos="fade-up"><div class="row gutter-v2 gallery">
+                <div class="col-6 col-md-4"><a href="images/ptsma-simasrim-1.webp" class="gal-item" data-fancybox="gal-portfolio-single-simasrim"><img src="images/ptsma-simasrim_1.webp" alt="simasrim.com di laptop dan HP, versi saya Agu 2026" class="img-fluid" loading="lazy" width="900" height="675"></a></div>
+                <div class="col-6 col-md-4"><a href="images/ptsma-simasrim-2.webp" class="gal-item" data-fancybox="gal-portfolio-single-simasrim"><img src="images/ptsma-simasrim_2.webp" alt="Dokumen Panduan SIMASRIM per peran pengguna" class="img-fluid" loading="lazy" width="900" height="675"></a></div>
+                <div class="col-6 col-md-4"><a href="images/ptsma-simasrim-3.webp" class="gal-item" data-fancybox="gal-portfolio-single-simasrim"><img src="images/ptsma-simasrim_3.webp" alt="simasrim.com di HP" class="img-fluid" loading="lazy" width="900" height="675"></a></div>
+              </div></div>
+            <div class="col-12 my-5"><div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-3"><div class="detail-v1"><span class="detail-label" data-i18n="desain.detail.date">Tanggal Proyek</span><span class="detail-val"><span data-i18n="desain.ptsma.tgl.Agu2024Agu2026">Agu 2024–Agu 2026</span></span></div></div>
+                <div class="col-sm-6 col-md-6 col-lg-3"><div class="detail-v1"><span class="detail-label" data-i18n="desain.detail.role">Peran</span><span class="detail-val"><span data-i18n="desain.role.kelola">Desain UI/UX, lalu Pengembangan Web</span></span></div></div>
+                <div class="col-sm-6 col-md-6 col-lg-3"><div class="detail-v1"><span class="detail-label" data-i18n="desain.detail.client">Klien</span><span class="detail-val"><span data-i18n="desain.klien.sma">PT SMA</span></span></div></div>
+                <div class="col-sm-6 col-md-6 col-lg-3"><div class="detail-v1"><span class="detail-label" data-i18n="desain.detail.status">Status</span><span class="detail-val"><span data-i18n="desain.status.tayang">Tayang; gambar dari versi lokal saya</span></span></div></div>
+              </div></div>
+            <div class="col-12"><p class="ps-ket" style="margin:0"><a class="ps-live" href="https://simasrim.com" target="_blank" rel="noopener">simasrim.com ↗</a> <span data-i18n="desain.ptsma.live" class="ps-ket">versi terkini dikelola tim PT SMA setelah saya keluar (Agu 2026), jadi tampilannya berbeda dari gambar di sini.</span></p>
+<section class="ps-blok"><p class="ps-over"><span data-i18n="desain.ptsma.tahap.over">Dua tahap</span></p><h3 class="ps-h3"><span data-i18n="desain.ptsma.sim.tahap.h">Dari desain ke kode sendiri</span></h3><div class="ps-grid">
+  <div><h4 class="ps-h4"><span data-i18n="desain.ptsma.sim.t1.h">1 · Desain UI/UX (Agu 2024–2025)</span></h4><p data-i18n="desain.ptsma.sim.t1" class="ps-p">Rancangan web SIMASRIM di Figma (Agu 2024), desain ulang Cek Resi (Okt 2024), revamp UX dan teks aplikasi, serta desain ulang tiket Pelni dan pesawat (Apr 2025). Kodenya ditulis tim IT, termasuk aplikasi di app.simasrim.com.</p></div>
+  <div><h4 class="ps-h4"><span data-i18n="desain.ptsma.sim.t2.h">2 · Bangun ulang sendiri (Mar–Agu 2026)</span></h4><p data-i18n="desain.ptsma.sim.t2" class="ps-p">Sejak 17 Maret 2026 saya membangun ulang simasrim.com dengan vibe coding: beranda, layanan, Reward (Mei–Jul 2026), lalu kecepatan dan Google Indexing (Mei dan Agu 2026). Formulir dan backend tertentu tetap dibantu tim IT.</p></div>
+</div></section>
+<section class="ps-blok"><p class="ps-over"><span data-i18n="desain.ptsma.kerja.over">Yang saya kerjakan</span></p><h3 class="ps-h3"><span data-i18n="desain.ptsma.sim.kerja.h">Pekerjaan di luar situs</span></h3><ul class="ps-garis"><li><b><span data-i18n="desain.ptsma.tgl.Okt2024Jan2025">Okt 2024–Jan 2025</span></b><span data-i18n="desain.ptsma.sim.g.1">Iklan dan banner Cek Resi: saya desain dan tayangkan sendiri; lanjut pop-up Resi Instan (Apr 2025, Jan 2026).</span></li><li><b><span data-i18n="desain.ptsma.tgl.Des2024Jun2025">Des 2024–Jun 2025</span></b><span data-i18n="desain.ptsma.sim.g.2">Kampanye rekrut agen JNE (Bogor dan Jogja): email blast, basis data agen, dan balasan otomatis CekatAI/BalesOtomatis.</span></li><li><b><span data-i18n="desain.ptsma.tgl.MarJun2025">Mar–Jun 2025</span></b><span data-i18n="desain.ptsma.sim.g.3">Peluncuran Tiket (Apr 2025), logo SIMASRIM Travel (Mar 2025), dan logo Umroh &amp; Haji (Jun 2025).</span></li><li><b><span data-i18n="desain.ptsma.tgl.Sep2024Jun2026">Sep 2024–Jun 2026</span></b><span data-i18n="desain.ptsma.sim.g.4">Dokumen Panduan per peran (Agen, Seller, B2B): PDF diubah ke HTML (Jul 2025), dokumen dinamis (Jun 2026), dan video tutorial (2026).</span></li><li><b><span data-i18n="desain.ptsma.tgl.Agu2024Agu2025">Agu 2024–Agu 2025</span></b><span data-i18n="desain.ptsma.sim.g.5">Kalender konten media sosial SIMASRIM.</span></li><li><b><span data-i18n="desain.ptsma.tgl.FebJul2026">Feb–Jul 2026</span></b><span data-i18n="desain.ptsma.sim.g.6">SIMASRIM Fulfillment (lanjutan SiKemas, Feb 2026) dan program Reward (Mei–Jul 2026).</span></li></ul><div class="ps-aksi"><a class="ps-tombol" href="../panduan/"><span data-i18n="desain.ptsma.sim.panduan">Buka arsip Dokumen Panduan →</span></a></div></section>
+<section class="ps-blok"><p class="ps-over"><span data-i18n="desain.ptsma.angka.over">Angka</span></p><h3 class="ps-h3"><span data-i18n="desain.ptsma.sim.angka.h">Hasil kampanye dan kemitraan</span></h3><div class="ps-angka">
+  <div><strong>±30% · ±20%</strong><span data-i18n="desain.ptsma.sim.a1" class="ps-ket">Kampanye akuisisi dan reaktivasi mencakup ±30% pengguna aktif dan ±20% transaksi, dihitung dari basis saat itu ketika jumlah pengguna keseluruhan sedang turun.</span><span data-i18n="desain.ptsma.hasiltim" class="ps-lencana">hasil tim</span></div>
+  <div><strong>1 → 14+</strong><span data-i18n="desain.ptsma.sim.a2" class="ps-ket">Mitra logistik dan PPOB aktif, dengan 208 tugas mitra di SMA-OS (Jan–Agu 2026).</span><span data-i18n="desain.ptsma.hasiltim" class="ps-lencana">hasil tim</span></div>
+</div><div class="ps-aksi"><a class="ps-tombol" href="../#case-5"><span data-i18n="desain.ptsma.lain.c5">Growth: Kemitraan B2B 1 → 14+ →</span></a></div></section><div class="ps-aksi" style="margin-top:48px"><a class="ps-tombol" href="portfolio-single-ptsma.html"><span data-i18n="desain.ptsma.balik">← Kembali ke Ekosistem PT SMA</span></a></div></div>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-
 
     <div class="site-footer" style="background:#09090b;border-top:1px solid #1f1f23;padding:48px 0 32px;">
     <div class="container">

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="mmgufron">
+  <link rel="shortcut icon" href="favicon.png">
+
+  <meta name="description" content="SQRIS.id dan mesin EDC dari PT SMA (Jun 2025–Agu 2026): situs sqris.id yang saya desain dan bangun, onboarding merchant, dan materi penjualan untuk agen." />
+  <meta name="keywords" content="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="fonts/icomoon/style.css">
+  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+  <link rel="stylesheet" href="css/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>SQRIS.id + EDC — MMGufron</title>
+  <style>
+    .lang-btn.active { color: #f59e0b !important; font-weight: 800 !important; }
+    .btn-desain-back:hover { background: #27272a !important; color: #fff !important; transform: translateX(-2px); }
+  </style>
+  <style>
+  /* Gaya bersama halaman PT SMA. Jarak 8-pt, huruf dari skala, hover hanya untuk pointer presisi. */
+  .ps-lead{color:#3f3f46;font-size:1.125rem;line-height:1.7;max-width:46rem;margin:0 0 32px}
+  .ps-blok{border:1px solid #e4e4e7;border-radius:16px;padding:32px 24px;background:#fafafa;margin-top:32px;scroll-margin-top:96px}
+  .ps-over{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#52525b;margin:0 0 8px}
+  .ps-h3{font-size:1.5rem;font-weight:700;color:#18181b;margin:0 0 16px}
+  .ps-h4{font-size:1.125rem;font-weight:700;color:#18181b;margin:0 0 8px}
+  .ps-p{color:#3f3f46;font-size:1rem;line-height:1.7;margin:0 0 16px}
+  .ps-ket{color:#52525b;font-size:.875rem;line-height:1.6}
+  .ps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:16px}
+  .ps-kartu{display:flex;flex-direction:column;background:#fff;border:1px solid #e4e4e7;border-radius:12px;overflow:hidden;color:inherit;text-decoration:none;transition:transform 120ms cubic-bezier(0.16,1,0.3,1)}
+  .ps-kartu img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#ebe9e4}
+  .ps-kartu .isi{padding:24px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .ps-kartu .tgl{font-size:.8125rem;font-weight:600;color:#52525b}
+  .ps-tombol{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border-radius:8px;border:1px solid #d4d4d8;background:#fff;color:#18181b;font-size:.875rem;font-weight:600;text-decoration:none;transition:transform 120ms cubic-bezier(0.16,1,0.3,1),background-color 200ms ease}
+  .ps-tombol.utama{background:#18181b;border-color:#18181b;color:#fff}
+  .ps-kartu .ps-tombol{margin-top:auto;align-self:flex-start}
+  .ps-kartu:active,.ps-tombol:active{transform:scale(.97)}
+  .ps-kartu:focus-visible,.ps-tombol:focus-visible,.ps-live:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+  @media (hover:hover) and (pointer:fine){.ps-kartu:hover{border-color:#a1a1aa}.ps-tombol:hover{background:#f4f4f5}.ps-tombol.utama:hover{background:#3f3f46}}
+  .ps-garis{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .ps-garis li{display:grid;grid-template-columns:8.5rem 1fr;gap:16px;padding:16px;background:#fff;border:1px solid #e4e4e7;border-radius:8px;font-size:1rem;line-height:1.6;color:#27272a}
+  .ps-garis b{font-size:.875rem;color:#18181b}
+  @media (max-width:575.98px){.ps-garis li{grid-template-columns:1fr;gap:4px}}
+  .ps-angka{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:16px}
+  .ps-angka div{background:#fff;border:1px solid #e4e4e7;border-radius:12px;padding:24px}
+  .ps-angka strong{display:block;font-size:1.75rem;font-weight:800;color:#18181b;line-height:1.2;margin-bottom:8px}
+  .ps-lencana{display:inline-block;font-size:.75rem;font-weight:700;color:#3f3f46;background:#f4f4f5;border:1px solid #e4e4e7;border-radius:4px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+  .ps-live{color:#18181b;font-weight:700;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px}
+  .ps-aksi{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  @media (prefers-reduced-motion:reduce){.ps-kartu,.ps-tombol{transition:none}.ps-kartu:active,.ps-tombol:active{transform:none}}
+</style>
+</head>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="100">
+
+    <!-- Enterprise Top Navigation Bar -->
+  <div class="enterprise-nav-top" style="background:#09090b;border-bottom:1px solid #27272a;padding:12px 24px;position:sticky;top:0;z-index:9999;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:'Poppins',sans-serif;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <a href="./#web" data-kembali style="display:inline-flex;align-items:center;gap:6px;background:#18181c;color:#f4f4f5;border:1px solid #27272a;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all .2s ease;">
+        <span aria-hidden="true">←</span> <span data-i18n="nav.back">Kembali</span>
+      </a>
+      <a href="../#web" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);color:#a1a1aa;border:1px solid #27272a;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;text-decoration:none;transition:all .2s ease;"><span data-i18n="desain.hub">Hub Utama</span></a>
+      <span style="color:#3f3f46;font-size:13px;">/</span>
+      <a href="./#portfolio-section" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.04);color:#a1a1aa;border:1px solid #27272a;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;text-decoration:none;transition:all .2s ease;">
+        <span data-i18n="desain.back.gallery.text">Galeri Desain</span>
+      </a>
+      <span style="color:#3f3f46;font-size:13px;">/</span>
+      <a href="portfolio-single-ptsma.html" style="color:#a1a1aa;font-size:12px;font-weight:500;padding:6px 4px;text-decoration:none;" data-i18n="desain.ptsma.crumb">Ekosistem PT SMA</a>
+      <span style="color:#3f3f46;font-size:13px;">/</span>
+      <span style="color:#f4f4f5;font-size:12px;font-weight:600;padding:6px 4px;" data-i18n="desain.detail.karya">Detail Karya</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div style="display:inline-flex;align-items:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:2px 4px;font-size:11px;font-weight:700;margin-right:8px;"><button type="button" class="lang-btn border-0 bg-transparent text-white p-0 fw-bold" style="font-size:10px;padding:2px 6px;cursor:pointer;opacity:0.7;" data-lang-btn="id" onclick="setLanguage('id')">ID</button><span style="color:#555;font-size:9px;">|</span><button type="button" class="lang-btn border-0 bg-transparent text-white p-0 fw-bold" style="font-size:10px;padding:2px 6px;cursor:pointer;opacity:0.7;" data-lang-btn="en" onclick="setLanguage('en')">EN</button></div><a href="https://wa.me/6281547287125?text=Halo%20Maulana%20Gufron%2C%20saya%20tertarik%20dengan%20karya%20desain%20Anda%20dan%20ingin%20berdiskusi%20lebih%20lanjut." target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.12);color:#34d399;border:1px solid rgba(16,185,129,0.25);font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;text-decoration:none;" rel="noopener">
+        <span style="width:6px;height:6px;border-radius:50%;background:#10b981;display:inline-block;"></span> <span data-i18n="desain.wa">Chat WhatsApp</span></a>
+    </div>
+  </div>
+
+
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close">
+        <span class="icofont-close js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div>
+  
+  <nav class="site-nav dark mb-5 site-navbar-target">
+    <div class="container">
+      <div class="site-navigation">
+        <div class="d-flex align-items-center"><a href="./" class="logo m-0" font="Poppins">MMGufron</span></a></div>
+
+                        <ul class="js-clone-nav d-none d-lg-inline-none site-menu float-right site-nav-wrap">
+          <li><a href="./#web" data-kembali class="nav-link font-weight-bold text-primary"><span aria-hidden="true">← </span><span data-i18n="nav.back">Kembali</span></a></li>
+          <li><a href="../#web" class="nav-link"><span data-i18n="desain.hub">Hub Utama</span></a></li>
+          <li><a href="./#portfolio-section" class="nav-link"><span data-i18n="desain.back.gallery">Galeri Desain</span></a></li>
+          <li><a href="./#skills-section" class="nav-link"><span data-i18n="desain.nav.skills">Keterampilan</span></a></li>
+          <li><a href="./#contact-section" class="nav-link"><span data-i18n="desain.nav.contact">Kontak</span></a></li>
+        </ul>
+
+        <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-inline-block" data-toggle="collapse" data-target="#main-navbar">
+          <span></span>
+        </a>
+
+      </div>
+    </div>
+  </nav>
+
+
+
+  
+
+
+
+  <div class="mg_co-section mg_co-section-4 pb-0" id="portfolio-section">
+    <div class="container">
+      <div class="portfolio-single-wrap unslate_co--section" id="portfolio-single-section">
+        <div class="portfolio-single-inner">
+          <h2 class="heading-portfolio-single-h2 text-black">SQRIS.id + EDC</h2>
+          <div class="row justify-content-between mb-5">
+            <div class="col-12"><p data-i18n="desain.ptsma.sq.lead" class="ps-lead">QRIS dengan soundbox untuk pedagang, ditambah mesin kasir EDC untuk agen SIMASRIM. Saya mendesain dan membangun situs sqris.id sendiri, lalu menyusun alur onboarding merchant dan materi penjualannya.</p></div>
+            <div class="custom-block" data-aos="fade-up"><div class="row gutter-v2 gallery">
+                <div class="col-6 col-md-4"><a href="images/ptsma-sqris-1.webp" class="gal-item" data-fancybox="gal-portfolio-single-sqris"><img src="images/ptsma-sqris_1.webp" alt="sqris.id di laptop dan HP, versi saya" class="img-fluid" loading="lazy" width="900" height="675"></a></div>
+                <div class="col-6 col-md-4"><a href="images/ptsma-sqris-2.webp" class="gal-item" data-fancybox="gal-portfolio-single-sqris"><img src="images/ptsma-sqris_2.webp" alt="Landing page QRIS Statis2Dinamis (LPQris)" class="img-fluid" loading="lazy" width="900" height="675"></a></div>
+                <div class="col-6 col-md-4"><a href="images/ptsma-sqris-3.webp" class="gal-item" data-fancybox="gal-portfolio-single-sqris"><img src="images/ptsma-sqris_3.webp" alt="sqris.id di HP" class="img-fluid" loading="lazy" width="900" height="675"></a></div>
+              </div></div>
+            <div class="col-12 my-5"><div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-3"><div class="detail-v1"><span class="detail-label" data-i18n="desain.detail.date">Tanggal Proyek</span><span class="detail-val"><span data-i18n="desain.ptsma.tgl.Jun2025Agu2026">Jun 2025–Agu 2026</span></span></div></div>
+                <div class="col-sm-6 col-md-6 col-lg-3"><div class="detail-v1"><span class="detail-label" data-i18n="desain.detail.role">Peran</span><span class="detail-val"><span data-i18n="desain.ptsma.peran.web">Desain UI/UX &amp; Pengembangan Web</span></span></div></div>
+                <div class="col-sm-6 col-md-6 col-lg-3"><div class="detail-v1"><span class="detail-label" data-i18n="desain.detail.client">Klien</span><span class="detail-val"><span data-i18n="desain.klien.sma">PT SMA</span></span></div></div>
+                <div class="col-sm-6 col-md-6 col-lg-3"><div class="detail-v1"><span class="detail-label" data-i18n="desain.detail.status">Status</span><span class="detail-val"><span data-i18n="desain.status.tayang">Tayang; gambar dari versi lokal saya</span></span></div></div>
+              </div></div>
+            <div class="col-12"><p class="ps-ket" style="margin:0"><a class="ps-live" href="https://sqris.id" target="_blank" rel="noopener">sqris.id ↗</a> <span data-i18n="desain.ptsma.live" class="ps-ket">versi terkini dikelola tim PT SMA setelah saya keluar (Agu 2026), jadi tampilannya berbeda dari gambar di sini.</span></p>
+<section class="ps-blok"><p class="ps-over"><span data-i18n="desain.ptsma.kerja.over">Yang saya kerjakan</span></p><h3 class="ps-h3"><span data-i18n="desain.ptsma.sq.kerja.h">Situs, onboarding, dan materi</span></h3><ul class="ps-garis"><li><b><span data-i18n="desain.ptsma.tgl.NovDes2025">Nov–Des 2025</span></b><span data-i18n="desain.ptsma.sq.g.1">Situs sqris.id: landing page, revamp, formulir tanpa server sendiri (serverless), dan SEO; pindah ke domain .id pada 20 Jan 2026.</span></li><li><b><span data-i18n="desain.ptsma.tgl.Nov2025Feb2026">Nov 2025–Feb 2026</span></b><span data-i18n="desain.ptsma.sq.g.2">Onboarding merchant: matriks paket soundbox, alur sales dan admin, perjanjian kerja sama, dan aktivasi.</span></li><li><b><span data-i18n="desain.ptsma.tgl.Nov2025Feb2026">Nov 2025–Feb 2026</span></b><span data-i18n="desain.ptsma.sq.g.3">Materi: panduan dan video soundbox, stiker, flyer, brosur, AI CS 24 jam, serta akun Instagram dan TikTok.</span></li><li><b><span data-i18n="desain.ptsma.tgl.Jun2025Apr2026">Jun 2025–Apr 2026</span></b><span data-i18n="desain.ptsma.sq.g.4">EDC: mockup (Jun 2025), sales deck, kalkulator EDC (Agu 2025), marketing kit agen v1–3 dan halaman EDC (Sep 2025), alur aktivasi (Mar–Apr 2026).</span></li><li><b><span data-i18n="desain.ptsma.tgl.Jul2026">Jul 2026</span></b><span data-i18n="desain.ptsma.sq.g.5">Revamp landing page QRIS Statis2Dinamis (LPQris).</span></li></ul><div class="ps-aksi"><a class="ps-tombol" href="../lpqris/"><span data-i18n="desain.ptsma.sq.lp">Buka arsip LPQris →</span></a></div></section>
+<section class="ps-blok"><p class="ps-over"><span data-i18n="desain.ptsma.angka.over">Angka</span></p><h3 class="ps-h3"><span data-i18n="desain.ptsma.sq.angka.h">Hasil peluncuran</span></h3><div class="ps-angka"><div><strong>16 / 30</strong><span data-i18n="desain.ptsma.sq.a1" class="ps-ket">Merchant aktif dari merchant yang sudah onboarding pada masa peluncuran SQRIS.</span><span data-i18n="desain.ptsma.hasiltim" class="ps-lencana">hasil tim</span></div></div>
+<div class="ps-aksi"><a class="ps-tombol" href="../#case-4"><span data-i18n="desain.ptsma.lain.c4">Growth: SQRIS Soundbox →</span></a></div></section><div class="ps-aksi" style="margin-top:48px"><a class="ps-tombol" href="portfolio-single-ptsma.html"><span data-i18n="desain.ptsma.balik">← Kembali ke Ekosistem PT SMA</span></a></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="site-footer" style="background:#09090b;border-top:1px solid #1f1f23;padding:48px 0 32px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5 mb-4 mb-lg-0">
+          <h3 style="font-size:16px;font-weight:700;color:#fafafa;margin-bottom:12px;" data-i18n="desain.footer.title">Galeri Karya Desain &amp; Web — Maulana Gufron</h3>
+          <p style="color:#71717a;font-size:13px;line-height:1.6;max-width:380px;" data-i18n="desain.footer.desc">Koleksi karya desain visual, periklanan, identitas brand, dan situs web periode 2018–2026.</p>
+          <div style="margin-top:16px;">
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px;">
+            <a href="./#portfolio-section" style="color:#10b981;font-size:13px;font-weight:600;text-decoration:none;"><span data-i18n="desain.back.gallery">← Kembali ke Galeri Desain</span></a>
+            <a href="../#web" style="color:#71717a;font-size:12px;text-decoration:none;" data-i18n="desain.footer.hub">↗ Ke Hub Portofolio Utama</a>
+          </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-6 mb-4 mb-lg-0">
+          <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin-bottom:12px;" data-i18n="desain.footer.nav">Navigasi Halaman</h3>
+          <ul class="list-unstyled links" style="font-size:13px;">
+            <li style="margin-bottom:8px;"><a href="./#portfolio-section" style="color:#a1a1aa;text-decoration:none;" data-i18n="desain.footer.cat">Katalog Portofolio</a></li>
+            <li style="margin-bottom:8px;"><a href="./#skills-section" style="color:#a1a1aa;text-decoration:none;" data-i18n="desain.footer.skills">Keahlian Teknis</a></li>
+            <li style="margin-bottom:8px;"><a href="./#contact-section" style="color:#a1a1aa;text-decoration:none;" data-i18n="desain.footer.contact">Kontak &amp; Kolaborasi</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-6">
+          <h3 style="font-size:14px;font-weight:700;color:#e4e4e7;margin-bottom:12px;" data-i18n="desain.footer.conn">Koneksi Profesional</h3>
+          <ul class="list-unstyled links" style="font-size:13px;">
+            <li style="margin-bottom:8px;"><a href="https://www.linkedin.com/in/mmgufron/" target="_blank" style="color:#a1a1aa;text-decoration:none;" rel="noopener">LinkedIn Profile ↗</a></li>
+            <li style="margin-bottom:8px;"><a href="https://instagram.com/mmgufron" target="_blank" style="color:#a1a1aa;text-decoration:none;" rel="noopener">Instagram Kreatif ↗</a></li>
+            <li style="margin-bottom:8px;"><a href="https://wa.me/6281547287125?text=Halo%20Maulana%20Gufron%2C%20saya%20tertarik%20dengan%20karya%20desain%20Anda%20dan%20ingin%20berdiskusi%20lebih%20lanjut." target="_blank" style="color:#10b981;text-decoration:none;" rel="noopener"><span data-i18n="desain.wa.direct">WhatsApp Direct ↗</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-12 text-center">
+          <p class="mb-0" style="color:#71717a;font-size:12px;">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Desain oleh <a href="https://www.linkedin.com/in/mmgufron/" target="_blank" style="color:#a1a1aa;" rel="noopener">mmgufron</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div> <!-- /.site-footer -->
+
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.fancybox.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/wave-animate.js"></script>
+  <script src="js/circle-progress.js"></script>
+  <script src="js/imagesloaded.pkgd.js"></script>
+  <script src="js/isotope.pkgd.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/TweenMax.min.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/scrollmagic.animation.gsap.min.js"></script>
+
+
+  <script src="js/custom.js"></script>
+  
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/kembali.js"></script>
+</body>
+
+</html>

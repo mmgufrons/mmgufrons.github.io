@@ -656,7 +656,7 @@
             <span data-i18n="card.simasrim.sub">Super App Logistik &amp; Bisnis Digital</span>
           </div>
         </a>
-        <a class="live-card" href="desain/portfolio-single-simasrim.html">
+        <a class="live-card" href="desain/portfolio-single-sqris.html">
           <span class="live-dot"></span>
           <div class="lc-body">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
@@ -666,7 +666,7 @@
             <span data-i18n="card.sqris.sub">Bikin QRIS Gratis Soundbox</span>
           </div>
         </a>
-        <a class="live-card" href="desain/portfolio-single-simasrim.html#ordermudah">
+        <a class="live-card" href="desain/portfolio-single-ptsma.html#ordermudah">
           <span class="live-dot"></span>
           <div class="lc-body">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
@@ -831,12 +831,12 @@
       <div class="design-grid">
 
         <div class="design-card">
-          <div class="design-thumb"><img src="desain/images/eko-simasrim_kartu.webp" alt="Ekosistem Web SIMASRIM" loading="lazy"></div>
+          <div class="design-thumb"><img src="desain/images/eko-simasrim_kartu.webp" alt="Ekosistem PT SMA" loading="lazy"></div>
           <div class="design-body">
             <span class="tag design" data-i18n="card.web.tag">Web App</span>
-            <h3>Ekosistem Web SIMASRIM</h3>
+            <h3>Ekosistem PT SMA</h3>
             <p data-i18n="desain.p.simasrim.desc">Tiga situs dalam satu ekosistem PT SMA: profil perusahaan Solusi Mitra Aplikasi, SIMASRIM (super-app logistik multi kurir, PPOB, tiket, dan kasir), serta SQRIS.id (QRIS dengan soundbox gratis). Saya kelola dan kembangkan agar pesan, tampilan, dan alur daftarnya selaras.</p>
-            <a class="cta secondary" href="desain/portfolio-single-simasrim.html" data-i18n="view.detail">Lihat Detail Karya</a>
+            <a class="cta secondary" href="desain/portfolio-single-ptsma.html" data-i18n="view.detail">Lihat Detail Karya</a>
           </div>
         </div>
 
@@ -1348,6 +1348,10 @@ function applyHashTab() {
     switchTab('business');
   } else if (h === '#growth' || h === '#marketing') {
     switchTab('growth');
+  } else if (/^#case-[1-6]$/.test(h)) {
+    // Tautan langsung ke studi kasus (dipakai halaman karya PT SMA): buka tab Growth lalu modalnya.
+    switchTab('growth');
+    openGrowthModal(Number(h.slice(6)));
   }
 }
 applyHashTab();
