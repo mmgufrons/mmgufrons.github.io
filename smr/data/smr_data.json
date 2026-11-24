@@ -4,7 +4,7 @@
     { "type": "whatsapp", "text": "Chat Admin (Demo)", "url": "https://wa.me/6280000000000" },
     { "type": "pembelian", "text": "Beli Pulsa & PPOB", "url": "#" },
     { "type": "daftar", "text": "Daftar Jadi Mitra", "url": "#" },
-    { "type": "default", "text": "Lacak Resi", "url": "#", "hoverColor": "bg-accent" },
+    { "type": "default", "text": "Lacak Resi", "url": "#" },
     { "type": "default", "text": "Syarat & Ketentuan", "url": "#" }
   ],
   "socials": [

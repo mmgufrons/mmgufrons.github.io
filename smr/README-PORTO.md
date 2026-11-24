@@ -8,3 +8,5 @@ Versi asli mengambil data lewat cURL langsung dari Firebase Realtime Database
 (`smsrm-lm-default-rtdb`), dengan fallback ke file lokal kalau Firebase kosong. Di versi porto ini,
 panggilan live **dihilangkan total** — `index.php` dipaksa selalu membaca dari file dummy lokal
 `data/smr_data.json` (link, nomor WA, dan sosial media semuanya data contoh).
+
+Tampilan memakai `assets/style.css` (Tailwind CDN dibuang 24 Nov 2026). `index.html` = arsip statis hasil render `index.php`; ubah PHP-nya lalu render ulang.
