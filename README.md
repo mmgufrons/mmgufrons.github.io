@@ -17,7 +17,7 @@ Portofolio digital interaktif Maulana Gufron yang merangkum rekam jejak profesio
 ### 1. 🚀 [Growth Marketing & Commercial Strategy](https://mmgufrons.github.io/growth/)
 Studi kasus pertumbuhan bisnis berbasis data, optimasi margin unit economics, dan akuisisi audiens:
 * **Toko Zoom (Zoom Group):** Analisis data penjualan Q1 3-segmen & identifikasi sweet spot alokasi stok laptop Ryzen 5/i5 512GB (mencegah dead stock), diperkuat 22 artikel SEO terindeks & 100+ katalog sales.
-* **Spot Kuliner & FJK:** Arsitektur komunitas kuliner publik Bogor (~117K pengikut aktif / arsip 2024 mencapai 122K), sistem komersial tenant (pitch deck, pricelist v1–v7, site plan), serta aktivasi sponsor Festival FJK ±Rp22 juta [Hasil Tim].
+* **Spot Kuliner & FJK:** Arsitektur komunitas kuliner publik Bogor (117K+ pengikut; puncak arsip 2024: 122K), sistem komersial tenant (pitch deck, pricelist v1–v7, site plan), serta aktivasi sponsor Festival FJK ±Rp22 juta [Hasil Tim].
 * **Stokmakan & FITCLEAN:** Optimasi margin laba bersih dari potongan komisi platform pesan-antar makanan, strategi bundling hemat vs jumbo, promo cashback 100%, serta rating 4.8★ GoFood (arsip 2024).
 * **SQRIS Soundbox:** Pilot peluncuran FinTech merchant GTM (16/30 merchant pilot aktif [Hasil Tim]), skema harga merchant, standarisasi SOP onboarding admin operasional, dan sales kit kasir.
 * **SIMASRIM B2B:** Integrasi jaringan ekspedisi logistik 1 → 14+ mitra aktif, penanganan 208 tugas kemitraan di SMA-OS, serta vibe coding scraper direktori legal 435 koperasi KDKMP Bogor.
@@ -38,7 +38,7 @@ Sinergi ekosistem kemitraan komersial dan rekayasa otomasi sistem operasional:
 
 ### 3. 🎨 [Creative & Visual Design](https://mmgufrons.github.io/desain/)
 Arsitektur identitas visual korporat, kemasan produk kuliner, dan periklanan:
-* **PT SAN (SANCorp):** Identitas visual dan materi bisnis untuk 17 klien korporat/bisnis (Des 2022 – Feb 2023) serta panduan brand SANCorp (17+1 bagian).
+* **PT SAN (SANCorp):** Identitas visual dan materi bisnis untuk 17 klien korporat/bisnis (Des 2022 – Apr 2023) serta panduan brand SANCorp (17+1 bagian).
 * **Showcase Brand UMKM & F&B:** Vilook, RM Simpang Bandara, Kasmaranid (freelance hingga 5 brand aktif), Gradasi 19 & 20 (Event alumni SMA), dan Ratunya KebabBurger.
 * **Prestasi Tingkat Nasional:** Juara 1 Lomba Desain Poster Nasional (Universitas Semarang, 2020) & Juara 1 Cepat Tepat Konservasi Olimpiade Lingkungan (IPB University, 2015).
 
