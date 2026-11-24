@@ -554,6 +554,8 @@ var loadPortfolioSinglePage = function(id, href) {
 				'<div id="portfolio-single-'+id+
 				'" class="portfolio-single-inner"><span class="unslate_co--close-portfolio js-close-portfolio d-flex align-items-center"><span class="icon-close2 wrap-icon-close"></span></span>' + getHTMLContent + '</div>'
 				);
+			// Isi yang baru dimuat belum diterjemahkan: terapkan ulang bahasa pilihan pengunjung.
+			if (window.setLanguage && window.getSavedLanguage) window.setLanguage(window.getSavedLanguage());
 
 			setTimeout(function() {
 				owlSingleSlider();
