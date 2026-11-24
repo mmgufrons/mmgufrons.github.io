@@ -108,9 +108,9 @@ function renderVisualTimeline(todayTasks) {
         <div class="relative h-5 bg-[#121212] rounded overflow-hidden border border-[#2a2a2a] w-full shadow-inner">
             ${html}
         </div>
-        <div class="flex justify-between text-[9px] text-gray-500 mt-2 font-bold uppercase tracking-wider">
+        <div class="flex flex-wrap justify-between gap-x-4 gap-y-2 text-[9px] text-gray-500 mt-2 font-bold uppercase tracking-wider">
             <span>Mulai: ${tIn}</span>
-            <div class="flex gap-3 text-gray-600">
+            <div class="flex flex-wrap gap-x-3 gap-y-1 text-gray-600 order-last sm:order-none w-full sm:w-auto">
                 <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Rencana</span>
                 <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Selesai</span>
                 <span class="flex items-center gap-1 cursor-pointer hover:text-amber-400 transition" onclick="openTodayBreakModal()"><span class="w-2 h-2 rounded-full bg-amber-500/50"></span> Istirahat <i class="fa-solid fa-pencil text-[8px] ml-1"></i></span>
@@ -169,7 +169,7 @@ function renderTodayView(c) {
 
     c.innerHTML = `
     ${renderVisualTimeline(allTodayTasks)}
-    <div class="grid grid-cols-3 gap-3 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
 
         <div onclick="showStatDetails('todo')" class="card-bg p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-[#252526] transition shadow-sm border-t-2 border-t-gray-500 card-hover">
             <div><p class="text-[9px] text-gray-500 uppercase font-bold">Akan Dikerjakan</p><h3 class="text-2xl font-bold text-white mt-1" id="statTodo">0</h3></div>

@@ -7,7 +7,7 @@
      • Navigation     → Network-First → Cache Fallback → offline.html
    ============================================================ */
 
-const CACHE_NAME    = 'simasrim-os-v10.3';
+const CACHE_NAME    = 'simasrim-os-v10.4';
 const OFFLINE_URL   = 'offline.html';
 
 // Assets to pre-cache on install (paths relative to sw.js location)
@@ -47,7 +47,8 @@ const PRECACHE_URLS = [
     // CDN (Font Awesome, Google Fonts) — best-effort
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
     'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
-    'https://cdn.tailwindcss.com'
+    './assets/css/tailwind.css',
+    './assets/css/app.css'
 ];
 
 // ── INSTALL ──────────────────────────────────────────────────

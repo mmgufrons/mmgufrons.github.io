@@ -27,3 +27,14 @@ otomatis mencocokkan ke salah satu user dummy di `data/dummy-seed.json`. Contoh:
 
 Perubahan data (tugas, catatan, chat, dsb) tersimpan di `localStorage` browser masing-masing
 pengunjung — reset otomatis jika `localStorage` dikosongkan atau dibuka via mode incognito.
+
+## Gaya tampilan (Tailwind lokal)
+Tailwind **tidak** lagi diambil dari CDN. `assets/css/tailwind.css` adalah hasil kompilasi Tailwind v3.4.17
+dari kelas yang dipakai di `index.html`, `offline.html`, dan `js/` (hover hanya untuk mouse/trackpad).
+Bila menambah kelas Tailwind baru di `js/`, bangun ulang (konfigurasi ada di `off/sources/porto-bahan/sma-tailwind/`):
+
+```
+npx -y tailwindcss@3.4.17 -c tailwind.config.js -i in.css -o out.css --minify
+```
+lalu salin `out.css` ke `assets/css/tailwind.css`. Berkas ini dimuat paling akhir di `<head>` (setelah app.css),
+sama seperti CDN dulu, supaya kelas utilitas menang.

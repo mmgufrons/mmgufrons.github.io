@@ -17,10 +17,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (lokal, dikompilasi) — dimuat SETELAH app.css seperti CDN dulu, supaya utilitas menang -->
     
     <!-- Custom Application CSS -->
-    <link rel="stylesheet" href="assets/css/app.css?v=10.2.1">
+    <link rel="stylesheet" href="assets/css/app.css?v=10.4">
 
     <style>
         .lang-btn.active {
@@ -30,6 +30,7 @@
         }
     </style>
 
+    <link rel="stylesheet" href="assets/css/tailwind.css?v=10.4">
 </head>
 <body class="h-screen flex overflow-hidden text-sm">
 
@@ -148,9 +149,9 @@
                 </div>
             </div>
             <!-- Quick Demo Switcher -->
-            <div class="mt-2.5 pt-2 border-t border-[#252525] flex items-center justify-between">
-                <span class="text-[9.5px] text-gray-400 font-medium" data-i18n="sma.sidebar.role.label">Akun Demo:</span>
-                <button type="button" onclick="window.switchDemoRole()" id="btnSwitchRole" class="text-[10px] bg-violet-950/70 hover:bg-violet-800 text-violet-300 hover:text-white border border-violet-700/50 px-2 py-0.5 rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm" title="Ganti antara SuperAdmin dan Staff">
+            <div class="mt-2.5 pt-2 border-t border-[#252525] flex flex-col items-stretch gap-2">
+                <span class="text-[9.5px] text-gray-400 font-medium whitespace-nowrap shrink-0" data-i18n="sma.sidebar.role.label">Akun Demo:</span>
+                <button type="button" onclick="window.switchDemoRole()" id="btnSwitchRole" class="text-[10px] bg-violet-950/70 hover:bg-violet-800 text-violet-300 hover:text-white border border-violet-700/50 px-3 min-h-[44px] w-full justify-center rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap" title="Ganti antara SuperAdmin dan Staff">
                     <i class="fa-solid fa-repeat text-[9px]"></i> <span id="btnSwitchRoleText">Ganti Akun</span>
                 </button>
             </div>
@@ -290,49 +291,50 @@
     <!-- MAIN CONTENT -->
     <!-- ============================================================ -->
     <main class="flex-1 min-w-0 flex flex-col relative bg-[#0f0f0f] w-full h-full">
-        <header class="h-14 border-b border-[#2a2a2a] flex items-center justify-between px-4 md:px-6 bg-[#0f0f0f] sticky top-0 z-20 shadow-sm">
-            <div class="flex items-center gap-3">
-                <button onclick="toggleSidebar()" class="md:hidden text-gray-300 hover:text-white"><i class="fa-solid fa-bars text-lg"></i></button>
-                <h2 id="pageTitle" class="font-bold text-white uppercase tracking-widest text-xs md:text-sm" data-i18n="sma.topbar.today.title">Dasbor Hari Ini</h2>
+        <header class="h-16 border-b border-[#2a2a2a] flex items-center justify-between gap-3 px-4 md:px-6 bg-[#0f0f0f] sticky top-0 z-20 shadow-sm">
+            <div class="flex items-center gap-3 shrink-0">
+                <button onclick="toggleSidebar()" aria-label="Buka menu" class="md:hidden w-11 h-11 -ml-2 flex items-center justify-center text-gray-300 hover:text-white"><i class="fa-solid fa-bars text-lg"></i></button>
+                <h2 id="pageTitle" class="font-bold text-white uppercase tracking-widest text-xs md:text-sm leading-tight max-w-[8rem] md:max-w-none" data-i18n="sma.topbar.today.title">Dasbor Hari Ini</h2>
             </div>
-            <div class="flex items-center gap-3 md:gap-4">
+            <!-- Di HP deretan tombol bisa digeser ke samping, tidak terpotong -->
+            <div class="flex items-center gap-2 xl:gap-4 min-w-0 overflow-x-auto py-1 topbar-scroll [&>*]:shrink-0">
                 <div id="topbar-workload" class="hidden md:flex flex-col items-end">
                     <span class="text-[10px] font-bold text-gray-400" id="loadBarText" data-i18n="sma.topbar.workload.text">0 / 8 Jam</span>
                     <div class="w-24 bg-gray-800 h-1.5 rounded-full mt-1">
                         <div id="loadBar" class="bg-violet-500 h-1.5 rounded-full transition-all"></div>
                     </div>
                 </div>
-                <span class="text-xs text-gray-600 hidden md:inline border-r border-[#333] pr-4 h-5 leading-5" id="currentDateDisplay">...</span>
+                <span class="text-xs text-gray-600 hidden xl:inline border-r border-[#333] pr-4 h-5 leading-5" id="currentDateDisplay">...</span>
                 <button onclick="document.getElementById('searchModal').classList.remove('hidden'); setTimeout(function(){document.getElementById('searchInput').focus();}, 100);"
-                    class="w-9 h-9 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-gray-400 hover:text-white hover:border-violet-500 transition">
+                    class="w-11 h-11 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-gray-400 hover:text-white hover:border-violet-500 transition">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
                 <div class="inline-flex items-center gap-1 bg-[#1a1a1a] border border-[#333] rounded-full p-1">
-                    <button type="button" class="lang-btn px-2.5 py-1 rounded-full text-[10px] font-bold text-gray-400 hover:text-white transition" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
+                    <button type="button" class="lang-btn px-3 min-h-[36px] rounded-full text-[10px] font-bold text-gray-400 hover:text-white transition" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
                     <span class="text-gray-600 text-[10px]">|</span>
-                    <button type="button" class="lang-btn px-2.5 py-1 rounded-full text-[10px] font-bold text-gray-400 hover:text-white transition" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
+                    <button type="button" class="lang-btn px-3 min-h-[36px] rounded-full text-[10px] font-bold text-gray-400 hover:text-white transition" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
                 </div>
-                <button onclick="toggleTheme()" id="themeToggleBtn" title="Ganti Tema" class="w-9 h-9 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-gray-400 hover:text-white hover:border-violet-500 transition">
+                <button onclick="toggleTheme()" id="themeToggleBtn" title="Ganti Tema" class="w-11 h-11 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-gray-400 hover:text-white hover:border-violet-500 transition">
                     <i class="fa-solid fa-sun" id="themeIcon"></i>
                 </button>
                 <!-- Envelope: Pesan Internal (chat langsung antar orang) -->
                 <div class="relative" id="msgBtnWrap">
-                    <button onclick="toggleDropdown('messageModal'); if(!document.getElementById('messageModal').classList.contains('hidden') && typeof renderMessages==='function') renderMessages();" class="w-9 h-9 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-gray-400 hover:text-emerald-400 hover:border-emerald-500 transition">
+                    <button onclick="toggleDropdown('messageModal'); if(!document.getElementById('messageModal').classList.contains('hidden') && typeof renderMessages==='function') renderMessages();" class="w-11 h-11 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-gray-400 hover:text-emerald-400 hover:border-emerald-500 transition">
                         <i class="fa-solid fa-envelope"></i>
                     </button>
                     <span id="messageBadge" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow border border-red-800">0</span>
                 </div>
                 <!-- Bell: Kotak Masuk sistem (notif otomatis delegasi/sistem) -->
                 <div class="relative" id="inboxBtnWrap">
-                    <button onclick="toggleDropdown('inboxModal'); if(!document.getElementById('inboxModal').classList.contains('hidden') && typeof renderInbox==='function') renderInbox();" class="w-9 h-9 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-gray-400 hover:text-yellow-400 hover:border-yellow-500 transition">
+                    <button onclick="toggleDropdown('inboxModal'); if(!document.getElementById('inboxModal').classList.contains('hidden') && typeof renderInbox==='function') renderInbox();" class="w-11 h-11 rounded-full bg-[#1a1a1a] border border-[#333] flex items-center justify-center text-gray-400 hover:text-yellow-400 hover:border-yellow-500 transition">
                         <i class="fa-solid fa-bell"></i>
                     </button>
                     <span id="inboxCount" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow border border-red-800">0</span>
                 </div>
-                <button id="btn-delegate-task" onclick="openTaskModal(null, '', 'task', true)" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white px-3 md:px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg shadow-emerald-900/20 flex items-center gap-2">
+                <button id="btn-delegate-task" onclick="openTaskModal(null, '', 'task', true)" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white px-3 md:px-4 min-h-[44px] rounded-lg text-xs font-bold transition shadow-lg shadow-emerald-900/20 flex items-center gap-2">
                     <i class="fa-solid fa-share-nodes"></i> <span class="hidden md:inline" data-i18n="sma.topbar.delegate">BAGI TASK</span>
                 </button>
-                <button id="btn-new-task" onclick="openTaskModal()" class="bg-violet-600 hover:bg-violet-500 text-white px-3 md:px-4 py-2 rounded-lg text-xs font-bold transition shadow-lg shadow-violet-900/20 flex items-center gap-2">
+                <button id="btn-new-task" onclick="openTaskModal()" class="bg-violet-600 hover:bg-violet-500 text-white px-3 md:px-4 min-h-[44px] rounded-lg text-xs font-bold transition shadow-lg shadow-violet-900/20 flex items-center gap-2">
                     <i class="fa-solid fa-plus"></i> <span class="hidden md:inline" data-i18n="sma.topbar.newtask">INPUT BARU</span>
                 </button>
             </div>
@@ -829,14 +831,14 @@
     <script src="js/firebase-config.js?v=10.2"></script>
     <script src="js/utils.js?v=10.2"></script>
     <script src="js/state.js?v=10.2"></script>
-    <script src="js/auth.js?v=10.3.9"></script>
+    <script src="js/auth.js?v=10.4"></script>
     <script src="js/engine.js?v=10.2.1"></script>
     <script src="js/modals.js?v=10.2.5"></script>
     <script src="js/stats.js?v=10.3.9"></script>
     <script src="js/export.js?v=10.2.1"></script>
     
     <!-- Views -->
-    <script src="js/views/today.js?v=10.3.9"></script>
+    <script src="js/views/today.js?v=10.4"></script>
     <script src="js/views/meeting.js?v=10.3.2"></script>
     <script src="js/views/board.js?v=10.3.4"></script>
     <script src="js/views/calendar.js?v=10.3.2"></script>
