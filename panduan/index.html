@@ -29,7 +29,7 @@
     font-size:13px; font-weight:600;
   }
   .top-nav a{ color:var(--muted); text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:color .2s; }
-  .top-nav a:hover{ color:var(--text); }
+  @media (hover:hover) and (pointer:fine){ .top-nav a:hover{ color:var(--text); } }
   .top-nav .sep{ color:#3f3f46; }
   .top-nav .current{ color:var(--text); }
   header{
@@ -52,13 +52,13 @@
     display:flex; flex-direction:column; gap:12px; background:var(--panel);
     border:1px solid var(--border); border-radius:18px; padding:24px 22px;
     text-decoration:none; color:var(--text);
-    transition:all .28s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:transform 320ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease, box-shadow 320ms ease;
     box-shadow:var(--shadow-card);
   }
-  .role-card:hover{
+  @media (hover:hover) and (pointer:fine){ .role-card:hover{
     transform:translateY(-5px); border-color:var(--border-hover);
     box-shadow:var(--shadow-hover);
-  }
+  } }
   .role-icon{
     width:46px; height:46px; border-radius:14px; background:rgba(99,102,241,0.12);
     border:1px solid rgba(99,102,241,0.25); display:flex; align-items:center;
@@ -78,12 +78,29 @@
     cursor:pointer; transition:all .2s ease;
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
   }
-  .lang-btn:hover{ color:#fff; }
+  @media (hover:hover) and (pointer:fine){ .lang-btn:hover{ color:#fff; } }
   .lang-btn.active{
     background:#27272a; color:#fff; border:1px solid #3f3f46;
     box-shadow:0 2px 8px rgba(0,0,0,0.3);
   }
 
+  .role-card:focus-visible,.shot a:focus-visible,.top-nav a:focus-visible,.lang-btn:focus-visible{ outline:2px solid #a5b4fc; outline-offset:4px; }
+  .role-card:active{ transform:scale(0.97); transition-duration:120ms; }
+  .meta{ text-align:center; color:var(--muted); font-size:14px; line-height:1.6; margin:0 0 32px; }
+  .arsip{ margin-top:64px; }
+  .arsip h2{ margin:0 0 8px; font-size:clamp(22px,3vw,28px); font-weight:800; letter-spacing:-0.02em; }
+  .arsip-ket{ margin:0 0 32px; color:var(--muted); font-size:16px; line-height:1.6; max-width:640px; }
+  .shot{ margin:0 0 32px; scroll-margin-top:24px; }
+  .shot img{ display:block; width:100%; height:auto; border-radius:12px; border:1px solid var(--border); background:var(--panel); }
+  .shot figcaption{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; margin-top:8px; color:var(--muted); font-size:14px; line-height:1.6; }
+  .shot figcaption strong{ color:var(--text); }
+  .shot figcaption a{ margin-left:auto; display:inline-flex; align-items:center; min-height:44px; color:#a5b4fc; text-decoration:none; font-weight:600; }
+  .shot-duo{ display:grid; grid-template-columns:1fr; gap:24px; margin-bottom:32px; }
+  .shot-duo .shot{ margin-bottom:0; }
+  .shot-hp img{ max-width:280px; margin:0 auto; }
+  @media (min-width:768px){ .shot-duo{ grid-template-columns:3fr 1fr; align-items:start; } .shot-hp img{ max-width:none; } }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } .role-card{ transition:none; } .role-card:hover,.role-card:active{ transform:none; } }
 </style>
 </head>
 <body>
@@ -104,42 +121,79 @@
 <header>
   <div class="badge" data-i18n="guide.badge">Dokumentasi SOP &amp; Modul Operasional</div>
   <h1 data-i18n="guide.title">Dokumen Panduan SIMASRIM</h1>
-  <p data-i18n="guide.subtitle">Kompilasi panduan teknis dan alur operasional SIMASRIM yang distrukturkan per peran pengguna. Pilih modul peran untuk mengakses dokumentasi resmi.</p>
+  <p data-i18n="guide.subtitle">Kompilasi panduan teknis dan alur operasional SIMASRIM yang distrukturkan per peran pengguna. Pilih peran untuk melihat arsipnya.</p>
 </header>
 
 <main>
+  <p class="meta" data-i18n="guide.meta">Periode pengerjaan: Sep 2024 – Jun 2026 · konversi PDF ke HTML (Jul 2025) · halaman panduan dinamis (Jun 2026)</p>
   <div class="grid">
-    <a class="role-card" href="https://docs.simasrim.com/47b87a54-5442-4d95-872d-2824a7f4fd5b/" target="_blank" rel="noopener">
-      <div class="role-icon">🧑‍💼</div>
+    <a class="role-card" href="#arsip-agen">
+      <div class="role-icon" aria-hidden="true">🧑‍💼</div>
       <h3 data-i18n="guide.role.agent">Agen</h3>
       <span data-i18n="guide.role.agent.desc">Panduan operasional untuk agen SIMASRIM.</span>
-      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
+      <span class="go" data-i18n="guide.view">Lihat arsip ↓</span>
     </a>
-    <a class="role-card" href="https://docs.simasrim.com/53b8f03d-66ee-46a8-94fc-ac7338e03948/" target="_blank" rel="noopener">
-      <div class="role-icon">🛍️</div>
+    <a class="role-card" href="#arsip-seller">
+      <div class="role-icon" aria-hidden="true">🛍️</div>
       <h3 data-i18n="guide.role.seller">Seller</h3>
       <span data-i18n="guide.role.seller.desc">Panduan untuk penjual/mitra seller.</span>
-      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
+      <span class="go" data-i18n="guide.view">Lihat arsip ↓</span>
     </a>
-    <a class="role-card" href="https://docs.simasrim.com/76e9ef88-742c-46f8-af58-e924e34c5f9c/" target="_blank" rel="noopener">
-      <div class="role-icon">🏢</div>
+    <a class="role-card" href="#arsip-b2b">
+      <div class="role-icon" aria-hidden="true">🏢</div>
       <h3 data-i18n="guide.role.b2b">B2B's User</h3>
       <span data-i18n="guide.role.b2b.desc">Panduan untuk pengguna korporat/B2B.</span>
-      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
+      <span class="go" data-i18n="guide.view">Lihat arsip ↓</span>
     </a>
-    <a class="role-card" href="https://docs.simasrim.com/6b5c3e7a-8f1d-4c9b-a0e2-d4f8c12e3f5a/" target="_blank" rel="noopener">
-      <div class="role-icon">📱</div>
+    <a class="role-card" href="#arsip-mobile">
+      <div class="role-icon" aria-hidden="true">📱</div>
       <h3 data-i18n="guide.role.mobile">Mobile</h3>
       <span data-i18n="guide.role.mobile.desc">Panduan aplikasi mobile versi terbaru.</span>
-      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
+      <span class="go" data-i18n="guide.view">Lihat arsip ↓</span>
     </a>
-    <a class="role-card" href="https://docs.simasrim.com/1c2e4f5a-3d7b-9c8a-6b5c-2d1e7a3f8c/" target="_blank" rel="noopener">
-      <div class="role-icon">📲</div>
+    <a class="role-card" href="#arsip-mobilev1">
+      <div class="role-icon" aria-hidden="true">📲</div>
       <h3 data-i18n="guide.role.mobile_v1">Mobile (v1)</h3>
       <span data-i18n="guide.role.mobile_v1.desc">Panduan aplikasi mobile versi sebelumnya.</span>
-      <span class="go" data-i18n="guide.open">Buka Dokumen →</span>
+      <span class="go" data-i18n="guide.view">Lihat arsip ↓</span>
     </a>
   </div>
+
+  <section class="arsip" aria-labelledby="arsip-judul">
+    <h2 id="arsip-judul" data-i18n="guide.archive.title">Arsip tangkapan layar</h2>
+    <p class="arsip-ket" data-i18n="guide.archive.note">Diambil 24 Nov 2026 dari docs.simasrim.com. Versi terkini dikelola tim PT SMA, jadi isinya bisa sudah berubah.</p>
+
+    <figure class="shot" id="arsip-agen">
+      <img src="img/agen.webp" width="1200" height="750" loading="lazy" alt="Beranda Panduan Agen SIMASRIM: kolom cari topik dan kartu Memulai, Pengiriman, PPOB">
+      <figcaption><strong data-i18n="guide.role.agent">Agen</strong> <span data-i18n="guide.cap.home">Beranda panduan</span> <a href="https://docs.simasrim.com/47b87a54-5442-4d95-872d-2824a7f4fd5b/" target="_blank" rel="noopener" data-i18n="guide.live">Versi terkini (tim PT SMA) ↗</a></figcaption>
+    </figure>
+    <div class="shot-duo">
+      <figure class="shot">
+        <img src="img/agen-isi.webp" width="1200" height="750" loading="lazy" alt="Halaman isi Panduan Pengiriman JNE: menu samping dan 6 langkah proses pengiriman">
+        <figcaption><strong data-i18n="guide.role.agent">Agen</strong> <span data-i18n="guide.cap.page">Halaman isi: alur pengiriman JNE</span></figcaption>
+      </figure>
+      <figure class="shot shot-hp">
+        <img src="img/agen-hp.webp" width="390" height="844" loading="lazy" alt="Panduan Agen SIMASRIM di layar HP">
+        <figcaption><strong data-i18n="guide.role.agent">Agen</strong> <span data-i18n="guide.cap.hp">Tampilan HP</span></figcaption>
+      </figure>
+    </div>
+    <figure class="shot" id="arsip-seller">
+      <img src="img/seller.webp" width="1200" height="750" loading="lazy" alt="Beranda Panduan Seller SIMASRIM dengan kartu Memulai, Pengiriman, PPOB, Tiket, Manajemen Akun, FAQ">
+      <figcaption><strong data-i18n="guide.role.seller">Seller</strong> <span data-i18n="guide.cap.home">Beranda panduan</span> <a href="https://docs.simasrim.com/53b8f03d-66ee-46a8-94fc-ac7338e03948/" target="_blank" rel="noopener" data-i18n="guide.live">Versi terkini (tim PT SMA) ↗</a></figcaption>
+    </figure>
+    <figure class="shot" id="arsip-b2b">
+      <img src="img/b2b.webp" width="1200" height="750" loading="lazy" alt="Beranda Panduan B2B SIMASRIM">
+      <figcaption><strong data-i18n="guide.role.b2b">B2B's User</strong> <span data-i18n="guide.cap.home">Beranda panduan</span> <a href="https://docs.simasrim.com/76e9ef88-742c-46f8-af58-e924e34c5f9c/" target="_blank" rel="noopener" data-i18n="guide.live">Versi terkini (tim PT SMA) ↗</a></figcaption>
+    </figure>
+    <figure class="shot" id="arsip-mobile">
+      <img src="img/mobile.webp" width="1200" height="750" loading="lazy" alt="Beranda Panduan aplikasi mobile SIMASRIM versi terbaru">
+      <figcaption><strong data-i18n="guide.role.mobile">Mobile</strong> <span data-i18n="guide.cap.home">Beranda panduan</span> <a href="https://docs.simasrim.com/6b5c3e7a-8f1d-4c9b-a0e2-d4f8c12e3f5a/" target="_blank" rel="noopener" data-i18n="guide.live">Versi terkini (tim PT SMA) ↗</a></figcaption>
+    </figure>
+    <figure class="shot" id="arsip-mobilev1">
+      <img src="img/mobilev1.webp" width="1200" height="750" loading="lazy" alt="Panduan aplikasi mobile SIMASRIM versi 1: halaman Kata Pengantar dengan menu samping">
+      <figcaption><strong data-i18n="guide.role.mobile_v1">Mobile (v1)</strong> <span data-i18n="guide.cap.intro">Halaman Kata Pengantar</span> <a href="https://docs.simasrim.com/1c2e4f5a-3d7b-9c8a-6b5c-2d1e7a3f8c/" target="_blank" rel="noopener" data-i18n="guide.live">Versi terkini (tim PT SMA) ↗</a></figcaption>
+    </figure>
+  </section>
 </main>
 
 <script src="../assets/js/i18n.js"></script>
