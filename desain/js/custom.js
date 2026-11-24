@@ -299,14 +299,31 @@ $(function(){
 			});
 		});
 
-		$container.isotope({ filter: '*' });
+		// Tautan "lihat semua" dari tiap tab hub membawa hash (#web, #brand, #konten, #kreatif)
+		// supaya galeri langsung tersaring sesuai bagian asalnya, bukan "Semua".
+		var hashFilter = { web: ['.f-web'], brand: ['.f-brand'], konten: ['.f-konten'], kreatif: ['.f-brand', '.f-konten'] };
+		var applyFilter = function(list) {
+			$container.isotope({ filter: list.join(', ') });
+			$('#filters a').removeClass('active').attr('aria-pressed', 'false');
+			$('#filters a').filter(function() { return list.indexOf($(this).attr('data-filter')) > -1; })
+				.addClass('active').attr('aria-pressed', 'true');
+		};
+		var awal = hashFilter[(window.location.hash || '').replace('#', '').toLowerCase()];
+		applyFilter(awal || ['*']);
+		$(window).on('hashchange', function() {
+			var f = hashFilter[(window.location.hash || '').replace('#', '').toLowerCase()];
+			if (f) applyFilter(f);
+		});
 
 		$('#filters').on( 'click', 'a', function(e) {
 			e.preventDefault();
 			var filterValue = $(this).attr('data-filter');
-			$container.isotope({ filter: filterValue });
-			$('#filters a').removeClass('active').attr('aria-pressed', 'false');
-			$(this).addClass('active').attr('aria-pressed', 'true');
+			applyFilter([filterValue]);
+			// Simpan pilihan di alamat supaya bisa dibagikan/di-refresh tanpa hilang.
+			var kunci = { '.f-web': '#web', '.f-brand': '#brand', '.f-konten': '#konten' }[filterValue];
+			if (window.history && history.replaceState) {
+				history.replaceState(null, '', kunci || window.location.pathname + window.location.search);
+			}
 		});
 
 		$container.imagesLoaded()

@@ -109,7 +109,7 @@
       'card.rk.desc': 'Proyek freelance kemasan & cetak: desain kemasan makanan, spanduk promosi, dan materi outlet kuliner.',
       'card.san.tag': 'Corporate Identity',
       'card.san.desc': 'Identitas visual & materi bisnis untuk 17 klien korporat/UMKM (Des 2022 – Feb 2023), serta rebrand SANCorp (brand guidelines 17+1 bagian).',
-      'btn.classic.gallery': 'Buka Galeri Karya Desain & Web Lengkap ↗',
+      'btn.classic.gallery': 'Lihat Semua Karya Kreatif di Galeri ↗',
 
       // Awards
       'award.nat.badge': 'Tingkat Nasional',
@@ -959,7 +959,7 @@
       'card.rk.desc': 'Freelance packaging & print project: food packaging design, promo banners, and culinary outlet print collateral.',
       'card.san.tag': 'Corporate Identity',
       'card.san.desc': 'Visual identity & business collateral for 17 corporate/SME clients (Dec 2022 – Feb 2023), plus SANCorp rebranding (17+1 brand guidelines).',
-      'btn.classic.gallery': 'Open Complete Design & Web Gallery ↗',
+      'btn.classic.gallery': 'See All Creative Work in the Gallery ↗',
 
       // Awards
       'award.nat.badge': 'National Level',
