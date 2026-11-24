@@ -122,6 +122,8 @@
   main{ max-width:1180px; margin:0 auto; padding:0 24px 80px; }
   .case-list{ display:flex; flex-direction:column; gap:36px; }
 
+  .case-card{scroll-margin-top:80px}
+
   .case-card{
     background:var(--panel); border:1px solid var(--border); border-radius:20px;
     padding:32px; display:flex; flex-direction:column; gap:20px;
@@ -277,7 +279,7 @@
   <div class="case-list">
 
     <!-- Case 1: Toko Zoom -->
-    <article class="case-card" data-category="analytics">
+    <article id="case-zoom" class="case-card" data-category="analytics">
       <div class="case-header">
         <div class="case-meta">
           <span class="case-tag analytics" data-i18n="growth.c1.tag">Commercial Analytics</span>
@@ -323,7 +325,7 @@
     </article>
 
     <!-- Case 2: Spot Kuliner & FJK -->
-    <article class="case-card" data-category="community">
+    <article id="case-spotkuliner" class="case-card" data-category="community">
       <div class="case-header">
         <div class="case-meta">
           <span class="case-tag community" data-i18n="growth.c2.tag">Community &amp; KOL Strategy</span>
@@ -369,7 +371,7 @@
     </article>
 
     <!-- Case 3: Stokmakan & FITCLEAN -->
-    <article class="case-card" data-category="margin">
+    <article id="case-wrc" class="case-card" data-category="margin">
       <div class="case-header">
         <div class="case-meta">
           <span class="case-tag margin" data-i18n="growth.c3.tag">Unit Economics &amp; Margin</span>
