@@ -1933,7 +1933,10 @@
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (dict[key] !== undefined) {
-        el.innerHTML = dict[key];
+        // Teks beranimasi (gsap-reveal) dibungkus .reveal-content dan induknya ber-line-height 0;
+        // menimpa induknya membuang bungkus itu sehingga baris teks bertumpuk. Tulis ke dalam bungkusnya.
+        const target = el.querySelector(':scope > .reveal-wrap > .reveal-content') || el;
+        target.innerHTML = dict[key];
       }
     });
 
