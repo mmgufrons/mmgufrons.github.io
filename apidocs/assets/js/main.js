@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const id = dataEl.dataset.id || '';
         const pw = dataEl.dataset.pw || '';
         const hasCreds = id !== '' || pw !== '';
+        // Kartu "Segera Hadir": tetap bisa disentuh untuk membaca keterangan, tapi tidak membuka apa pun
+        const nonaktif = card.getAttribute('aria-disabled') === 'true';
 
         let contentHtml = `
             <div class="tt-title">${title}</div>
@@ -37,8 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             contentHtml += `</div>`;
             contentHtml += `<div class="tt-instruction"><i class="ph-bold ph-cursor-click"></i> Klik icon untuk copy otomatis & buka link</div>`;
-        } else {
-            contentHtml += `<div class="tt-instruction" style="color: var(--accent-hover);"><i class="ph-bold ph-cursor-click"></i> Klik icon untuk buka link</div>`;
+        } else if (!nonaktif) {
+            contentHtml += `<div class="tt-instruction tt-buka"><i class="ph-bold ph-cursor-click"></i> Klik icon untuk buka link</div>`;
         }
 
         tippy(card, {
@@ -54,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Click handler for copying and opening
         card.addEventListener('click', (e) => {
             e.preventDefault(); // Prevent default link behavior initially
+            if (nonaktif) return;
             const targetUrl = card.getAttribute('href');
 
             if (hasCreds) {
@@ -64,15 +67,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     showToast(`Tersalin: ${textToCopy}`);
                     // Open link after short delay to allow toast to be seen
                     setTimeout(() => {
-                        window.open(targetUrl, '_blank');
+                        window.open(targetUrl, '_blank', 'noopener');
                     }, 300);
                 }).catch(err => {
                     console.error('Failed to copy', err);
-                    window.open(targetUrl, '_blank');
+                    window.open(targetUrl, '_blank', 'noopener');
                 });
             } else {
                 // Just open the link
-                window.open(targetUrl, '_blank');
+                window.open(targetUrl, '_blank', 'noopener');
             }
         });
     });

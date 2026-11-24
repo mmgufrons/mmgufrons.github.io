@@ -24,28 +24,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
     
     <style>
-        .api-card {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .api-card i {
-            margin-bottom: 0;
-            font-size: 2.5rem;
-        }
-        .api-card .region-code {
-            font-size: 1.1rem;
-        }
-        .disabled-card {
-            filter: grayscale(100%);
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        .disabled-card .region-code {
-            background: #94a3b8;
-            -webkit-text-fill-color: #94a3b8;
-        }
+        .api-card { display: flex; flex-direction: column; gap: var(--s-16); }
+        .api-card i { margin-bottom: 0; font-size: 2.5rem; }
+        .api-card .region-code { font-size: var(--fs-18); }
     </style>
 </head>
 <body>
@@ -57,7 +38,7 @@
     </div>
 
     <div class="container">
-        <header style="position: relative;">
+        <header>
             <h1>Dokumentasi API SIMASRIM</h1>
             <p>Pusat Integrasi & Pengembangan</p>
         </header>
@@ -67,8 +48,8 @@
                 <h2>Layanan API</h2>
                 <div class="icon-grid">
                     <!-- 1. PPOB -->
-                    <a href="https://documenter.getpostman.com/view/36962052/2sBY4HU49Z#cf30e1bd-8b3b-4626-b83d-0a3ae440957d" class="icon-card api-card" target="_blank">
-                        <i class="ph-light ph-plug"></i>
+                    <a href="https://documenter.getpostman.com/view/36962052/2sBY4HU49Z#cf30e1bd-8b3b-4626-b83d-0a3ae440957d" class="icon-card api-card" target="_blank" rel="noopener">
+                        <i class="ph-light ph-plug" aria-hidden="true"></i>
                         <span class="region-code">PPOB</span>
                         <div class="tooltip-data" 
                             data-title="API PPOB" 
@@ -76,8 +57,8 @@
                     </a>
 
                     <!-- 2. Tiket (Disabled) -->
-                    <a href="#" class="icon-card api-card disabled-card">
-                        <i class="ph-light ph-airplane-tilt"></i>
+                    <a class="icon-card api-card disabled-card" aria-disabled="true">
+                        <i class="ph-light ph-airplane-tilt" aria-hidden="true"></i>
                         <span class="region-code">Tiket</span>
                         <div class="tooltip-data" 
                             data-title="API Tiket" 
@@ -85,8 +66,8 @@
                     </a>
 
                     <!-- 3. Umroh (Disabled) -->
-                    <a href="#" class="icon-card api-card disabled-card">
-                        <i class="ph-light ph-mosque"></i>
+                    <a class="icon-card api-card disabled-card" aria-disabled="true">
+                        <i class="ph-light ph-mosque" aria-hidden="true"></i>
                         <span class="region-code">Umroh</span>
                         <div class="tooltip-data" 
                             data-title="API Umroh" 
@@ -96,8 +77,8 @@
             </section>
         </div>
 
-        <footer style="text-align: center; margin-top: 4rem; color: var(--text-muted); font-size: 0.9rem; padding-bottom: 2rem;">
-            <i class="ph-bold ph-copyright"></i> 2026 <a href="https://simasrim.com" target="_blank" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='inherit'">simasrim.com</a>
+        <footer class="kaki">
+            <i class="ph-bold ph-copyright" aria-hidden="true"></i> 2026 <a href="https://simasrim.com" target="_blank" rel="noopener">simasrim.com</a>
         </footer>
     </div>
 
