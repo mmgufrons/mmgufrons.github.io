@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
@@ -32,8 +32,16 @@
             --border: rgba(255, 255, 255, 0.06);
             --border-hover: rgba(88, 43, 140, 0.5);
             --text: #F0ECF8;
-            --text-muted: rgba(240, 236, 248, 0.5);
-            --text-subtle: rgba(240, 236, 248, 0.4);
+            --text-muted: rgba(240, 236, 248, 0.8);   /* ≥ 7:1 di latar gelap */
+            --text-subtle: rgba(240, 236, 248, 0.72);
+            --ungu-teks: #C084FC;                      /* ungu merek yang dicerahkan untuk teks kecil (AAA) */
+            --shopee-teks: #FF9B82;                    /* oranye Shopee dicerahkan untuk teks kecil (AAA) */
+            --gerak-cepat: 120ms;
+            --gerak-normal: 200ms;
+            --gerak-sedang: 320ms;
+            --gerak-lambat: 450ms;
+            --ease-keluar: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-masuk: cubic-bezier(0.7, 0, 0.84, 0);
             --font-body: 'Satoshi', sans-serif;
             --font-display: 'Clash Display', sans-serif;
         }
@@ -53,6 +61,8 @@
 
         body {
             font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.6;
             background-color: var(--bg);
             color: var(--text);
             min-height: 100vh;
@@ -74,9 +84,6 @@
             border-radius: 99px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--purple-light);
-        }
 
         /* ===== BACKGROUND EFFECTS — static, no animation for perf ===== */
         .bg-glow {
@@ -108,8 +115,9 @@
             left: 0;
             right: 0;
             z-index: 100;
-            padding: 1rem 2rem;
-            background: rgba(7, 5, 15, 0.7);
+            padding: 16px 32px;
+            padding-top: max(16px, env(safe-area-inset-top));
+            background: rgba(7, 5, 15, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
@@ -127,24 +135,24 @@
         }
 
         .nav-logo span {
-            color: var(--purple-light);
+            color: var(--ungu-teks);
         }
 
         .nav-badge {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
             font-size: 0.75rem;
             color: var(--text-muted);
             background: rgba(88, 43, 140, 0.15);
             border: 1px solid rgba(88, 43, 140, 0.3);
-            padding: 0.35rem 0.85rem;
+            padding: 4px 16px;
             border-radius: 99px;
         }
 
         .pulse-dot {
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             background: var(--green);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
@@ -182,24 +190,24 @@
         .hero-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 8px;
             background: rgba(88, 43, 140, 0.15);
             border: 1px solid rgba(88, 43, 140, 0.35);
             border-radius: 99px;
-            padding: 0.4rem 1.1rem;
-            font-size: 0.72rem;
+            padding: 8px 16px;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: #C084FC;
-            margin-bottom: 1.75rem;
+            margin-bottom: 24px;
         }
 
         .hero-title {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
-            line-height: 1.05;
+            line-height: 1.1;
             letter-spacing: -0.03em;
             margin-bottom: 1.5rem;
             color: #fff;
@@ -213,10 +221,10 @@
         }
 
         .hero-sub {
-            font-size: 1.05rem;
+            font-size: 1.125rem;
             color: var(--text-muted);
             max-width: 600px;
-            margin: 0 auto 2.5rem;
+            margin: 0 auto 48px;
             line-height: 1.75;
         }
 
@@ -224,19 +232,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.85rem;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            gap: 8px;
+            min-height: 48px;
+            padding: 8px 24px;
             border-radius: 99px;
             font-weight: 600;
-            font-size: 0.875rem;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: transform var(--gerak-cepat) var(--ease-keluar), box-shadow var(--gerak-normal) var(--ease-keluar), background-color var(--gerak-normal) var(--ease-keluar), border-color var(--gerak-normal) var(--ease-keluar);
+            -webkit-tap-highlight-color: transparent;
             cursor: pointer;
             text-decoration: none;
             border: none;
@@ -248,10 +258,6 @@
             box-shadow: 0 4px 24px rgba(88, 43, 140, 0.45);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(88, 43, 140, 0.65);
-        }
 
         .btn-ghost {
             background: rgba(255, 255, 255, 0.05);
@@ -259,9 +265,11 @@
             color: var(--text);
         }
 
-        .btn-ghost:hover {
-            background: rgba(88, 43, 140, 0.15);
-            border-color: var(--purple-light);
+        .btn:active { transform: scale(0.97); }
+
+        a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+            outline: 2px solid var(--ungu-teks);
+            outline-offset: 4px;
         }
 
         /* ===== SECTION HEADER ===== */
@@ -270,12 +278,12 @@
         }
 
         .section-label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: var(--purple-light);
-            margin-bottom: 0.6rem;
+            color: var(--ungu-teks);
+            margin-bottom: 8px;
         }
 
         .section-title {
@@ -288,9 +296,9 @@
         }
 
         .section-desc {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--text-muted);
-            margin-top: 0.6rem;
+            margin-top: 8px;
             line-height: 1.7;
             max-width: 550px;
         }
@@ -299,13 +307,13 @@
         .platform-header {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .platform-icon {
-            width: 42px;
-            height: 42px;
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -336,7 +344,7 @@
         .platform-period {
             font-size: 0.75rem;
             color: var(--text-muted);
-            margin-top: 0.1rem;
+            margin-top: 4px;
         }
 
         /* ===== STATS GRID ===== */
@@ -383,14 +391,8 @@
             /* backdrop-filter dinonaktifkan di card kecil — boros GPU */
             border: 1px solid var(--border);
             border-radius: 20px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            transition: border-color var(--gerak-normal) var(--ease-keluar), box-shadow var(--gerak-sedang) var(--ease-keluar), transform var(--gerak-sedang) var(--ease-keluar);
             overflow: hidden;
-        }
-
-        .card:hover {
-            border-color: var(--border-hover);
-            box-shadow: 0 0 30px -8px var(--purple-glow);
-            transform: translateY(-2px);
         }
 
         /* Hanya elemen besar yang pakai backdrop-filter */
@@ -403,17 +405,17 @@
 
         /* ===== STAT CARD ===== */
         .stat-card {
-            padding: 1.4rem 1.5rem;
+            padding: 24px;
             position: relative;
         }
 
         .stat-label {
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-subtle);
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            margin-bottom: 0.6rem;
+            margin-bottom: 8px;
         }
 
         .stat-value {
@@ -422,7 +424,7 @@
             font-weight: 800;
             color: #fff;
             letter-spacing: -0.02em;
-            line-height: 1;
+            line-height: 1.15;
         }
 
         .stat-value.big {
@@ -432,11 +434,11 @@
         .stat-change {
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
-            font-size: 0.72rem;
+            gap: 4px;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-top: 0.5rem;
-            padding: 0.2rem 0.55rem;
+            margin-top: 8px;
+            padding: 4px 8px;
             border-radius: 99px;
         }
 
@@ -447,7 +449,7 @@
 
         .stat-change.down {
             background: rgba(239, 68, 68, 0.12);
-            color: #F87171;
+            color: #FCA5A5;
         }
 
         .stat-change.neu {
@@ -457,15 +459,15 @@
 
         .stat-icon {
             position: absolute;
-            top: 1.2rem;
-            right: 1.2rem;
+            top: 16px;
+            right: 16px;
             font-size: 1.3rem;
             opacity: 0.12;
         }
 
         /* ===== HERO STAT (large featured) ===== */
         .hero-stat-card {
-            padding: 2rem;
+            padding: 32px;
             background: linear-gradient(135deg, rgba(88, 43, 140, 0.25) 0%, rgba(18, 11, 32, 0.85) 100%);
             border-color: rgba(88, 43, 140, 0.4);
         }
@@ -505,7 +507,7 @@
         }
 
         /* Tambah hint zoom tanpa scale hover yang mahal */
-        .screenshot-wrapper:hover .screenshot-overlay {
+        .screenshot-wrapper:focus-visible .screenshot-overlay {
             opacity: 1;
         }
 
@@ -514,28 +516,28 @@
             inset: 0;
             background: linear-gradient(to top, rgba(7, 5, 15, 0.65) 0%, rgba(7, 5, 15, 0.1) 50%, transparent 100%);
             opacity: 0;
-            transition: opacity 0.25s ease;
+            transition: opacity var(--gerak-normal) var(--ease-keluar);
             display: flex;
             align-items: flex-end;
-            padding: 1.25rem;
+            padding: 16px;
         }
 
         .screenshot-zoom-hint {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            font-size: 0.78rem;
-            color: rgba(255, 255, 255, 0.9);
-            background: rgba(0, 0, 0, 0.55);
-            padding: 0.35rem 0.75rem;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 4px 16px;
             border-radius: 99px;
         }
 
         /* ===== PLATFORM BLOCK ===== */
         .platform-block {
-            padding: 2.5rem;
-            border-radius: 28px;
-            margin-bottom: 2rem;
+            padding: 48px;
+            border-radius: 24px;
+            margin-bottom: 32px;
         }
 
         .platform-block.shopee-block {
@@ -552,7 +554,7 @@
         .section-divider {
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(88, 43, 140, 0.35), transparent);
-            margin: 4rem 0;
+            margin: 64px 0;
         }
 
         /* ===== PROOF BLOCK ===== */
@@ -564,23 +566,19 @@
             border: 1px solid var(--border);
             border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 4rem;
+            margin-bottom: 64px;
         }
 
         .proof-item {
             background: var(--bg-card);
-            padding: 1.75rem 1.5rem;
+            padding: 24px;
             text-align: center;
-            transition: background 0.3s;
-        }
-
-        .proof-item:hover {
-            background: rgba(88, 43, 140, 0.1);
+            transition: background-color var(--gerak-normal) var(--ease-keluar);
         }
 
         .proof-item-val {
             font-family: var(--font-display);
-            font-size: 1.9rem;
+            font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
             font-weight: 800;
             color: #fff;
             letter-spacing: -0.02em;
@@ -591,7 +589,7 @@
         }
 
         .proof-item-val.shopee-red {
-            color: #EE4D2D;
+            color: var(--shopee-teks);
         }
 
         .proof-item-val.tiktok-teal {
@@ -599,9 +597,9 @@
         }
 
         .proof-item-label {
-            font-size: 0.72rem;
+            font-size: 0.875rem;
             color: var(--text-muted);
-            margin-top: 0.35rem;
+            margin-top: 4px;
             font-weight: 500;
         }
 
@@ -614,10 +612,10 @@
         /* ===== PARTNER CTA ===== */
         .partner-cta {
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 64px 32px;
             position: relative;
             overflow: hidden;
-            border-radius: 28px;
+            border-radius: 24px;
             background: linear-gradient(145deg, rgba(88, 43, 140, 0.2) 0%, rgba(7, 5, 15, 0.95) 100%);
             border: 1px solid rgba(88, 43, 140, 0.3);
         }
@@ -640,27 +638,21 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-top: 2rem;
+            gap: 8px;
+            margin-top: 32px;
         }
 
         .partner-tag {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0.5rem 1rem;
+            gap: 8px;
+            padding: 8px 16px;
             border-radius: 99px;
-            font-size: 0.82rem;
+            font-size: 0.875rem;
             font-weight: 600;
             background: rgba(88, 43, 140, 0.12);
             border: 1px solid rgba(88, 43, 140, 0.25);
-            color: #C084FC;
-            transition: all 0.3s;
-        }
-
-        .partner-tag:hover {
-            background: rgba(88, 43, 140, 0.25);
-            border-color: var(--purple-light);
+            color: var(--ungu-teks);
         }
 
         /* ===== LIGHTBOX ===== */
@@ -673,15 +665,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 32px;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: opacity var(--gerak-normal) var(--ease-masuk), visibility 0s linear var(--gerak-normal);
         }
 
         .lightbox.active {
             opacity: 1;
             visibility: visible;
+            transition: opacity var(--gerak-sedang) var(--ease-keluar), visibility 0s;
         }
 
         .lightbox img {
@@ -691,7 +684,7 @@
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
             object-fit: contain;
             transform: scale(0.95);
-            transition: transform 0.3s ease;
+            transition: transform var(--gerak-sedang) var(--ease-keluar);
         }
 
         .lightbox.active img {
@@ -700,10 +693,10 @@
 
         .lightbox-close {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            width: 44px;
-            height: 44px;
+            top: max(16px, env(safe-area-inset-top));
+            right: 16px;
+            width: 48px;
+            height: 48px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 50%;
@@ -713,29 +706,25 @@
             cursor: pointer;
             color: #fff;
             font-size: 1rem;
-            transition: all 0.2s;
+            transition: background-color var(--gerak-normal) var(--ease-keluar), transform var(--gerak-cepat) var(--ease-keluar);
         }
-
-        .lightbox-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .lightbox-close:active { transform: scale(0.97); }
 
         .lightbox-caption {
             position: absolute;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8rem;
+            bottom: max(16px, env(safe-area-inset-bottom));
+            left: 16px;
+            right: 16px;
+            font-size: 0.875rem;
             color: var(--text-muted);
             text-align: center;
-            white-space: nowrap;
         }
 
         /* ===== SCROLL REVEAL ===== */
         .reveal {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(24px);
+            transition: opacity var(--gerak-lambat) var(--ease-keluar), transform var(--gerak-lambat) var(--ease-keluar);
         }
 
         .reveal.visible {
@@ -744,19 +733,19 @@
         }
 
         .reveal-delay-1 {
-            transition-delay: 0.1s;
+            transition-delay: 60ms;
         }
 
         .reveal-delay-2 {
-            transition-delay: 0.2s;
+            transition-delay: 120ms;
         }
 
         .reveal-delay-3 {
-            transition-delay: 0.3s;
+            transition-delay: 180ms;
         }
 
         .reveal-delay-4 {
-            transition-delay: 0.4s;
+            transition-delay: 240ms;
         }
 
         /* ===== NUMBER COUNTER ===== */
@@ -768,17 +757,17 @@
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 0.3rem 0.7rem;
+            gap: 4px;
+            padding: 4px 8px;
             border-radius: 99px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
             letter-spacing: 0.04em;
         }
 
         .badge-shopee {
             background: rgba(238, 77, 45, 0.12);
-            color: var(--shopee);
+            color: var(--shopee-teks);
             border: 1px solid rgba(238, 77, 45, 0.25);
         }
 
@@ -790,7 +779,7 @@
 
         .badge-purple {
             background: rgba(88, 43, 140, 0.15);
-            color: #C084FC;
+            color: var(--ungu-teks);
             border: 1px solid rgba(88, 43, 140, 0.35);
         }
 
@@ -798,7 +787,7 @@
         .highlight-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 16px;
         }
 
         @media (max-width: 640px) {
@@ -812,35 +801,36 @@
             position: relative;
             z-index: 1;
             border-top: 1px solid var(--border);
-            padding: 2.5rem 2rem;
+            padding: 48px 32px;
+            padding-bottom: max(48px, env(safe-area-inset-bottom));
             text-align: center;
-            font-size: 0.78rem;
+            font-size: 0.875rem;
             color: var(--text-subtle);
         }
 
         footer a {
-            color: var(--text-muted);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: #C084FC;
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            display: inline-block;
+            padding: 16px 0;
         }
 
         /* ===== ANIMATED BARS ===== */
         .bar-track {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.06);
+            height: 8px;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 99px;
             overflow: hidden;
-            margin-top: 0.75rem;
+            margin-top: 16px;
         }
 
         .bar-fill {
             height: 100%;
             border-radius: 99px;
-            width: 0;
-            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform var(--gerak-lambat) var(--ease-keluar);
         }
 
         .bar-fill.purple {
@@ -858,17 +848,46 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             main {
-                padding: 6rem 1rem 3rem;
+                padding: 64px 16px 48px;
             }
 
             .platform-block {
-                padding: 1.5rem;
-                border-radius: 20px;
+                padding: 24px 16px;
+                border-radius: 16px;
             }
 
             nav {
-                padding: 0.85rem 1.25rem;
+                padding: 8px 16px;
+                padding-top: max(8px, env(safe-area-inset-top));
+                gap: 8px;
             }
+
+            .nav-logo { font-size: 1rem; }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            ::-webkit-scrollbar-thumb:hover { background: var(--purple-light); }
+            .btn-primary:hover { box-shadow: 0 8px 32px rgba(88, 43, 140, 0.65); }
+            .btn-ghost:hover { background: rgba(88, 43, 140, 0.15); border-color: var(--purple-light); }
+            .card:hover {
+                border-color: var(--border-hover);
+                box-shadow: 0 0 32px -8px var(--purple-glow);
+                transform: translateY(-2px);
+            }
+            .screenshot-wrapper:hover .screenshot-overlay { opacity: 1; }
+            .proof-item:hover { background: rgba(88, 43, 140, 0.1); }
+            .partner-tag:hover { background: rgba(88, 43, 140, 0.25); }
+            .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); }
+            footer a:hover { color: var(--ungu-teks); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .pulse-dot { animation: none; }
+            .reveal { transform: none; transition: opacity var(--gerak-normal) linear; }
+            .bar-fill, .lightbox img { transition: none; }
+            .card, .btn, .lightbox-close { transition-property: background-color, border-color, box-shadow; }
+            .card, .btn, .lightbox-close { transform: none !important; }
         }
     </style>
 </head>
@@ -880,9 +899,9 @@
     <div class="bg-grid" aria-hidden="true"></div>
 
     <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Tutup">
-            <i class="fas fa-times"></i>
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Pratinjau tangkapan layar" onclick="closeLightbox(event)">
+        <button type="button" class="lightbox-close" onclick="closeLightbox()" aria-label="Tutup">
+            <i class="fas fa-times" aria-hidden="true"></i>
         </button>
         <img src="" alt="" id="lightboxImg">
         <div class="lightbox-caption" id="lightboxCaption"></div>
@@ -952,7 +971,7 @@
         <!-- ===== SHOPEE SECTION ===== -->
         <section id="shopee-data" aria-labelledby="shopee-heading">
             <div class="section-header reveal">
-                <div class="section-label"><i class="fab fa-shopify"></i> &nbsp;Platform</div>
+                <div class="section-label"><i class="fab fa-shopify" aria-hidden="true"></i> &nbsp;Platform</div>
                 <h2 class="section-title" id="shopee-heading">Data Live Shopee</h2>
                 <p class="section-desc">Data resmi dari Seller Center Shopee · Toko Albani (albanistore). Semua angka
                     dapat diverifikasi langsung.</p>
@@ -983,7 +1002,7 @@
                     <div class="card hero-stat-card">
                         <div class="stat-label">🎥 Total Sesi & Durasi Live</div>
                         <div class="stat-value big">51 <span style="font-size:1.2rem;opacity:0.7;">Sesi</span></div>
-                        <div style="margin-top:0.5rem;font-size:0.8rem;color:var(--text-muted);">Total Durasi:
+                        <div style="margin-top:0.5rem;font-size:0.875rem;color:var(--text-muted);">Total Durasi:
                             <strong>67:43:59</strong> jam · Avg. 1:19:41/sesi
                         </div>
                     </div>
@@ -1010,7 +1029,7 @@
                         <div class="stat-icon"><i class="fas fa-trophy"></i></div>
                         <div class="stat-label">Penonton Tertinggi</div>
                         <div class="stat-value">11</div>
-                        <div class="stat-label" style="margin-top:0.4rem;">dalam satu sesi</div>
+                        <div class="stat-label" style="margin-top:4px;">dalam satu sesi</div>
                     </div>
                 </div>
 
@@ -1087,7 +1106,7 @@
                 <!-- Screenshot -->
                 <div style="margin-top:1.5rem;">
                     <div
-                        style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:0.75rem;">
+                        style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-subtle);margin-bottom:0.75rem;">
                         <i class="fas fa-image"></i> &nbsp;Screenshot Verifikasi — Tinjauan Data April 2026
                     </div>
                     <div class="screenshot-wrapper" onclick="openLightbox(this)"
@@ -1284,7 +1303,7 @@
                         style="font-size:0.75rem;font-weight:700;color:var(--text-subtle);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1rem;">
                         Sumber Trafik</div>
                     <div style="display:flex;flex-direction:column;gap:0.6rem;">
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.875rem;">
                             <span style="color:var(--text-muted);min-width:110px;">Pencarian</span>
                             <div style="flex:1;margin:0 1rem;">
                                 <div class="bar-track" style="margin-top:0;">
@@ -1293,7 +1312,7 @@
                             </div>
                             <span style="color:#fff;font-weight:600;">8,31 RB penonton</span>
                         </div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.875rem;">
                             <span style="color:var(--text-muted);min-width:110px;">Rekomendasi</span>
                             <div style="flex:1;margin:0 1rem;">
                                 <div class="bar-track" style="margin-top:0;">
@@ -1302,7 +1321,7 @@
                             </div>
                             <span style="color:#fff;font-weight:600;">4,74 RB penonton</span>
                         </div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.875rem;">
                             <span style="color:var(--text-muted);min-width:110px;">Lainnya</span>
                             <div style="flex:1;margin:0 1rem;">
                                 <div class="bar-track" style="margin-top:0;">
@@ -1311,7 +1330,7 @@
                             </div>
                             <span style="color:#fff;font-weight:600;">6,76 RB penonton</span>
                         </div>
-                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.82rem;">
+                        <div style="display:flex;align-items:center;justify-content:space-between;font-size:0.875rem;">
                             <span style="color:var(--text-muted);min-width:110px;">Tab Toko</span>
                             <div style="flex:1;margin:0 1rem;">
                                 <div class="bar-track" style="margin-top:0;">
@@ -1414,16 +1433,16 @@
             <!-- Trust indicators -->
             <div
                 style="display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:2.5rem;flex-wrap:wrap;">
-                <div style="font-size:0.8rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
+                <div style="font-size:0.875rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
                     <i class="fas fa-shield-check" style="color:#4ADE80;"></i> Data Terverifikasi
                 </div>
-                <div style="font-size:0.8rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
+                <div style="font-size:0.875rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
                     <i class="fas fa-building" style="color:#C084FC;"></i> Dikelola PT SMA
                 </div>
-                <div style="font-size:0.8rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
+                <div style="font-size:0.875rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
                     <i class="fas fa-video" style="color:var(--tiktok-accent);"></i> Studio Profesional
                 </div>
-                <div style="font-size:0.8rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
+                <div style="font-size:0.875rem;color:var(--text-subtle);display:flex;align-items:center;gap:0.4rem;">
                     <i class="fas fa-chart-line" style="color:#EE4D2D;"></i> Laporan Transparan
                 </div>
             </div>
@@ -1434,12 +1453,14 @@
     <footer>
         <p>© 2026 Toko Albani · Dikelola oleh <a href="https://simasrim.id" target="_blank" rel="noopener">PT Solusi Mitra Aplikasi
                 (SIMASRIM)</a></p>
-        <p style="margin-top:0.4rem;">Data per Juni 2026 · <a href="../babehwan/">Profil Babeh Wan</a></p>
+        <p style="margin-top:4px;">Data per Juni 2026 · <a href="../babehwan/">Profil Babeh Wan</a></p>
     </footer>
 
     <script>
         // ===== LIGHTBOX =====
+        let pemicuLightbox = null;
         function openLightbox(el) {
+            pemicuLightbox = el;
             const img = el.querySelector('img');
             const caption = el.dataset.caption || '';
             document.getElementById('lightboxImg').src = img.src;
@@ -1447,16 +1468,32 @@
             document.getElementById('lightboxCaption').textContent = caption;
             document.getElementById('lightbox').classList.add('active');
             document.body.style.overflow = 'hidden';
+            document.querySelector('.lightbox-close').focus();
         }
         function closeLightbox(e) {
             if (!e || e.target === document.getElementById('lightbox') || e.currentTarget.classList.contains('lightbox-close')) {
-                document.getElementById('lightbox').classList.remove('active');
+                const lb = document.getElementById('lightbox');
+                if (!lb.classList.contains('active')) return;
+                lb.classList.remove('active');
                 document.body.style.overflow = '';
+                if (pemicuLightbox) pemicuLightbox.focus();
             }
         }
         document.addEventListener('keydown', e => {
             if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox') });
         });
+
+        // Tangkapan layar bisa dibuka dengan keyboard (Enter / Spasi)
+        document.querySelectorAll('.screenshot-wrapper').forEach(el => {
+            el.setAttribute('tabindex', '0');
+            el.setAttribute('role', 'button');
+            el.setAttribute('aria-label', 'Perbesar: ' + (el.dataset.caption || el.querySelector('img').alt));
+            el.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(el); }
+            });
+        });
+
+        const geraknyaDikurangi = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // ===== SCROLL REVEAL =====
         const revealEls = document.querySelectorAll('.reveal');
@@ -1476,7 +1513,7 @@
                 if (entry.isIntersecting) {
                     const fill = entry.target;
                     const width = fill.dataset.width;
-                    setTimeout(() => { fill.style.width = width + '%'; }, 200);
+                    fill.style.transform = 'scaleX(' + (width / 100) + ')';
                     barObserver.unobserve(fill);
                 }
             });
@@ -1485,11 +1522,12 @@
 
         // ===== COUNTER ANIMATION =====
         function animateCounter(el) {
+            if (geraknyaDikurangi) return; // angka akhir sudah tertulis di HTML
             const target = parseInt(el.dataset.target);
             const prefix = el.dataset.prefix || '';
             const suffix = el.dataset.suffix || '';
             const format = el.dataset.format;
-            const duration = 1800;
+            const duration = 1200;
             const start = performance.now();
 
             function update(now) {
@@ -1499,10 +1537,10 @@
                 const current = Math.floor(eased * target);
 
                 if (format === 'currency') {
-                    if (current >= 1000000) el.textContent = prefix + (current / 1000000).toFixed(2) + ' Jt';
+                    if (current >= 1000000) el.textContent = prefix + (Math.floor(current / 10000) / 100).toFixed(2).replace('.', ',') + ' Jt';
                     else el.textContent = prefix + current.toLocaleString('id-ID');
                 } else if (format === 'big') {
-                    if (current >= 1000) el.textContent = (current / 1000).toFixed(0) + 'K+';
+                    if (target >= 10000) el.textContent = (current / 1000).toFixed(0) + 'K+';
                     else el.textContent = current.toLocaleString('id-ID');
                 } else {
                     el.textContent = prefix + current.toLocaleString('id-ID') + suffix;
