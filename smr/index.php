@@ -67,7 +67,7 @@ $nama_sosial = ['instagram' => 'Instagram', 'tiktok' => 'TikTok', 'linkedin' => 
         <header class="smr-kepala">
             <h1 class="smr-judul">Pusat Informasi SIMASRIM</h1>
             <a class="smr-logo" href="https://www.simasrim.com" target="_blank" rel="noopener">
-                <img src="https://www.simasrim.com/images/logo.png" alt="Logo SIMASRIM" width="192" height="64">
+                <img src="assets/logo-simasrim.png" alt="Logo SIMASRIM" width="192" height="61">
             </a>
             <p class="smr-slogan">Solusi Pengiriman &amp; Layanan Digital Terintegrasi</p>
         </header>
