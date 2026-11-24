@@ -228,12 +228,12 @@ function setupRoleBasedUI() {
         if (role === 'SuperAdmin') {
             switchBtnText.textContent = 'Ganti ke Demo User (Staff)';
             if (switchBtn) {
-                switchBtn.className = 'text-[10px] bg-emerald-950/70 hover:bg-emerald-800 text-emerald-300 hover:text-white border border-emerald-700/50 px-3 min-h-[44px] w-full justify-center rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap';
+                switchBtn.className = 'text-xs bg-emerald-950/70 hover:bg-emerald-800 text-emerald-300 hover:text-white border border-emerald-700/50 px-3 min-h-[44px] w-full justify-center rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap';
             }
         } else {
             switchBtnText.textContent = 'Ganti ke Demo Admin';
             if (switchBtn) {
-                switchBtn.className = 'text-[10px] bg-violet-950/70 hover:bg-violet-800 text-violet-300 hover:text-white border border-violet-700/50 px-3 min-h-[44px] w-full justify-center rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap';
+                switchBtn.className = 'text-xs bg-violet-950/70 hover:bg-violet-800 text-violet-300 hover:text-white border border-violet-700/50 px-3 min-h-[44px] w-full justify-center rounded-md font-semibold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap';
             }
         }
     }

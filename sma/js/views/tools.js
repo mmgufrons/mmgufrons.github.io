@@ -112,7 +112,7 @@ function renderToolsView(container) {
         });
 
         Object.keys(groups).sort().forEach(cat => {
-            html += `<h3 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-4 mb-1 border-b border-[#333] pb-1">${cat}</h3>`;
+            html += `<h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mt-4 mb-1 border-b border-[#333] pb-1">${cat}</h3>`;
             groups[cat].forEach(t => {
                 html += `
                 <div class="card-bg p-3 rounded-lg border border-white/5 hover:border-violet-500/50 transition flex items-center justify-between group cursor-pointer" onclick="${isSuperAdmin ? `editTool('${t.id}')` : `window.open('${t.url}', '_blank')`}">
@@ -122,11 +122,11 @@ function renderToolsView(container) {
                         </div>
                         <div class="flex-1 min-w-0">
                             <h3 class="text-sm font-bold text-white truncate">${t.title}</h3>
-                            <p class="text-[10px] text-gray-400 truncate">${t.description || 'Tidak ada deskripsi'}</p>
+                            <p class="text-xs text-gray-400 truncate">${t.description || 'Tidak ada deskripsi'}</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-2 ml-4 flex-shrink-0">
-                        <button onclick="event.stopPropagation(); window.open('${t.url}', '_blank')" class="bg-[#1a1a1a] hover:bg-violet-600 text-gray-300 hover:text-white px-3 py-1.5 rounded text-[10px] font-bold transition border border-[#333] group-hover:border-violet-600">
+                        <button onclick="event.stopPropagation(); window.open('${t.url}', '_blank')" class="bg-[#1a1a1a] hover:bg-violet-600 text-gray-300 hover:text-white px-3 py-1.5 rounded text-xs font-bold transition border border-[#333] group-hover:border-violet-600">
                             BUKA <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
                         </button>
                         ${isSuperAdmin ? `

@@ -173,15 +173,15 @@ function renderAnalyticsView(c) {
     const scopeToggleHtml = isSuperAdmin ? `
     <div class="flex gap-1 bg-[#1a1a1a] p-1 rounded-lg border border-[#333]">
         <button onclick="_analyticsScope='company'; renderAnalyticsView(document.getElementById('viewContainer'))"
-            class="px-3 py-1.5 text-[10px] font-bold rounded transition ${effectiveScope === 'company' ? 'bg-purple-600 text-white' : 'text-gray-400 hover:text-white'}">
+            class="px-3 py-1.5 text-xs font-bold rounded transition ${effectiveScope === 'company' ? 'bg-purple-600 text-white' : 'text-gray-400 hover:text-white'}">
             <i class="fa-solid fa-building mr-1"></i>Perusahaan
         </button>
         <button onclick="_analyticsScope='dept'; renderAnalyticsView(document.getElementById('viewContainer'))"
-            class="px-3 py-1.5 text-[10px] font-bold rounded transition ${effectiveScope === 'dept' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-white'}">
+            class="px-3 py-1.5 text-xs font-bold rounded transition ${effectiveScope === 'dept' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:text-white'}">
             <i class="fa-solid fa-people-roof mr-1"></i>Divisi Saya
         </button>
         <button onclick="_analyticsScope='personal'; renderAnalyticsView(document.getElementById('viewContainer'))"
-            class="px-3 py-1.5 text-[10px] font-bold rounded transition ${effectiveScope === 'personal' ? 'bg-emerald-600 text-white' : 'text-gray-400 hover:text-white'}">
+            class="px-3 py-1.5 text-xs font-bold rounded transition ${effectiveScope === 'personal' ? 'bg-emerald-600 text-white' : 'text-gray-400 hover:text-white'}">
             <i class="fa-solid fa-user mr-1"></i>Pribadi
         </button>
     </div>` : '';
@@ -204,17 +204,17 @@ function renderAnalyticsView(c) {
                 <h2 class="text-xl font-bold text-white uppercase tracking-widest flex items-center gap-3">
                     <i class="fa-solid fa-chart-pie text-purple-500"></i> Enterprise Analytics
                 </h2>
-                <p class="text-[10px] text-gray-500 mt-1 uppercase tracking-wider">
+                <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">
                     Scope: <span class="text-purple-400 font-bold">${scopeLabel}</span>
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
                 ${dateFilterHtml}
                 ${scopeToggleHtml}
-                <button onclick="exportDataCSV()" class="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-gray-300 px-3 py-2 rounded-lg text-[10px] font-bold border border-[#3f3f3f] transition flex items-center gap-2 uppercase">
+                <button onclick="exportDataCSV()" class="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-gray-300 px-3 py-2 rounded-lg text-xs font-bold border border-[#3f3f3f] transition flex items-center gap-2 uppercase">
                     <i class="fa-solid fa-file-csv text-green-400"></i> CSV
                 </button>
-                <button onclick="exportDataPDF()" class="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-gray-300 px-3 py-2 rounded-lg text-[10px] font-bold border border-[#3f3f3f] transition flex items-center gap-2 uppercase">
+                <button onclick="exportDataPDF()" class="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-gray-300 px-3 py-2 rounded-lg text-xs font-bold border border-[#3f3f3f] transition flex items-center gap-2 uppercase">
                     <i class="fa-solid fa-file-pdf text-red-400"></i> PDF
                 </button>
             </div>
@@ -224,29 +224,29 @@ function renderAnalyticsView(c) {
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div class="bg-[#202020] rounded-xl p-5 border border-[#2f2f2f] shadow-lg relative overflow-hidden group hover:border-blue-500/40 transition cursor-pointer" onclick="switchView('board')">
                 <div class="absolute -right-3 -top-3 text-blue-900 opacity-30 text-6xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-list-check"></i></div>
-                <h4 class="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1 relative z-10">Tugas Aktif</h4>
+                <h4 class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-1 relative z-10">Tugas Aktif</h4>
                 <p class="text-3xl font-black text-blue-400 relative z-10">${activeTasks.length}</p>
-                <p class="text-[9px] mt-1 relative z-10">${overdueTasks.length > 0 ? '<span class="text-red-400 font-bold">⚠ ' + overdueTasks.length + ' Overdue</span>' : '<span class="text-emerald-400">On-track ✓</span>'}</p>
+                <p class="text-xs mt-1 relative z-10">${overdueTasks.length > 0 ? '<span class="text-red-400 font-bold">⚠ ' + overdueTasks.length + ' Overdue</span>' : '<span class="text-emerald-400">On-track ✓</span>'}</p>
             </div>
             <div class="bg-[#202020] rounded-xl p-5 border border-[#2f2f2f] shadow-lg relative overflow-hidden group">
                 <div class="absolute -right-3 -top-3 text-emerald-900 opacity-30 text-6xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-circle-check"></i></div>
-                <h4 class="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1 relative z-10">Total Selesai</h4>
+                <h4 class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-1 relative z-10">Total Selesai</h4>
                 <p class="text-3xl font-black text-emerald-400 relative z-10">${doneTasks.length}</p>
-                <p class="text-[9px] text-gray-500 mt-1 relative z-10">Dari ${totalTasks.length} total</p>
+                <p class="text-xs text-gray-500 mt-1 relative z-10">Dari ${totalTasks.length} total</p>
             </div>
             <div class="bg-[#202020] rounded-xl p-5 border border-[#2f2f2f] shadow-lg relative overflow-hidden group">
                 <div class="absolute -right-3 -top-3 text-purple-900 opacity-30 text-6xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-percent"></i></div>
-                <h4 class="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1 relative z-10">Completion Rate</h4>
+                <h4 class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-1 relative z-10">Completion Rate</h4>
                 <p class="text-3xl font-black ${completionColor} relative z-10">${completionRate}<span class="text-lg">%</span></p>
                 <div class="mt-2 w-full bg-gray-800 h-1.5 rounded-full overflow-hidden relative z-10">
-                    <div class="h-1.5 rounded-full bg-gradient-to-r from-purple-600 to-emerald-500 transition-all duration-1000" style="width:${completionRate}%"></div>
+                    <div class="h-1.5 rounded-full bg-gradient-to-r from-purple-600 to-emerald-500 transition duration-1000" style="width:${completionRate}%"></div>
                 </div>
             </div>
             <div class="bg-[#202020] rounded-xl p-5 border border-[#2f2f2f] shadow-lg relative overflow-hidden group">
                 <div class="absolute -right-3 -top-3 text-orange-900 opacity-30 text-6xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-clock"></i></div>
-                <h4 class="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1 relative z-10">Beban 7 Hari (Pribadi)</h4>
+                <h4 class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-1 relative z-10">Beban 7 Hari (Pribadi)</h4>
                 <p class="text-3xl font-black ${next7DaysHours > 40 ? 'text-red-400' : 'text-orange-400'} relative z-10">${next7DaysHours}<span class="text-lg font-bold text-gray-500">j</span></p>
-                <p class="text-[9px] mt-1 relative z-10">${parseFloat(next7DaysHours) > 40 ? '<span class="text-red-400 font-bold">Melebihi kapasitas!</span>' : '<span class="text-gray-500">Kapasitas aman</span>'}</p>
+                <p class="text-xs mt-1 relative z-10">${parseFloat(next7DaysHours) > 40 ? '<span class="text-red-400 font-bold">Melebihi kapasitas!</span>' : '<span class="text-gray-500">Kapasitas aman</span>'}</p>
             </div>
         </div>
 
@@ -283,7 +283,7 @@ function renderAnalyticsView(c) {
                                 <span class="text-gray-500 shrink-0">${count} Tugas · ${pct}%</span>
                             </div>
                             <div class="w-full bg-[#1a1a1a] h-2.5 rounded-full overflow-hidden border border-[#333]">
-                                <div class="bg-gradient-to-r ${barColor} h-full rounded-full transition-all duration-1000" style="width:${pct}%"></div>
+                                <div class="bg-gradient-to-r ${barColor} h-full rounded-full transition duration-1000" style="width:${pct}%"></div>
                             </div>
                         </div>`;
                     }).join('')}
@@ -304,22 +304,22 @@ function renderAnalyticsView(c) {
         <div class="bg-[#202020] rounded-xl p-5 border border-[#2f2f2f] shadow-lg">
             <div class="flex justify-between items-center mb-3">
                 <div>
-                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">${isFilterActive ? 'Produktivitas Rentang Filter' : 'Produktivitas Pekan Ini'}</p>
+                    <p class="text-xs text-gray-500 font-bold uppercase tracking-widest">${isFilterActive ? 'Produktivitas Rentang Filter' : 'Produktivitas Pekan Ini'}</p>
                     <p class="text-3xl font-black text-purple-400 mt-1">${doneWeekly} <span class="text-sm text-gray-500 font-normal">tugas selesai</span></p>
                 </div>
                 <div class="text-right">
-                    <p class="text-[9px] text-gray-600 uppercase">Target: ${prodTarget}+/periode</p>
-                    <p class="text-[10px] font-bold ${doneWeekly >= prodTarget ? 'text-emerald-400' : 'text-yellow-400'} mt-1">
+                    <p class="text-xs text-gray-600 uppercase">Target: ${prodTarget}+/periode</p>
+                    <p class="text-xs font-bold ${doneWeekly >= prodTarget ? 'text-emerald-400' : 'text-yellow-400'} mt-1">
                         ${doneWeekly >= prodTarget ? '✓ Target tercapai!' : 'Terus semangat!'}
                     </p>
                     <button onclick="window._analyticsShowRoutine = !window._analyticsShowRoutine; renderAnalyticsView(document.getElementById('viewContainer'))"
-                        class="mt-2 text-[9px] px-2 py-1 rounded border transition font-bold ${window._analyticsShowRoutine ? 'bg-purple-900/30 text-purple-400 border-purple-700/40' : 'text-gray-500 border-[#3f3f3f] hover:text-white'}">
+                        class="mt-2 text-xs px-2 py-1 rounded border transition font-bold ${window._analyticsShowRoutine ? 'bg-purple-900/30 text-purple-400 border-purple-700/40' : 'text-gray-500 border-[#3f3f3f] hover:text-white'}">
                         <i class="fa-solid fa-rotate-right mr-1"></i>${window._analyticsShowRoutine ? '✓ Rutinitas Tampil' : 'Tampilkan Rutinitas'}
                     </button>
                 </div>
             </div>
             <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-600 to-violet-400 h-full rounded-full transition-all duration-1000" style="width:${Math.min((doneWeekly / prodTarget) * 100, 100)}%"></div>
+                <div class="bg-gradient-to-r from-purple-600 to-violet-400 h-full rounded-full transition duration-1000" style="width:${Math.min((doneWeekly / prodTarget) * 100, 100)}%"></div>
             </div>
         </div>
     </div>`;

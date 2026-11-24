@@ -47,7 +47,7 @@ function renderSearchModal() {
     let html = '';
 
     if (taskResults.length > 0) {
-        html += `<h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3 px-2">Tugas & Meeting</h4>`;
+        html += `<h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 px-2">Tugas & Meeting</h4>`;
         html += taskResults.map(t => {
             let icon = t.type === 'meeting' ? 'fa-video text-pink-400' : 'fa-check-square text-blue-400';
             return `
@@ -58,15 +58,15 @@ function renderSearchModal() {
                 </div>
                 <div class="flex-1 min-w-0">
                     <h5 class="text-sm font-bold text-white truncate">${t.title}</h5>
-                    <p class="text-[10px] text-gray-500 truncate mt-0.5">${t.project || 'Umum'} • ${t.status}</p>
+                    <p class="text-xs text-gray-500 truncate mt-0.5">${t.project || 'Umum'} • ${t.status}</p>
                 </div>
-                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-white text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
+                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-white text-xs opacity-0 group-hover:opacity-100 transition"></i>
             </div>`;
         }).join('');
     }
 
     if (noteResults.length > 0) {
-        html += `<h4 class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3 px-2 mt-6">Catatan Digital</h4>`;
+        html += `<h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 px-2 mt-6">Catatan Digital</h4>`;
         html += noteResults.map(n => `
             <div onclick="handleSearchResultClick('note', '${n.id}')" 
                  class="flex items-center gap-4 p-3 rounded-xl hover:bg-[#2a2a2a] cursor-pointer transition group border border-transparent hover:border-[#3f3f3f] mb-1">
@@ -75,9 +75,9 @@ function renderSearchModal() {
                 </div>
                 <div class="flex-1 min-w-0">
                     <h5 class="text-sm font-bold text-white truncate">${n.title || 'Tanpa Judul'}</h5>
-                    <p class="text-[10px] text-gray-500 truncate mt-0.5">Disimpan di Catatan</p>
+                    <p class="text-xs text-gray-500 truncate mt-0.5">Disimpan di Catatan</p>
                 </div>
-                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-white text-[10px] opacity-0 group-hover:opacity-100 transition"></i>
+                <i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-white text-xs opacity-0 group-hover:opacity-100 transition"></i>
             </div>`).join('');
     }
 

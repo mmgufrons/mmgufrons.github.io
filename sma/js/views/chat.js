@@ -20,8 +20,8 @@ function renderGroupChatView(c){
     var stHtml='';
     if(canAll){
         stHtml='<div class="flex gap-2 mb-3 border-b border-[#333] pb-3">'
-            +'<button onclick="_chatScope=\'mine\';renderGroupChatView(document.getElementById(\'grupChatContainer\'))" class="px-4 py-1.5 rounded-lg text-[11px] font-bold transition '+(_chatScope==='mine'?'bg-emerald-600 text-white':'text-gray-400 hover:text-white hover:bg-[#2a2a2a]')+'">&#127970; Divisi Saya</button>'
-            +'<button onclick="_chatScope=\'all\';renderGroupChatView(document.getElementById(\'grupChatContainer\'))" class="px-4 py-1.5 rounded-lg text-[11px] font-bold transition '+(_chatScope==='all'?'bg-emerald-600 text-white':'text-gray-400 hover:text-white hover:bg-[#2a2a2a]')+'">&#127760; Semua Divisi</button>'
+            +'<button onclick="_chatScope=\'mine\';renderGroupChatView(document.getElementById(\'grupChatContainer\'))" class="px-4 py-1.5 rounded-lg text-xs font-bold transition '+(_chatScope==='mine'?'bg-emerald-600 text-white':'text-gray-400 hover:text-white hover:bg-[#2a2a2a]')+'">&#127970; Divisi Saya</button>'
+            +'<button onclick="_chatScope=\'all\';renderGroupChatView(document.getElementById(\'grupChatContainer\'))" class="px-4 py-1.5 rounded-lg text-xs font-bold transition '+(_chatScope==='all'?'bg-emerald-600 text-white':'text-gray-400 hover:text-white hover:bg-[#2a2a2a]')+'">&#127760; Semua Divisi</button>'
             +'</div>';
     }
     var vis=(canAll&&_chatScope==='mine')?[myDept].filter(Boolean):ad;
@@ -55,14 +55,14 @@ function _chatRenderWindow(){
     if(_chatListener){try{db.ref('group_chats/'+_chatSafeKey(dept)).off('value',_chatListener);}catch(e){}_chatListener=null;}
     win.innerHTML='<div class="flex items-center gap-2 p-2 border-b border-[#2a2a2a] shrink-0 bg-[#202020]">'
         +'<div class="w-7 h-7 rounded-full bg-emerald-900/40 border border-emerald-600/30 flex items-center justify-center text-emerald-400 font-bold text-xs">'+(dept.charAt(0)||'?')+'</div>'
-        +'<div><p class="text-white font-bold text-xs">'+dept+'</p><p class="text-[9px] text-emerald-500">Real-time Grup</p></div></div>'
+        +'<div><p class="text-white font-bold text-xs">'+dept+'</p><p class="text-xs text-emerald-500">Real-time Grup</p></div></div>'
         +'<div id="chatMessages" class="flex-1 overflow-y-auto p-3 space-y-3 bg-[#151515]"></div>'
         +'<div class="p-2 border-t border-[#2a2a2a] shrink-0 bg-[#202020]">'
         +'<div class="flex gap-2 items-end">'
         +'<label class="cursor-pointer text-gray-500 hover:text-emerald-400 transition self-center" title="Lampiran"><i class="fa-solid fa-paperclip"></i><input type="file" id="chatFileInput" class="hidden" onchange="_chatUploadFile()"></label>'
         +'<div id="chatInputWrap" class="flex-1 bg-[#252525] rounded border border-[#3f3f3f] px-2 py-1.5 min-h-[32px] max-h-[80px] overflow-y-auto text-xs text-gray-200 outline-none" contenteditable="true" placeholder="Ketik pesan..." onkeydown="_chatKeyDown(event)"></div>'
         +'<button onclick="_chatSend()" class="shrink-0 w-8 h-8 bg-emerald-600 hover:bg-emerald-500 rounded flex items-center justify-center text-white transition shadow text-xs"><i class="fa-solid fa-paper-plane"></i></button>'
-        +'</div><p class="text-[8px] text-gray-600 mt-1 pl-1">Enter = kirim &bull; Shift+Enter = baris baru</p></div>';
+        +'</div><p class="text-xs text-gray-600 mt-1 pl-1">Enter = kirim &bull; Shift+Enter = baris baru</p></div>';
     _chatLastSeen[dept]=Date.now();_chatSaveLastSeen();_chatUnread[dept]=0;_updateGroupChatBadge();
     var msgRef=db.ref('group_chats/'+_chatSafeKey(dept)).orderByChild('timestamp').limitToLast(100);
     _chatListener=function(snap){var msgs=[];snap.forEach(function(ch){msgs.push(ch.val());});_chatRenderMessages(msgs,dept);};
@@ -73,7 +73,7 @@ function _chatRenderMessages(msgs,dept){
     var el=document.getElementById('chatMessages');if(!el)return;
     var myUid=currentUser?currentUser.uid:'';
     el.innerHTML=msgs.length===0
-        ?'<div class="text-center py-12"><i class="fa-solid fa-comment-dots text-4xl text-gray-700 mb-3 block"></i><p class="text-gray-500 text-sm">Belum ada pesan di grup ini</p><p class="text-gray-600 text-[10px] mt-1">Jadilah yang pertama menyapa! &#128075;</p></div>'
+        ?'<div class="text-center py-12"><i class="fa-solid fa-comment-dots text-4xl text-gray-700 mb-3 block"></i><p class="text-gray-500 text-sm">Belum ada pesan di grup ini</p><p class="text-gray-600 text-xs mt-1">Jadilah yang pertama menyapa! &#128075;</p></div>'
         :msgs.map(function(m){
             var isMe=m.uid===myUid;
             var time=m.timestamp?new Date(m.timestamp).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}):'';
@@ -84,13 +84,13 @@ function _chatRenderMessages(msgs,dept){
                 if(m.attachment.type&&m.attachment.type.startsWith('image/'))
                     ah='<a href="'+m.attachment.url+'" target="_blank" class="block mt-2"><img src="'+m.attachment.url+'" class="max-w-[200px] rounded-xl border border-white/10" alt="lampiran"></a>';
                 else
-                    ah='<a href="'+m.attachment.url+'" target="_blank" class="flex items-center gap-2 mt-2 bg-black/20 px-3 py-2 rounded-lg text-[11px] hover:bg-black/30 transition"><i class="fa-solid fa-file"></i> '+(m.attachment.name||'Lampiran')+'</a>';
+                    ah='<a href="'+m.attachment.url+'" target="_blank" class="flex items-center gap-2 mt-2 bg-black/20 px-3 py-2 rounded-lg text-xs hover:bg-black/30 transition"><i class="fa-solid fa-file"></i> '+(m.attachment.name||'Lampiran')+'</a>';
             }
             return '<div class="flex flex-col '+(isMe?'items-end':'items-start')+'">'
-                +(!isMe?'<p class="text-[9px] font-bold text-emerald-400 mb-1 ml-1">'+(m.name||'Anonim')+'</p>':'')
+                +(!isMe?'<p class="text-xs font-bold text-emerald-400 mb-1 ml-1">'+(m.name||'Anonim')+'</p>':'')
                 +'<div class="max-w-[75%] px-4 py-2.5 rounded-2xl border '+bc+' text-sm leading-relaxed shadow-sm">'
                 +'<p>'+_chatEscape(m.message||'')+'</p>'+ah
-                +'<p class="text-[8px] opacity-50 mt-1 text-right">'+dateStr+' '+time+'</p></div></div>';
+                +'<p class="text-xs opacity-50 mt-1 text-right">'+dateStr+' '+time+'</p></div></div>';
         }).join('');
     el.scrollTop=el.scrollHeight;
     if(msgs.length>0&&dept===_chatCurrentDept){var last=msgs[msgs.length-1];if(last.timestamp){_chatLastSeen[dept]=last.timestamp;_chatSaveLastSeen();}}

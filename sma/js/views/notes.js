@@ -77,7 +77,7 @@ function renderNotesView(c) {
                         class="text-red-500 text-xs font-bold uppercase hidden hover:text-red-400 transition">
                         <i class="fa-solid fa-trash"></i> Hapus
                     </button>
-                    <span id="noteAutoSaveStatus" class="text-[10px] text-gray-600 italic hidden">Tersimpan otomatis</span>
+                    <span id="noteAutoSaveStatus" class="text-xs text-gray-600 italic hidden">Tersimpan otomatis</span>
                 </div>
                 <div class="flex gap-3 ml-auto">
                     <button onclick="copyNoteLink()" id="btnCopyNote"
@@ -120,7 +120,7 @@ function updateNotesListOnly() {
         <div onclick="openNote('${n.id}')"
             class="p-4 rounded-xl cursor-pointer transition shadow-sm ${activeNoteId === n.id ? 'bg-purple-900/30 border border-purple-500/50' : 'bg-[#1a1a1a] border border-[#2f2f2f] hover:bg-[#252526]'}">
             <h4 class="text-sm font-bold text-white truncate mb-1">${n.title || 'Tanpa Judul'}</h4>
-            <p class="text-[10px] text-gray-500 truncate">${plain.substring(0, 50) || 'Kosong...'}</p>
+            <p class="text-xs text-gray-500 truncate">${plain.substring(0, 50) || 'Kosong...'}</p>
         </div>`;
     }).join('') || '<p class="text-center text-gray-600 italic py-4 text-xs">Belum ada catatan tersimpan.</p>';
 }

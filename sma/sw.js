@@ -7,7 +7,7 @@
      • Navigation     → Network-First → Cache Fallback → offline.html
    ============================================================ */
 
-const CACHE_NAME    = 'simasrim-os-v10.4';
+const CACHE_NAME    = 'simasrim-os-v10.4.1';
 const OFFLINE_URL   = 'offline.html';
 
 // Assets to pre-cache on install (paths relative to sw.js location)

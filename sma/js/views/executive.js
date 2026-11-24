@@ -156,7 +156,7 @@ function _renderExecMain(c) {
         var pct  = info.total > 0 ? Math.round((info.done / info.total) * 100) : 0;
         var barColor = pct >= 70 ? 'bg-emerald-500' : pct >= 40 ? 'bg-yellow-500' : 'bg-red-500';
         var overdueTag = info.overdue > 0 
-            ? '<span class="text-[9px] bg-red-900/30 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">' + info.overdue + ' OVERDUE</span>' 
+            ? '<span class="text-xs bg-red-900/30 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-bold">' + info.overdue + ' OVERDUE</span>' 
             : '';
         var safeId = d.replace(/\s+/g,'_');
         var isCollapsed = !!(window._execCollapsed.score && window._execCollapsed.score[d]);
@@ -167,16 +167,16 @@ function _renderExecMain(c) {
             '<i id="execDeptIcon_' + safeId + '" class="' + chevronClass + '"></i>' +
             '<h4 class="text-white font-bold text-sm uppercase">' + d + '</h4>' + overdueTag +
             '</div>' +
-            '<button onclick="execDrillToDept(\'' + d + '\'); event.stopPropagation()" class="text-[9px] text-blue-400 hover:text-blue-300 border border-blue-800/40 px-2 py-0.5 rounded transition"><i class="fa-solid fa-arrow-right mr-1"></i>Detail</button>' +
+            '<button onclick="execDrillToDept(\'' + d + '\'); event.stopPropagation()" class="text-xs text-blue-400 hover:text-blue-300 border border-blue-800/40 px-2 py-0.5 rounded transition"><i class="fa-solid fa-arrow-right mr-1"></i>Detail</button>' +
             '</div>' +
             '<div id="execDeptBody_' + safeId + '" style="' + (isCollapsed ? 'display:none' : '') + '">' +
             '<div class="px-4 pb-4">' +
-            '<div class="flex justify-between text-[10px] text-gray-400 mb-1">' +
+            '<div class="flex justify-between text-xs text-gray-400 mb-1">' +
             '<span>Penyelesaian (' + info.done + '/' + info.total + ')</span><span class="text-white font-bold">' + pct + '%</span>' +
             '</div>' +
             '<div class="w-full bg-gray-800 h-1.5 rounded-full overflow-hidden mb-2">' +
             '<div class="' + barColor + ' h-1.5 rounded-full" style="width:' + pct + '%"></div></div>' +
-            '<p class="text-[9px] text-gray-500 text-right">Aktif: ' + info.active + ' | Overdue: ' + info.overdue + '</p>' +
+            '<p class="text-xs text-gray-500 text-right">Aktif: ' + info.active + ' | Overdue: ' + info.overdue + '</p>' +
             '</div></div></div>';
     }).join('') || '<p class="text-gray-500 text-xs italic">Tidak ada data proyek aktif (Non-Rutin, Sedang/Tinggi).</p>';
 
@@ -190,15 +190,15 @@ function _renderExecMain(c) {
             return '<div onclick="openTaskModal(\'' + t.id + '\')" class="flex items-center gap-3 p-2 bg-[#1a1a1a] rounded border border-[#2a2a2a] mb-1.5 cursor-pointer hover:border-violet-500/40 hover:bg-[#1e1b2e] transition group">' +
                 '<div class="w-1 h-full self-stretch rounded-full ' + (isOverdue ? 'bg-red-500' : 'bg-[#3f3f3f]') + '"></div>' +
                 '<div class="flex-1 min-w-0">' +
-                '<p class="text-white text-[11px] font-semibold truncate group-hover:text-violet-200 transition">' + (t.title||'Tanpa Judul') + '</p>' +
-                '<p class="text-[9px] text-gray-500 truncate">' + (t.assignedName || 'Tanpa Nama') + ' <span class="' + prioColor + '">&bull; ' + (window.PRIORITY_LABELS ? window.PRIORITY_LABELS[t.priority] || t.priority : t.priority) + '</span></p>' +
+                '<p class="text-white text-xs font-semibold truncate group-hover:text-violet-200 transition">' + (t.title||'Tanpa Judul') + '</p>' +
+                '<p class="text-xs text-gray-500 truncate">' + (t.assignedName || 'Tanpa Nama') + ' <span class="' + prioColor + '">&bull; ' + (window.PRIORITY_LABELS ? window.PRIORITY_LABELS[t.priority] || t.priority : t.priority) + '</span></p>' +
                 '</div>' +
                 '<div class="text-right shrink-0 flex items-center gap-2">' +
                 '<div>' +
-                '<p class="text-[10px] font-bold ' + (isOverdue ? 'text-red-400' : 'text-gray-400') + '">' + (t.dueDate||'-') + '</p>' +
-                '<p class="text-[8px] uppercase text-gray-500">' + (window.STATUS_LABELS ? window.STATUS_LABELS[t.status] || t.status : t.status || '-') + '</p>' +
+                '<p class="text-xs font-bold ' + (isOverdue ? 'text-red-400' : 'text-gray-400') + '">' + (t.dueDate||'-') + '</p>' +
+                '<p class="text-xs uppercase text-gray-500">' + (window.STATUS_LABELS ? window.STATUS_LABELS[t.status] || t.status : t.status || '-') + '</p>' +
                 '</div>' +
-                '<i class="fa-solid fa-chevron-right text-[9px] text-gray-600 group-hover:text-violet-400 transition"></i>' +
+                '<i class="fa-solid fa-chevron-right text-xs text-gray-600 group-hover:text-violet-400 transition"></i>' +
                 '</div></div>';
         }).join('');
     }
@@ -220,10 +220,10 @@ function _renderExecMain(c) {
                '<i id="execDeptIcon_' + safeId + '" class="' + (isCollapsed ? 'fa-solid fa-chevron-right text-gray-600' : 'fa-solid fa-chevron-down text-gray-400') + ' text-xs"></i>' +
                '</div>' +
                '<div id="execDeptBody_' + safeId + '" style="' + (isCollapsed ? 'display:none' : '') + '" class="px-4 pb-4">' +
-               (customHtml ? '<div class="mb-3"><h5 class="text-[10px] font-bold text-gray-400 mb-1">Daftar Tugas Berdasarkan Filter</h5>' + customHtml + '</div>' : '') +
-               (weekHtml ? '<div class="mb-3"><h5 class="text-[10px] font-bold text-emerald-400 mb-1">Pekan Ini</h5>' + weekHtml + '</div>' : '') +
-               (nextHtml ? '<div class="mb-3"><h5 class="text-[10px] font-bold text-blue-400 mb-1">Pekan Depan</h5>' + nextHtml + '</div>' : '') +
-               (monthHtml ? '<div><h5 class="text-[10px] font-bold text-yellow-400 mb-1">Sisa Bulan Ini</h5>' + monthHtml + '</div>' : '') +
+               (customHtml ? '<div class="mb-3"><h5 class="text-xs font-bold text-gray-400 mb-1">Daftar Tugas Berdasarkan Filter</h5>' + customHtml + '</div>' : '') +
+               (weekHtml ? '<div class="mb-3"><h5 class="text-xs font-bold text-emerald-400 mb-1">Pekan Ini</h5>' + weekHtml + '</div>' : '') +
+               (nextHtml ? '<div class="mb-3"><h5 class="text-xs font-bold text-blue-400 mb-1">Pekan Depan</h5>' + nextHtml + '</div>' : '') +
+               (monthHtml ? '<div><h5 class="text-xs font-bold text-yellow-400 mb-1">Sisa Bulan Ini</h5>' + monthHtml + '</div>' : '') +
                '</div></div>';
     }).join('') || '<p class="text-gray-500 text-xs italic">Tidak ada proyek yang sesuai dengan kriteria filter.</p>';
 
@@ -329,7 +329,7 @@ window.execDrillToDept = function(dept) {
             '<div class="w-10 h-10 rounded-full bg-violet-900/30 border border-violet-500/30 flex items-center justify-center text-violet-300 font-bold text-sm shrink-0">' + name.charAt(0).toUpperCase() + '</div>' +
             '<div class="flex-1 min-w-0">' +
             '<p class="text-white font-semibold text-sm group-hover:text-violet-300 transition truncate">' + name + '</p>' +
-            '<p class="text-[10px] text-gray-500">' + info.done + ' selesai / ' + info.total + ' proyek &nbsp;&bull;&nbsp; ' + pct + '%</p>' +
+            '<p class="text-xs text-gray-500">' + info.done + ' selesai / ' + info.total + ' proyek &nbsp;&bull;&nbsp; ' + pct + '%</p>' +
             '<div class="w-full bg-gray-800 h-1 rounded-full mt-1 overflow-hidden"><div class="bg-violet-500 h-1 rounded-full" style="width:' + pct + '%"></div></div>' +
             '</div>' +
             '<i class="fa-solid fa-chevron-right text-gray-600 group-hover:text-violet-400 transition"></i>' +
@@ -372,11 +372,11 @@ window.execDrillToUser = function(uid) {
             '<div class="shrink-0 w-1 rounded-full self-stretch ' + (isOverdue ? 'bg-red-500' : 'bg-[#333]') + '"></div>' +
             '<div class="flex-1 min-w-0">' +
             '<p class="text-white text-xs font-semibold truncate group-hover:text-violet-200 transition">' + (t.title || 'Tanpa Judul') + '</p>' +
-            '<p class="text-[10px] text-gray-500 mt-0.5">' + (t.project || '-') + ' <span class="' + prioColor + '">&bull; ' + t.priority + '</span> &bull; Tenggat: ' + (t.dueDate || '-') + (isOverdue ? ' <span class="text-red-400 font-bold">OVERDUE</span>' : '') + '</p>' +
+            '<p class="text-xs text-gray-500 mt-0.5">' + (t.project || '-') + ' <span class="' + prioColor + '">&bull; ' + t.priority + '</span> &bull; Tenggat: ' + (t.dueDate || '-') + (isOverdue ? ' <span class="text-red-400 font-bold">OVERDUE</span>' : '') + '</p>' +
             '</div>' +
             '<div class="flex items-center gap-2 shrink-0">' +
-            '<span class="text-[9px] font-bold uppercase ' + col + '">' + (t.status || '-') + '</span>' +
-            '<i class="fa-solid fa-chevron-right text-[9px] text-gray-600 group-hover:text-violet-400 transition"></i>' +
+            '<span class="text-xs font-bold uppercase ' + col + '">' + (t.status || '-') + '</span>' +
+            '<i class="fa-solid fa-chevron-right text-xs text-gray-600 group-hover:text-violet-400 transition"></i>' +
             '</div>' +
             '</div>';
     }
@@ -387,7 +387,7 @@ window.execDrillToUser = function(uid) {
         '<div class="flex items-center gap-3">' +
         '<div class="w-10 h-10 rounded-full bg-violet-900/30 border border-violet-500/30 flex items-center justify-center text-violet-300 font-bold">' + name.charAt(0).toUpperCase() + '</div>' +
         '<div><h2 class="text-base font-bold text-white">' + name + '</h2>' +
-        '<p class="text-[10px] text-gray-500">' + (profile.department || execDrillDept) + ' &mdash; Proyek Aktif</p></div>' +
+        '<p class="text-xs text-gray-500">' + (profile.department || execDrillDept) + ' &mdash; Proyek Aktif</p></div>' +
         '</div></div>' +
         '<div><h3 class="text-xs font-bold text-blue-400 uppercase mb-2 border-b border-[#2a2a2a] pb-1">Aktif / Berlangsung (' + active.length + ')</h3>' +
         '<div class="space-y-2">' + (active.length ? active.map(taskRow).join('') : '<p class="text-gray-600 italic text-xs py-4 text-center">Tidak ada proyek aktif.</p>') + '</div></div>' +

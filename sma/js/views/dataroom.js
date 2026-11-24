@@ -124,7 +124,7 @@ window.openDataRoomModal = function() {
                     <label class="block text-gray-400 mb-2 font-bold">Pilih Metode (Link atau Upload)</label>
                     <div class="mb-3">
                         <input type="text" id="drLink" class="input-bg rounded p-2 w-full text-white mb-1" placeholder="Tempel Link (GDrive dll)">
-                        <span class="text-[9px] text-gray-500">Atau upload file dari komputer:</span>
+                        <span class="text-xs text-gray-500">Atau upload file dari komputer:</span>
                     </div>
                     <div>
                         <input type="file" id="drFile" class="text-gray-300 w-full text-xs">

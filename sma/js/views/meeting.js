@@ -106,7 +106,7 @@ function updateMeetingList() {
         if (isInvited) {
             var org2 = allUsers[t.uid];
             var orgName2 = org2 ? (org2.name || org2.email || 'Seseorang') : 'Seseorang';
-            invitedBadge = '<span class="text-[9px] bg-rose-900/30 text-rose-400 border border-rose-500/30 px-1.5 py-0.5 rounded font-bold whitespace-nowrap"><i class="fa-solid fa-envelope mr-1"></i>Undangan: ' + orgName2 + '</span>';
+            invitedBadge = '<span class="text-xs bg-rose-900/30 text-rose-400 border border-rose-500/30 px-1.5 py-0.5 rounded font-bold whitespace-nowrap"><i class="fa-solid fa-envelope mr-1"></i>Undangan: ' + orgName2 + '</span>';
         }
 
         return '<div onclick="openTaskModal(\'' + t.id + '\')" class="bg-[#202020] rounded-xl border border-[#3f3f3f] hover:border-pink-500/60 flex flex-col cursor-pointer transition shadow-lg ' + opacity + ' overflow-hidden group">' +
@@ -119,7 +119,7 @@ function updateMeetingList() {
             '<h4 class="text-white font-bold text-sm group-hover:text-pink-400 transition truncate">' + (t.title || 'Tanpa Judul') + '</h4>' +
             invitedBadge +
             '</div>' +
-            '<p class="text-[10px] text-gray-500 flex items-center gap-2"><i class="fa-regular fa-clock text-pink-500/60"></i> ' + (t.dueDate || '-') + ' &nbsp;&bull;&nbsp; ' + timeRange + '</p>' +
+            '<p class="text-xs text-gray-500 flex items-center gap-2"><i class="fa-regular fa-clock text-pink-500/60"></i> ' + (t.dueDate || '-') + ' &nbsp;&bull;&nbsp; ' + timeRange + '</p>' +
             '</div></div>' +
 
             '<div class="flex items-center gap-2 shrink-0">' +
@@ -127,9 +127,9 @@ function updateMeetingList() {
             '</div></div>' +
 
             '<div class="p-4 bg-[#1a1a1a] border-t border-[#3f3f3f] flex justify-between items-center">' +
-            '<div class="text-[10px] font-bold uppercase ' + (isDone ? 'text-emerald-500' : 'text-purple-400') + '"><i class="fa-solid fa-flag mr-1"></i> ' + (window.STATUS_LABELS ? window.STATUS_LABELS[t.status] || t.status : t.status) + '</div>' +
+            '<div class="text-xs font-bold uppercase ' + (isDone ? 'text-emerald-500' : 'text-purple-400') + '"><i class="fa-solid fa-flag mr-1"></i> ' + (window.STATUS_LABELS ? window.STATUS_LABELS[t.status] || t.status : t.status) + '</div>' +
             '<div class="flex items-center gap-2">' +
-            '<p class="text-[9px] font-bold text-gray-600 uppercase tracking-widest mb-2">Hasil / Catatan Meeting:</p>' +
+            '<p class="text-xs font-bold text-gray-600 uppercase tracking-widest mb-2">Hasil / Catatan Meeting:</p>' +
             (plain
                 ? '<div class="text-gray-300 text-xs leading-relaxed line-clamp-3">' + autoLinkify(plain) + '</div>'
                 : '<p class="text-gray-600 text-xs italic">Belum ada catatan untuk meeting ini.</p>'

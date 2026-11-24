@@ -20,18 +20,18 @@ function renderUsersView(c) {
         '</div></div>' +
 
         '<div class="card-bg p-5 rounded-xl border border-[#3f3f3f] shadow-lg">' +
-        '<p class="text-[10px] font-bold text-gray-400 uppercase mb-4 border-b border-[#2a2a2a] pb-2">' +
+        '<p class="text-xs font-bold text-gray-400 uppercase mb-4 border-b border-[#2a2a2a] pb-2">' +
         '<i class="fa-solid fa-user-plus text-blue-400 mr-2"></i> Tambah / Perbarui Profil User</p>' +
         '<div class="space-y-4">' +
 
-        '<div><label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">UID User (dari Firebase Console &rsaquo; Authentication &rsaquo; Users)</label>' +
+        '<div><label class="block text-xs text-gray-500 mb-1 font-bold uppercase">UID User (dari Firebase Console &rsaquo; Authentication &rsaquo; Users)</label>' +
         '<input type="text" id="manageUid" class="w-full input-bg rounded p-3 text-sm font-mono" placeholder="Contoh: demoUID000001"></div>' +
 
-        '<div><label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">Nama Lengkap Karyawan</label>' +
+        '<div><label class="block text-xs text-gray-500 mb-1 font-bold uppercase">Nama Lengkap Karyawan</label>' +
         '<input type="text" id="manageName" class="w-full input-bg rounded p-3 text-sm" placeholder="Nama lengkap"></div>' +
 
                 '<div class="grid grid-cols-2 gap-4">' +
-        '<div><label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">Role Akses</label>' +
+        '<div><label class="block text-xs text-gray-500 mb-1 font-bold uppercase">Role Akses</label>' +
         '<select id="manageRole" class="w-full input-bg rounded p-3 text-sm" onchange="onRoleChange()">' +
         '<option value="Staff">Staff (Data Sendiri)</option>' +
         '<option value="Supervisor">Supervisor (Pantau Tim Dept)</option>' +
@@ -40,12 +40,12 @@ function renderUsersView(c) {
         '<option value="Direktur">Direktur (Global, Setara SuperAdmin tanpa UserMgmt)</option>' +
         '<option value="SuperAdmin">SuperAdmin (Full Akses)</option>' +
         '</select></div>' +
-        '<div><label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">Status Aktif</label>' +
+        '<div><label class="block text-xs text-gray-500 mb-1 font-bold uppercase">Status Aktif</label>' +
         '<select id="manageStatus" class="w-full input-bg rounded p-3 text-sm">' +
         '<option value="true">Aktif</option>' +
         '<option value="false">Nonaktif (Resign / Cuti Panjang)</option>' +
         '</select></div>' +
-        '<div><label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">Departemen</label>' +
+        '<div><label class="block text-xs text-gray-500 mb-1 font-bold uppercase">Departemen</label>' +
         '<input type="text" id="manageDept" list="deptList" class="w-full input-bg rounded p-3 text-sm" placeholder="Ketik atau pilih departemen">' +
         '<datalist id="deptList">' +
         '<option value="Marketing"></option>' +
@@ -56,14 +56,14 @@ function renderUsersView(c) {
         '<option value="HR"></option>' +
         '<option value="Magang"></option>' +
         '</datalist></div>' +
-        '<div><label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">Hari Kerja</label>' +
+        '<div><label class="block text-xs text-gray-500 mb-1 font-bold uppercase">Hari Kerja</label>' +
         '<select id="manageWorkDays" class="w-full input-bg rounded p-3 text-sm">' +
         '<option value="5">Senin - Jumat (5 Hari)</option>' +
         '<option value="6">Senin - Sabtu (6 Hari)</option>' +
         '</select></div></div>' +
 
         '<div id="watchDeptBox" class="hidden">' +
-        '<label class="block text-[10px] text-orange-400 mb-1 font-bold uppercase">Dept yang Diawasi (khusus DeptExecutive)</label>' +
+        '<label class="block text-xs text-orange-400 mb-1 font-bold uppercase">Dept yang Diawasi (khusus DeptExecutive)</label>' +
         '<input type="text" id="manageWatchDept" list="deptList" class="w-full input-bg rounded p-3 text-sm" placeholder="Ketik atau pilih departemen">' +
         '</div>' +
 
@@ -72,13 +72,13 @@ function renderUsersView(c) {
         '</div></div>' +
 
         '<div class="card-bg p-5 rounded-xl border border-[#3f3f3f] shadow-lg mt-6 mb-8">' +
-        '<p class="text-[10px] font-bold text-gray-400 uppercase mb-4 border-b border-[#2a2a2a] pb-2">' +
+        '<p class="text-xs font-bold text-gray-400 uppercase mb-4 border-b border-[#2a2a2a] pb-2">' +
         '<i class="fa-solid fa-truck-fast text-orange-400 mr-2"></i> Migrasi Divisi / Departemen (Batch Update)</p>' +
         '<p class="text-xs text-gray-500 mb-4">Gunakan alat ini jika ada pergantian nama divisi atau penggabungan divisi (misal: "Marketing" diganti ke "Bisnis"). Seluruh tugas & profil staf terkait akan otomatis dipindahkan secara masal.</p>' +
         '<div class="grid grid-cols-2 gap-4">' +
-        '<div><label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">Nama Divisi Lama</label>' +
+        '<div><label class="block text-xs text-gray-500 mb-1 font-bold uppercase">Nama Divisi Lama</label>' +
         '<input type="text" id="migrateOldDept" class="w-full input-bg rounded p-3 text-sm" placeholder="Contoh: Marketing"></div>' +
-        '<div><label class="block text-[10px] text-gray-500 mb-1 font-bold uppercase">Nama Divisi Baru</label>' +
+        '<div><label class="block text-xs text-gray-500 mb-1 font-bold uppercase">Nama Divisi Baru</label>' +
         '<input type="text" id="migrateNewDept" class="w-full input-bg rounded p-3 text-sm" placeholder="Contoh: Bisnis"></div>' +
         '</div>' +
         '<button onclick="migrateDepartment()" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 mt-4 rounded-lg transition shadow-lg">' +
@@ -87,7 +87,7 @@ function renderUsersView(c) {
 
 
         '<div>' +
-        '<h3 class="font-bold text-gray-400 text-[10px] uppercase mb-3 border-b border-[#333] pb-2">' +
+        '<h3 class="font-bold text-gray-400 text-xs uppercase mb-3 border-b border-[#333] pb-2">' +
         '<i class="fa-solid fa-database text-gray-600 mr-1"></i> Daftar User di Database</h3>' +
         '<div id="usersListDb" class="space-y-2 max-h-72 overflow-y-auto pr-2"></div>' +
         '</div>' +
@@ -172,11 +172,11 @@ function loadUsersList() {
             return '<div class="bg-[#1a1a1a] p-3 rounded-lg border border-[#2a2a2a] flex justify-between items-center gap-3">' +
                 '<div class="min-w-0 flex-1">' +
                 '<p class="text-xs font-bold text-white truncate">' + (u.name || u.email || 'No Name') + activeLabel + '</p>' +
-                '<p class="text-[10px] text-gray-500">' + (u.department || '-') + watchLabel + '</p>' +
-                '<p class="text-[9px] text-gray-700 font-mono truncate mt-0.5">' + uid + '</p>' +
+                '<p class="text-xs text-gray-500">' + (u.department || '-') + watchLabel + '</p>' +
+                '<p class="text-xs text-gray-700 font-mono truncate mt-0.5">' + uid + '</p>' +
                 '</div>' +
                 '<div class="flex items-center gap-2 shrink-0">' +
-                '<span class="px-2 py-1 border text-[10px] font-bold rounded uppercase ' + clr + '">' + (u.role || 'Staff') + '</span>' +
+                '<span class="px-2 py-1 border text-xs font-bold rounded uppercase ' + clr + '">' + (u.role || 'Staff') + '</span>' +
                 '<button onclick="editUser(\'' + uid + '\')" class="w-8 h-8 rounded bg-blue-900/30 text-blue-400 hover:bg-blue-600 hover:text-white transition" title="Edit Pengguna"><i class="fa-solid fa-pencil"></i></button>' +
                 '<button onclick="resetUserPassword(\'' + uid + '\')" class="w-8 h-8 rounded bg-orange-900/30 text-orange-400 hover:bg-orange-600 hover:text-white transition" title="Reset Password"><i class="fa-solid fa-key"></i></button>' +
                 '</div>' +

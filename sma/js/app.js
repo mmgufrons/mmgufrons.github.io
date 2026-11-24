@@ -36,8 +36,8 @@ function switchView(view, payload) {
         dataroom:   'btn-dataroom',
         tools:      'btn-tools'
     };
-    var active_cls   = 'w-full text-left px-3 py-2.5 rounded transition flex items-center gap-3 menu-active text-[13px]';
-    var inactive_cls = 'w-full text-left px-3 py-2.5 rounded transition flex items-center gap-3 menu-inactive text-[13px] hover:bg-[#252525]';
+    var active_cls   = 'w-full text-left px-3 py-2.5 rounded transition flex items-center gap-3 menu-active text-[0.8125rem]';
+    var inactive_cls = 'w-full text-left px-3 py-2.5 rounded transition flex items-center gap-3 menu-inactive text-[0.8125rem] hover:bg-[#252525]';
 
     Object.keys(btnMap).forEach(function(v) {
         var id = btnMap[v];

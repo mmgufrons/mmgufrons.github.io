@@ -11,7 +11,7 @@ function renderRoutinesView(c) {
 
     const section = (title, list, type, color) => `
     <div class="bg-[#202020] rounded-xl border border-[#2f2f2f] p-5 h-full flex flex-col shadow-md">
-        <h4 class="text-[10px] font-bold ${color} uppercase mb-4 flex items-center gap-2 border-b border-[#333] pb-2">
+        <h4 class="text-xs font-bold ${color} uppercase mb-4 flex items-center gap-2 border-b border-[#333] pb-2">
             <i class="fa-solid fa-repeat"></i> ${title}
         </h4>
         <div class="flex-1 overflow-y-auto pr-1">
@@ -23,10 +23,10 @@ function renderRoutinesView(c) {
                 onclick="editRoutine('${type}', '${r.id}')"
                 class="bg-[#252526] p-3 rounded-lg border border-[#3f3f3f] flex justify-between items-center group hover:border-purple-500 transition shadow-sm cursor-grab active:cursor-grabbing mb-2">
                 <div class="truncate pr-2 pointer-events-none">
-                    ${r.day  ? `<span class="text-[9px] bg-blue-900 text-blue-300 px-1.5 py-0.5 rounded font-bold mr-2">${dayNames[r.day]}</span>` : ''}
-                    ${r.date ? `<span class="text-[9px] bg-orange-900 text-orange-300 px-1.5 py-0.5 rounded font-bold mr-2">Tgl ${r.date}</span>` : ''}
-                    ${r.startTime && r.endTime ? `<span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-bold mr-2"><i class="fa-regular fa-clock mr-1"></i>${r.startTime} - ${r.endTime}</span>` : ''}
-                    ${r.delegatedBy ? `<span class="text-[9px] bg-orange-900/30 text-orange-400 border border-orange-500/30 px-1.5 py-0.5 rounded font-bold mr-2 whitespace-nowrap"><i class="fa-solid fa-share-nodes mr-1"></i>Dari: ${r.delegatedByName || 'Atasan'}</span>` : ''}
+                    ${r.day  ? `<span class="text-xs bg-blue-900 text-blue-300 px-1.5 py-0.5 rounded font-bold mr-2">${dayNames[r.day]}</span>` : ''}
+                    ${r.date ? `<span class="text-xs bg-orange-900 text-orange-300 px-1.5 py-0.5 rounded font-bold mr-2">Tgl ${r.date}</span>` : ''}
+                    ${r.startTime && r.endTime ? `<span class="text-xs bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-bold mr-2"><i class="fa-regular fa-clock mr-1"></i>${r.startTime} - ${r.endTime}</span>` : ''}
+                    ${r.delegatedBy ? `<span class="text-xs bg-orange-900/30 text-orange-400 border border-orange-500/30 px-1.5 py-0.5 rounded font-bold mr-2 whitespace-nowrap"><i class="fa-solid fa-share-nodes mr-1"></i>Dari: ${r.delegatedByName || 'Atasan'}</span>` : ''}
                     <span class="text-xs font-bold text-gray-200">${r.title}</span>
                 </div>
                 <div class="flex gap-2 items-center">
@@ -38,7 +38,7 @@ function renderRoutinesView(c) {
             </div>`).join('')}
         </div>
         <button onclick="openRoutineModal('${type}')"
-            class="w-full mt-4 py-3 border border-dashed border-gray-600 rounded-lg text-[10px] text-gray-400 hover:text-white hover:border-white transition uppercase font-bold tracking-widest bg-[#1a1a1a]">
+            class="w-full mt-4 py-3 border border-dashed border-gray-600 rounded-lg text-xs text-gray-400 hover:text-white hover:border-white transition uppercase font-bold tracking-widest bg-[#1a1a1a]">
             + Tambah Baru
         </button>
     </div>`;
@@ -47,7 +47,7 @@ function renderRoutinesView(c) {
     <div class="mb-4 flex justify-between items-center">
         <p class="text-xs text-gray-400">Atur pekerjaan yang berulang otomatis. Rutinitas tidak akan muncul di hari libur.</p>
         <button onclick="document.getElementById('holidayModal').classList.remove('hidden'); renderHolidays();"
-            class="bg-red-900/30 text-red-400 border border-red-900 px-4 py-2 rounded-lg text-[10px] font-bold uppercase transition hover:bg-red-900/50">
+            class="bg-red-900/30 text-red-400 border border-red-900 px-4 py-2 rounded-lg text-xs font-bold uppercase transition hover:bg-red-900/50">
             <i class="fa-solid fa-calendar-xmark mr-1"></i> Set Hari Libur
         </button>
     </div>
@@ -58,7 +58,7 @@ function renderRoutinesView(c) {
     </div>
     <div class="mt-4 text-center md:text-right pb-10">
         <button onclick="forceRecoverRoutines()"
-            class="text-gray-600 hover:text-blue-400 text-[10px] underline italic transition">
+            class="text-gray-600 hover:text-blue-400 text-xs underline italic transition">
             Data lama hilang? Pulihkan dari memori lokal
         </button>
     </div>`;

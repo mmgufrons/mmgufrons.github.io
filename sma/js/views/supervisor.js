@@ -81,20 +81,20 @@ function renderSupervisorView(c) {
         const pct       = m.total > 0 ? Math.round((m.done / m.total) * 100) : 0;
         const safeName  = m.name.replace(/'/g, '').replace(/"/g, '');
         const overdueTag = m.overdue > 0
-            ? `<span class="text-[9px] bg-red-900/30 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded font-bold shrink-0">${m.overdue} OD</span>`
+            ? `<span class="text-xs bg-red-900/30 text-red-400 border border-red-500/30 px-1.5 py-0.5 rounded font-bold shrink-0">${m.overdue} OD</span>`
             : '';
 
         const monitorBtnLabel = isSPVCard
             ? '<i class="fa-solid fa-magnifying-glass"></i> Pantau SPV'
             : '<i class="fa-solid fa-table-columns"></i> Cek Papan';
         const monitorBtnClass = isSPVCard
-            ? 'flex-1 py-1.5 border border-purple-500/30 rounded text-purple-400 text-[10px] font-bold hover:bg-purple-900/20 transition'
-            : 'flex-1 py-1.5 border border-blue-500/30 rounded text-blue-400 text-[10px] font-bold hover:bg-blue-900/20 transition';
+            ? 'flex-1 py-1.5 border border-purple-500/30 rounded text-purple-400 text-xs font-bold hover:bg-purple-900/20 transition'
+            : 'flex-1 py-1.5 border border-blue-500/30 rounded text-blue-400 text-xs font-bold hover:bg-blue-900/20 transition';
 
         const delegationInfo = isSPVCard
-            ? `<div class="text-[9px] text-purple-400 bg-purple-900/20 px-2 py-1 rounded mb-2 font-bold"><i class="fa-solid fa-share-nodes mr-1"></i> Delegasi Keluar: ${m.delegatedOut} tugas</div>`
+            ? `<div class="text-xs text-purple-400 bg-purple-900/20 px-2 py-1 rounded mb-2 font-bold"><i class="fa-solid fa-share-nodes mr-1"></i> Delegasi Keluar: ${m.delegatedOut} tugas</div>`
             : m.delegatedIn > 0
-                ? `<div class="text-[9px] text-orange-400 bg-orange-900/20 px-2 py-1 rounded mb-2 font-bold"><i class="fa-solid fa-inbox mr-1"></i> Delegasi Masuk: ${m.delegatedIn} tugas</div>`
+                ? `<div class="text-xs text-orange-400 bg-orange-900/20 px-2 py-1 rounded mb-2 font-bold"><i class="fa-solid fa-inbox mr-1"></i> Delegasi Masuk: ${m.delegatedIn} tugas</div>`
                 : '';
 
         return `<div class="card-bg p-4 rounded-xl border border-[#3f3f3f] hover:border-${isSPVCard ? 'purple' : 'emerald'}-500/40 transition">
@@ -104,25 +104,25 @@ function renderSupervisorView(c) {
                 </div>
                 <div class="flex-1 min-w-0">
                     <p class="text-white font-semibold text-xs truncate">${m.name}</p>
-                    <p class="text-[9px] text-gray-500">${m.department} &mdash; ${m.role}</p>
+                    <p class="text-xs text-gray-500">${m.department} &mdash; ${m.role}</p>
                 </div>
                 ${overdueTag}
             </div>
             ${delegationInfo}
             <div class="grid grid-cols-3 gap-1.5 text-center mb-2">
-                <div class="bg-[#1a1a1a] rounded p-1"><p class="text-white text-xs font-bold">${m.total}</p><p class="text-[8px] text-gray-500">Total</p></div>
-                <div class="bg-[#1a1a1a] rounded p-1"><p class="text-emerald-400 text-xs font-bold">${m.done}</p><p class="text-[8px] text-gray-500">Selesai</p></div>
-                <div class="bg-[#1a1a1a] rounded p-1"><p class="text-blue-400 text-xs font-bold">${m.inProgress}</p><p class="text-[8px] text-gray-500">Jalan</p></div>
+                <div class="bg-[#1a1a1a] rounded p-1"><p class="text-white text-xs font-bold">${m.total}</p><p class="text-xs text-gray-500">Total</p></div>
+                <div class="bg-[#1a1a1a] rounded p-1"><p class="text-emerald-400 text-xs font-bold">${m.done}</p><p class="text-xs text-gray-500">Selesai</p></div>
+                <div class="bg-[#1a1a1a] rounded p-1"><p class="text-blue-400 text-xs font-bold">${m.inProgress}</p><p class="text-xs text-gray-500">Jalan</p></div>
             </div>
             <div class="w-full bg-gray-800 h-1 rounded-full overflow-hidden mb-3">
-                <div class="bg-emerald-500 h-1 rounded-full transition-all" style="width:${pct}%"></div>
+                <div class="bg-emerald-500 h-1 rounded-full transition" style="width:${pct}%"></div>
             </div>
             <div class="flex gap-1.5">
                 <button onclick="switchView('board', '${m.uid}')" class="${monitorBtnClass}">${monitorBtnLabel}</button>
-                <button onclick="openStaffRoutineModal('${m.uid}', '${safeName}')" class="flex-1 py-1.5 border border-indigo-500/30 rounded text-indigo-400 text-[10px] font-bold hover:bg-indigo-900/20 transition">
+                <button onclick="openStaffRoutineModal('${m.uid}', '${safeName}')" class="flex-1 py-1.5 border border-indigo-500/30 rounded text-indigo-400 text-xs font-bold hover:bg-indigo-900/20 transition">
                     <i class="fa-solid fa-repeat"></i> Rutinitas
                 </button>
-                <button onclick="spvSendReminder('${m.uid}', '${safeName}')" class="flex-1 py-1.5 border border-emerald-500/30 rounded text-emerald-400 text-[10px] font-bold hover:bg-emerald-900/20 transition">
+                <button onclick="spvSendReminder('${m.uid}', '${safeName}')" class="flex-1 py-1.5 border border-emerald-500/30 rounded text-emerald-400 text-xs font-bold hover:bg-emerald-900/20 transition">
                     <i class="fa-solid fa-paper-plane"></i> Reminder
                 </button>
             </div>
@@ -137,9 +137,9 @@ function renderSupervisorView(c) {
     // ── SPV section (only for SuperAdmin/Executive) ──────────────
     const spvSectionHtml = (!isSPV && spvMembers.length > 0) ? `
     <div class="mt-6">
-        <h3 class="text-[10px] font-bold text-gray-400 uppercase mb-3 flex items-center gap-2">
+        <h3 class="text-xs font-bold text-gray-400 uppercase mb-3 flex items-center gap-2">
             <i class="fa-solid fa-user-tie text-purple-400"></i> Supervisor & Manajemen (${spvMembers.length})
-            <span class="text-[9px] text-gray-600 normal-case font-normal">— Anda dapat memantau delegasi mereka</span>
+            <span class="text-xs text-gray-600 normal-case font-normal">— Anda dapat memantau delegasi mereka</span>
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             ${spvMembers.map(m => buildMemberCard(m, true)).join('')}
@@ -168,7 +168,7 @@ function renderSupervisorView(c) {
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-                <h3 class="text-[10px] font-bold text-gray-400 uppercase mb-3 flex items-center gap-2">
+                <h3 class="text-xs font-bold text-gray-400 uppercase mb-3 flex items-center gap-2">
                     <i class="fa-solid fa-users text-emerald-500"></i>
                     Tim Staf (${staffMembers.length} orang)
                 </h3>
@@ -246,17 +246,17 @@ window.renderStaffRoutines = function(data) {
             html = '<p class="text-xs text-gray-600 italic">Tidak ada rutinitas.</p>';
         } else {
             html = list.map(function(r) {
-                var dayBadge = r.day ? `<span class="text-[9px] bg-blue-900 text-blue-300 px-1.5 py-0.5 rounded font-bold mr-2">${dayNames[r.day]}</span>` : '';
-                var dateBadge = r.date ? `<span class="text-[9px] bg-orange-900 text-orange-300 px-1.5 py-0.5 rounded font-bold mr-2">Tgl ${r.date}</span>` : '';
-                var timeBadge = (r.startTime && r.endTime) ? `<span class="text-[9px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-bold mr-2"><i class="fa-regular fa-clock mr-1"></i>${r.startTime} - ${r.endTime}</span>` : '';
-                var delegBadge = r.delegatedBy ? `<span class="text-[9px] bg-orange-900/30 text-orange-400 border border-orange-500/30 px-1.5 py-0.5 rounded font-bold mr-2 whitespace-nowrap"><i class="fa-solid fa-share-nodes mr-1"></i>Dari: ${r.delegatedByName || 'Atasan'}</span>` : '';
+                var dayBadge = r.day ? `<span class="text-xs bg-blue-900 text-blue-300 px-1.5 py-0.5 rounded font-bold mr-2">${dayNames[r.day]}</span>` : '';
+                var dateBadge = r.date ? `<span class="text-xs bg-orange-900 text-orange-300 px-1.5 py-0.5 rounded font-bold mr-2">Tgl ${r.date}</span>` : '';
+                var timeBadge = (r.startTime && r.endTime) ? `<span class="text-xs bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-bold mr-2"><i class="fa-regular fa-clock mr-1"></i>${r.startTime} - ${r.endTime}</span>` : '';
+                var delegBadge = r.delegatedBy ? `<span class="text-xs bg-orange-900/30 text-orange-400 border border-orange-500/30 px-1.5 py-0.5 rounded font-bold mr-2 whitespace-nowrap"><i class="fa-solid fa-share-nodes mr-1"></i>Dari: ${r.delegatedByName || 'Atasan'}</span>` : '';
                 
                 return `<div class="bg-[#252526] p-3 rounded-lg border border-[#3f3f3f] flex justify-between items-center mb-2">
                     <div class="truncate pr-2">
                         ${dayBadge}${dateBadge}${timeBadge}${delegBadge}
                         <span class="text-xs font-bold text-gray-200">${r.title}</span>
                     </div>
-                    <button onclick="editStaffRoutine('${type}', '${r.id}')" class="text-blue-400 hover:text-blue-300 text-[10px] uppercase font-bold tracking-wider px-2 py-1 rounded bg-blue-900/30 transition">Edit</button>
+                    <button onclick="editStaffRoutine('${type}', '${r.id}')" class="text-blue-400 hover:text-blue-300 text-xs uppercase font-bold tracking-wider px-2 py-1 rounded bg-blue-900/30 transition">Edit</button>
                 </div>`;
             }).join('');
         }

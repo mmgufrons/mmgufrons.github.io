@@ -108,9 +108,9 @@ function openTaskModal(id, date, forceType, isDelegation) {
 
             if (canSee) {
                 opts += '<option value="' + uid + '">' + (u.name || u.email) + ' (' + (u.department||'-') + ')</option>';
-                chkHtml += '<label class="flex items-center gap-2 text-[11px] text-gray-300 cursor-pointer hover:bg-[#2a2a2a] p-1.5 rounded transition">' +
+                chkHtml += '<label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer hover:bg-[#2a2a2a] p-1.5 rounded transition">' +
                            '<input type="checkbox" name="meetingParticipants" value="'+uid+'" class="accent-emerald-500 w-3.5 h-3.5">' +
-                           (u.name || u.email) + ' <span class="text-[9px] text-gray-500">(' + (u.department||'-') + ')</span></label>';
+                           (u.name || u.email) + ' <span class="text-xs text-gray-500">(' + (u.department||'-') + ')</span></label>';
             }
         });
         assigneeSel.innerHTML = opts;
@@ -404,11 +404,11 @@ function postTaskComment() {
 function renderTaskComments(id) {
     var cList = document.getElementById('taskCommentsList');
     if (!cList) return;
-    cList.innerHTML = '<p class="text-gray-500 italic text-[10px] text-center">Memuat komentar...</p>';
+    cList.innerHTML = '<p class="text-gray-500 italic text-xs text-center">Memuat komentar...</p>';
     
     db.ref('comments/' + id).on('value', function(snap) {
         if (!snap.exists()) {
-            cList.innerHTML = '<p class="text-gray-500 italic text-[10px] text-center">Belum ada diskusi.</p>';
+            cList.innerHTML = '<p class="text-gray-500 italic text-xs text-center">Belum ada diskusi.</p>';
             return;
         }
         var html = '';
@@ -420,8 +420,8 @@ function renderTaskComments(id) {
             var align = isMe ? 'text-right' : 'text-left';
             var bg    = isMe ? 'bg-blue-900/40 border border-blue-500/30' : 'bg-[#2a2a2a] border border-[#3f3f3f]';
             html += '<div class="mb-2 ' + align + '">' +
-                    '<div class="inline-block px-3 py-2 rounded-lg text-[11px] ' + bg + ' max-w-[85%] text-left">' +
-                    '<p class="font-bold text-[9px] ' + (isMe ? 'text-blue-300' : 'text-gray-400') + ' mb-0.5">' + (isMe ? 'Saya' : c.name) + ' &bull; ' + timeStr + '</p>' +
+                    '<div class="inline-block px-3 py-2 rounded-lg text-xs ' + bg + ' max-w-[85%] text-left">' +
+                    '<p class="font-bold text-xs ' + (isMe ? 'text-blue-300' : 'text-gray-400') + ' mb-0.5">' + (isMe ? 'Saya' : c.name) + ' &bull; ' + timeStr + '</p>' +
                     '<p class="text-white whitespace-pre-wrap break-words">' + c.text + '</p>' +
                     '</div></div>';
         });
@@ -466,8 +466,8 @@ function renderInbox() {
         return '<div onclick="readInbox(\'' + item.id + '\', \'' + item.taskId + '\')" class="relative p-3 rounded-xl cursor-pointer hover:border-violet-500 transition ' + bg + '">' +
                dot +
                '<p class="text-xs font-bold text-white mb-1">' + (item.fromName || 'Sistem') + ' ' + actionText + '</p>' +
-               '<p class="text-[10px] text-gray-400 truncate max-w-[90%]">' + (item.title || 'Tugas Baru') + '</p>' +
-               '<p class="text-[9px] text-gray-500 mt-2">' + (item.date || '') + '</p>' +
+               '<p class="text-xs text-gray-400 truncate max-w-[90%]">' + (item.title || 'Tugas Baru') + '</p>' +
+               '<p class="text-xs text-gray-500 mt-2">' + (item.date || '') + '</p>' +
                '</div>';
     }).join('');
 }
@@ -527,7 +527,7 @@ function renderMessages() {
     });
 
     if (partnerList.length === 0) {
-        cList.innerHTML = '<p class="text-center text-gray-500 italic text-xs py-10"><i class="fa-solid fa-comments mr-2"></i>Belum ada percakapan.<br><span class="text-[10px]">Klik "Tulis" untuk memulai.</span></p>';
+        cList.innerHTML = '<p class="text-center text-gray-500 italic text-xs py-10"><i class="fa-solid fa-comments mr-2"></i>Belum ada percakapan.<br><span class="text-xs">Klik "Tulis" untuk memulai.</span></p>';
         return;
     }
 
@@ -540,7 +540,7 @@ function renderMessages() {
         var timeStr = isNaN(d) ? '' : d.toLocaleDateString('id-ID', {day:'numeric', month:'short'}) + ' ' +
             d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
         var unreadBadge = p.unreadCount > 0
-            ? '<span class="bg-emerald-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">' + p.unreadCount + '</span>'
+            ? '<span class="bg-emerald-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">' + p.unreadCount + '</span>'
             : '';
         var initials = name.split(' ').map(function(w){return w[0]||'';}).join('').toUpperCase().slice(0,2);
         // Color avatar based on role
@@ -556,10 +556,10 @@ function renderMessages() {
                     unreadBadge +
                 '</div>' +
                 '<div class="flex justify-between items-center">' +
-                    '<span class="text-[10px] text-gray-500 truncate pr-2">' + (p.lastMessage || '').slice(0,40) + (p.lastMessage && p.lastMessage.length > 40 ? '...' : '') + '</span>' +
-                    '<span class="text-[9px] text-gray-600 shrink-0">' + timeStr + '</span>' +
+                    '<span class="text-xs text-gray-500 truncate pr-2">' + (p.lastMessage || '').slice(0,40) + (p.lastMessage && p.lastMessage.length > 40 ? '...' : '') + '</span>' +
+                    '<span class="text-xs text-gray-600 shrink-0">' + timeStr + '</span>' +
                 '</div>' +
-                '<span class="text-[9px] text-gray-600">' + role + dept + '</span>' +
+                '<span class="text-xs text-gray-600">' + role + dept + '</span>' +
             '</div>' +
         '</div>';
     }).join('');
@@ -605,7 +605,7 @@ function renderMessageThread(partnerUid) {
         var dateStr = d.toLocaleDateString('id-ID', {day:'numeric', month:'short'});
         var msgContent = m.message ? m.message.replace(/\n/g, '<br>') : '';
         if (m.attachment) {
-            var attHtml = '<div class="mt-1 p-1.5 bg-black/20 rounded-lg flex items-center gap-2"><i class="fa-solid fa-file text-lg text-emerald-400"></i><a href="'+m.attachment.url+'" target="_blank" class="text-[10px] text-blue-300 hover:underline truncate max-w-[150px]" title="'+m.attachment.name+'">Lampiran: '+m.attachment.name+'</a></div>';
+            var attHtml = '<div class="mt-1 p-1.5 bg-black/20 rounded-lg flex items-center gap-2"><i class="fa-solid fa-file text-lg text-emerald-400"></i><a href="'+m.attachment.url+'" target="_blank" class="text-xs text-blue-300 hover:underline truncate max-w-[150px]" title="'+m.attachment.name+'">Lampiran: '+m.attachment.name+'</a></div>';
             msgContent = msgContent ? (msgContent + '<br>' + attHtml) : attHtml;
         }
 
@@ -615,7 +615,7 @@ function renderMessageThread(partnerUid) {
                 '<div class="bg-violet-700 text-white text-xs px-3 py-2 rounded-2xl rounded-br-sm shadow">' +
                     msgContent +
                 '</div>' +
-                '<div class="text-[9px] text-gray-500 text-right mt-0.5">' + timeStr + ' · ' + dateStr + (m.read ? ' ✓✓' : '') + '</div>' +
+                '<div class="text-xs text-gray-500 text-right mt-0.5">' + timeStr + ' · ' + dateStr + (m.read ? ' ✓✓' : '') + '</div>' +
                 '</div></div>';
         } else {
             return '<div class="flex justify-start mb-2">' +
@@ -623,7 +623,7 @@ function renderMessageThread(partnerUid) {
                 '<div class="bg-[#2a2a2a] border border-[#3f3f3f] text-gray-200 text-xs px-3 py-2 rounded-2xl rounded-bl-sm shadow">' +
                     msgContent +
                 '</div>' +
-                '<div class="text-[9px] text-gray-500 mt-0.5">' + timeStr + ' · ' + dateStr + '</div>' +
+                '<div class="text-xs text-gray-500 mt-0.5">' + timeStr + ' · ' + dateStr + '</div>' +
                 '</div></div>';
         }
     }).join('');
@@ -634,7 +634,7 @@ function renderMessageThread(partnerUid) {
                 '<i class="fa-solid fa-arrow-left text-xs"></i>' +
             '</button>' +
             '<div class="font-bold text-sm text-white">' + partnerName + '</div>' +
-            '<div class="text-[10px] text-gray-500">' + partnerRole + '</div>' +
+            '<div class="text-xs text-gray-500">' + partnerRole + '</div>' +
         '</div>' +
         '<div id="threadBubbles" class="flex flex-col px-2 pb-16 overflow-y-auto max-h-[50vh]">' +
             (bubbles || '<p class="text-center text-gray-600 italic text-xs py-6">Mulai percakapan...</p>') +
@@ -1126,7 +1126,7 @@ function renderHolidays() {
 
     var isSuperAdmin = currentUser && currentUser.role === 'SuperAdmin';
     var cleanupBtn = isSuperAdmin
-        ? '<button onclick="cleanupGlobalHolidays()" class="text-[9px] text-orange-400 hover:text-orange-300 border border-orange-500/30 px-2 py-1 rounded transition"><i class="fa-solid fa-broom mr-1"></i>Hapus Data Lama Global</button>'
+        ? '<button onclick="cleanupGlobalHolidays()" class="text-xs text-orange-400 hover:text-orange-300 border border-orange-500/30 px-2 py-1 rounded transition"><i class="fa-solid fa-broom mr-1"></i>Hapus Data Lama Global</button>'
         : '';
 
     list.innerHTML = (holidays.length
@@ -1134,10 +1134,10 @@ function renderHolidays() {
             return '<div class="flex justify-between items-center bg-[#252526] p-2 rounded border border-[#3f3f3f]">' +
                 '<span class="text-xs text-gray-300"><i class="fa-regular fa-calendar text-red-400 mr-2"></i>' + h + '</span>' +
                 '<button onclick="deleteHoliday(\'' + h + '\')" class="text-red-500 hover:text-red-300 transition">' +
-                '<i class="fa-solid fa-trash text-[10px]"></i></button>' +
+                '<i class="fa-solid fa-trash text-xs"></i></button>' +
                 '</div>';
         }).join('')
-        : '<p class="text-gray-600 italic text-[10px]">Belum ada jadwal libur.</p>'
+        : '<p class="text-gray-600 italic text-xs">Belum ada jadwal libur.</p>'
     ) + (isSuperAdmin ? '<div class="mt-3 pt-2 border-t border-[#3f3f3f]">' + cleanupBtn + '</div>' : '');
 }
 

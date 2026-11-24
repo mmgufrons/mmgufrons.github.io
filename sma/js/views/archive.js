@@ -34,10 +34,10 @@ function renderArchiveView(c, filter) {
         });
 
     function sortIcon(col) {
-        if (_archiveSortBy !== col) return '<i class="fa-solid fa-sort text-gray-600 ml-1 text-[9px]"></i>';
+        if (_archiveSortBy !== col) return '<i class="fa-solid fa-sort text-gray-600 ml-1 text-xs"></i>';
         return _archiveSortDir === 'asc'
-            ? '<i class="fa-solid fa-sort-up text-violet-400 ml-1 text-[9px]"></i>'
-            : '<i class="fa-solid fa-sort-down text-violet-400 ml-1 text-[9px]"></i>';
+            ? '<i class="fa-solid fa-sort-up text-violet-400 ml-1 text-xs"></i>'
+            : '<i class="fa-solid fa-sort-down text-violet-400 ml-1 text-xs"></i>';
     }
 
     function thClass(col) {
@@ -52,22 +52,22 @@ function renderArchiveView(c, filter) {
     <div class="mb-5 flex flex-wrap gap-2 items-center justify-between animate-fadein">
         <div class="flex gap-2">
             <button onclick="renderArchiveView(document.getElementById('viewContainer'), 'Done')"
-                class="px-4 py-2 rounded-lg ${_archiveFilter === 'Done' ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/50' : 'bg-[#252526] text-gray-500 border border-transparent'} text-[10px] font-bold uppercase transition">
+                class="px-4 py-2 rounded-lg ${_archiveFilter === 'Done' ? 'bg-emerald-600/20 text-emerald-400 border border-emerald-500/50' : 'bg-[#252526] text-gray-500 border border-transparent'} text-xs font-bold uppercase transition">
                 <i class="fa-solid fa-check mr-1"></i> Selesai (${doneCount})
             </button>
             <button onclick="renderArchiveView(document.getElementById('viewContainer'), 'Cancelled')"
-                class="px-4 py-2 rounded-lg ${_archiveFilter === 'Cancelled' ? 'bg-red-600/20 text-red-400 border border-red-500/50' : 'bg-[#252526] text-gray-500 border border-transparent'} text-[10px] font-bold uppercase transition">
+                class="px-4 py-2 rounded-lg ${_archiveFilter === 'Cancelled' ? 'bg-red-600/20 text-red-400 border border-red-500/50' : 'bg-[#252526] text-gray-500 border border-transparent'} text-xs font-bold uppercase transition">
                 <i class="fa-solid fa-ban mr-1"></i> Dibatalkan (${cancelledCount})
             </button>
         </div>
         <div class="flex flex-col sm:flex-row items-center gap-3">
             <input type="text" placeholder="Cari tugas atau proyek..." oninput="searchArchiveUI(this.value)" class="bg-[#1a1a1a] border border-[#333] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-violet-500 transition w-full sm:w-64 placeholder-gray-600">
-            <span class="text-[10px] text-gray-600 italic whitespace-nowrap">${list.length} data · Klik kolom u/ sortir</span>
+            <span class="text-xs text-gray-600 italic whitespace-nowrap">${list.length} data · Klik kolom u/ sortir</span>
         </div>
     </div>
     <div class="card-bg rounded-xl overflow-hidden overflow-x-auto shadow-xl">
         <table class="w-full text-left text-xs text-gray-400">
-            <thead class="bg-[#202020] text-gray-400 font-bold uppercase text-[9px] border-b border-[#333]">
+            <thead class="bg-[#202020] text-gray-400 font-bold uppercase text-xs border-b border-[#333]">
                 <tr>
                     <th onclick="sortArchive('title')" class="${thClass('title')}">Tugas / Meeting ${sortIcon('title')}</th>
                     <th onclick="sortArchive('project')" class="${thClass('project')}">Proyek ${sortIcon('project')}</th>
@@ -86,7 +86,7 @@ function renderArchiveView(c, filter) {
                         ${t.title}
                     </td>
                     <td class="px-6 py-3">
-                        <span class="bg-[#333] px-2 py-0.5 rounded text-[10px]">
+                        <span class="bg-[#333] px-2 py-0.5 rounded text-xs">
                             ${t.type === 'meeting' ? 'MEETING' : (t.project || 'Umum')}
                         </span>
                     </td>

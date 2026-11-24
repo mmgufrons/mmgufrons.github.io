@@ -142,11 +142,11 @@ function renderGuideView(c) {
         '<h2 class="text-2xl font-bold text-white mb-2 flex items-center gap-3">' +
         '<i class="fa-solid fa-book-open-reader text-violet-400"></i> Buku Panduan PT SMA Enterprise OS CLOUD v10.3</h2>' +
         '<p class="text-sm text-gray-400">Panduan cara menggunakan sistem untuk mempermudah pekerjaan sehari-hari seluruh karyawan.</p>' +
-        '<p class="text-[10px] text-gray-600 mt-1">Terakhir diperbarui: <span class="text-violet-400 font-bold">Juli 2026</span> (Fase 3.7–3.9 + Batch Update)</p>' +
+        '<p class="text-xs text-gray-600 mt-1">Terakhir diperbarui: <span class="text-violet-400 font-bold">Juli 2026</span> (Fase 3.7–3.9 + Batch Update)</p>' +
         '<div class="flex gap-6 mt-4">' +
-        '<div class="text-center"><p class="text-lg font-bold text-white">' + myTaskCount + '</p><p class="text-[10px] text-gray-500">Tugas Anda</p></div>' +
-        '<div class="text-center"><p class="text-lg font-bold text-emerald-400">' + myDoneCount + '</p><p class="text-[10px] text-gray-500">Selesai</p></div>' +
-        '<div class="text-center"><p class="text-xs font-bold text-violet-300 mt-1">' + role + '</p><p class="text-[10px] text-gray-500">Role Anda</p></div>' +
+        '<div class="text-center"><p class="text-lg font-bold text-white">' + myTaskCount + '</p><p class="text-xs text-gray-500">Tugas Anda</p></div>' +
+        '<div class="text-center"><p class="text-lg font-bold text-emerald-400">' + myDoneCount + '</p><p class="text-xs text-gray-500">Selesai</p></div>' +
+        '<div class="text-center"><p class="text-xs font-bold text-violet-300 mt-1">' + role + '</p><p class="text-xs text-gray-500">Role Anda</p></div>' +
         '</div></div>' +
 
         '<div class="space-y-4">' + sectionHtml + '</div>' +

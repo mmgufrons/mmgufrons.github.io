@@ -198,7 +198,7 @@ function initCalendar(searchQuery = '') {
             if (loadMins > 0) {
                 const loadHours = (loadMins / 60).toFixed(1);
                 const el = document.createElement('div');
-                el.className = 'text-[9px] font-bold px-1.5 py-0.5 rounded mr-1 ' +
+                el.className = 'text-xs font-bold px-1.5 py-0.5 rounded mr-1 ' +
                     (loadHours > 8 ? 'bg-red-900/80 text-red-300' : 'bg-blue-900/50 text-blue-300');
                 el.innerHTML = `<i class="fa-regular fa-clock"></i> ${loadHours}j`;
 

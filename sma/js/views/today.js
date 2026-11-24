@@ -104,16 +104,16 @@ function renderVisualTimeline(todayTasks) {
 
     return `
     <div class="mb-6 p-4 card-bg rounded-xl border border-white/5 shadow-md">
-        <h4 class="text-[10px] font-bold text-gray-500 mb-3 uppercase tracking-widest flex items-center gap-2"><i class="fa-solid fa-timeline text-violet-400"></i> Visual Timeline</h4>
+        <h4 class="text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest flex items-center gap-2"><i class="fa-solid fa-timeline text-violet-400"></i> Visual Timeline</h4>
         <div class="relative h-5 bg-[#121212] rounded overflow-hidden border border-[#2a2a2a] w-full shadow-inner">
             ${html}
         </div>
-        <div class="flex flex-wrap justify-between gap-x-4 gap-y-2 text-[9px] text-gray-500 mt-2 font-bold uppercase tracking-wider">
+        <div class="flex flex-wrap justify-between gap-x-4 gap-y-2 text-xs text-gray-500 mt-2 font-bold uppercase tracking-wider">
             <span>Mulai: ${tIn}</span>
             <div class="flex flex-wrap gap-x-3 gap-y-1 text-gray-600 order-last sm:order-none w-full sm:w-auto">
                 <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Rencana</span>
                 <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Selesai</span>
-                <span class="flex items-center gap-1 cursor-pointer hover:text-amber-400 transition" onclick="openTodayBreakModal()"><span class="w-2 h-2 rounded-full bg-amber-500/50"></span> Istirahat <i class="fa-solid fa-pencil text-[8px] ml-1"></i></span>
+                <span class="flex items-center gap-1 cursor-pointer hover:text-amber-400 transition" onclick="openTodayBreakModal()"><span class="w-2 h-2 rounded-full bg-amber-500/50"></span> Istirahat <i class="fa-solid fa-pencil text-xs ml-1"></i></span>
             </div>
             <span>Selesai: ${endHStr}:${endM}${dayOffset}</span>
         </div>
@@ -172,15 +172,15 @@ function renderTodayView(c) {
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
 
         <div onclick="showStatDetails('todo')" class="card-bg p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-[#252526] transition shadow-sm border-t-2 border-t-gray-500 card-hover">
-            <div><p class="text-[9px] text-gray-500 uppercase font-bold">Akan Dikerjakan</p><h3 class="text-2xl font-bold text-white mt-1" id="statTodo">0</h3></div>
+            <div><p class="text-xs text-gray-500 uppercase font-bold">Akan Dikerjakan</p><h3 class="text-2xl font-bold text-white mt-1" id="statTodo">0</h3></div>
             <i class="fa-solid fa-list-ul text-gray-700 text-xl"></i>
         </div>
         <div onclick="showStatDetails('progress')" class="card-bg p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-[#252526] transition shadow-sm border-t-2 border-t-blue-500 card-hover">
-            <div><p class="text-[9px] text-gray-500 uppercase font-bold">Sedang Proses</p><h3 class="text-2xl font-bold text-blue-400 mt-1" id="statProgress">0</h3></div>
+            <div><p class="text-xs text-gray-500 uppercase font-bold">Sedang Proses</p><h3 class="text-2xl font-bold text-blue-400 mt-1" id="statProgress">0</h3></div>
             <i class="fa-solid fa-spinner text-blue-900 text-xl"></i>
         </div>
         <div onclick="showStatDetails('done')" class="card-bg p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-[#252526] transition shadow-sm border-t-2 border-t-emerald-500 card-hover">
-            <div><p class="text-[9px] text-gray-500 uppercase font-bold">Selesai Hari Ini</p><h3 class="text-2xl font-bold text-emerald-400 mt-1" id="statDone">0</h3></div>
+            <div><p class="text-xs text-gray-500 uppercase font-bold">Selesai Hari Ini</p><h3 class="text-2xl font-bold text-emerald-400 mt-1" id="statDone">0</h3></div>
             <i class="fa-solid fa-check-double text-emerald-900 text-xl"></i>
         </div>
     </div>
@@ -200,7 +200,7 @@ function renderTodayView(c) {
                     <i class="fa-solid fa-check text-xs"></i>
                 </button>
                 <div class="flex-1 min-w-0">
-                    <div class="flex items-center gap-2 text-[10px] font-bold text-gray-500 mb-1 uppercase flex-wrap">
+                    <div class="flex items-center gap-2 text-xs font-bold text-gray-500 mb-1 uppercase flex-wrap">
                         ${t.type === 'meeting'
                             ? `<span class="bg-pink-900/20 text-pink-500 px-2 py-0.5 rounded border border-pink-900/30">MEETING</span>`
                             : `<span class="bg-[#333] px-2 py-0.5 rounded text-gray-400">${t.project || 'Umum'}</span>`}
@@ -213,11 +213,11 @@ function renderTodayView(c) {
                             var myUid = currentUser.uid;
                             if (t.type === 'meeting' && t.uid !== myUid && t.participants && t.participants[myUid]) {
                                 var org = allUsers[t.uid]; var orgName = org ? (org.name || org.email || 'Seseorang') : 'Seseorang';
-                                return '<span class="text-[9px] bg-rose-900/30 text-rose-400 border border-rose-500/30 px-1.5 py-0.5 rounded font-bold normal-case"><i class="fa-solid fa-envelope mr-1"></i>Undangan: ' + orgName + '</span>';
+                                return '<span class="text-xs bg-rose-900/30 text-rose-400 border border-rose-500/30 px-1.5 py-0.5 rounded font-bold normal-case"><i class="fa-solid fa-envelope mr-1"></i>Undangan: ' + orgName + '</span>';
                             }
                             if (t.delegatedBy && t.delegatedBy !== myUid) {
                                 var del = allUsers[t.delegatedBy]; var delName = del ? (del.name || del.email || 'Atasan') : 'Atasan';
-                                return '<span class="text-[9px] bg-orange-900/30 text-orange-400 border border-orange-500/30 px-1.5 py-0.5 rounded font-bold normal-case"><i class="fa-solid fa-share-nodes mr-1"></i>Dari: ' + delName + '</span>';
+                                return '<span class="text-xs bg-orange-900/30 text-orange-400 border border-orange-500/30 px-1.5 py-0.5 rounded font-bold normal-case"><i class="fa-solid fa-share-nodes mr-1"></i>Dari: ' + delName + '</span>';
                             }
                             return '';
                         })()}
@@ -235,7 +235,7 @@ function renderTodayView(c) {
     <div class="mt-6 animate-fadein">
         <div class="flex items-center gap-2 mb-3">
             <i class="fa-solid fa-triangle-exclamation text-red-400 text-sm"></i>
-            <h4 class="text-[10px] font-bold text-red-400 uppercase tracking-widest">Tunggakan — Belum Selesai (${overdueTasks.length})</h4>
+            <h4 class="text-xs font-bold text-red-400 uppercase tracking-widest">Tunggakan — Belum Selesai (${overdueTasks.length})</h4>
         </div>
         <div class="space-y-2">
         ${overdueTasks.map(t => `
@@ -243,9 +243,9 @@ function renderTodayView(c) {
                 <i class="fa-solid fa-clock-rotate-left text-red-500 shrink-0"></i>
                 <div class="flex-1 min-w-0">
                     <p class="text-sm font-bold text-gray-200 truncate">${t.title}</p>
-                    <p class="text-[9px] text-red-400 mt-0.5">Tenggat: ${t.dueDate} &bull; ${t.project || 'Umum'} &bull; ${window.STATUS_LABELS ? window.STATUS_LABELS[t.status] || t.status : t.status}</p>
+                    <p class="text-xs text-red-400 mt-0.5">Tenggat: ${t.dueDate} &bull; ${t.project || 'Umum'} &bull; ${window.STATUS_LABELS ? window.STATUS_LABELS[t.status] || t.status : t.status}</p>
                 </div>
-                <span class="text-[9px] bg-red-900/40 text-red-400 border border-red-700/40 px-2 py-0.5 rounded font-bold shrink-0">TERLAMBAT</span>
+                <span class="text-xs bg-red-900/40 text-red-400 border border-red-700/40 px-2 py-0.5 rounded font-bold shrink-0">TERLAMBAT</span>
             </div>`).join('')}
         </div>
     </div>` : ''}`;

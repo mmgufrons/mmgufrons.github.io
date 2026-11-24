@@ -58,7 +58,7 @@ function renderActivityLogView(c) {
         allowedScopes.forEach(function(s) {
             var active = _activityScope === s;
             var cls = active ? 'bg-purple-600 text-white shadow' : 'text-gray-400 hover:text-white hover:bg-[#2a2a2a]';
-            scopeTabs += '<button onclick="_activityScope=\'' + s + '\'; _activityFilterDept=\'\'; _activityFilterUser=\'\'; renderActivityLogView(document.getElementById(\'viewContainer\'))" class="px-4 py-1.5 rounded-lg text-[11px] font-bold transition ' + cls + '">' + tabLabels[s] + '</button>';
+            scopeTabs += '<button onclick="_activityScope=\'' + s + '\'; _activityFilterDept=\'\'; _activityFilterUser=\'\'; renderActivityLogView(document.getElementById(\'viewContainer\'))" class="px-4 py-1.5 rounded-lg text-xs font-bold transition ' + cls + '">' + tabLabels[s] + '</button>';
         });
         scopeTabs += '</div>';
     }
@@ -82,7 +82,7 @@ function renderActivityLogView(c) {
             + '<select onchange="_activityFilterUser=this.value; renderActivityLogView(document.getElementById(\'viewContainer\'))" class="input-bg px-3 py-2 rounded-lg text-xs border border-[#333] flex-shrink-0">' + userOptions2 + '</select>';
     }
     if (_activitySearchQuery || _activityFilterDept || _activityFilterUser) {
-        filterBarHtml += '<button onclick="_activitySearchQuery=\'\'; _activityFilterDept=\'\'; _activityFilterUser=\'\'; renderActivityLogView(document.getElementById(\'viewContainer\'))" class="px-3 py-2 text-[10px] font-bold text-red-400 border border-red-500/30 rounded-lg hover:bg-red-900/20 transition"><i class="fa-solid fa-xmark mr-1"></i>Reset</button>';
+        filterBarHtml += '<button onclick="_activitySearchQuery=\'\'; _activityFilterDept=\'\'; _activityFilterUser=\'\'; renderActivityLogView(document.getElementById(\'viewContainer\'))" class="px-3 py-2 text-xs font-bold text-red-400 border border-red-500/30 rounded-lg hover:bg-red-900/20 transition"><i class="fa-solid fa-xmark mr-1"></i>Reset</button>';
     }
     filterBarHtml += '</div>';
 
@@ -109,22 +109,22 @@ function renderActivityLogView(c) {
                 var u = allUsers[log.uid];
                 var uname = u ? (u.name || u.email) : log.uid;
                 var udept = log.dept !== '-' ? log.dept : (u ? u.department : 'Sistem');
-                var uidBadge = isSuperAdmin ? '<span class="text-gray-700 text-[8px] font-mono ml-1">' + log.uid.slice(0,8) + '...</span>' : '';
-                userInfoStr = '<p class="text-[10px] text-gray-400 mt-2 border-t border-[#333] pt-2 flex items-center gap-1">'
-                    + '<i class="fa-solid fa-user-shield text-gray-600 text-[9px]"></i>'
+                var uidBadge = isSuperAdmin ? '<span class="text-gray-700 text-xs font-mono ml-1">' + log.uid.slice(0,8) + '...</span>' : '';
+                userInfoStr = '<p class="text-xs text-gray-400 mt-2 border-t border-[#333] pt-2 flex items-center gap-1">'
+                    + '<i class="fa-solid fa-user-shield text-gray-600 text-xs"></i>'
                     + '<span class="font-semibold">' + uname + '</span>' + uidBadge
                     + '<span class="text-gray-600"> - ' + udept + '</span></p>';
             }
             logHtml += '<div class="relative pl-6 md:pl-8 group">'
-                + '<div class="absolute -left-[17px] top-1 w-8 h-8 rounded-full ' + bg + ' border flex items-center justify-center ' + color + ' text-[10px] shadow-lg group-hover:scale-110 transition-transform">'
+                + '<div class="absolute -left-[17px] top-1 w-8 h-8 rounded-full ' + bg + ' border flex items-center justify-center ' + color + ' text-xs shadow-lg group-hover:scale-110 transition-transform">'
                 + '<i class="fa-solid ' + icon + '"></i></div>'
                 + '<div class="bg-[#202020] p-4 rounded-xl border border-[#2f2f2f] group-hover:border-[#3f3f3f] transition shadow-sm">'
                 + '<div class="flex justify-between items-start mb-1.5">'
-                + '<span class="text-[10px] font-bold uppercase tracking-widest ' + color + '">' + log.action + '</span>'
-                + '<span class="text-[10px] text-gray-500 font-medium shrink-0 ml-2"><i class="fa-regular fa-clock mr-1"></i>' + dateStr + ', ' + timeStr + '</span>'
+                + '<span class="text-xs font-bold uppercase tracking-widest ' + color + '">' + log.action + '</span>'
+                + '<span class="text-xs text-gray-500 font-medium shrink-0 ml-2"><i class="fa-regular fa-clock mr-1"></i>' + dateStr + ', ' + timeStr + '</span>'
                 + '</div>'
                 + '<h4 class="text-sm font-bold text-gray-200 leading-snug">' + (log.taskTitle || 'Tugas Tanpa Judul') + '</h4>'
-                + '<p class="text-[9px] text-gray-600 mt-1 font-mono">ID: ' + (log.taskId || '-') + '</p>'
+                + '<p class="text-xs text-gray-600 mt-1 font-mono">ID: ' + (log.taskId || '-') + '</p>'
                 + userInfoStr + '</div></div>';
         });
     }
@@ -151,20 +151,20 @@ function _buildEmptyState(type) {
         return '<div class="text-center py-16">'
             + '<div class="w-12 h-12 border-2 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>'
             + '<p class="text-gray-500 text-sm font-bold">Memuat riwayat aktivitas...</p>'
-            + '<p class="text-gray-600 text-[10px] mt-1">Jika lama, coba refresh atau periksa koneksi internet</p></div>';
+            + '<p class="text-gray-600 text-xs mt-1">Jika lama, coba refresh atau periksa koneksi internet</p></div>';
     }
     return '<div class="text-center py-16">'
         + '<i class="fa-solid fa-list-check text-4xl text-gray-700 mb-4 block"></i>'
         + '<p class="text-gray-500 text-sm font-bold">Belum ada aktivitas tercatat</p>'
-        + '<p class="text-gray-600 text-[10px] mt-1">Aktivitas muncul saat kamu membuat atau mengubah tugas</p></div>';
+        + '<p class="text-gray-600 text-xs mt-1">Aktivitas muncul saat kamu membuat atau mengubah tugas</p></div>';
 }
 
 function _buildActivityShell(filterArea, logContent, count) {
     return '<div class="max-w-3xl mx-auto w-full animate-fadein">'
         + '<div class="bg-[#1a1a1a] rounded-xl border border-[#333] p-4 shadow-inner mb-4 flex justify-between items-center">'
         + '<div><h3 class="text-white font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-list-check text-purple-400"></i> Riwayat Aktivitas &amp; Audit Log</h3>'
-        + '<p class="text-[10px] text-gray-500 mt-1">Tersimpan otomatis di Cloud - Real-time</p></div>'
-        + (count !== '' ? '<div id="activityLogCount" class="bg-purple-900/20 text-purple-400 px-3 py-1.5 rounded-lg border border-purple-900/30 text-[10px] font-bold shrink-0">' + count + ' LOG</div>' : '')
+        + '<p class="text-xs text-gray-500 mt-1">Tersimpan otomatis di Cloud - Real-time</p></div>'
+        + (count !== '' ? '<div id="activityLogCount" class="bg-purple-900/20 text-purple-400 px-3 py-1.5 rounded-lg border border-purple-900/30 text-xs font-bold shrink-0">' + count + ' LOG</div>' : '')
         + '</div>'
         + filterArea
         + '<div id="activityLogListContainer" class="relative border-l-2 border-[#333] ml-3 md:ml-6 space-y-5 pb-10">' + logContent + '</div>'

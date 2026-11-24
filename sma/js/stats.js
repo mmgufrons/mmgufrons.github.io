@@ -48,8 +48,8 @@ function updateGlobalStats() {
         if (loadBar) {
             loadBar.style.width     = Math.min((loadHours / maxHours) * 100, 100) + '%';
             loadBar.className       = loadHours > maxHours
-                ? 'bg-red-500 h-1.5 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.5)] transition-all'
-                : 'bg-blue-500 h-1.5 rounded-full transition-all';
+                ? 'bg-red-500 h-1.5 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.5)] transition'
+                : 'bg-blue-500 h-1.5 rounded-full transition';
         }
         if (overload) overload.classList.toggle('hidden', parseFloat(loadHours) <= maxHours);
 
@@ -157,10 +157,10 @@ function showStatDetails(type) {
     <div onclick="openTaskModal('${t.id}'); closeModal('statModal')"
         class="bg-[#2a2a2a] p-4 rounded-xl border border-[#3f3f3f] cursor-pointer hover:border-purple-500 transition mb-3 shadow-md">
         <div class="flex justify-between items-center mb-1.5 uppercase font-bold">
-            <span class="text-[9px] text-blue-500 bg-blue-900/20 px-1.5 py-0.5 rounded border border-blue-900/50">
+            <span class="text-xs text-blue-500 bg-blue-900/20 px-1.5 py-0.5 rounded border border-blue-900/50">
                 ${t.type === 'meeting' ? 'MEETING' : (t.project || 'Umum')}
             </span>
-            <span class="text-[9px] text-gray-500"><i class="fa-regular fa-clock"></i> ${t.dueDate || '-'}</span>
+            <span class="text-xs text-gray-500"><i class="fa-regular fa-clock"></i> ${t.dueDate || '-'}</span>
         </div>
         <p class="text-sm text-white font-bold truncate">${t.title}</p>
     </div>`).join('') || '<p class="text-center text-gray-600 py-10 italic">Data Kosong.</p>';
@@ -212,16 +212,16 @@ function generateReport() {
         <p class="text-blue-400 text-xs mb-1">Total Pencapaian${window._statsShowRoutine ? ' (Termasuk Rutin)' : ' (Non-Rutin)'}</p>
         <p class="text-white text-2xl">${list.length} Pekerjaan</p>
     </div>
-    <h4 class="text-red-400 font-bold uppercase text-[10px] mb-2 tracking-widest border-b border-[#333] pb-1">🔥 Prioritas Tinggi Selesai</h4>
+    <h4 class="text-red-400 font-bold uppercase text-xs mb-2 tracking-widest border-b border-[#333] pb-1">🔥 Prioritas Tinggi Selesai</h4>
     <ul class="list-disc pl-5 mb-6 text-gray-300 space-y-1">
         ${list.filter(t => t.priority === 'High').map(t =>
-            `<li>${t.title} <span class="text-gray-500 text-[10px]">(${t.type === 'meeting' ? 'Meeting' : t.project})</span></li>`
+            `<li>${t.title} <span class="text-gray-500 text-xs">(${t.type === 'meeting' ? 'Meeting' : t.project})</span></li>`
         ).join('') || '<li class="italic text-gray-600">Tidak ada.</li>'}
     </ul>
-    <h4 class="text-blue-400 font-bold uppercase text-[10px] mb-2 tracking-widest border-b border-[#333] pb-1">✅ Tugas Lainnya Selesai</h4>
+    <h4 class="text-blue-400 font-bold uppercase text-xs mb-2 tracking-widest border-b border-[#333] pb-1">✅ Tugas Lainnya Selesai</h4>
     <ul class="list-disc pl-5 text-gray-300 space-y-1">
         ${list.filter(t => t.priority !== 'High').map(t =>
-            `<li>${t.title} <span class="text-gray-500 text-[10px]">(${t.type === 'meeting' ? 'Meeting' : t.project})</span></li>`
+            `<li>${t.title} <span class="text-gray-500 text-xs">(${t.type === 'meeting' ? 'Meeting' : t.project})</span></li>`
         ).join('') || '<li class="italic text-gray-600">Tidak ada.</li>'}
     </ul>`;
 }

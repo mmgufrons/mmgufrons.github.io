@@ -50,13 +50,13 @@ window.renderBulkActionBar = function() {
                     <span id="bulkCountLabel" class="text-white text-sm font-bold"></span>
                 </div>
                 <div class="flex flex-wrap gap-2 flex-1">
-                    <button onclick="bulkRenameProject()" class="flex items-center gap-1.5 px-3 py-1.5 bg-violet-900/40 border border-violet-500/40 hover:bg-violet-700/40 text-violet-300 rounded-lg text-[11px] font-bold transition">
+                    <button onclick="bulkRenameProject()" class="flex items-center gap-1.5 px-3 py-1.5 bg-violet-900/40 border border-violet-500/40 hover:bg-violet-700/40 text-violet-300 rounded-lg text-xs font-bold transition">
                         <i class="fa-solid fa-folder-open"></i> Ganti Proyek
                     </button>
-                    <button onclick="bulkChangeStatus()" class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-900/40 border border-blue-500/40 hover:bg-blue-700/40 text-blue-300 rounded-lg text-[11px] font-bold transition">
+                    <button onclick="bulkChangeStatus()" class="flex items-center gap-1.5 px-3 py-1.5 bg-blue-900/40 border border-blue-500/40 hover:bg-blue-700/40 text-blue-300 rounded-lg text-xs font-bold transition">
                         <i class="fa-solid fa-arrows-rotate"></i> Ganti Status
                     </button>
-                    <button onclick="bulkChangePriority()" class="flex items-center gap-1.5 px-3 py-1.5 bg-orange-900/40 border border-orange-500/40 hover:bg-orange-700/40 text-orange-300 rounded-lg text-[11px] font-bold transition">
+                    <button onclick="bulkChangePriority()" class="flex items-center gap-1.5 px-3 py-1.5 bg-orange-900/40 border border-orange-500/40 hover:bg-orange-700/40 text-orange-300 rounded-lg text-xs font-bold transition">
                         <i class="fa-solid fa-flag"></i> Ganti Prioritas
                     </button>
                 </div>
@@ -161,11 +161,11 @@ function renderBoardView(c) {
         const isMonitoringStaff = targetRole === 'Staff';
         const monitorType = isMonitoringStaff ? 'Memantau Tugas Staf' : 'Memantau Delegasi SPV';
         monitorBanner = `
-        <div class="mb-3 bg-emerald-900/30 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold p-2.5 rounded-lg flex items-center gap-2 justify-between">
+        <div class="mb-3 bg-emerald-900/30 border border-emerald-500/30 text-emerald-400 text-xs font-bold p-2.5 rounded-lg flex items-center gap-2 justify-between">
             <span><i class="fa-solid fa-eye mr-1"></i> ${monitorType}: <span class="text-white font-bold">${targetName}</span>
             <span class="text-emerald-600 ml-1">(${targetUser.department || '-'} · ${targetRole})</span></span>
             <button onclick="boardTargetUid=null; switchView('supervisor')"
-                class="text-[9px] text-gray-400 hover:text-white border border-gray-600 px-2 py-1 rounded transition shrink-0">
+                class="text-xs text-gray-400 hover:text-white border border-gray-600 px-2 py-1 rounded transition shrink-0">
                 <i class="fa-solid fa-arrow-left mr-1"></i> Kembali
             </button>
         </div>`;
@@ -285,14 +285,14 @@ function renderKanban(target) {
                 if (t.delegatedBy && t.delegatedBy !== uid) {
                     var del = allUsers[t.delegatedBy];
                     var dn = del ? (del.name || del.email || 'Atasan') : 'Atasan';
-                    delegBadge = '<div class="mt-2 text-[9px] bg-orange-900/30 text-orange-400 border border-orange-500/30 px-1.5 py-0.5 rounded font-bold inline-block">'
+                    delegBadge = '<div class="mt-2 text-xs bg-orange-900/30 text-orange-400 border border-orange-500/30 px-1.5 py-0.5 rounded font-bold inline-block">'
                                + '<i class="fa-solid fa-share-nodes mr-1"></i>Dari: ' + dn + '</div>';
                 }
                 var prioFlag = t.priority === 'High'
                     ? '<div class="absolute top-0 right-0 w-8 h-8 overflow-hidden"><div class="absolute top-[-10px] right-[-10px] w-12 h-4 bg-red-500 rotate-45"></div></div>'
                     : '';
                 var routineBadge = t.isRoutine
-                    ? '<p class="text-[9px] text-purple-400 mt-2"><i class="fa-solid fa-repeat"></i> ' + t.routineType + '</p>'
+                    ? '<p class="text-xs text-purple-400 mt-2"><i class="fa-solid fa-repeat"></i> ' + t.routineType + '</p>'
                     : '';
                 itemsHtml +=
                     '<div draggable="true"'
@@ -303,9 +303,9 @@ function renderKanban(target) {
                     + '<div class="flex justify-between mb-2 items-center">'
                     + '<div class="flex items-center gap-2">'
                     + '<input type="checkbox" data-task-id="' + t.id + '" onclick="event.stopPropagation(); window.toggleTaskSelection(this,\'' + t.id + '\')" class="task-checkbox appearance-none w-4 h-4 border border-gray-500 rounded bg-[#333] checked:bg-purple-500 checked:border-purple-500 cursor-pointer transition shrink-0">'
-                    + '<span class="text-[9px] text-blue-400 font-bold uppercase bg-blue-900/20 px-1.5 py-0.5 rounded border border-blue-900/50">' + (t.project || 'Umum') + '</span>'
+                    + '<span class="text-xs text-blue-400 font-bold uppercase bg-blue-900/20 px-1.5 py-0.5 rounded border border-blue-900/50">' + (t.project || 'Umum') + '</span>'
                     + '</div>'
-                    + '<span class="text-[9px] text-gray-500"><i class="fa-regular fa-clock"></i> ' + (t.dueDate || '').slice(5) + '</span>'
+                    + '<span class="text-xs text-gray-500"><i class="fa-regular fa-clock"></i> ' + (t.dueDate || '').slice(5) + '</span>'
                     + '</div>'
                     + '<p class="text-sm text-gray-200 font-bold line-clamp-2 leading-snug">' + (t.title || '') + '</p>'
                     + routineBadge
@@ -315,11 +315,11 @@ function renderKanban(target) {
         }
 
         var addBtn = !_isMonitoring()
-            ? '<button onclick="openTaskModal(null, null, \'task\')" class="mt-3 w-full py-2 border border-dashed border-[#444] rounded-lg text-gray-500 hover:text-white hover:border-purple-500 text-[10px] font-bold uppercase transition">+ Tambah Tugas</button>'
+            ? '<button onclick="openTaskModal(null, null, \'task\')" class="mt-3 w-full py-2 border border-dashed border-[#444] rounded-lg text-gray-500 hover:text-white hover:border-purple-500 text-xs font-bold uppercase transition">+ Tambah Tugas</button>'
             : '';
 
         colEl.innerHTML =
-            '<h4 class="font-bold text-gray-300 border-b-2 ' + col.color + ' pb-3 mb-4 uppercase tracking-widest text-[10px] flex justify-between">'
+            '<h4 class="font-bold text-gray-300 border-b-2 ' + col.color + ' pb-3 mb-4 uppercase tracking-widest text-xs flex justify-between">'
             + col.title + ' <span class="bg-[#333] px-2 rounded text-white">' + items.length + '</span>'
             + '</h4>'
             + '<div class="flex-1 space-y-3 overflow-y-auto pr-2 pb-10">'
@@ -387,13 +387,13 @@ function renderProjectList(target) {
         FILTER_CONFIG.map(function(f) {
             var isActive = (curFilter === f.key);
             var count = countByFilter(f.key);
-            var activeBase = 'px-3 py-1.5 rounded-lg text-[10px] font-bold transition border cursor-pointer select-none flex items-center gap-1.5 ';
+            var activeBase = 'px-3 py-1.5 rounded-lg text-xs font-bold transition border cursor-pointer select-none flex items-center gap-1.5 ';
             var cls = isActive
                 ? activeBase + f.cls + ' bg-white/5'
                 : activeBase + 'text-gray-600 border-gray-800 hover:text-gray-400 hover:border-gray-600';
             return '<button onclick="setProjectFilter(\'' + f.key + '\')" class="' + cls + '">'
-                + '<i class="fa-solid ' + f.icon + ' text-[9px]"></i>' + f.label
-                + '<span class="text-[9px] opacity-60">' + count + '</span>'
+                + '<i class="fa-solid ' + f.icon + ' text-xs"></i>' + f.label
+                + '<span class="text-xs opacity-60">' + count + '</span>'
                 + '</button>';
         }).join('') + '</div>';
 
@@ -420,7 +420,7 @@ function renderProjectList(target) {
 
         var safeProj = proj.replace(/'/g, "\\'");
         var editBtn = canEdit
-            ? '<button onclick="renameProject(\'' + safeProj + '\')" class="text-[9px] text-gray-500 hover:text-violet-400 border border-gray-700 hover:border-violet-500 px-2 py-0.5 rounded transition"><i class="fa-solid fa-pen-to-square mr-1"></i>Ganti Nama</button>'
+            ? '<button onclick="renameProject(\'' + safeProj + '\')" class="text-xs text-gray-500 hover:text-violet-400 border border-gray-700 hover:border-violet-500 px-2 py-0.5 rounded transition"><i class="fa-solid fa-pen-to-square mr-1"></i>Ganti Nama</button>'
             : '';
 
         var taskCards = pTasks.map(function(t) {
@@ -432,7 +432,7 @@ function renderProjectList(target) {
                 + '<input type="checkbox" data-task-id="' + t.id + '" onclick="event.stopPropagation(); window.toggleTaskSelection(this, \'' + t.id + '\')" class="task-checkbox appearance-none w-4 h-4 border border-gray-500 rounded bg-[#333] checked:bg-purple-500 checked:border-purple-500 cursor-pointer transition shrink-0 relative after:content-[\'\'] after:absolute after:hidden checked:after:block after:left-[4px] after:top-[1px] after:w-[5px] after:h-[10px] after:border-r-2 after:border-b-2 after:border-white after:rotate-45">'
                 + '<span class="text-xs font-bold text-gray-300 truncate pr-2 group-hover:text-white">' + t.title + '</span>'
                 + '</div>'
-                + '<span class="text-[9px] font-bold px-2 py-0.5 rounded border ' + cfg.color + ' ' + cfg.bg + ' ' + cfg.border + ' uppercase shrink-0">' + cfg.label + '</span>'
+                + '<span class="text-xs font-bold px-2 py-0.5 rounded border ' + cfg.color + ' ' + cfg.bg + ' ' + cfg.border + ' uppercase shrink-0">' + cfg.label + '</span>'
                 + '</div>';
         }).join('');
 
@@ -440,11 +440,11 @@ function renderProjectList(target) {
             + '<div class="flex items-center justify-between border-b border-[#333] pb-3 mb-4">'
             + '<h3 class="text-sm font-bold text-purple-400 uppercase tracking-widest"><i class="fa-solid fa-folder-open mr-2"></i>' + proj + '</h3>'
             + '<div class="flex items-center gap-3">'
-            + '<span class="text-[9px] text-gray-500">' + totalCount + ' tugas · ' + doneCount + ' selesai · ' + activeCount + ' berjalan</span>'
+            + '<span class="text-xs text-gray-500">' + totalCount + ' tugas · ' + doneCount + ' selesai · ' + activeCount + ' berjalan</span>'
             + editBtn
             + '</div></div>'
             + '<div class="w-full bg-[#333] rounded-full h-1 mb-3">'
-            + '<div class="bg-violet-500 h-1 rounded-full transition-all" style="width:' + donePercent + '%"></div>'
+            + '<div class="bg-violet-500 h-1 rounded-full transition" style="width:' + donePercent + '%"></div>'
             + '</div>'
             + '<div class="grid grid-cols-1 md:grid-cols-2 gap-3">' + taskCards + '</div>'
             + '</div>';
@@ -516,13 +516,13 @@ function renderDelegatedBoard(target) {
         delegatedTasks = tasks.filter(t => t.uid === uid && t.delegatedBy && t.delegatedBy !== uid);
         const titleText = isMonitoring ? `Tugas Masuk ke: <span class="text-white">${targetName}</span>` : 'Tugas yang Didelegasikan kepada Anda';
         const bgClass = isMonitoring ? 'bg-blue-900/20 border-blue-500/30 text-blue-400' : 'bg-orange-900/20 border-orange-500/30 text-orange-400';
-        headerMsg = `<div class="${bgClass} border p-2.5 rounded-lg text-[10px] font-bold uppercase flex justify-between items-center w-full">
+        headerMsg = `<div class="${bgClass} border p-2.5 rounded-lg text-xs font-bold uppercase flex justify-between items-center w-full">
             <span class="flex items-center gap-2"><i class="fa-solid fa-inbox"></i> ${titleText}</span>
         </div>`;
     } else {
         delegatedTasks = tasks.filter(t => t.delegatedBy === uid && t.uid !== uid);
         const titleText = isMonitoring ? `Delegasi Keluar dari: <span class="text-white">${targetName}</span>` : 'Tugas yang Anda Delegasikan Keluar';
-        headerMsg = `<div class="bg-purple-900/20 border border-purple-500/30 text-purple-400 p-2.5 rounded-lg text-[10px] font-bold uppercase flex justify-between items-center w-full">
+        headerMsg = `<div class="bg-purple-900/20 border border-purple-500/30 text-purple-400 p-2.5 rounded-lg text-xs font-bold uppercase flex justify-between items-center w-full">
             <span class="flex items-center gap-2"><i class="fa-solid fa-share-nodes"></i> ${titleText}</span>
         </div>`;
     }
@@ -567,7 +567,7 @@ function renderDelegatedBoard(target) {
         });
 
         colEl.innerHTML = `
-        <h4 class="font-bold text-gray-300 border-b-2 ${col.color} pb-3 mb-4 uppercase tracking-widest text-[10px] flex justify-between">
+        <h4 class="font-bold text-gray-300 border-b-2 ${col.color} pb-3 mb-4 uppercase tracking-widest text-xs flex justify-between">
             ${col.title} <span class="bg-[#333] px-2 rounded text-white">${items.length}</span>
         </h4>
         <div class="flex-1 space-y-3 overflow-y-auto pr-2 pb-10">
@@ -580,14 +580,14 @@ function renderDelegatedBoard(target) {
                         // Show who delegated it
                         const fromUser = allUsers[t.delegatedBy];
                         const fromName = fromUser ? (fromUser.name || 'Atasan') : 'Atasan';
-                        badge = `<div class="mt-2 text-[9px] text-orange-400 bg-orange-900/20 px-1.5 py-0.5 rounded inline-block border border-orange-900/50 font-bold">
+                        badge = `<div class="mt-2 text-xs text-orange-400 bg-orange-900/20 px-1.5 py-0.5 rounded inline-block border border-orange-900/50 font-bold">
                             <i class="fa-solid fa-share-nodes"></i> Dari: ${fromName}
                         </div>`;
                     } else {
                         // Show who is assigned
                         const toUser = allUsers[t.uid];
                         const toName = toUser ? (toUser.name || 'Seseorang') : 'Seseorang';
-                        badge = `<div class="mt-2 text-[9px] text-emerald-400 bg-emerald-900/20 px-1.5 py-0.5 rounded inline-block border border-emerald-900/50 font-bold">
+                        badge = `<div class="mt-2 text-xs text-emerald-400 bg-emerald-900/20 px-1.5 py-0.5 rounded inline-block border border-emerald-900/50 font-bold">
                             <i class="fa-solid fa-user-arrow-right"></i> Dikerjakan: ${toName}
                         </div>`;
                     }
@@ -598,8 +598,8 @@ function renderDelegatedBoard(target) {
                          class="bg-[#202020] p-4 rounded-xl border border-[#3f3f3f] hover:border-purple-500 cursor-pointer shadow-sm transition group relative overflow-hidden card-hover">
                         ${t.priority === 'High' ? `<div class="absolute top-0 right-0 w-8 h-8 overflow-hidden"><div class="absolute top-[-10px] right-[-10px] w-12 h-4 bg-red-500 rotate-45"></div></div>` : ''}
                         <div class="flex justify-between mb-2 items-center">
-                            <span class="text-[9px] text-blue-400 font-bold uppercase bg-blue-900/20 px-1.5 py-0.5 rounded border border-blue-900/50">${t.project || 'Umum'}</span>
-                            <span class="text-[9px] text-gray-500"><i class="fa-regular fa-clock"></i> ${(t.dueDate || '').slice(5)}</span>
+                            <span class="text-xs text-blue-400 font-bold uppercase bg-blue-900/20 px-1.5 py-0.5 rounded border border-blue-900/50">${t.project || 'Umum'}</span>
+                            <span class="text-xs text-gray-500"><i class="fa-regular fa-clock"></i> ${(t.dueDate || '').slice(5)}</span>
                         </div>
                         <p class="text-sm text-gray-200 font-bold line-clamp-2 leading-snug">${t.title}</p>
                         ${badge}
@@ -608,7 +608,7 @@ function renderDelegatedBoard(target) {
         </div>
         ${col.id === 'Planning' && !isMonitoring ? `
         <button onclick="openTaskModal(null, null, 'task', true)"
-            class="mt-3 w-full py-2 border border-dashed border-purple-500/50 rounded-lg text-purple-400 hover:bg-purple-900/20 text-[10px] font-bold uppercase transition">
+            class="mt-3 w-full py-2 border border-dashed border-purple-500/50 rounded-lg text-purple-400 hover:bg-purple-900/20 text-xs font-bold uppercase transition">
             <i class="fa-solid fa-share-nodes"></i> Delegasikan Tugas Baru
         </button>` : ''}`;
         columnsWrapper.appendChild(colEl);
