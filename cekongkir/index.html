@@ -12,114 +12,147 @@
 <style>
   :root{
     --bg:#09090b; --panel:#121215; --panel-2:#18181c; --border:#27272a;
-    --border-hover:#3f3f46; --text:#f4f4f5; --muted:#a1a1aa;
-    --accent:#6366f1; --accent-2:#10b981;
-    --shadow-card:0 10px 30px -10px rgba(0,0,0,0.6);
-    --shadow-hover:0 20px 40px -12px rgba(0,0,0,0.8), 0 0 25px -5px rgba(99,102,241,0.15);
+    --border-hover:#52525b; --text:#f4f4f5; --muted:#b4b4bc;
+    /* Indigo merek: teks memakai rona terang, tombol memakai rona gelap (AAA dengan teks putih) */
+    --accent:#6366f1; --accent-text:#a5b4fc; --accent-btn:#4338ca; --accent-btn-hover:#3730a3;
+    --ok:#6ee7b7;
+    --shadow-card:0 8px 24px -8px rgba(0,0,0,0.6);
+    --shadow-hover:0 16px 32px -8px rgba(0,0,0,0.8), 0 0 24px -4px rgba(99,102,241,0.15);
+    /* Skala huruf (rem) */
+    --fs-12:.75rem; --fs-13:.8125rem; --fs-14:.875rem; --fs-16:1rem; --fs-18:1.125rem; --fs-24:1.5rem;
+    /* Token gerak (Proyek Manager) */
+    --gerak-cepat:120ms; --gerak-normal:200ms; --gerak-sedang:320ms;
+    --ease-keluar:cubic-bezier(0.16, 1, 0.3, 1);
+    --tekan-skala:0.97;
   }
   *{box-sizing:border-box;}
   body{
     margin:0; background:var(--bg); color:var(--text);
     font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;
+    font-size:var(--fs-16); line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
+  a:focus-visible, button:focus-visible{outline:2px solid var(--accent-text); outline-offset:2px; border-radius:8px;}
+
   .top-nav{
-    display:flex; align-items:center; gap:12px; padding:18px 32px;
-    border-bottom:1px solid var(--border); background:rgba(18,18,21,0.7); backdrop-filter:blur(12px);
-    font-size:13px; font-weight:600;
+    position:sticky; top:0; z-index:10;
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    padding:8px 16px; padding-top:max(8px, env(safe-area-inset-top));
+    border-bottom:1px solid var(--border); background:rgba(18,18,21,0.92);
+    font-size:var(--fs-14); font-weight:600;
   }
-  .top-nav a{ color:var(--muted); text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all .2s ease; }
-  .top-nav a:hover{ color:#ffffff; transform:translateX(-2px); }
-  .top-nav .sep{ color:#3f3f46; }
+  @supports (backdrop-filter:blur(12px)){ .top-nav{ background:rgba(18,18,21,0.7); backdrop-filter:blur(12px); } }
+  .top-nav a{
+    color:var(--muted); text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    min-height:44px; padding:0 8px;
+    transition:color var(--gerak-normal) var(--ease-keluar), transform var(--gerak-normal) var(--ease-keluar);
+  }
+  .top-nav .sep{ color:#71717a; }
   .top-nav .current{ color:var(--text); }
+  .lang{
+    margin-left:auto; display:inline-flex; align-items:center; gap:4px;
+    background:var(--panel); border:1px solid var(--border); border-radius:99px; padding:0 4px;
+  }
+  .lang-sep{ color:#71717a; font-size:var(--fs-12); }
+  .lang-btn{
+    background:transparent; border:1px solid transparent; color:var(--muted);
+    font-size:var(--fs-12); font-weight:700; min-width:44px; min-height:44px; padding:0 8px; border-radius:99px;
+    cursor:pointer; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    transition:color var(--gerak-normal) ease, transform var(--gerak-cepat) ease;
+  }
+  .lang-btn.active{ background:#27272a; color:#fff; border-color:#3f3f46; }
+  .lang-btn:active{ transform:scale(var(--tekan-skala)); }
+
   header{
-    padding:64px 24px 36px; text-align:center;
+    padding:64px 16px 32px; text-align:center;
     background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 65%);
   }
   header h1{
-    margin:0 0 12px; font-size:clamp(30px,4.5vw,44px); font-weight:800;
+    margin:0 0 16px; font-size:clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem); font-weight:800; line-height:1.15;
     letter-spacing:-0.03em; color:#fafafa;
   }
-  header p{margin:0 auto;max-width:640px;color:var(--muted);font-size:14.5px;line-height:1.65;}
+  header p{margin:0 auto; max-width:40rem; color:var(--muted); font-size:var(--fs-16); line-height:1.65;}
   .badge{
-    display:inline-block;background:rgba(255,255,255,0.06);color:#e4e4e7;
-    border:1px solid rgba(255,255,255,0.14);padding:5px 14px;border-radius:99px;
-    font-size:12px;font-weight:700;letter-spacing:.02em;margin-bottom:16px;
-    transition:all .2s ease;
+    display:inline-block; background:rgba(255,255,255,0.06); color:#e4e4e7;
+    border:1px solid rgba(255,255,255,0.14); padding:4px 16px; border-radius:99px;
+    font-size:var(--fs-12); font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:16px;
   }
-  .badge:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.09);}
-  main{max-width:1180px;margin:0 auto;padding:0 24px 80px;}
-  .group{margin-bottom:52px;}
-  .group-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
-  .group-head h2{margin:0;font-size:22px;font-weight:800;letter-spacing:-0.02em;}
-  .group-head span{color:var(--muted);font-size:13.5px;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+
+  main{max-width:1180px; margin:0 auto; padding:0 16px 64px;}
+  .group{margin-bottom:48px;}
+  .group-head{display:flex; align-items:baseline; gap:8px 16px; margin-bottom:24px; flex-wrap:wrap;}
+  .group-head h2{margin:0; font-size:var(--fs-24); font-weight:800; letter-spacing:-0.02em;}
+  .group-head span{color:var(--muted); font-size:var(--fs-14);}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 288px), 1fr)); gap:24px;}
+
   .card{
-    background:var(--panel);border:1px solid var(--border);border-radius:18px;
-    overflow:hidden;display:flex;flex-direction:column;
-    transition:all .28s cubic-bezier(0.16, 1, 0.3, 1);
+    background:var(--panel); border:1px solid var(--border); border-radius:16px;
+    overflow:hidden; display:flex; flex-direction:column;
     box-shadow:var(--shadow-card);
+    transition:transform var(--gerak-sedang) var(--ease-keluar), border-color var(--gerak-sedang) ease, box-shadow var(--gerak-sedang) ease;
   }
-  .card:hover{
-    transform:translateY(-5px);border-color:var(--border-hover);
-    box-shadow:var(--shadow-hover);
-  }
-  .thumb{height:130px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid var(--border);}
-  .thumb .mock{width:82%;height:78%;background:var(--panel-2);border-radius:12px;border:1px solid var(--border);padding:10px;display:flex;flex-direction:column;gap:6px;}
-  .mock .bar{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--accent),transparent);width:60%;}
-  .mock .line{height:6px;border-radius:3px;background:rgba(255,255,255,0.08);}
+  .thumb{height:128px; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; border-bottom:1px solid var(--border);}
+  .thumb .mock{width:82%; height:76%; background:var(--panel-2); border-radius:12px; border:1px solid var(--border); padding:8px; display:flex; flex-direction:column; gap:8px;}
+  .mock .bar{height:8px; border-radius:4px; background:linear-gradient(90deg, var(--mock, var(--accent)), transparent); width:60%;}
+  .mock .line{height:4px; border-radius:4px; background:rgba(255,255,255,0.08);}
   .mock .line.w1{width:90%;} .mock .line.w2{width:70%;} .mock .line.w3{width:50%;}
-  .mock .chip{margin-top:auto;height:20px;width:40%;border-radius:99px;background:rgba(99,102,241,0.25);}
-  .thumb.t-base{background:linear-gradient(135deg,#1c1c22,#121215);}
-  .thumb.t-bold{background:linear-gradient(135deg,#201c24,#121215);}
-  .thumb.t-minimal{background:linear-gradient(135deg,#181c20,#121215);}
-  .thumb.t-update{background:linear-gradient(135deg,#18201a,#121215);}
-  .thumb.t-signature{background:linear-gradient(135deg,#1d1a24,#121215);}
-  .thumb.t-nova{background:linear-gradient(135deg,#191c26,#121215);}
-  .thumb.t-landing{background:linear-gradient(135deg,#221e16,#121215);}
-  .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1;}
-  .body h3{margin:0;font-size:17px;font-weight:700;}
-  .body p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55;}
-  .pages{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:12px;}
+  .mock .chip{margin-top:auto; height:16px; width:40%; border-radius:99px; background:var(--mock, var(--accent)); opacity:.3;}
+  .thumb.t-signature{background:linear-gradient(135deg,#1d1a24,#121215); --mock:#b58cff;}
+  .thumb.t-nova{background:linear-gradient(135deg,#191c26,#121215); --mock:#7eb8ff;}
+  .thumb.t-landing{background:linear-gradient(135deg,#221e16,#121215); --mock:#ffd27e;}
+
+  .body{padding:24px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .body h3{margin:0; font-size:var(--fs-18); font-weight:700;}
+  .body p{margin:0; color:var(--muted); font-size:var(--fs-16); line-height:1.6;}
+  .body p a{color:var(--accent-text);}
+  .tag{
+    display:inline-block; width:fit-content; font-size:var(--fs-12); font-weight:700; letter-spacing:.04em;
+    text-transform:uppercase; padding:4px 8px; border-radius:4px;
+    background:rgba(110,231,183,0.12); color:var(--ok);
+  }
+  .pages{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; padding-top:16px;}
   .pages a{
-    font-size:12px;font-weight:600;color:var(--text);background:var(--panel-2);
-    border:1px solid var(--border);padding:6px 12px;border-radius:9px;text-decoration:none;
-    transition:all .2s ease;
+    display:inline-flex; align-items:center; min-height:44px;
+    font-size:var(--fs-14); font-weight:600; color:var(--text); background:var(--panel-2);
+    border:1px solid var(--border); padding:0 16px; border-radius:8px; text-decoration:none;
+    transition:border-color var(--gerak-normal) ease, background-color var(--gerak-normal) ease, transform var(--gerak-cepat) var(--ease-keluar);
   }
-  .pages a:hover{border-color:var(--border-hover);color:#fff;transform:translateY(-1px);}
+  .pages a:active{ transform:scale(var(--tekan-skala)); }
   .pages a.primary{
-    background:#6366f1;border-color:transparent;color:#ffffff;
-    box-shadow:0 3px 12px rgba(99,102,241,0.35);
-  }
-  .pages a.primary:hover{background:#4f46e5;color:#ffffff;}
-  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:28px 24px 48px;border-top:1px solid var(--border);max-width:1180px;margin:0 auto;}
-  footer a{color:var(--accent);text-decoration:none;transition:all .2s ease;display:inline-block;}
-  footer a:hover{color:#818cf8;transform:translateX(-2px);text-decoration:underline;}
-
-  /* Language Switcher */
-  .lang-btn{
-    background:transparent; border:none; color:var(--muted);
-    font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:99px;
-    cursor:pointer; transition:all .2s ease;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  }
-  .lang-btn:hover{ color:#fff; }
-  .lang-btn.active{
-    background:#27272a; color:#fff; border:1px solid #3f3f46;
-    box-shadow:0 2px 8px rgba(0,0,0,0.3);
+    background:var(--accent-btn); border-color:transparent; color:#ffffff;
+    box-shadow:0 4px 12px rgba(99,102,241,0.3);
   }
 
+  footer{text-align:center; color:var(--muted); font-size:var(--fs-14); padding:32px 16px 48px; padding-bottom:max(48px, env(safe-area-inset-bottom)); border-top:1px solid var(--border); max-width:1180px; margin:0 auto;}
+  footer a{color:var(--accent-text); text-underline-offset:4px;}
+
+  @media (hover:hover) and (pointer:fine){
+    .top-nav a:hover{ color:#ffffff; transform:translateX(var(--geser-kiri,-2px)); }
+    .lang-btn:hover{ color:#fff; }
+    .card:hover{ transform:translateY(var(--angkat,-4px)); border-color:var(--border-hover); box-shadow:var(--shadow-hover); }
+    .pages a:hover{ border-color:var(--border-hover); background:#202026; }
+    .pages a.primary:hover{ background:var(--accent-btn-hover); }
+    footer a:hover{ color:#c7d2fe; }
+  }
+  @media (min-width:768px){
+    .top-nav{ padding-left:32px; padding-right:32px; }
+    main{ padding-left:24px; padding-right:24px; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    *, *::before, *::after{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
+    :root{ --angkat:0; --geser-kiri:0; --tekan-skala:1; }
+  }
 </style>
 </head>
 <body>
 
-<nav class="top-nav">
+<nav class="top-nav" aria-label="Navigasi">
   <a href="../index.html" data-i18n="back.hub">← Portofolio Hub</a>
-  <span class="sep">/</span>
+  <span class="sep" aria-hidden="true">/</span>
   <span class="current" data-i18n="cek.title">Galeri Tema Cek Ongkir</span>
-  <div style="margin-left:auto;display:inline-flex;align-items:center;gap:4px;background:#121215;border:1px solid var(--border);border-radius:99px;padding:3px 6px;">
+  <div class="lang" role="group" aria-label="Bahasa / Language">
     <button type="button" class="lang-btn active" data-lang-btn="id" onclick="setLanguage('id')">ID</button>
-    <span style="color:#3f3f46;font-size:11px;">|</span>
+    <span class="lang-sep" aria-hidden="true">|</span>
     <button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')">EN</button>
   </div>
 </nav>
@@ -132,12 +165,12 @@
 
 <main>
 
-  <div class="group">
-    <div class="group-head"><h2 data-i18n="cek.group.sicek">SiCek</h2><span data-i18n="cek.group.sub">3 varian: Signature, Nova, dan Landing Page</span></div>
+  <section class="group" aria-labelledby="grp-sicek">
+    <div class="group-head"><h2 id="grp-sicek" data-i18n="cek.group.sicek">SiCek</h2><span data-i18n="cek.group.sub">3 varian: Signature, Nova, dan Landing Page</span></div>
     <div class="grid">
 
-      <div class="card">
-        <div class="thumb t-signature"><div class="mock"><div class="bar" style="background:linear-gradient(90deg,#b58cff,transparent);"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip" style="background:rgba(181,140,255,.25);"></div></div></div>
+      <article class="card">
+        <div class="thumb t-signature" aria-hidden="true"><div class="mock"><div class="bar"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip"></div></div></div>
         <div class="body">
           <h3>Signature</h3>
           <p data-i18n="cek.card.sig.desc">Identitas visual khas SiCek — beranda, cek ongkir, tracking, dan halaman transaksi berhasil.</p>
@@ -148,10 +181,10 @@
             <a href="sicek/signature/transaksi_berhasil/code.html" data-i18n="cek.page.success">Transaksi Berhasil</a>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="card">
-        <div class="thumb t-nova"><div class="mock"><div class="bar" style="background:linear-gradient(90deg,#7eb8ff,transparent);"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip" style="background:rgba(126,184,255,.25);"></div></div></div>
+      <article class="card">
+        <div class="thumb t-nova" aria-hidden="true"><div class="mock"><div class="bar"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip"></div></div></div>
         <div class="body">
           <h3>Nova</h3>
           <p data-i18n="cek.card.nova.desc">Iterasi lanjutan dari Signature dengan penyegaran visual & interaksi.</p>
@@ -162,12 +195,12 @@
             <a href="sicek/nova/transaksi_berhasil/code.html" data-i18n="cek.page.success">Transaksi Berhasil</a>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="card">
-        <div class="thumb t-landing"><div class="mock"><div class="bar" style="background:linear-gradient(90deg,#ffd27e,transparent);"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip" style="background:rgba(255,210,126,.25);"></div></div></div>
+      <article class="card">
+        <div class="thumb t-landing" aria-hidden="true"><div class="mock"><div class="bar"></div><div class="line w1"></div><div class="line w2"></div><div class="line w3"></div><div class="chip"></div></div></div>
         <div class="body">
-          <span class="tag" style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:3px 8px;border-radius:6px;width:fit-content;background:rgba(126,224,193,0.15);color:var(--accent-2);" data-i18n="cek.live.tag">Sudah Live</span>
+          <span class="tag" data-i18n="cek.live.tag">Sudah Live</span>
           <h3>Landing Page</h3>
           <p data-i18n="cek.card.lp.desc">Halaman pemasaran berdiri sendiri — "Cek Ongkir Murah, Bandingkan &amp; Lacak Sekejap". Sudah live di <a href="https://cekongkirmurah.smsrm.com" target="_blank" rel="noopener">cekongkirmurah.smsrm.com</a>.</p>
           <div class="pages">
@@ -175,10 +208,10 @@
             <a href="https://cekongkirmurah.smsrm.com" target="_blank" rel="noopener" data-i18n="cek.open.live">Buka Versi Live</a>
           </div>
         </div>
-      </div>
+      </article>
 
     </div>
-  </div>
+  </section>
 
 </main>
 

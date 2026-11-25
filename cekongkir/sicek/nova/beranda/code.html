@@ -4,40 +4,12 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Beranda — SiCek Nova</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="icon" href="../../landing-page/assets/favicon.svg" type="image/svg+xml"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          violet: "#6D28D9",
-          "violet-deep": "#4C1D95",
-          "violet-soft": "#F3EEFC",
-          surface: "#FAF8FF",
-          "surface-card": "#FFFFFF",
-          "surface-muted": "#F1ECFB",
-          border: "#E7DFF7",
-          gold: "#FFB627",
-          "gold-dark": "#F0970A",
-          mint: "#12B981",
-          "mint-soft": "#E3FBF1",
-          ink: "#241547",
-          ink70: "rgba(36,21,71,0.68)",
-          ink45: "rgba(36,21,71,0.45)",
-        },
-        fontFamily: {
-          display: ["Plus Jakarta Sans", "sans-serif"],
-          body: ["Inter", "sans-serif"],
-        },
-        borderRadius: { xl2: "22px", xl3: "32px" },
-      },
-    },
-  };
-</script>
+<link rel="stylesheet" href="../tailwind.css"/>
 <style>
-  body { min-height: max(884px, 100dvh); }
+  body { min-height: 100vh; min-height: 100dvh; }
   .glow::before {
     content: ""; position: absolute; inset: 0; opacity: .16; pointer-events: none;
     background: radial-gradient(circle at 20% 0%, #fff 0%, transparent 55%);
@@ -46,6 +18,10 @@
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   #sheet-backdrop { transition: opacity .25s ease; }
   #sheet { transition: transform .35s cubic-bezier(.22,1,.36,1); }
+  /* Hormati pengguna yang memilih kurangi gerak */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  }
 </style>
 </head>
 <body class="bg-surface text-ink font-body antialiased pb-28">
@@ -53,21 +29,21 @@
 <header class="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-border">
   <div class="max-w-md mx-auto px-5 h-16 flex items-center justify-between">
     <div class="flex items-center gap-2">
-      <a href="../../../index.html" data-kembali title="Kembali ke Galeri Tema" aria-label="Kembali ke Galeri Tema" class="w-8 h-8 rounded-full bg-surface-muted flex items-center justify-center text-ink hover:bg-border transition">
-        <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+      <a href="../../../index.html" data-kembali title="Kembali ke Galeri Tema" aria-label="Kembali ke Galeri Tema" class="w-11 h-11 rounded-full bg-surface-muted flex items-center justify-center text-ink hover:bg-border active:scale-95 transition">
+        <span class="material-symbols-outlined text-lg">arrow_back</span>
       </a>
       <div>
-        <p class="text-[10px] text-ink45 uppercase tracking-wider font-semibold">SiCek Nova</p>
+        <p class="text-xs text-ink45 uppercase tracking-wider font-semibold">SiCek Nova</p>
         <p class="font-display font-extrabold text-base -mt-0.5">Sobat Kirim! 🚀</p>
       </div>
     </div>
     <div class="flex items-center gap-2">
-      <a href="../../../../index.html" class="text-xs bg-ink text-white px-2.5 py-1.5 rounded-lg hover:bg-ink-soft transition font-medium">Hub Utama</a>
-      <button class="w-9 h-9 rounded-full bg-surface-muted flex items-center justify-center active:scale-95 transition">
-        <span class="material-symbols-outlined text-[20px] text-violet">notifications</span>
+      <a href="../../../../index.html" class="text-xs bg-ink text-white px-3 min-h-[44px] inline-flex items-center rounded-lg active:scale-95 hover:bg-ink-soft transition font-medium">Hub Utama</a>
+      <button type="button" aria-label="Notifikasi" class="w-11 h-11 shrink-0 rounded-full bg-surface-muted flex items-center justify-center active:scale-95 transition">
+        <span class="material-symbols-outlined text-xl text-violet">notifications</span>
       </button>
       <div class="w-9 h-9 rounded-full bg-violet flex items-center justify-center overflow-hidden">
-        <span class="material-symbols-outlined text-white text-[20px]">person</span>
+        <span class="material-symbols-outlined text-white text-xl">person</span>
       </div>
     </div>
   </div>
@@ -79,10 +55,10 @@
   <section class="relative overflow-hidden bg-gradient-to-br from-violet to-violet-deep text-white rounded-xl3 p-6 glow">
     <div class="absolute -bottom-14 -right-10 w-40 h-40 bg-gold/20 rounded-full blur-3xl pointer-events-none"></div>
     <div class="relative flex flex-col gap-4">
-      <span class="self-start bg-gold text-violet-deep text-[10px] font-extrabold px-2.5 py-1 rounded-full">HEMAT SAMPAI 25%</span>
-      <h1 class="font-display font-extrabold text-2xl leading-snug">Ongkir mahal itu<br/>karena kamu belum<br/>buka SiCek. 😉</h1>
+      <span class="self-start bg-gold text-violet-deep text-xs font-extrabold px-2.5 py-1 rounded-full">HEMAT SAMPAI 25%</span>
+      <h1 class="font-display font-extrabold text-2xl leading-[1.375]">Ongkir mahal itu<br/>karena kamu belum<br/>buka SiCek. 😉</h1>
       <a href="../cek_ongkir/code.html" class="self-start h-12 px-5 rounded-2xl bg-gold text-violet-deep text-sm font-bold flex items-center gap-2 active:scale-95 transition shadow-lg">
-        <span class="material-symbols-outlined text-[18px]">payments</span>
+        <span class="material-symbols-outlined text-lg">payments</span>
         Cek Ongkir, Yuk!
       </a>
     </div>
@@ -92,33 +68,33 @@
   <section class="flex flex-col gap-3">
     <div class="flex items-center justify-between">
       <h3 class="font-display font-bold text-base">Resi Terakhir</h3>
-      <a class="text-[12px] text-violet font-bold" href="../tracking/code.html">Lihat Semua</a>
+      <a class="text-xs text-violet font-bold inline-flex items-center min-h-[44px] px-2 -mr-2" href="../tracking/code.html">Lihat Semua</a>
     </div>
     <div class="flex flex-col gap-2.5">
       <a href="../tracking/code.html" class="bg-surface-card border border-border rounded-xl2 p-3.5 flex items-center gap-3 active:scale-[.98] transition">
-        <div class="w-10 h-10 rounded-xl bg-[#E31E24] text-white flex items-center justify-center font-display font-bold text-[10px]">J&T</div>
+        <div class="w-10 h-10 rounded-xl bg-[#E31E24] text-white flex items-center justify-center font-display font-bold text-xs">J&T</div>
         <div class="flex-1 min-w-0">
           <p class="font-semibold text-sm truncate">JP9876543210</p>
-          <p class="text-[11px] text-ink45">J&T Express</p>
+          <p class="text-xs text-ink45">J&T Express</p>
         </div>
-        <span class="bg-mint-soft text-mint text-[10px] font-bold px-2.5 py-1 rounded-full">Transit</span>
+        <span class="bg-mint-soft text-mint text-xs font-bold px-2.5 py-1 rounded-full">Transit</span>
       </a>
       <a href="../tracking/code.html" class="bg-surface-card border border-border rounded-xl2 p-3.5 flex items-center gap-3 active:scale-[.98] transition">
-        <div class="w-10 h-10 rounded-xl bg-[#EF3340] text-white flex items-center justify-center font-display font-bold text-[10px]">SAPX</div>
+        <div class="w-10 h-10 rounded-xl bg-[#EF3340] text-white flex items-center justify-center font-display font-bold text-xs">SAPX</div>
         <div class="flex-1 min-w-0">
           <p class="font-semibold text-sm truncate">0012398475</p>
-          <p class="text-[11px] text-ink45">SAPX</p>
+          <p class="text-xs text-ink45">SAPX</p>
         </div>
-        <span class="bg-violet text-white text-[10px] font-bold px-2.5 py-1 rounded-full">Terkirim</span>
+        <span class="bg-violet text-white text-xs font-bold px-2.5 py-1 rounded-full">Terkirim</span>
       </a>
     </div>
   </section>
 
   <!-- Zona A: Slot Iklan -->
   <section class="relative">
-    <div class="absolute top-2.5 left-2.5 z-10 bg-violet-deep/70 backdrop-blur-sm text-white/90 text-[9px] font-bold px-2 py-0.5 rounded-full tracking-wide">IKLAN</div>
+    <div class="absolute top-2.5 left-2.5 z-10 bg-violet-deep/90 backdrop-blur-sm text-white text-xs font-bold px-2 py-0.5 rounded-full tracking-wide">IKLAN</div>
     <div class="w-full h-24 rounded-xl2 bg-surface-muted border border-dashed border-border flex items-center justify-center overflow-hidden">
-      <p class="text-[11px] text-ink45">Slot Banner Ads · 336×96</p>
+      <p class="text-xs text-ink45">Slot Banner Ads · 336×96</p>
     </div>
   </section>
 
@@ -126,7 +102,7 @@
   <section class="flex flex-col gap-3">
     <div>
       <h3 class="font-display font-bold text-base">9 Ekspedisi, Siap Tempur</h3>
-      <p class="text-[12px] text-ink45 mt-0.5">Ketuk buat kepoin layanan unggulannya</p>
+      <p class="text-xs text-ink45 mt-0.5">Ketuk buat kepoin layanan unggulannya</p>
     </div>
     <div id="courier-grid" class="grid grid-cols-5 gap-2.5"></div>
   </section>
@@ -135,32 +111,32 @@
   <section class="flex flex-col gap-3 pb-4">
     <div>
       <h3 class="font-display font-bold text-base">Bukan Cuma Soal Ongkir</h3>
-      <p class="text-[12px] text-ink45 mt-0.5">Satu app, semua beres — hidup jadi lebih santai</p>
+      <p class="text-xs text-ink45 mt-0.5">Satu app, semua beres — hidup jadi lebih santai</p>
     </div>
     <div class="flex gap-3 overflow-x-auto no-scrollbar -mx-5 px-5 pb-1">
       <div class="shrink-0 w-36 bg-surface-card border border-border rounded-xl2 p-3.5 flex flex-col gap-2.5 active:scale-95 transition">
         <div class="w-9 h-9 rounded-lg bg-mint-soft flex items-center justify-center">
-          <span class="material-symbols-outlined text-mint text-[18px]">bolt</span>
+          <span class="material-symbols-outlined text-mint text-lg">bolt</span>
         </div>
-        <p class="text-[12px] font-bold leading-snug">Pulsa &amp; Tagihan Beres</p>
+        <p class="text-xs font-bold leading-normal">Pulsa &amp; Tagihan Beres</p>
       </div>
       <div class="shrink-0 w-36 bg-surface-card border border-border rounded-xl2 p-3.5 flex flex-col gap-2.5 active:scale-95 transition">
         <div class="w-9 h-9 rounded-lg bg-gold/15 flex items-center justify-center">
-          <span class="material-symbols-outlined text-gold-dark text-[18px]">confirmation_number</span>
+          <span class="material-symbols-outlined text-gold-dark text-lg">confirmation_number</span>
         </div>
-        <p class="text-[12px] font-bold leading-snug">Tiket Jalan-jalan</p>
+        <p class="text-xs font-bold leading-normal">Tiket Jalan-jalan</p>
       </div>
       <div class="shrink-0 w-36 bg-surface-card border border-border rounded-xl2 p-3.5 flex flex-col gap-2.5 active:scale-95 transition">
         <div class="w-9 h-9 rounded-lg bg-violet-soft flex items-center justify-center">
-          <span class="material-symbols-outlined text-violet text-[18px]">storefront</span>
+          <span class="material-symbols-outlined text-violet text-lg">storefront</span>
         </div>
-        <p class="text-[12px] font-bold leading-snug">Belanja Tanpa Ribet</p>
+        <p class="text-xs font-bold leading-normal">Belanja Tanpa Ribet</p>
       </div>
       <div class="shrink-0 w-36 bg-surface-card border border-border rounded-xl2 p-3.5 flex flex-col gap-2.5 active:scale-95 transition">
         <div class="w-9 h-9 rounded-lg bg-mint-soft flex items-center justify-center">
-          <span class="material-symbols-outlined text-mint text-[18px]">mosque</span>
+          <span class="material-symbols-outlined text-mint text-lg">mosque</span>
         </div>
-        <p class="text-[12px] font-bold leading-snug">Rencanakan Umroh</p>
+        <p class="text-xs font-bold leading-normal">Rencanakan Umroh</p>
       </div>
     </div>
   </section>
@@ -179,25 +155,25 @@
 <nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-t border-border">
   <div class="max-w-md mx-auto grid grid-cols-4 h-[74px] px-2 pb-safe">
     <a class="flex flex-col items-center justify-center gap-1 text-violet" href="../beranda/code.html">
-      <span class="material-symbols-outlined text-[22px]" style="font-variation-settings:'FILL' 1">home</span>
-      <span class="text-[10px] font-bold">Beranda</span>
+      <span class="material-symbols-outlined text-[1.375rem]" style="font-variation-settings:'FILL' 1">home</span>
+      <span class="text-xs font-bold">Beranda</span>
     </a>
     <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../cek_ongkir/code.html">
-      <span class="material-symbols-outlined text-[22px]">payments</span>
-      <span class="text-[10px] font-medium">Cek Ongkir</span>
+      <span class="material-symbols-outlined text-[1.375rem]">payments</span>
+      <span class="text-xs font-medium">Cek Ongkir</span>
     </a>
     <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../tracking/code.html">
-      <span class="material-symbols-outlined text-[22px]">local_shipping</span>
-      <span class="text-[10px] font-medium">Tracking</span>
+      <span class="material-symbols-outlined text-[1.375rem]">local_shipping</span>
+      <span class="text-xs font-medium">Tracking</span>
     </a>
     <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../cek_ongkir/code.html#kirim">
-      <span class="material-symbols-outlined text-[22px]">send</span>
-      <span class="text-[10px] font-medium">Kirim</span>
+      <span class="material-symbols-outlined text-[1.375rem]">send</span>
+      <span class="text-xs font-medium">Kirim</span>
     </a>
   </div>
 </nav>
 
-<style>.pb-safe{padding-bottom:env(safe-area-inset-bottom,10px)}</style>
+<style>.pb-safe{padding-bottom:max(8px, env(safe-area-inset-bottom))}</style>
 
 <script>
   const couriers = [
@@ -233,11 +209,14 @@
   const grid = document.getElementById("courier-grid");
   couriers.forEach((c) => {
     const btn = document.createElement("button");
-    btn.className = "flex flex-col items-center gap-1.5 group";
+    btn.className = "flex flex-col items-center gap-1.5 group min-h-[44px]";
+    btn.type = "button";
+    btn.setAttribute("aria-controls", "courier-detail");
+    btn.setAttribute("aria-expanded", "false");
     btn.innerHTML = `
-      <span class="w-12 h-12 rounded-2xl flex items-center justify-center font-display font-bold text-[11px] shadow-sm border border-border transition group-active:scale-90"
+      <span class="w-12 h-12 rounded-2xl flex items-center justify-center font-display font-bold text-xs shadow-sm border border-border transition group-active:scale-90"
             style="background:${c.color};color:${c.text}">${c.code}</span>
-      <span class="text-[10px] text-ink70 leading-tight text-center">${c.name}</span>
+      <span class="text-xs text-ink70 leading-normal text-center">${c.name}</span>
     `;
     btn.addEventListener("click", () => openSheet(c));
     grid.appendChild(btn);
@@ -253,16 +232,16 @@
         <span class="w-12 h-12 rounded-xl flex items-center justify-center font-display font-bold text-xs" style="background:${c.color};color:${c.text}">${c.code}</span>
         <div>
           <p class="font-display font-bold text-base">${c.full}</p>
-          <p class="text-[12px] text-ink45">Estimasi ${c.eta}</p>
+          <p class="text-xs text-ink45">Estimasi ${c.eta}</p>
         </div>
       </div>
       <p class="text-sm text-ink70 leading-relaxed mb-4">${c.tagline}</p>
       <div class="flex flex-wrap gap-1.5 mb-4">
-        ${c.chips.map((ch) => `<span class="bg-surface-muted text-ink70 text-[11px] font-bold px-2.5 py-1 rounded-full">${ch}</span>`).join("")}
+        ${c.chips.map((ch) => `<span class="bg-surface-muted text-ink70 text-xs font-bold px-2.5 py-1 rounded-full">${ch}</span>`).join("")}
       </div>
       <div class="bg-violet-soft rounded-xl2 p-3 flex items-start gap-2 mb-5">
-        <span class="material-symbols-outlined text-gold-dark text-[18px] mt-0.5">lightbulb</span>
-        <p class="text-[12px] text-ink70 leading-relaxed">${c.highlight}</p>
+        <span class="material-symbols-outlined text-gold-dark text-lg mt-0.5">lightbulb</span>
+        <p class="text-xs text-ink70 leading-relaxed">${c.highlight}</p>
       </div>
       <button onclick="closeSheet()" class="w-full h-12 rounded-xl bg-violet text-white text-sm font-bold active:scale-95 transition">Oke, Paham!</button>
     `;

@@ -4,28 +4,17 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Tracking — SiCek</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="icon" href="../../landing-page/assets/favicon.svg" type="image/svg+xml"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          ink: "#0B1B33", "ink-soft": "#1B2C4A", surface: "#FBFAF7",
-          "surface-card": "#FFFFFF", "surface-muted": "#F1EEE6", border: "#E7E2D9",
-          amber: "#FF6B35", "amber-dark": "#E05A28", teal: "#0EA5A0", "teal-soft": "#E4F7F5",
-          ink70: "rgba(11,27,51,0.70)", ink45: "rgba(11,27,51,0.45)",
-        },
-        fontFamily: { display: ["Space Grotesk", "sans-serif"], body: ["Inter", "sans-serif"] },
-        borderRadius: { xl2: "20px", xl3: "28px" },
-      },
-    },
-  };
-</script>
+<link rel="stylesheet" href="../tailwind.css"/>
 <style>
-  body { min-height: max(884px, 100dvh); }
+  body { min-height: 100vh; min-height: 100dvh; }
   .timeline-dot { box-shadow: 0 0 0 4px #FBFAF7; }
+  /* Hormati pengguna yang memilih kurangi gerak */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  }
 </style>
 </head>
 <body class="bg-surface text-ink font-body antialiased pb-28">
@@ -33,16 +22,16 @@
 <header class="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-border">
   <div class="max-w-md mx-auto px-5 h-16 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <a href="../beranda/code.html" data-kembali title="Kembali ke Beranda" aria-label="Kembali ke Beranda" class="w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-muted active:scale-95 transition">
+      <a href="../beranda/code.html" data-kembali title="Kembali ke Beranda" aria-label="Kembali ke Beranda" class="w-11 h-11 -ml-2 shrink-0 rounded-full flex items-center justify-center hover:bg-surface-muted active:scale-95 transition">
         <span class="material-symbols-outlined text-ink">arrow_back</span>
       </a>
       <div>
-        <h1 class="font-display font-semibold text-lg leading-tight">Lacak Pengiriman</h1>
-        <p class="text-[11px] text-ink45 -mt-0.5">Ke mana pun paketmu pergi, kami ikut memantau</p>
+        <h1 class="font-display font-semibold text-lg leading-[1.25]">Lacak Pengiriman</h1>
+        <p class="text-xs text-ink45 -mt-0.5">Ke mana pun paketmu pergi, kami ikut memantau</p>
       </div>
     </div>
     <div class="flex items-center gap-2">
-      <a href="../../../../index.html" class="text-xs bg-ink text-white px-2.5 py-1.5 rounded-lg hover:bg-ink-soft transition font-medium">Hub Utama</a>
+      <a href="../../../../index.html" class="text-xs bg-ink text-white px-3 min-h-[44px] inline-flex items-center rounded-lg active:scale-95 hover:bg-ink-soft transition font-medium">Hub Utama</a>
     </div>
   </div>
 </header>
@@ -54,11 +43,11 @@
     <div class="absolute -top-14 -right-8 w-36 h-36 bg-teal/20 rounded-full blur-3xl pointer-events-none"></div>
     <div class="relative flex flex-col gap-3">
       <div class="relative">
-        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-[20px]">barcode_scanner</span>
-        <input class="w-full h-[52px] rounded-2xl bg-white/10 border border-white/15 pl-11 pr-4 text-sm placeholder:text-white/40 focus:outline-none focus:border-teal transition" placeholder="Masukkan nomor resi (AWB)" type="text"/>
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/80 text-xl">barcode_scanner</span>
+        <input class="w-full h-[52px] rounded-2xl bg-white/10 border border-white/15 pl-11 pr-4 text-sm placeholder:text-white/70 focus:outline-none focus:border-teal transition" placeholder="Masukkan nomor resi (AWB)" type="text"/>
       </div>
       <div class="relative">
-        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-[20px]">local_shipping</span>
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/80 text-xl">local_shipping</span>
         <select class="w-full h-[52px] rounded-2xl bg-white/10 border border-white/15 pl-11 pr-4 text-sm text-white/80 focus:outline-none focus:border-teal transition appearance-none">
           <option class="text-ink">Pilih kurir…</option>
           <option class="text-ink">JNE</option>
@@ -68,7 +57,7 @@
         </select>
       </div>
       <button class="h-[52px] rounded-2xl bg-teal hover:opacity-90 active:scale-[.98] transition flex items-center justify-center gap-2 font-semibold text-sm">
-        <span class="material-symbols-outlined text-[20px]">search</span>
+        <span class="material-symbols-outlined text-xl">search</span>
         Lacak Sekarang
       </button>
     </div>
@@ -78,7 +67,7 @@
   <section class="flex flex-col gap-3">
     <div class="flex items-center justify-between">
       <h3 class="font-display font-semibold text-base">JP9876543210</h3>
-      <span class="bg-teal-soft text-teal text-[10px] font-semibold px-2.5 py-1 rounded-full">Dalam Perjalanan</span>
+      <span class="bg-teal-soft text-teal text-xs font-semibold px-2.5 py-1 rounded-full">Dalam Perjalanan</span>
     </div>
     <div class="bg-surface-card border border-border rounded-xl2 p-4">
       <div class="relative pl-7">
@@ -87,22 +76,22 @@
         <div class="relative pb-5">
           <div class="absolute -left-[21px] top-0.5 w-4 h-4 rounded-full bg-amber timeline-dot"></div>
           <p class="text-sm font-semibold">Paket sedang diantar kurir</p>
-          <p class="text-[11px] text-ink45 mt-0.5">Hari ini, 09.42 · Surabaya</p>
+          <p class="text-xs text-ink45 mt-0.5">Hari ini, 09.42 · Surabaya</p>
         </div>
         <div class="relative pb-5">
           <div class="absolute -left-[21px] top-0.5 w-4 h-4 rounded-full bg-teal timeline-dot"></div>
           <p class="text-sm font-semibold text-ink70">Tiba di gudang transit tujuan</p>
-          <p class="text-[11px] text-ink45 mt-0.5">Kemarin, 21.15 · Surabaya Hub</p>
+          <p class="text-xs text-ink45 mt-0.5">Kemarin, 21.15 · Surabaya Hub</p>
         </div>
         <div class="relative pb-5">
           <div class="absolute -left-[21px] top-0.5 w-4 h-4 rounded-full bg-teal timeline-dot"></div>
           <p class="text-sm font-semibold text-ink70">Paket dalam perjalanan</p>
-          <p class="text-[11px] text-ink45 mt-0.5">Kemarin, 14.03 · Jakarta Hub</p>
+          <p class="text-xs text-ink45 mt-0.5">Kemarin, 14.03 · Jakarta Hub</p>
         </div>
         <div class="relative">
           <div class="absolute -left-[21px] top-0.5 w-4 h-4 rounded-full bg-ink45 timeline-dot"></div>
           <p class="text-sm font-semibold text-ink70">Pesanan diterima ekspedisi</p>
-          <p class="text-[11px] text-ink45 mt-0.5">2 hari lalu, 10.20 · Jakarta Pusat</p>
+          <p class="text-xs text-ink45 mt-0.5">2 hari lalu, 10.20 · Jakarta Pusat</p>
         </div>
       </div>
     </div>
@@ -113,29 +102,29 @@
     <h3 class="font-display font-semibold text-base">Riwayat Pencarian</h3>
     <div class="flex flex-col gap-2.5">
       <div class="bg-surface-card border border-border rounded-xl2 p-3.5 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-[#EF3340] text-white flex items-center justify-center font-display font-bold text-[10px]">SAPX</div>
+        <div class="w-10 h-10 rounded-xl bg-[#EF3340] text-white flex items-center justify-center font-display font-bold text-xs">SAPX</div>
         <div class="flex-1 min-w-0">
           <p class="font-semibold text-sm truncate">0012398475</p>
-          <p class="text-[11px] text-ink45">SAPX · Terkirim</p>
+          <p class="text-xs text-ink45">SAPX · Terkirim</p>
         </div>
-        <button class="text-ink45"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+        <button type="button" aria-label="Lihat detail" class="text-ink45 w-11 h-11 -mr-3 flex items-center justify-center"><span class="material-symbols-outlined text-xl">chevron_right</span></button>
       </div>
       <div class="bg-surface-card border border-border rounded-xl2 p-3.5 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-[#DA0812] text-white flex items-center justify-center font-display font-bold text-[10px]">JNE</div>
+        <div class="w-10 h-10 rounded-xl bg-[#DA0812] text-white flex items-center justify-center font-display font-bold text-xs">JNE</div>
         <div class="flex-1 min-w-0">
           <p class="font-semibold text-sm truncate">TKP882211</p>
-          <p class="text-[11px] text-ink45">JNE Reguler · Manifested</p>
+          <p class="text-xs text-ink45">JNE Reguler · Manifested</p>
         </div>
-        <button class="text-ink45"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+        <button type="button" aria-label="Lihat detail" class="text-ink45 w-11 h-11 -mr-3 flex items-center justify-center"><span class="material-symbols-outlined text-xl">chevron_right</span></button>
       </div>
     </div>
   </section>
 
   <!-- Slot Iklan (AdMob / sumber ads lain) -->
   <section class="relative pb-6">
-    <div class="absolute top-2.5 left-2.5 z-10 bg-ink/60 backdrop-blur-sm text-white/90 text-[9px] font-semibold px-2 py-0.5 rounded-full tracking-wide">IKLAN</div>
+    <div class="absolute top-2.5 left-2.5 z-10 bg-ink/80 backdrop-blur-sm text-white text-xs font-semibold px-2 py-0.5 rounded-full tracking-wide">IKLAN</div>
     <div class="w-full h-24 rounded-xl2 bg-surface-muted border border-dashed border-border flex items-center justify-center overflow-hidden">
-      <p class="text-[11px] text-ink45">Slot Banner Ads · 336×96</p>
+      <p class="text-xs text-ink45">Slot Banner Ads · 336×96</p>
     </div>
   </section>
 </main>
@@ -143,25 +132,25 @@
 <nav class="fixed bottom-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-t border-border">
   <div class="max-w-md mx-auto grid grid-cols-4 h-[74px] px-2 pb-safe">
     <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../beranda/code.html">
-      <span class="material-symbols-outlined text-[22px]">home</span>
-      <span class="text-[10px] font-medium">Beranda</span>
+      <span class="material-symbols-outlined text-[1.375rem]">home</span>
+      <span class="text-xs font-medium">Beranda</span>
     </a>
     <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../cek_ongkir/code.html">
-      <span class="material-symbols-outlined text-[22px]">payments</span>
-      <span class="text-[10px] font-medium">Cek Ongkir</span>
+      <span class="material-symbols-outlined text-[1.375rem]">payments</span>
+      <span class="text-xs font-medium">Cek Ongkir</span>
     </a>
     <a class="flex flex-col items-center justify-center gap-1 text-teal" href="../tracking/code.html">
-      <span class="material-symbols-outlined text-[22px]" style="font-variation-settings:'FILL' 1">local_shipping</span>
-      <span class="text-[10px] font-semibold">Tracking</span>
+      <span class="material-symbols-outlined text-[1.375rem]" style="font-variation-settings:'FILL' 1">local_shipping</span>
+      <span class="text-xs font-semibold">Tracking</span>
     </a>
     <a class="flex flex-col items-center justify-center gap-1 text-ink45" href="../cek_ongkir/code.html#kirim">
-      <span class="material-symbols-outlined text-[22px]">send</span>
-      <span class="text-[10px] font-medium">Kirim</span>
+      <span class="material-symbols-outlined text-[1.375rem]">send</span>
+      <span class="text-xs font-medium">Kirim</span>
     </a>
   </div>
 </nav>
 
-<style>.pb-safe{padding-bottom:env(safe-area-inset-bottom,10px)}</style>
+<style>.pb-safe{padding-bottom:max(8px, env(safe-area-inset-bottom))}</style>
 <script src="../../../../assets/js/i18n.js"></script>
 <script src="../../../../assets/js/kembali.js"></script>
 </body>
