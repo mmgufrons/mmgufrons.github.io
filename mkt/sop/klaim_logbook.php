@@ -6,24 +6,20 @@ include __DIR__ . '/../includes/header.php';
 ?>
 
 <style>
-    /* UI/UX Link Clickable */
-    .inline-link-btn {
-        display: inline-flex; align-items: center; gap: 6px; background: #f3effa; color: #7335B7 !important; border: 1px solid rgba(115, 53, 183, 0.2); padding: 8px 20px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: all 0.2s ease-in-out; box-shadow: 0 4px 10px rgba(115, 53, 183, 0.05);
-    }
-    .inline-link-btn:hover { background: #7335B7; color: #ffffff !important; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(115, 53, 183, 0.25); border-color: #7335B7; }
-    
-    /* Base SOP Styling */
-    .sop-section-title { font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f8f9fa; padding-bottom: 10px; }
-    .step-card { background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 1.8rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-    .zone-box { border-left: 4px solid var(--primary); background: #fcfcfc; padding: 1.2rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 1rem; border-top: 1px solid #f1f1f1; border-right: 1px solid #f1f1f1; border-bottom: 1px solid #f1f1f1; }
-    .zone-title { font-size: 0.95rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
-    
-    .critical-indicator { background: #fff5f5; border: 2px dashed #e3342f; color: #cc1f1a; border-radius: 12px; padding: 1.5rem; }
-    
-    /* Custom Table Status */
-    .table-status th { background: var(--primary); color: white; border: none; padding: 15px; text-align: center; }
-    .table-status td { padding: 12px 15px; vertical-align: middle; border-bottom: 1px solid #eee; font-size: 0.9rem; }
-    .badge-status { padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.5px; display: inline-block; text-align: center; width: 100%; }
+    .inline-link-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; background: #f3effa; color: #5A2A8F !important; border: 1px solid rgba(115, 53, 183, 0.3); padding: 8px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: transform 120ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1); }
+    .inline-link-btn:active { transform: scale(0.97); }
+    .inline-link-btn:focus-visible { outline: 3px solid #5A2A8F; outline-offset: 2px; }
+    @media (hover: hover) and (pointer: fine) { .inline-link-btn:hover { background: #5A2A8F; color: #ffffff !important; border-color: #5A2A8F; } }
+    .sop-section-title { font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #f1f3f5; padding-bottom: 8px; }
+    .step-card { background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: clamp(16px, 4vw, 32px); margin-bottom: 32px; }
+    .zone-box { border: 1px solid #f1f1f1; border-left: 4px solid var(--primary); background: #fcfcfc; padding: 16px 24px; border-radius: 0 12px 12px 0; margin-bottom: 16px; }
+    .zone-title { font-size: 1rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .critical-indicator { background: #fff5f5; border: 2px dashed #c81e1e; color: #991b1b; border-radius: 12px; padding: 24px; }
+    .step-card, .step-card .table-responsive { min-width: 0; max-width: 100%; }
+    .table-status th { background: var(--primary); color: white; border: none; padding: 16px; text-align: center; }
+    .table-status td { padding: 8px 16px; vertical-align: middle; border-bottom: 1px solid #eee; font-size: 0.875rem; }
+    .badge-status { padding: 4px 8px; border-radius: 8px; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.5px; display: inline-block; text-align: center; width: 100%; }
+    @media (prefers-reduced-motion: reduce) { .inline-link-btn, .btn-copy-prompt { transition: none; } .inline-link-btn:active, .btn-copy-prompt:active { transform: none; } }
 </style>
 
 <section class="hero-section text-center">

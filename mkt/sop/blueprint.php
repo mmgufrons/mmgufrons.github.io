@@ -6,13 +6,16 @@ include __DIR__ . '/../includes/header.php';
 ?>
 
 <style>
-    .step-num { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; flex-shrink: 0; }
-    .tool-tag { display: inline-flex; align-items: center; gap: 6px; background: #f1f3f5; border: 1px solid #e9ecef; color: #495057; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
-    .prompt-box { background: #f8f9fa; border: 1px solid #e9ecef; border-left: 4px solid var(--primary); border-radius: 10px; padding: 1rem 1.2rem; font-size: 0.85rem; color: #333; line-height: 1.7; white-space: pre-wrap; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .step-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .tool-tag { display: inline-flex; align-items: center; gap: 8px; background: #f1f3f5; border: 1px solid #dee2e6; color: #343a40; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 999px; }
+    .prompt-box { background: #f8f9fa; border: 1px solid #e9ecef; border-left: 4px solid var(--primary); border-radius: 8px; padding: 16px; font-size: 0.875rem; color: #212529; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     .raw-prompt-text { display: none !important; }
-    .btn-copy-prompt { background: white; border: 1px solid #ced4da; color: #495057; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600; transition: all 0.2s ease; cursor: pointer; white-space: nowrap; }
-    .btn-copy-prompt:hover { background: #e9ecef; color: #212529; }
+    .btn-copy-prompt { background: white; border: 1px solid #adb5bd; color: #343a40; min-height: 44px; padding: 8px 16px; border-radius: 8px; font-size: 0.875rem; font-weight: 600; transition: transform 120ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1); cursor: pointer; white-space: nowrap; }
+    .btn-copy-prompt:active { transform: scale(0.97); }
+    .btn-copy-prompt:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+    @media (hover: hover) and (pointer: fine) { .btn-copy-prompt:hover { background: #e9ecef; color: #212529; } }
     .btn-copy-prompt.copied { background: var(--primary); border-color: var(--primary); color: white; }
+    @media (prefers-reduced-motion: reduce) { .inline-link-btn, .btn-copy-prompt { transition: none; } .inline-link-btn:active, .btn-copy-prompt:active { transform: none; } }
 </style>
 
 <section class="hero-section text-center">

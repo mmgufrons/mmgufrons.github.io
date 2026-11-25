@@ -6,18 +6,16 @@ include __DIR__ . '/../includes/header.php';
 ?>
 
 <style>
-    /* UI/UX Link Clickable */
-    .inline-link-btn {
-        display: inline-flex; align-items: center; gap: 8px; background: #7335B7; color: #ffffff !important; padding: 12px 24px; border-radius: 10px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(115, 53, 183, 0.3);
-    }
-    .inline-link-btn:hover { background: #5A2A8F; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(115, 53, 183, 0.4); }
-    
-    /* Base SOP Styling */
-    .sop-section-title { font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #f8f9fa; padding-bottom: 10px; }
-    .step-card { background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 1.8rem; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-    .status-alert { background: #fff5f5; border-left: 5px solid #e3342f; padding: 1rem; border-radius: 8px; font-size: 0.9rem; color: #cc1f1a; }
-    .step-list { padding-left: 1.2rem; }
-    .step-list li { margin-bottom: 0.5rem; color: #4a5568; }
+    .inline-link-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; background: #5A2A8F; color: #ffffff !important; padding: 8px 24px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: transform 120ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1); }
+    .inline-link-btn:active { transform: scale(0.97); }
+    .inline-link-btn:focus-visible { outline: 3px solid #312e81; outline-offset: 2px; }
+    @media (hover: hover) and (pointer: fine) { .inline-link-btn:hover { background: #4a2277; } }
+    .sop-section-title { font-size: 1.125rem; font-weight: 800; color: var(--text-main); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid #f1f3f5; padding-bottom: 8px; }
+    .step-card { background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: clamp(16px, 4vw, 32px); margin-bottom: 32px; }
+    .status-alert { background: #fff5f5; border-left: 4px solid #c81e1e; padding: 16px; border-radius: 8px; font-size: 0.875rem; color: #991b1b; }
+    .step-list { padding-left: 24px; }
+    .step-list li { margin-bottom: 8px; color: #374151; }
+    @media (prefers-reduced-motion: reduce) { .inline-link-btn, .btn-copy-prompt { transition: none; } .inline-link-btn:active, .btn-copy-prompt:active { transform: none; } }
 </style>
 
 <section class="hero-section text-center">
