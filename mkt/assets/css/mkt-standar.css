@@ -29,7 +29,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9fa;color:var(--t
 .nav-divider{border-color:rgba(255,255,255,0.12);margin:8px 0;}
 .sidebar-merek{font-size:var(--fs-24);font-weight:800;color:#fff;}
 .sidebar-merek .titik{color:var(--accent-terang);}
-.sidebar-lencana{display:inline-block;margin-top:4px;font-size:var(--fs-12);font-weight:600;padding:4px 8px;border-radius:99px;background:rgba(255,255,255,0.1);color:#e2e8f0;border:1px solid rgba(255,255,255,0.15);}
+/* Keterangan di bawah logo: teks pendamping, bukan lencana (samakan dengan .sb-tagline di style.css) */
+.sidebar-lencana{display:block;margin-top:4px;font-size:var(--fs-12);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.78);line-height:1.4;white-space:nowrap;}
 
 /* Tombol kembali ke portofolio (bawah sidebar) */
 .nav-item-link.btn-bottom-porto{margin:0 16px 16px;border-radius:8px;border:1px solid rgba(74,222,128,0.3);color:#86efac;background:rgba(74,222,128,0.12);font-weight:700;}

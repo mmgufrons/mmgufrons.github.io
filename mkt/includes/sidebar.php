@@ -12,13 +12,10 @@ $base_path = isset($base_path) ? $base_path : '';
 <div id="sidebar" class="sidebar">
     <!-- Brand & Tombol Hub Utama -->
     <div class="px-5 pt-6 pb-4">
-        <a href="<?= $base_path ?>../index.html" class="inline-flex items-center gap-2 mb-3 text-xs font-semibold text-white/70 hover:text-white bg-white/10 px-3 py-1.5 rounded-lg transition" style="text-decoration:none;">
-            <i class="fas fa-arrow-left text-xs" aria-hidden="true"></i> Portofolio Utama
-        </a>
-        <a href="<?= $base_path ?>index.php" class="block" style="text-decoration:none;">
+        <a href="<?= $base_path ?>index.html" class="block" style="text-decoration:none;">
             <span class="text-2xl font-extrabold text-white tracking-wide">MKT<span style="color:#F3700D;">.</span>OS</span>
         </a>
-        <p class="sb-tagline">Portofolio · 7 Modul</p>
+        <p class="sb-tagline">Portofolio Demo</p>
     </div>
 
     <div class="flex-grow-1" style="display: block;">

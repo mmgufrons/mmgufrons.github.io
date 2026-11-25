@@ -802,5 +802,5 @@ button.nav-item {
     .badge-b2b { background: #eef2ff; color: #0d6efd; border: 1px solid #0d6efd; }
     .node-title { font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;}
 
-/* Keterangan di bawah logo sidebar: teks pendamping logo, bukan lencana */
+/* Keterangan di bawah logo sidebar: teks pendamping, bukan lencana (samakan dengan .sidebar-lencana di mkt-standar.css) */
 .sb-tagline { margin: 4px 0 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.78); line-height: 1.4; white-space: nowrap; }
