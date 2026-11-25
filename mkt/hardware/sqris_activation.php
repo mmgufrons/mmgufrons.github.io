@@ -4,53 +4,20 @@ $footer_desc = "Dokumen Internal Terbatas - Divisi Admin Operasional & Tech Supp
 $base_path = '../';
 include __DIR__ . '/../includes/header.php'; 
 ?>
-
 <style>
-    /* UI/UX Link Clickable Upgrade */
-    .inline-link-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: #f3effa;
-        color: #7335B7 !important;
-        border: 1px solid rgba(115, 53, 183, 0.2);
-        padding: 3px 10px;
-        border-radius: 6px;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 0.2s ease-in-out;
-        box-shadow: 0 2px 4px rgba(115, 53, 183, 0.04);
+    .inline-link-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; background: #f3effa; color: #5A2A8F !important; border: 1px solid rgba(115, 53, 183, 0.3); padding: 8px 16px; border-radius: 8px; font-weight: 700; text-decoration: none; transition: transform 120ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms cubic-bezier(0.16,1,0.3,1); }
+    .inline-link-badge { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 700; padding: 8px 16px; border-radius: 8px; text-decoration: none; transition: transform 120ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms cubic-bezier(0.16,1,0.3,1); }
+    .inline-link-btn:active, .inline-link-badge:active { transform: scale(0.97); }
+    .inline-link-btn:focus-visible, .inline-link-badge:focus-visible { outline: 3px solid #5A2A8F; outline-offset: 2px; }
+    @media (hover: hover) and (pointer: fine) {
+        .inline-link-btn:hover { background: #5A2A8F; color: #ffffff !important; border-color: #5A2A8F; }
+        .inline-link-badge:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
     }
-    .inline-link-btn:hover {
-        background: #7335B7;
-        color: #ffffff !important;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 10px rgba(115, 53, 183, 0.2);
-        border-color: #7335B7;
-    }
-    
-    .inline-link-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-weight: 700;
-        padding: 4px 12px;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: all 0.2s ease-in-out;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    .inline-link-badge:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 12px rgba(0,0,0,0.15);
-        filter: brightness(1.1);
-    }
-
-    /* Base Styling */
-    .sop-section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 10px; }
-    .sop-meta-box { background: #fffdf5; border-left: 4px solid #ffc107; border-radius: 0 12px 12px 0; padding: 1rem; margin-bottom: 2rem; border: 1px solid rgba(0,0,0,0.05); border-left-width: 4px; }
-    .flow-badge { width: 30px; height: 30px; border-radius: 50%; background: var(--primary); color: white; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
-    .critical-indicator { background: #fff5f5; border: 1px dashed #e3342f; color: #cc1f1a; border-radius: 8px; padding: 10px 15px; font-size: 0.85rem; }
+    .sop-section-title { font-size: 1.125rem; font-weight: 700; color: var(--primary); margin-bottom: 24px; display: flex; align-items: center; gap: 8px; }
+    .sop-meta-box { background: #fffdf5; border: 1px solid rgba(0,0,0,0.06); border-left: 4px solid #ffc107; border-radius: 0 12px 12px 0; padding: 16px; margin-bottom: 32px; }
+    .flow-badge { width: 32px; height: 32px; border-radius: 50%; background: var(--primary); color: white; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.875rem; }
+    .critical-indicator { background: #fff5f5; border: 1px dashed #c81e1e; color: #991b1b; border-radius: 8px; padding: 8px 16px; font-size: 0.875rem; }
+    @media (prefers-reduced-motion: reduce) { .inline-link-btn, .inline-link-badge { transition: none; } .inline-link-btn:active, .inline-link-badge:active { transform: none; } }
 </style>
 
 <section class="hero-section text-center">

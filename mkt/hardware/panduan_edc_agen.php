@@ -7,6 +7,7 @@ $_SESSION['login_simasrim'] = true;
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Panduan Pengajuan EDC KB Bank | SIMASRIM</title>
@@ -14,57 +15,40 @@ $_SESSION['login_simasrim'] = true;
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --primary: #7335B7;
-            --accent: #F3700D;
-            --kb-yellow: #ffc107;
-            --kb-grey: #6c757d;
-            --bg-soft: #f4f8ff;
-        }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fa; color: #333; }
-        
-        /* Navbar */
-        .navbar-public { background: white; padding: 15px 0; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
-        .navbar-brand { font-weight: 800; color: var(--primary); font-size: 1.5rem; }
-        .navbar-brand span { color: var(--accent); }
-        
-        /* Hero Section */
-        .hero-public { background: linear-gradient(135deg, #1e1e2f, #3A1B5E); color: white; padding: 80px 0 60px; text-align: center; position: relative; overflow: hidden; }
-        .hero-public::after { content: ''; position: absolute; width: 400px; height: 400px; background: var(--kb-yellow); filter: blur(150px); opacity: 0.15; border-radius: 50%; top: -100px; right: -100px; }
-        
-        /* Feature Cards */
-        .feature-card { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.02); border: 1px solid rgba(0,0,0,0.05); height: 100%; transition: 0.3s; text-align: center; }
-        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(115, 53, 183, 0.1); border-color: rgba(115, 53, 183, 0.2); }
-        .feature-icon { width: 60px; height: 60px; border-radius: 12px; background: var(--bg-soft); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 15px; }
-        
-        /* Timeline */
-        .timeline-container { position: relative; max-width: 800px; margin: 0 auto; padding: 20px 0; }
-        .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 40px; width: 4px; background: #e9ecef; border-radius: 4px; }
-        
-        .timeline-step { position: relative; margin-bottom: 40px; padding-left: 90px; }
-        .timeline-icon { position: absolute; left: 20px; top: 0; width: 45px; height: 45px; border-radius: 50%; background: white; border: 4px solid var(--primary); display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--primary); z-index: 2; box-shadow: 0 4px 10px rgba(115, 53, 183, 0.2); }
-        
-        .step-card-public { background: white; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
-        .step-card-public:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
-        
-        .doc-list { background: var(--bg-soft); border-left: 4px solid #0d6efd; padding: 15px; border-radius: 8px; margin-top: 15px; }
-        .doc-list ul { margin-bottom: 0; padding-left: 20px; }
-        .doc-list li { margin-bottom: 5px; font-size: 0.9rem; }
-        
-        .sla-badge { background: #fff3cd; color: #856404; padding: 5px 12px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 15px; }
-        
-        /* Accordion FAQ */
-        .accordion-button:not(.collapsed) { background-color: var(--bg-soft); color: var(--primary); box-shadow: none; font-weight: 600; }
+        :root { --primary: #7335B7; --primary-gelap: #5A2A8F; --accent: #F3700D; --kb-yellow: #ffc107; --bg-soft: #f4f8ff; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8f9fa; color: #212529; line-height: 1.6; }
+        .navbar-public { background: white; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+        .navbar-brand { font-weight: 800; color: var(--primary-gelap); font-size: 1.5rem; }
+        .navbar-brand span { color: #b45309; }
+        .hero-public { background: linear-gradient(135deg, #1e1e2f, #3A1B5E); color: white; padding: clamp(48px, 10vw, 80px) 0 clamp(48px, 8vw, 64px); text-align: center; position: relative; overflow: hidden; }
+        .hero-public::after { content: ''; position: absolute; width: 400px; height: 400px; background: var(--kb-yellow); filter: blur(150px); opacity: 0.15; border-radius: 50%; top: -96px; right: -96px; pointer-events: none; }
+        .feature-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid rgba(0,0,0,0.08); height: 100%; text-align: center; transition: transform 120ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms cubic-bezier(0.16,1,0.3,1); }
+        .feature-icon { width: 64px; height: 64px; border-radius: 12px; background: var(--bg-soft); color: var(--primary-gelap); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 16px; }
+        .timeline-container { position: relative; max-width: 800px; margin: 0 auto; padding: 16px 0; }
+        .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 22px; width: 4px; background: #e9ecef; border-radius: 4px; }
+        .timeline-step { position: relative; margin-bottom: 48px; padding-left: 64px; }
+        .timeline-icon { position: absolute; left: 0; top: 0; width: 48px; height: 48px; border-radius: 50%; background: white; border: 4px solid var(--primary); display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--primary-gelap); z-index: 2; }
+        .step-card-public { background: white; border-radius: 16px; padding: 24px; border: 1px solid rgba(0,0,0,0.08); transition: transform 120ms cubic-bezier(0.16,1,0.3,1), background-color 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms cubic-bezier(0.16,1,0.3,1); }
+        .doc-list { background: var(--bg-soft); border-left: 4px solid #0d6efd; padding: 16px; border-radius: 8px; margin-top: 16px; }
+        .doc-list ul { margin-bottom: 0; padding-left: 24px; }
+        .doc-list li { margin-bottom: 8px; font-size: 0.875rem; }
+        .sla-badge { background: #fff3cd; color: #5c4400; padding: 4px 16px; border-radius: 999px; font-size: 0.875rem; font-weight: 600; display: inline-block; margin-bottom: 16px; }
+        .accordion-button { min-height: 48px; }
+        .accordion-button:not(.collapsed) { background-color: var(--bg-soft); color: var(--primary-gelap); box-shadow: none; font-weight: 600; }
         .accordion-button:focus { box-shadow: none; border-color: rgba(0,0,0,0.1); }
-        
-        @media (max-width: 768px) {
-            .timeline-container::before { left: 20px; }
-            .timeline-step { padding-left: 60px; }
-            .timeline-icon { left: 0; width: 35px; height: 35px; font-size: 0.9rem; }
-            .step-card-public { padding: 20px 15px; }
+        .accordion-button:focus-visible { outline: 3px solid var(--primary); outline-offset: -3px; }
+        @media (hover: hover) and (pointer: fine) {
+            .feature-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(115, 53, 183, 0.1); border-color: rgba(115, 53, 183, 0.2); }
+            .step-card-public:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.06); }
         }
+        @media (max-width: 768px) {
+            .timeline-container::before { left: 16px; }
+            .timeline-step { padding-left: 64px; }
+            .timeline-icon { left: 0; width: 36px; height: 36px; font-size: 0.875rem; }
+            .step-card-public { padding: 16px; }
+        }
+        @media (prefers-reduced-motion: reduce) { .feature-card, .step-card-public { transition: none; transform: none !important; } }
     </style>
 </head>
 <body>
