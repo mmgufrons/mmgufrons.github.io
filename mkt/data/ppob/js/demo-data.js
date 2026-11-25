@@ -16,8 +16,8 @@ const DEMO_DATA = {
     // DATA MASTER USER — Preview kolom dari file XLSX
     // ================================================================
     users: {
-        "imelda@simasrim,com": {
-            email: "imelda@simasrim.com",
+        "imelda@contoh,demo": {
+            email: "imelda@contoh.demo",
             id_user: "USR-001",
             nama: "Imelda Susanti",
             no_wa: "628112345001",
@@ -25,8 +25,8 @@ const DEMO_DATA = {
             origin: "Jakarta",
             updated_at: "2025-07-01T00:00:00.000Z"
         },
-        "budi@gmail,com": {
-            email: "budi@gmail.com",
+        "budi@contoh,demo": {
+            email: "budi@contoh.demo",
             id_user: "USR-002",
             nama: "Budi Santoso",
             no_wa: "628112345002",
@@ -34,8 +34,8 @@ const DEMO_DATA = {
             origin: "Surabaya",
             updated_at: "2025-07-01T00:00:00.000Z"
         },
-        "sari,dewi@yahoo,com": {
-            email: "sari.dewi@yahoo.com",
+        "sari,dewi@contoh,demo": {
+            email: "sari.dewi@contoh.demo",
             id_user: "USR-003",
             nama: "Sari Dewi",
             no_wa: "628112345003",
@@ -43,8 +43,8 @@ const DEMO_DATA = {
             origin: "Bandung",
             updated_at: "2025-07-01T00:00:00.000Z"
         },
-        "ahmad@hotmail,com": {
-            email: "ahmad@hotmail.com",
+        "ahmad@contoh,demo": {
+            email: "ahmad@contoh.demo",
             id_user: "USR-004",
             nama: "Ahmad Fauzi",
             no_wa: "628112345004",
@@ -52,8 +52,8 @@ const DEMO_DATA = {
             origin: "Medan",
             updated_at: "2025-07-01T00:00:00.000Z"
         },
-        "rini@gmail,com": {
-            email: "rini@gmail.com",
+        "rini@contoh,demo": {
+            email: "rini@contoh.demo",
             id_user: "USR-005",
             nama: "Rini Wulandari",
             no_wa: "628112345005",
@@ -61,8 +61,8 @@ const DEMO_DATA = {
             origin: "Yogyakarta",
             updated_at: "2025-07-01T00:00:00.000Z"
         },
-        "dedi@simasrim,com": {
-            email: "dedi@simasrim.com",
+        "dedi@contoh,demo": {
+            email: "dedi@contoh.demo",
             id_user: "USR-006",
             nama: "Dedi Kurniawan",
             no_wa: "628112345006",
@@ -70,8 +70,8 @@ const DEMO_DATA = {
             origin: "Semarang",
             updated_at: "2025-07-01T00:00:00.000Z"
         },
-        "putri@gmail,com": {
-            email: "putri@gmail.com",
+        "putri@contoh,demo": {
+            email: "putri@contoh.demo",
             id_user: "USR-007",
             nama: "Putri Anggraini",
             no_wa: "628112345007",
@@ -79,8 +79,8 @@ const DEMO_DATA = {
             origin: "Makassar",
             updated_at: "2025-07-01T00:00:00.000Z"
         },
-        "hendra@yahoo,com": {
-            email: "hendra@yahoo.com",
+        "hendra@contoh,demo": {
+            email: "hendra@contoh.demo",
             id_user: "USR-008",
             nama: "Hendra Wijaya",
             no_wa: "",
@@ -97,8 +97,8 @@ const DEMO_DATA = {
     ppob_transactions: {
         "TRX-2025-001": {
             kode_transaksi: "TRX-2025-001",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-01",
             kategori: "PLN",
             nama_produk: "PLN Token 100.000",
@@ -111,8 +111,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-002": {
             kode_transaksi: "TRX-2025-002",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-02",
             kategori: "PULSA",
             nama_produk: "Telkomsel 50.000",
@@ -125,8 +125,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-003": {
             kode_transaksi: "TRX-2025-003",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-03",
             kategori: "E-WALLET",
             nama_produk: "GoPay 200.000",
@@ -139,8 +139,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-004": {
             kode_transaksi: "TRX-2025-004",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-05",
             kategori: "PLN",
             nama_produk: "PLN Token 200.000",
@@ -153,8 +153,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-005": {
             kode_transaksi: "TRX-2025-005",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-10",
             kategori: "PULSA",
             nama_produk: "Indosat 100.000",
@@ -167,8 +167,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-006": {
             kode_transaksi: "TRX-2025-006",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-12",
             kategori: "E-WALLET",
             nama_produk: "OVO 100.000",
@@ -181,8 +181,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-007": {
             kode_transaksi: "TRX-2025-007",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-15",
             kategori: "BPJS",
             nama_produk: "BPJS Kesehatan",
@@ -195,8 +195,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-008": {
             kode_transaksi: "TRX-2025-008",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-18",
             kategori: "PULSA",
             nama_produk: "XL Axiata 50.000",
@@ -209,8 +209,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-009": {
             kode_transaksi: "TRX-2025-009",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-20",
             kategori: "PLN",
             nama_produk: "PLN Token 50.000",
@@ -223,8 +223,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-010": {
             kode_transaksi: "TRX-2025-010",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-22",
             kategori: "INTERNET",
             nama_produk: "Telkomsel LOOP 30GB",
@@ -237,8 +237,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-011": {
             kode_transaksi: "TRX-2025-011",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-25",
             kategori: "E-WALLET",
             nama_produk: "Dana 500.000",
@@ -251,8 +251,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-012": {
             kode_transaksi: "TRX-2025-012",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-28",
             kategori: "PULSA",
             nama_produk: "Telkomsel 100.000",
@@ -265,8 +265,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-013": {
             kode_transaksi: "TRX-2025-013",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-30",
             kategori: "PLN",
             nama_produk: "PLN Token 500.000",
@@ -279,8 +279,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-014": {
             kode_transaksi: "TRX-2025-014",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-07-31",
             kategori: "BPJS",
             nama_produk: "BPJS Ketenagakerjaan",
@@ -293,8 +293,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-015": {
             kode_transaksi: "TRX-2025-015",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-08-01",
             kategori: "PLN",
             nama_produk: "PLN Token 200.000",
@@ -307,8 +307,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-016": {
             kode_transaksi: "TRX-2025-016",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-08-02",
             kategori: "PULSA",
             nama_produk: "Telkomsel 200.000",
@@ -321,8 +321,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-017": {
             kode_transaksi: "TRX-2025-017",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-08-05",
             kategori: "E-WALLET",
             nama_produk: "ShopeePay 300.000",
@@ -335,8 +335,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-018": {
             kode_transaksi: "TRX-2025-018",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-08-08",
             kategori: "PLN",
             nama_produk: "PLN Token 100.000",
@@ -349,8 +349,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-019": {
             kode_transaksi: "TRX-2025-019",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-08-10",
             kategori: "INTERNET",
             nama_produk: "Indosat Freedom 20GB",
@@ -363,8 +363,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-020": {
             kode_transaksi: "TRX-2025-020",
-            email: "imelda@simasrim.com",
-            email_key: "imelda@simasrim,com",
+            email: "imelda@contoh.demo",
+            email_key: "imelda@contoh,demo",
             tanggal_beli: "2025-08-12",
             kategori: "PLN",
             nama_produk: "PLN Token 50.000",
@@ -378,8 +378,8 @@ const DEMO_DATA = {
         // Budi - Active Micro
         "TRX-2025-021": {
             kode_transaksi: "TRX-2025-021",
-            email: "budi@gmail.com",
-            email_key: "budi@gmail,com",
+            email: "budi@contoh.demo",
+            email_key: "budi@contoh,demo",
             tanggal_beli: "2025-07-05",
             kategori: "PULSA",
             nama_produk: "Telkomsel 5.000",
@@ -392,8 +392,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-022": {
             kode_transaksi: "TRX-2025-022",
-            email: "budi@gmail.com",
-            email_key: "budi@gmail,com",
+            email: "budi@contoh.demo",
+            email_key: "budi@contoh,demo",
             tanggal_beli: "2025-07-10",
             kategori: "PULSA",
             nama_produk: "Telkomsel 10.000",
@@ -406,8 +406,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-023": {
             kode_transaksi: "TRX-2025-023",
-            email: "budi@gmail.com",
-            email_key: "budi@gmail,com",
+            email: "budi@contoh.demo",
+            email_key: "budi@contoh,demo",
             tanggal_beli: "2025-07-15",
             kategori: "PULSA",
             nama_produk: "XL Axiata 5.000",
@@ -420,8 +420,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-024": {
             kode_transaksi: "TRX-2025-024",
-            email: "budi@gmail.com",
-            email_key: "budi@gmail,com",
+            email: "budi@contoh.demo",
+            email_key: "budi@contoh,demo",
             tanggal_beli: "2025-07-20",
             kategori: "PULSA",
             nama_produk: "Indosat 5.000",
@@ -434,8 +434,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-025": {
             kode_transaksi: "TRX-2025-025",
-            email: "budi@gmail.com",
-            email_key: "budi@gmail,com",
+            email: "budi@contoh.demo",
+            email_key: "budi@contoh,demo",
             tanggal_beli: "2025-07-25",
             kategori: "PULSA",
             nama_produk: "Telkomsel 10.000",
@@ -448,8 +448,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-026": {
             kode_transaksi: "TRX-2025-026",
-            email: "budi@gmail.com",
-            email_key: "budi@gmail,com",
+            email: "budi@contoh.demo",
+            email_key: "budi@contoh,demo",
             tanggal_beli: "2025-08-01",
             kategori: "PULSA",
             nama_produk: "Telkomsel 5.000",
@@ -462,8 +462,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-027": {
             kode_transaksi: "TRX-2025-027",
-            email: "budi@gmail.com",
-            email_key: "budi@gmail,com",
+            email: "budi@contoh.demo",
+            email_key: "budi@contoh,demo",
             tanggal_beli: "2025-08-05",
             kategori: "PULSA",
             nama_produk: "Telkomsel 5.000",
@@ -477,8 +477,8 @@ const DEMO_DATA = {
         // Sari Dewi - Cross-Sell Target (hanya PPOB, tidak ada logistik)
         "TRX-2025-028": {
             kode_transaksi: "TRX-2025-028",
-            email: "sari.dewi@yahoo.com",
-            email_key: "sari,dewi@yahoo,com",
+            email: "sari.dewi@contoh.demo",
+            email_key: "sari,dewi@contoh,demo",
             tanggal_beli: "2025-07-08",
             kategori: "PLN",
             nama_produk: "PLN Token 100.000",
@@ -491,8 +491,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-029": {
             kode_transaksi: "TRX-2025-029",
-            email: "sari.dewi@yahoo.com",
-            email_key: "sari,dewi@yahoo,com",
+            email: "sari.dewi@contoh.demo",
+            email_key: "sari,dewi@contoh,demo",
             tanggal_beli: "2025-07-18",
             kategori: "E-WALLET",
             nama_produk: "GoPay 100.000",
@@ -505,8 +505,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-030": {
             kode_transaksi: "TRX-2025-030",
-            email: "sari.dewi@yahoo.com",
-            email_key: "sari,dewi@yahoo,com",
+            email: "sari.dewi@contoh.demo",
+            email_key: "sari,dewi@contoh,demo",
             tanggal_beli: "2025-07-28",
             kategori: "BPJS",
             nama_produk: "BPJS Kesehatan",
@@ -520,8 +520,8 @@ const DEMO_DATA = {
         // Dedi - At Risk (terakhir transaksi > 30 hari lalu)
         "TRX-2025-031": {
             kode_transaksi: "TRX-2025-031",
-            email: "dedi@simasrim.com",
-            email_key: "dedi@simasrim,com",
+            email: "dedi@contoh.demo",
+            email_key: "dedi@contoh,demo",
             tanggal_beli: "2025-05-10",
             kategori: "PULSA",
             nama_produk: "Telkomsel 50.000",
@@ -534,8 +534,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-032": {
             kode_transaksi: "TRX-2025-032",
-            email: "dedi@simasrim.com",
-            email_key: "dedi@simasrim,com",
+            email: "dedi@contoh.demo",
+            email_key: "dedi@contoh,demo",
             tanggal_beli: "2025-05-20",
             kategori: "PLN",
             nama_produk: "PLN Token 100.000",
@@ -548,8 +548,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-033": {
             kode_transaksi: "TRX-2025-033",
-            email: "dedi@simasrim.com",
-            email_key: "dedi@simasrim,com",
+            email: "dedi@contoh.demo",
+            email_key: "dedi@contoh,demo",
             tanggal_beli: "2025-06-01",
             kategori: "BPJS",
             nama_produk: "BPJS Kesehatan",
@@ -563,8 +563,8 @@ const DEMO_DATA = {
         // Ahmad - Transaksi minimal
         "TRX-2025-034": {
             kode_transaksi: "TRX-2025-034",
-            email: "ahmad@hotmail.com",
-            email_key: "ahmad@hotmail,com",
+            email: "ahmad@contoh.demo",
+            email_key: "ahmad@contoh,demo",
             tanggal_beli: "2025-08-01",
             kategori: "PULSA",
             nama_produk: "Telkomsel 50.000",
@@ -577,8 +577,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-035": {
             kode_transaksi: "TRX-2025-035",
-            email: "ahmad@hotmail.com",
-            email_key: "ahmad@hotmail,com",
+            email: "ahmad@contoh.demo",
+            email_key: "ahmad@contoh,demo",
             tanggal_beli: "2025-08-05",
             kategori: "PLN",
             nama_produk: "PLN Token 50.000",
@@ -592,8 +592,8 @@ const DEMO_DATA = {
         // Rini - Gagal transaksi
         "TRX-2025-036": {
             kode_transaksi: "TRX-2025-036",
-            email: "rini@gmail.com",
-            email_key: "rini@gmail,com",
+            email: "rini@contoh.demo",
+            email_key: "rini@contoh,demo",
             tanggal_beli: "2025-08-03",
             kategori: "E-WALLET",
             nama_produk: "OVO 50.000",
@@ -606,8 +606,8 @@ const DEMO_DATA = {
         },
         "TRX-2025-037": {
             kode_transaksi: "TRX-2025-037",
-            email: "rini@gmail.com",
-            email_key: "rini@gmail,com",
+            email: "rini@contoh.demo",
+            email_key: "rini@contoh,demo",
             tanggal_beli: "2025-08-07",
             kategori: "PULSA",
             nama_produk: "XL Axiata 25.000",
@@ -628,8 +628,8 @@ const DEMO_DATA = {
             resi: "JNE-20250701-001",
             id_user: "USR-007",
             nama_user: "Putri Anggraini",
-            email: "putri@gmail.com",
-            email_key: "putri@gmail,com",
+            email: "putri@contoh.demo",
+            email_key: "putri@contoh,demo",
             ekspedisi: "JNE",
             status: "TERKIRIM",
             tanggal: "2025-07-01",
@@ -639,8 +639,8 @@ const DEMO_DATA = {
             resi: "JNT-20250705-002",
             id_user: "USR-007",
             nama_user: "Putri Anggraini",
-            email: "putri@gmail.com",
-            email_key: "putri@gmail,com",
+            email: "putri@contoh.demo",
+            email_key: "putri@contoh,demo",
             ekspedisi: "J&T EXPRESS",
             status: "TERKIRIM",
             tanggal: "2025-07-05",
@@ -650,8 +650,8 @@ const DEMO_DATA = {
             resi: "SIC-20250708-003",
             id_user: "USR-008",
             nama_user: "Hendra Wijaya",
-            email: "hendra@yahoo.com",
-            email_key: "hendra@yahoo,com",
+            email: "hendra@contoh.demo",
+            email_key: "hendra@contoh,demo",
             ekspedisi: "SICEPAT",
             status: "DALAM PENGIRIMAN",
             tanggal: "2025-08-08",

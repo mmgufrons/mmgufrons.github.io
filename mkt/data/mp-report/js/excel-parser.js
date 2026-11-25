@@ -12,10 +12,10 @@ class ExcelParser {
                     
                     const result = {
                         penjualan: {
-                            shopee_albanistore: {},
+                            shopee_tokoklien: {},
                             shopee_bobcare: {},
                             soundbox: {},
-                            tiktok_albanie: {}
+                            tiktok_tokoklien: {}
                         },
                         mutasi_saldo: {
                             bobcare: {}
@@ -29,7 +29,7 @@ class ExcelParser {
                         jsonData.forEach(row => {
                             const id = row['No Pesanan'];
                             if (id) {
-                                result.penjualan.shopee_albanistore[id] = {
+                                result.penjualan.shopee_tokoklien[id] = {
                                     akun: row['Akun'] || '',
                                     tanggal_order: this.formatDate(row['Tanggal Order']),
                                     nama_produk: row['Nama Produk'] || 'Produk Tidak Diketahui',
@@ -114,7 +114,7 @@ class ExcelParser {
                         jsonData.forEach(row => {
                             const id = row['Order ID'] || row['No Pesanan'];
                             if (id) {
-                                result.penjualan.tiktok_albanie[id] = {
+                                result.penjualan.tiktok_tokoklien[id] = {
                                     tanggal_order: this.formatDate(row['Created Time'] || row['Tanggal Order']),
                                     nama_produk: row['Product Name'] || row['Nama Produk'] || 'TikTok Product',
                                     jumlah: parseInt(row['Jumlah']) || 1,
