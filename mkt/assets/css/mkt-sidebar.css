@@ -45,8 +45,9 @@
 .sidebar-overlay.show{visibility:visible;opacity:1;}
 @supports (backdrop-filter:blur(4px)){.sidebar-overlay{backdrop-filter:blur(4px);}}
 @media (max-width:991.98px){
-  #sidebar{transform:translateX(-100%);}
-  #sidebar.show{transform:translateX(0);}
+  /* Tertutup: tanpa bayangan (dulu bocor sebagai pita abu di tepi kiri) dan tak bisa difokus */
+  #sidebar{transform:translateX(-100%);box-shadow:none;visibility:hidden;transition:transform 450ms cubic-bezier(0.16,1,0.3,1),visibility 450ms;}
+  #sidebar.show{transform:translateX(0);box-shadow:4px 0 24px rgba(0,0,0,0.2);visibility:visible;}
 }
 
 @media (hover:hover) and (pointer:fine){
