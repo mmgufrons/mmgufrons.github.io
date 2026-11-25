@@ -181,7 +181,7 @@ include __DIR__ . '/../includes/header.php';
                     <strong>Daftar 100% Gratis. Kami kasih Saldo Percobaan Rp 10.000 + dampingi sampai transaksi pertama berhasil.</strong><br><br>
                     Proposal singkat 1 halaman kami lampirkan di bawah ini. Apakah pengurus ada waktu sejenak pekan ini untuk diskusi singkat, atau kami bisa visit langsung ke kantor (khusus area Bogor/Jabodetabek)?<br><br>
                     Terima kasih banyak, salam sukses! 🙏<br>
-                    👉 Info selengkapnya: http://dpj.smsrm.com/<br>
+                    👉 Info selengkapnya: http://dpj.contoh.demo/<br>
                     📎 <i>[Lampiran: Proposal_B2B_SIMASRIM.pdf]</i>
                 </div>
                 <pre id="wa1" class="raw-text">Selamat pagi, Pengurus {{Nama Koperasi}} di {{Kota}}. Salam kenal, saya Dinda dari PT Solusi Mitra Aplikasi (SIMASRIM). 😊
@@ -199,7 +199,7 @@ Sistemnya bisa dioperasikan dari HP atau komputer yang sudah ada. Bahkan bisa di
 Proposal singkat 1 halaman kami lampirkan di bawah ini. Apakah pengurus ada waktu sejenak pekan ini untuk diskusi singkat, atau kami bisa visit langsung ke kantor (khusus area Bogor/Jabodetabek)?
 
 Terima kasih banyak, salam sukses! 🙏
-👉 Info selengkapnya: http://dpj.smsrm.com/
+👉 Info selengkapnya: http://dpj.contoh.demo/
 📎 _[Lampiran: Proposal_B2B_SIMASRIM.pdf]_</pre>
             </div>
 
@@ -218,7 +218,7 @@ Terima kasih banyak, salam sukses! 🙏
                     ✅ Seluruh margin keuntungan langsung masuk kas koperasi<br><br>
                     <strong>Bergabung 100% Gratis. Tidak ada investasi modal, tidak ada biaya franchise.</strong> Kami lampirkan proposal ringkas 1 halaman berikut sebagai bahan rapat pengurus.<br><br>
                     Apakah kami diperkenankan untuk koordinasi lanjutan via WA atau tatap muka langsung? Terima kasih banyak atas perhatiannya. 🙏<br>
-                    👉 Info selengkapnya: http://dpj.smsrm.com/<br>
+                    👉 Info selengkapnya: http://dpj.contoh.demo/<br>
                     📎 <i>[Lampiran: Proposal_B2B_SIMASRIM.pdf]</i>
                 </div>
                 <pre id="wa2" class="raw-text">Selamat pagi, Bapak/Ibu Pengurus {{Nama Koperasi}} di {{Kota}}. Salam kenal, saya Dinda dari PT Solusi Mitra Aplikasi (SIMASRIM). 🙏
@@ -233,7 +233,7 @@ Program kami: *"Penambahan Unit Usaha Ritel Logistik & Loket Pembayaran Warga"* 
 *Bergabung 100% Gratis. Tidak ada investasi modal, tidak ada biaya franchise.* Kami lampirkan proposal ringkas 1 halaman berikut sebagai bahan rapat pengurus.
 
 Apakah kami diperkenankan untuk koordinasi lanjutan via WA atau tatap muka langsung? Terima kasih banyak atas perhatiannya. 🙏
-👉 Info selengkapnya: http://dpj.smsrm.com/
+👉 Info selengkapnya: http://dpj.contoh.demo/
 📎 _[Lampiran: Proposal_B2B_SIMASRIM.pdf]_</pre>
             </div>
 
@@ -252,7 +252,7 @@ Apakah kami diperkenankan untuk koordinasi lanjutan via WA atau tatap muka langs
                     ✅ Setiap transaksi menghasilkan margin keuntungan yang masuk ke SHU koperasi<br><br>
                     Sistemnya sangat mudah — cukup HP atau laptop yang sudah ada. Tim kami akan mendampingi staf Anda dari awal sampai benar-benar lancar, dan kami berikan <strong>Saldo Percobaan Gratis Rp 10.000</strong> untuk memulai tanpa risiko.<br><br>
                     Proposal singkat kami lampirkan berikut. Boleh kami jadwalkan obrolan singkat untuk menjelaskan lebih lanjut? Terima kasih! 🙏<br>
-                    👉 Info selengkapnya: http://dpj.smsrm.com/<br>
+                    👉 Info selengkapnya: http://dpj.contoh.demo/<br>
                     📎 <i>[Lampiran: Proposal_B2B_SIMASRIM.pdf]</i>
                 </div>
                 <pre id="wa3" class="raw-text">Selamat pagi, Bapak/Ibu Pengurus {{Nama Koperasi}} di {{Kota}}. Saya Dinda dari PT Solusi Mitra Aplikasi (SIMASRIM). 😊
@@ -267,7 +267,7 @@ Dengan bergabung, kantor koperasi bisa sekaligus menjadi:
 Sistemnya sangat mudah — cukup HP atau laptop yang sudah ada. Tim kami akan mendampingi staf Anda dari awal sampai benar-benar lancar, dan kami berikan *Saldo Percobaan Gratis Rp 10.000* untuk memulai tanpa risiko.
 
 Proposal singkat kami lampirkan berikut. Boleh kami jadwalkan obrolan singkat untuk menjelaskan lebih lanjut? Terima kasih! 🙏
-👉 Info selengkapnya: http://dpj.smsrm.com/
+👉 Info selengkapnya: http://dpj.contoh.demo/
 📎 _[Lampiran: Proposal_B2B_SIMASRIM.pdf]_</pre>
             </div>
 
@@ -287,7 +287,7 @@ Proposal singkat kami lampirkan berikut. Boleh kami jadwalkan obrolan singkat un
                     ✅ Warga tidak perlu ke kota hanya untuk urusan pengiriman dan pembayaran<br><br>
                     <strong>Bergabung sepenuhnya gratis. Tidak ada investasi alat, tidak ada biaya bulanan.</strong> Sebagai gambaran awal, kami lampirkan proposal resmi 1 halaman berikut.<br><br>
                     Apakah unit usaha BUMDes terbuka untuk diskusi lanjutan via online atau kunjungan tim lapangan kami? Terima kasih banyak atas waktunya. 🙏<br>
-                    👉 Info selengkapnya: http://dpj.smsrm.com/<br>
+                    👉 Info selengkapnya: http://dpj.contoh.demo/<br>
                     📎 <i>[Lampiran: Proposal_B2B_SIMASRIM.pdf]</i>
                 </div>
                 <pre id="wa4" class="raw-text">Selamat siang, Bapak/Ibu Direktur Pengelola {{Nama BUMDes}} {{Kota}}. Salam kenal, saya Dinda dari PT Solusi Mitra Aplikasi (SIMASRIM). 🙏
@@ -303,7 +303,7 @@ Program kami: *"Kemitraan Pusat Ritel Logistik & Loket Pembayaran Desa"*:
 *Bergabung sepenuhnya gratis. Tidak ada investasi alat, tidak ada biaya bulanan.* Sebagai gambaran awal, kami lampirkan proposal resmi 1 halaman berikut.
 
 Apakah unit usaha BUMDes terbuka untuk diskusi lanjutan via online atau kunjungan tim lapangan kami? Terima kasih banyak atas waktunya. 🙏
-👉 Info selengkapnya: http://dpj.smsrm.com/
+👉 Info selengkapnya: http://dpj.contoh.demo/
 📎 _[Lampiran: Proposal_B2B_SIMASRIM.pdf]_</pre>
             </div>
 
@@ -323,7 +323,7 @@ Apakah unit usaha BUMDes terbuka untuk diskusi lanjutan via online atau kunjunga
                     ✅ Dashboard terpusat untuk lacak semua resi pengiriman dalam satu layar<br><br>
                     <strong>Daftar 100% Gratis. Kami berikan Saldo Percobaan Rp 10.000 + pendampingan penuh sampai sistem berjalan lancar.</strong><br><br>
                     Proposal ringkas terlampir untuk bahan tinjauan institusi. Apakah kami bisa minta waktu 15 menit untuk diskusi singkat via WhatsApp/Zoom pekan ini? Terima kasih. 🙏<br>
-                    👉 Info selengkapnya: http://dpj.smsrm.com/<br>
+                    👉 Info selengkapnya: http://dpj.contoh.demo/<br>
                     📎 <i>[Lampiran: Proposal_B2B_SIMASRIM.pdf]</i>
                 </div>
                 <pre id="wa5" class="raw-text">Selamat pagi, Tim Kerjasama/Humas {{Nama Universitas}}. Salam kenal, saya Dinda dari PT Solusi Mitra Aplikasi (SIMASRIM). 😊
@@ -340,7 +340,7 @@ Kami ingin menawarkan solusi yang bisa *mengefisiensi biaya pengiriman sekaligus
 *Daftar 100% Gratis. Kami berikan Saldo Percobaan Rp 10.000 + pendampingan penuh sampai sistem berjalan lancar.*
 
 Proposal ringkas terlampir untuk bahan tinjauan institusi. Apakah kami bisa minta waktu 15 menit untuk diskusi singkat via WhatsApp/Zoom pekan ini? Terima kasih. 🙏
-👉 Info selengkapnya: http://dpj.smsrm.com/
+👉 Info selengkapnya: http://dpj.contoh.demo/
 📎 _[Lampiran: Proposal_B2B_SIMASRIM.pdf]_</pre>
             </div>
 
@@ -557,7 +557,7 @@ Raka — Business Development SIMASRIM</div>
                     <div class="chat-bubble w-100 me-3">
                         Selamat datang <span class="wa-bold">Master Agen {{Nama Institusi}}</span>! 🎉<br><br>
                         Saya Winda dari Tim Ops SIMASRIM Pusat. Selamat, akun B2B institusi Bapak/Ibu sudah berstatus AKTIF dan siap digunakan untuk mencetak cuan! Saldo Uji Coba Rp 10.000 juga sudah kami top-up otomatis ke dashboard.<br><br>
-                        Agar staf operasional/admin Bapak/Ibu bisa langsung beradaptasi, yuk kita tes mencetak resi pengiriman pertama atau tes transaksi PPOB hari ini! Buka dashboardnya di laptop/HP: dpj.smsrm.com<br><br>
+                        Agar staf operasional/admin Bapak/Ibu bisa langsung beradaptasi, yuk kita tes mencetak resi pengiriman pertama atau tes transaksi PPOB hari ini! Buka dashboardnya di laptop/HP: dpj.contoh.demo<br><br>
                         Silakan simpan kontak Winda. Jika staf di lapangan bingung cara input paket, langsung chat ke sini agar Winda pandu pelan-pelan pakai panduan gambar. Sukses selalu untuk {{Nama Institusi}}! 🚀
                     </div>
                     <button class="btn-copy" onclick="copyText('cs_onboard', this)"><i class="far fa-copy"></i> Salin</button>
@@ -566,7 +566,7 @@ Raka — Business Development SIMASRIM</div>
 
 Saya Winda dari Tim Ops SIMASRIM Pusat. Selamat, akun B2B institusi Bapak/Ibu sudah berstatus AKTIF dan siap digunakan untuk mencetak cuan! Saldo Uji Coba Rp 10.000 juga sudah kami top-up otomatis ke dashboard.
 
-Agar staf operasional/admin Bapak/Ibu bisa langsung beradaptasi, yuk kita tes mencetak resi pengiriman pertama atau tes transaksi PPOB hari ini! Buka dashboardnya di laptop/HP: dpj.smsrm.com
+Agar staf operasional/admin Bapak/Ibu bisa langsung beradaptasi, yuk kita tes mencetak resi pengiriman pertama atau tes transaksi PPOB hari ini! Buka dashboardnya di laptop/HP: dpj.contoh.demo
 
 Silakan simpan kontak Winda. Jika staf di lapangan bingung cara input paket, langsung chat ke sini agar Winda pandu pelan-pelan pakai panduan gambar. Sukses selalu untuk {{Nama Institusi}}! 🚀</pre>
             </div>
@@ -727,7 +727,7 @@ Jika opsi tanpa ribet operasional fisik ini lebih masuk akal untuk dijalankan sa
                             Tentu, dengan senang hati! PT Solusi Mitra Aplikasi (SIMASRIM) adalah perusahaan teknologi logistik yang sudah beroperasi dan memiliki integrasi resmi API dengan ekspedisi-ekspedisi besar nasional.<br><br>
                             Beberapa tautan resmi yang bisa Bapak/Ibu tinjau:<br>
                             - Website resmi: simasrim.com<br>
-                            - Dokumen Panduan: dpj.smsrm.com<br>
+                            - Dokumen Panduan: dpj.contoh.demo<br>
                             - Email resmi: marketing.demo@contoh-perusahaan.demo<br><br>
                             Jika dibutuhkan salinan dokumen legalitas perusahaan (SIUP, NIB, dll.), kami bisa kirimkan langsung melalui email resmi kami. Boleh dikonfirmasi alamat email yang dituju? 🙏
                         </div>
@@ -781,7 +781,7 @@ Jika opsi tanpa ribet operasional fisik ini lebih masuk akal untuk dijalankan sa
                     <div class="d-flex align-items-center gap-2 mb-2">
                         <span class="badge bg-success border border-success">Maps</span>
                     </div>
-                    <p class="small text-muted mb-0">Pakai metode <a href="https://mkt.smsrm.com/campaign/scraping_data.php" target="_blank" class="fw-bold">Tutorial Scraping Data</a> dengan kata kunci <strong>Kopdes [Area]</strong>.</p>
+                    <p class="small text-muted mb-0">Pakai metode <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka">Tutorial Scraping Data</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small> dengan kata kunci <strong>Kopdes [Area]</strong>.</p>
                 </div>
             </div>
 
@@ -791,7 +791,7 @@ Jika opsi tanpa ribet operasional fisik ini lebih masuk akal untuk dijalankan sa
                     <div class="d-flex align-items-center gap-2 mb-2">
                         <span class="badge bg-success border border-success">Maps</span>
                     </div>
-                    <p class="small text-muted mb-0">Pakai metode <a href="https://mkt.smsrm.com/campaign/scraping_data.php" target="_blank" class="fw-bold">Tutorial Scraping Data</a> dengan kata kunci <strong>Bumdes [Area]</strong>.</p>
+                    <p class="small text-muted mb-0">Pakai metode <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka">Tutorial Scraping Data</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small> dengan kata kunci <strong>Bumdes [Area]</strong>.</p>
                 </div>
             </div>
 
@@ -834,7 +834,7 @@ Jika opsi tanpa ribet operasional fisik ini lebih masuk akal untuk dijalankan sa
                     </div>
                     <ul class="small text-muted mb-0 ps-3" style="line-height: 1.6;">
                         <li class="mb-2"><strong>Google:</strong> Buka Google, Cari <strong>Kopkar [Area/Tanpa]</strong>, klik web relevan, lalu cari Kontak WA & Email.</li>
-                        <li><strong>Maps:</strong> Ikuti <a href="https://mkt.smsrm.com/campaign/scraping_data.php" target="_blank" class="fw-bold">Tutorial Scraping Data</a> dengan kata kunci <strong>Kopkar [Area/Tanpa]</strong>.</li>
+                        <li><strong>Maps:</strong> Ikuti <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka">Tutorial Scraping Data</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small> dengan kata kunci <strong>Kopkar [Area/Tanpa]</strong>.</li>
                     </ul>
                 </div>
             </div>
@@ -848,7 +848,7 @@ Jika opsi tanpa ribet operasional fisik ini lebih masuk akal untuk dijalankan sa
                     </div>
                     <ul class="small text-muted mb-0 ps-3" style="line-height: 1.6;">
                         <li class="mb-2"><strong>Google:</strong> Buka Google, Cari <strong>Kopma [Area/Tanpa]</strong>, klik web relevan, lalu cari Kontak WA & Email.</li>
-                        <li><strong>Maps:</strong> Ikuti <a href="https://mkt.smsrm.com/campaign/scraping_data.php" target="_blank" class="fw-bold">Tutorial Scraping Data</a> dengan kata kunci <strong>Kopma [Area/Tanpa]</strong>.</li>
+                        <li><strong>Maps:</strong> Ikuti <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka">Tutorial Scraping Data</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small> dengan kata kunci <strong>Kopma [Area/Tanpa]</strong>.</li>
                     </ul>
                 </div>
             </div>

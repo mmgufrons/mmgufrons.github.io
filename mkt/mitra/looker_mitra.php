@@ -74,7 +74,7 @@ if (!$lookers) {
                         <strong>Request Data ke IT:</strong> Lakukan permintaan penarikan data ke tim IT sesuai <a href="#" target="_blank"><b>Format Standar</b></a>. 
                         <ul class="mt-1 mb-2">
                             <li><strong>Rentang Waktu:</strong> Infokan tanggal tarikan mulai dari <b>hari setelah data terakhir ditarik s/d kemarin jam 23.59</b>.</li>
-                            <li><strong>Mitra Baru (Jika Ada):</strong> Wajib infokan <i>Agen ID</i> Mitra tersebut ke IT agar masuk dalam daftar tarikan. Agen ID dapat dicek pada menu "Daftar Mitra Area" di <a href="https://mitra.smsrm.com/tracker.php" target="_blank">Tracker Mitra</a>. (Abaikan jika tidak ada mitra baru).</li>
+                            <li><strong>Mitra Baru (Jika Ada):</strong> Wajib infokan <i>Agen ID</i> Mitra tersebut ke IT agar masuk dalam daftar tarikan. Agen ID dapat dicek pada menu "Daftar Mitra Area" di <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka">Tracker Mitra</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small>. (Abaikan jika tidak ada mitra baru).</li>
                         </ul>
                     </li>
 

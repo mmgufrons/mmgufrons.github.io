@@ -1,6 +1,6 @@
 /**
  * firebase-api.js — Campaign SIMASRIM
- * Thin wrapper ke PHP proxy → Firebase Realtime Database (campaign-smsrm)
+ * Thin wrapper ke PHP proxy → Firebase Realtime Database (campaign-demo)
  * Identik pola dengan /ppob/js/firebase-api.js
  */
 

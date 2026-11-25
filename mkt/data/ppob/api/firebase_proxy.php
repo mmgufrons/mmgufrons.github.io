@@ -2,7 +2,7 @@
 // firebase_proxy.php — PPOB SIMASRIM Dashboard
 // ============================================================
 // PORTOFOLIO DEMO — versi asli proxy cURL ke Firebase Realtime
-// Database (project ppob-smsrm-dashboard) dengan secret asli. Di
+// Database (project ppob-demo) dengan secret asli. Di
 // versi porto ini SELURUH panggilan live DIHILANGKAN TOTAL, diganti
 // baca/tulis ke file JSON dummy lokal (api/data/ppob_store.json,
 // di-seed dari api/data/ppob_seed.json — data user/transaksi fiktif).

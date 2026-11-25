@@ -502,7 +502,7 @@ $_SESSION['login_simasrim'] = true;
                             <p>Edit judul, subjudul, dan tautan Linktree Albani Store.</p>
                         </div>
                         <div class="header-actions">
-                            <a href="https://sta.smsrm.com/" target="_blank" class="btn-preview"><i class="ph-bold ph-eye"></i> Live Preview</a>
+                            <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka"><i class="ph-bold ph-eye"></i> Live Preview</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small>
                             <button @click="saveData('sta', staData)" class="btn-save" :disabled="saving">
                                 <i class="ph-bold ph-floppy-disk"></i> {{ saving ? 'Menyimpan...' : 'Simpan Perubahan' }}
                             </button>
@@ -580,7 +580,7 @@ $_SESSION['login_simasrim'] = true;
                             <p>Kelola daftar tautan pusat informasi SIMASRIM dan template tombolnya.</p>
                         </div>
                         <div class="header-actions">
-                            <a href="https://smr.smsrm.com/" target="_blank" class="btn-preview"><i class="ph-bold ph-eye"></i> Live Preview</a>
+                            <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka"><i class="ph-bold ph-eye"></i> Live Preview</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small>
                             <button @click="saveData('smr', smrData)" class="btn-save" :disabled="saving">
                                 <i class="ph-bold ph-floppy-disk"></i> {{ saving ? 'Menyimpan...' : 'Simpan Perubahan' }}
                             </button>
@@ -662,7 +662,7 @@ $_SESSION['login_simasrim'] = true;
                             <p>Edit section, ikon, dan tautan di dashboard utama.</p>
                         </div>
                         <div class="header-actions">
-                            <a href="https://portal.smsrm.com/" target="_blank" class="btn-preview"><i class="ph-bold ph-eye"></i> Live Preview</a>
+                            <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka"><i class="ph-bold ph-eye"></i> Live Preview</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small>
                             <button @click="saveData('portal', portalData)" class="btn-save" :disabled="saving">
                                 <i class="ph-bold ph-floppy-disk"></i> {{ saving ? 'Menyimpan...' : 'Simpan Perubahan' }}
                             </button>

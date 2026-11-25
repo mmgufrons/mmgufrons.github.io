@@ -1,7 +1,7 @@
 <?php
 // ============================================================
 // PORTOFOLIO DEMO — api_save.php
-// Versi asli meng-upload data ke Firebase RTDB (project smsrm-lm)
+// Versi asli meng-upload data ke Firebase RTDB (project lm-demo)
 // pakai secret asli, termasuk endpoint 'migrate' yang mem-push
 // seluruh file lokal ke server. Di versi porto ini SELURUH
 // panggilan live DIHILANGKAN TOTAL — data disimpan ke file JSON

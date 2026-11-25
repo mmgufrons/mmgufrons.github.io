@@ -49,7 +49,7 @@ if (!$marketing_kits) {
                         <div class="card card-body bg-white border-warning border-opacity-50 small text-muted">
                             <strong class="text-dark mb-2">Catatan Historis - Alur Versi KB Bekasi (Sebelumnya):</strong>
                             <ol class="mb-0 ps-3">
-                                <li>Request di edc.smsrm.com</li>
+                                <li>Request di portal-ai.contoh.demo</li>
                                 <li>Konfirmasi manual ke KB Bekasi</li>
                                 <li>Proses Pembuatan Rekening</li>
                                 <li>FU Kelengkapan Rekening + TID/MID ke KB Bekasi</li>
@@ -192,7 +192,7 @@ Sudah tersedia/ready Tim? Agar bisa segera kami proses input ke eForm Mobile. Te
                 <div class="col-md-12">
                     <div class="p-3 border rounded" style="background: #f4f8ff; border-color: #cce0ff !important;">
                         <span class="d-block small text-muted mb-1">Link Portal Approval:</span>
-                        <a href="https://kapas.arranetpay.com/" target="_blank" class="fw-bold text-primary fs-5 text-decoration-none"><i class="fas fa-external-link-alt me-2"></i>kapas.arranetpay.com</a>
+                        <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka">kapas.contoh.demo</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small>
                         
                         <div class="d-flex flex-wrap gap-4 mt-3 pt-3 border-top border-primary border-opacity-25">
                             <div>

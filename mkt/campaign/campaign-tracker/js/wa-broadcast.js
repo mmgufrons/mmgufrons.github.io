@@ -1,7 +1,7 @@
 /**
  * wa-broadcast.js — WA Broadcast tool (adaptasi dari tools/wa/index.html)
  * Diintegrasikan ke tab 'WA Broadcast' campaign-tracker.
- * Storage: template pesan -> Firebase (campaign-smsrm, via api/firebase_proxy.php),
+ * Storage: template pesan -> Firebase (campaign-demo, via api/firebase_proxy.php),
  * kontak/grup -> localStorage browser. Kontak untuk broadcast harian dibawa masuk
  * lewat WABroadcast.loadFromLeads() dari tab Master Leads (tombol 'Broadcast WA').
  */

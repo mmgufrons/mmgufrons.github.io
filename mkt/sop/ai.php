@@ -22,7 +22,7 @@ include __DIR__ . '/../includes/header.php';
 
         <div class="login-box shadow-sm border-0">
             <h5 class="fw-bold text-dark mb-3"><i class="fas fa-sign-in-alt me-2 text-primary"></i>Akses Portal AI (EDC SIMASRIM)</h5>
-            <p class="text-muted small mb-3">Untuk melakukan pembaruan, silakan akses portal manajemen AI kita melalui link <a href="https://edc.smsrm.com/" target="_blank" class="fw-bold text-decoration-none">https://edc.smsrm.com/</a> menggunakan kredensial khusus tim CS di bawah ini:</p>
+            <p class="text-muted small mb-3">Untuk melakukan pembaruan, silakan akses portal manajemen AI kita melalui link <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka">https://portal-ai.contoh.demo/</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small> menggunakan kredensial khusus tim CS di bawah ini:</p>
             
             <div class="d-flex flex-wrap gap-3 align-items-center mt-3">
                 <div>

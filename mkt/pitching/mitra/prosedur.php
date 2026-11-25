@@ -83,7 +83,7 @@ include 'header.php';
                         <a href="#" target="_blank" class="btn-resource m-0"><i class="fas fa-file-contract text-primary mt-1"></i> Base Dokumen NDA</a>
                         <a href="#" target="_blank" class="btn-resource m-0"><i class="fas fa-file-signature text-primary mt-1"></i> Base Surat Penunjukan</a>
                         <a href="#" target="_blank" class="btn-resource m-0"><i class="fas fa-file-alt text-primary mt-1"></i> Base Adendum PKS</a>
-                        <a href="https://mkt.smsrm.com/sop/duplikasi_mitra.php" target="_blank" class="btn-resource m-0 mt-2"><i class="fas fa-chart-pie text-info mt-1"></i> SOP Duplikasi Dashboard</a>
+                        <span class="fw-bold" title="Portofolio demo: alamat contoh, tidak bisa dibuka"><i class="fas fa-chart-pie text-info mt-1"></i> SOP Duplikasi Dashboard</span> <small style="font-weight:600;color:#9a3412;">(alamat contoh · bukan situs asli)</small>
                     </div>
                 </div>
             </div>

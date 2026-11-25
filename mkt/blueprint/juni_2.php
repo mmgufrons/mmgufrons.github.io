@@ -63,7 +63,7 @@ include __DIR__ . '/../includes/header.php';
                             Kabar gembira buat Kakak! SIMASRIM menghadirkan program kolaborasi eksklusif:<br>
                             ✨ <span class="wa-bold">MALL SIMASRIM (OrderMudah) x FULFILLMENT QSIR x STUDIO BABEH WAN</span> ✨<br><br>
                             Siapa sih Babeh Wan?<br>
-                            Beliau adalah "Sahabat Keluarga, Berkah Terjaga" (babehwan.smsrm.com). Dengan pembawaan yang hangat, Islami, dan dekat dengan masyarakat, Babeh Wan siap menjadi "Wajah" untuk mempromosikan produk Kakak agar laris manis!<br><br>
+                            Beliau adalah "Sahabat Keluarga, Berkah Terjaga" (babehwan.contoh.demo). Dengan pembawaan yang hangat, Islami, dan dekat dengan masyarakat, Babeh Wan siap menjadi "Wajah" untuk mempromosikan produk Kakak agar laris manis!<br><br>
                             Apa aja untungnya buat Kakak?<br>
                             1️⃣ <span class="wa-bold">DIPROMOSIKAN BABEH WAN:</span> Produk Kakak bakal di-review dan di-LIVE-kan langsung oleh Babeh Wan dari studio kami ke berbagai platform digital. Daya tarik Babeh Wan bikin produk Kakak makin dilirik! 🎥👳‍♂️<br>
                             2️⃣ <span class="wa-bold">JUALAN GRATIS DI MALL SIMASRIM:</span> Eksposur produk makin luas di platform e-commerce kami.<br>
@@ -89,7 +89,7 @@ Kabar gembira buat Kakak! SIMASRIM menghadirkan program kolaborasi eksklusif:
 ✨ *MALL SIMASRIM (OrderMudah) x FULFILLMENT QSIR x STUDIO BABEH WAN* ✨
 
 Siapa sih Babeh Wan?
-Beliau adalah "Sahabat Keluarga, Berkah Terjaga" (babehwan.smsrm.com). Dengan pembawaan yang hangat, Islami, dan dekat dengan masyarakat, Babeh Wan siap menjadi "Wajah" untuk mempromosikan produk Kakak agar laris manis!
+Beliau adalah "Sahabat Keluarga, Berkah Terjaga" (babehwan.contoh.demo). Dengan pembawaan yang hangat, Islami, dan dekat dengan masyarakat, Babeh Wan siap menjadi "Wajah" untuk mempromosikan produk Kakak agar laris manis!
 
 Apa aja untungnya buat Kakak?
 1️⃣ *DIPROMOSIKAN BABEH WAN:* Produk Kakak bakal di-review dan di-LIVE-kan langsung oleh Babeh Wan dari studio kami ke berbagai platform digital. Daya tarik Babeh Wan bikin produk Kakak makin dilirik! 🎥👳‍♂️

@@ -3,7 +3,7 @@
  * firebase_proxy.php — Campaign SIMASRIM
  * ============================================================
  * PORTOFOLIO DEMO — versi asli adalah proxy cURL ke Firebase
- * Realtime Database (project campaign-smsrm) dengan secret asli.
+ * Realtime Database (project campaign-demo) dengan secret asli.
  * Di versi porto ini SELURUH panggilan live DIHILANGKAN TOTAL,
  * diganti baca/tulis ke file JSON dummy lokal (api/data/campaign_store.json,
  * di-seed dari api/data/campaign_seed.json — leads WA & Email fiktif).
