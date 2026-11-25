@@ -33,29 +33,27 @@
         .bg-primary { background-color: var(--primary) !important; }
         .border-primary { border-color: var(--primary) !important; }
         .btn-primary { background-color: var(--primary) !important; border-color: var(--primary) !important; color: white !important; }
-        .btn-primary:hover { background-color: var(--primary-dark) !important; border-color: var(--primary-dark) !important; }
 
         body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-main); background-color: #f8f9fa; overflow-x: hidden; letter-spacing: -0.01em; }
         a { text-decoration: none; transition: 0.3s; }
 
         /* NAVBAR GLASS EFFECT & MENU STYLING */
-        .navbar-glass { padding: 1rem 0; background: transparent; transition: all 0.3s ease-in-out; position: fixed; top: 0; width: 100%; z-index: 1050; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .navbar-glass { padding: 1rem 0; background: transparent; transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; position: fixed; top: 0; width: 100%; z-index: 1050; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .navbar-glass .nav-logo-text { color: white; transition: 0.3s; }
         .navbar-glass.scrolled { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); padding: 0.8rem 0; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .navbar-glass.scrolled .nav-logo-text { color: var(--primary) !important; }
         
         /* Menu Navigasi */
         .navbar-nav .nav-link { color: rgba(255,255,255,0.8); font-weight: 500; font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: 8px; transition: 0.3s; }
-        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: white; background: rgba(255,255,255,0.15); font-weight: 600; }
+.navbar-nav .nav-link.active { color: white; background: rgba(255,255,255,0.15); font-weight: 600; }
         
         /* Menu Navigasi Saat Di-Scroll (Mode Terang) */
         .navbar-glass.scrolled .navbar-nav .nav-link { color: var(--text-main); }
-        .navbar-glass.scrolled .navbar-nav .nav-link:hover, .navbar-glass.scrolled .navbar-nav .nav-link.active { color: var(--primary); background: var(--bg-soft-purple); }
+.navbar-glass.scrolled .navbar-nav .nav-link.active { color: var(--primary); background: var(--bg-soft-purple); }
         
         /* Dropdown Styling */
         .dropdown-menu { border: none; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
-        .dropdown-item { padding: 10px 20px; font-weight: 500; font-size: 0.9rem; color: var(--text-main); transition: 0.2s; }
-        .dropdown-item:hover { background-color: var(--bg-soft-purple); color: var(--primary); }
+        .dropdown-item { padding: 8px 24px; font-weight: 500; font-size: 0.9rem; color: var(--text-main); transition: 0.2s; }
         
         /* Hamburger Menu Icon Fix */
         .navbar-toggler { border: none; outline: none; box-shadow: none !important; }
@@ -63,9 +61,9 @@
         .navbar-glass.scrolled .navbar-toggler-icon { filter: none; }
 
         /* UI GLOBAL (Disatukan agar halaman turunan langsung rapi) */
-        .hero-section { position: relative; padding: 150px 0 80px; background: radial-gradient(circle at top right, #3A1B5E, #1F0D3D, #0f0c29); color: white; overflow: hidden; width: 100%; }
+        .hero-section { position: relative; padding: 8rem 0 4rem; background: radial-gradient(circle at top right, #3A1B5E, #1F0D3D, #0f0c29); color: white; overflow: hidden; width: 100%; }
         /* OPTIMIZATION: Removed filter: blur(180px) which causes extreme GPU stuttering. Using radial-gradient instead. */
-        .hero-blob { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, var(--accent) 0%, transparent 60%); opacity: 0.15; border-radius: 50%; z-index: 0; transform: translate3d(0,0,0); }
+        .hero-blob { position: absolute; width: 600px; aspect-ratio: 1; background: radial-gradient(circle, var(--accent) 0%, transparent 60%); opacity: 0.15; border-radius: 50%; z-index: 0; transform: translate3d(0,0,0); }
         
         .followup-container { max-width: 800px; margin: 0 auto; }
         .step-card { background: #fff; border-radius: 20px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.03); border-left: 5px solid var(--primary); position: relative; }
@@ -76,33 +74,26 @@
         .wa-italic { font-style: italic; }
         .raw-wa-text { display: none; }
         
-        .btn-copy { background: white; color: var(--primary); border: 1px solid var(--primary); border-radius: 8px; padding: 0.4rem 1rem; font-weight: 600; font-size: 0.85rem; transition: 0.2s; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; }
-        .btn-copy:hover { background: var(--bg-soft-purple); }
+        .btn-copy { background: white; color: var(--primary); border: 1px solid var(--primary); border-radius: 8px; padding: 0.4rem 1rem; font-weight: 600; font-size: 0.85rem; transition: 0.2s; display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
         .btn-copy.copied { background: var(--wa-green); color: white; border-color: var(--wa-green); }
         
-        .btn-report { background: linear-gradient(135deg, #128C7E, #25D366); color: white; border: none; border-radius: 50px; padding: 10px 25px; font-weight: bold; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-report:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); color: white; }
+        .btn-report { background: linear-gradient(135deg, #128C7E, #25D366); color: white; border: none; border-radius: 50px; padding: 8px 24px; font-weight: bold; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
         
-        .fab-report { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: var(--text-main); color: white; padding: 12px 20px; border-radius: 50px; font-weight: bold; text-decoration: none; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: 0.3s; display: flex; align-items: center; gap: 10px; border: 2px solid rgba(255,255,255,0.1); }
-        .fab-report:hover { transform: scale(1.05); color: var(--accent); }
+        .fab-report { position: fixed; bottom: 30px; right: 30px; z-index: 1000; background: var(--text-main); color: white; padding: 16px 24px; border-radius: 50px; font-weight: bold; text-decoration: none; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transition: 0.3s; display: flex; align-items: center; gap: 8px; border: 2px solid rgba(255,255,255,0.1); }
 
-        .info-card { background: #fff; border-radius: 20px; padding: 2rem; height: 100%; border: 1px solid rgba(115, 53, 183, 0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.02); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
-        .info-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(115, 53, 183, 0.1); border-color: rgba(115, 53, 183, 0.3); }
+        .info-card { background: #fff; border-radius: 20px; padding: 2rem; height: 100%; border: 1px solid rgba(115, 53, 183, 0.08); box-shadow: 0 10px 30px rgba(0,0,0,0.02); transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
         .info-icon { width: 65px; height: 65px; display: flex; align-items: center; justify-content: center; border-radius: 18px; font-size: 1.8rem; margin-bottom: 1.5rem; }
         .icon-primary-soft { background-color: var(--bg-soft-purple); color: var(--primary); }
         .icon-accent-soft { background-color: rgba(243, 112, 13, 0.1); color: var(--accent); }
         
-        .nav-pills .nav-link { border-radius: 50px; padding: 10px 25px; color: var(--text-main); font-weight: 600; margin-right: 10px; margin-bottom: 10px; border: 1px solid #dee2e6; background: white; transition: 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .nav-pills .nav-link { border-radius: 50px; padding: 8px 24px; color: var(--text-main); font-weight: 600; margin-right: 8px; margin-bottom: 8px; border: 1px solid #dee2e6; background: white; transition: 0.3s; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
         .nav-pills .nav-link.active { background-color: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 8px 20px rgba(115, 53, 183, 0.3); transform: translateY(-2px); }
-        .nav-pills .nav-link:hover:not(.active) { background-color: var(--bg-soft-purple); border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
         
         .table-custom { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.02); margin-bottom: 0; }
-        .table-custom thead th { background-color: var(--primary); color: white; font-weight: 600; border: none; padding: 18px 15px; text-align: center; vertical-align: middle; letter-spacing: 0.5px; }
-        .table-custom tbody td { padding: 15px; vertical-align: middle; text-align: center; border-bottom: 1px dashed #eee; transition: 0.2s; }
-        .table-custom tbody tr:hover td { background-color: var(--bg-soft-purple); }
-        .badge-override { background: linear-gradient(135deg, var(--accent), #ff903b); color: white; font-size: 0.95rem; padding: 8px 15px; border-radius: 8px; box-shadow: 0 4px 10px rgba(243, 112, 13, 0.3); }
-        .tier-box { background: #fff; border: 1px solid #e9ecef; border-radius: 8px; padding: 6px 12px; display: inline-block; font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: 0.3s; }
-        .table-custom tbody tr:hover .tier-box { border-color: var(--primary); color: var(--primary); }
+        .table-custom thead th { background-color: var(--primary); color: white; font-weight: 600; border: none; padding: 16px 16px; text-align: center; vertical-align: middle; letter-spacing: 0.5px; }
+        .table-custom tbody td { padding: 16px; vertical-align: middle; text-align: center; border-bottom: 1px dashed #eee; transition: 0.2s; }
+        .badge-override { background: linear-gradient(135deg, var(--accent), #ff903b); color: white; font-size: 0.95rem; padding: 8px 16px; border-radius: 8px; box-shadow: 0 4px 10px rgba(243, 112, 13, 0.3); }
+        .tier-box { background: #fff; border: 1px solid #e9ecef; border-radius: 8px; padding: 8px 16px; display: inline-block; font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: 0.3s; }
 
         /* --- TWEAK ESTETIKA & UX TAMBAHAN --- */
         
@@ -113,12 +104,12 @@
                 backdrop-filter: blur(10px); 
                 padding: 1rem; 
                 border-radius: 15px; 
-                margin-top: 15px; 
+                margin-top: 16px; 
                 box-shadow: 0 10px 40px rgba(0,0,0,0.15); 
                 border: 1px solid rgba(115, 53, 183, 0.1);
             }
             .navbar-nav .nav-link { color: var(--text-main) !important; font-weight: 600; }
-            .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { 
+            .navbar-nav .nav-link.active, .navbar-nav .nav-link:focus-visible { 
                 color: var(--primary) !important; 
                 background: var(--bg-soft-purple) !important; 
             }
@@ -129,19 +120,32 @@
         .table-custom head th, .table-custom thead th { white-space: nowrap; }
 
         /* 3. Fix Footer ngasih ruang buat tombol melayang (FAB) */
-        footer { padding-bottom: 90px !important; }
+        footer { padding-bottom: 6rem !important; }
 
         /* --- FIX ANTI BOCOR KANAN-KIRI (MOBILE) --- */
         html, body { max-width: 100vw; overflow-x: hidden !important; }
         .navbar-glass { left: 0; right: 0; max-width: 100vw; }
         .chat-bubble, .wa-italic { word-wrap: break-word !important; word-break: break-word !important; overflow-wrap: break-word !important; white-space: normal; }
-    </style>
+    
+@media (hover: hover) and (pointer: fine) {
+        .btn-primary:hover { background-color: var(--primary-dark) !important; border-color: var(--primary-dark) !important; }
+  .navbar-nav .nav-link:hover { color: white; background: rgba(255,255,255,0.15); font-weight: 600; }
+  .navbar-glass.scrolled .navbar-nav .nav-link:hover { color: var(--primary); background: var(--bg-soft-purple); }
+        .dropdown-item:hover { background-color: var(--bg-soft-purple); color: var(--primary); }
+        .btn-copy:hover { background: var(--bg-soft-purple); }
+        .btn-report:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); color: white; }
+        .fab-report:hover { transform: scale(1.05); color: var(--accent); }
+        .info-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(115, 53, 183, 0.1); border-color: rgba(115, 53, 183, 0.3); }
+        .nav-pills .nav-link:hover:not(.active) { background-color: var(--bg-soft-purple); border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+        .table-custom tbody tr:hover td { background-color: var(--bg-soft-purple); }
+        .table-custom tbody tr:hover .tier-box { border-color: var(--primary); color: var(--primary); }
+}</style>
 <style>
 /* Tombol bahasa di bar atas pitching: ikut warna menu (putih di atas foto, gelap setelah digulir) */
-.pt-lang{display:inline-flex;align-items:center;gap:4px;border:1px solid rgba(255,255,255,0.3);border-radius:99px;padding:0 4px;color:rgba(255,255,255,0.85);}
+.pt-lang{display:inline-flex;align-items:center;gap: 4px;border:1px solid rgba(255,255,255,0.3);border-radius:99px;padding: 0 4px;color:rgba(255,255,255,0.85);}
 .navbar-glass.scrolled .pt-lang{color:#1e1e2f;border-color:rgba(0,0,0,0.15);}
 @media (max-width:991.98px){.pt-lang{color:#1e1e2f;border-color:rgba(0,0,0,0.15);}}
-.pt-lang .lang-btn{min-width:44px;min-height:44px;padding:0 8px;border:0;background:transparent;color:inherit;font-size:0.75rem;font-weight:700;border-radius:99px;cursor:pointer;transition:transform 120ms cubic-bezier(0.16,1,0.3,1);}
+.pt-lang .lang-btn{min-width:44px;min-height:44px;padding: 0 8px;border:0;background:transparent;color:inherit;font-size:0.75rem;font-weight:700;border-radius:99px;cursor:pointer;transition:transform 120ms cubic-bezier(0.16,1,0.3,1);}
 .pt-lang .lang-btn:active{transform:scale(0.97);}
 .pt-lang .lang-btn.active{color:#F3700D;font-weight:800;}
 .pt-lang .lang-btn:focus-visible{outline:2px solid #F3700D;outline-offset:2px;}
@@ -150,9 +154,9 @@
 </style>
 <style>
 /* Catatan bahasa: hanya muncul di mode EN, karena isi dokumen asli berbahasa Indonesia */
-.catatan-bahasa{display:none;margin:0;padding:8px 16px;background:#fff7ed;color:#7c2d12;border-bottom:1px solid #fed7aa;font-size:0.875rem;line-height:1.5;text-align:center;}
+.catatan-bahasa{display:none;margin: 0;padding: 8px 16px;background:#fff7ed;color:#7c2d12;border-bottom:1px solid #fed7aa;font-size:0.875rem;line-height:1.5;text-align:center;}
 html[lang="en"] .catatan-bahasa{display:block;}
-.pitch-bahasa{position:relative;z-index:1051;margin-top:72px;}
+.pitch-bahasa{position:relative;z-index:1051;margin-top: 64px;}
 </style>
 </head>
 <body>
@@ -198,15 +202,12 @@ html[lang="en"] .catatan-bahasa{display:block;}
     .preview-image-wrapper {
         position: relative;
         border-radius: 24px;
-        padding: 12px;
+        padding: 16px;
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
         transform: perspective(1000px) rotateY(-5deg);
         transition: 0.5s ease;
-    }
-    .preview-image-wrapper:hover {
-        transform: perspective(1000px) rotateY(0deg) translateY(-10px);
     }
     .preview-image-wrapper img {
         border-radius: 16px;
@@ -222,7 +223,7 @@ html[lang="en"] .catatan-bahasa{display:block;}
         transform: translateX(-50%);
         background: linear-gradient(135deg, var(--accent), #ff903b);
         color: white;
-        padding: 8px 20px;
+        padding: 8px 24px;
         border-radius: 50px;
         font-weight: 700;
         font-size: 0.85rem;
@@ -239,15 +240,10 @@ html[lang="en"] .catatan-bahasa{display:block;}
         border: 1px solid rgba(115, 53, 183, 0.08); 
         background: linear-gradient(145deg, #ffffff, #fcfaff); 
         box-shadow: 0 10px 30px rgba(0,0,0,0.02); 
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; 
         height: 100%; 
         position: relative; 
         overflow: hidden; 
-    }
-    .ecosystem-card:hover { 
-        transform: translateY(-10px); 
-        border-color: var(--primary); 
-        box-shadow: 0 20px 40px rgba(115, 53, 183, 0.12); 
     }
     .icon-box-large { 
         width: 70px; 
@@ -259,9 +255,6 @@ html[lang="en"] .catatan-bahasa{display:block;}
         font-size: 2rem; 
         margin-bottom: 1.5rem; 
         transition: 0.3s;
-    }
-    .ecosystem-card:hover .icon-box-large {
-        transform: scale(1.1) rotate(5deg);
     }
     
     /* ARSITEKTUR KOMPLEKS QSIR (INTERAKTIF) */
@@ -277,32 +270,27 @@ html[lang="en"] .catatan-bahasa{display:block;}
     .diagram-top-bar {
         background: linear-gradient(90deg, #3A1B5E, var(--primary), #3A1B5E);
         color: white;
-        padding: 15px;
+        padding: 16px;
         border-radius: 15px;
         font-weight: 700;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 15px;
+        gap: 16px;
         box-shadow: 0 10px 20px rgba(115, 53, 183, 0.2);
         margin-bottom: 3rem;
     }
     .diagram-top-bar span { 
         background: rgba(255,255,255,0.1); 
-        padding: 5px 12px; 
+        padding: 4px 16px; 
         border-radius: 8px; 
         font-size: 0.85rem; 
         transition: 0.3s ease;
         cursor: default;
     }
-    .diagram-top-bar span:hover {
-        background: var(--accent);
-        transform: translateY(-3px);
-    }
     
     /* Hover Effects for Diagram Elements */
     .interactive-box { transition: 0.3s ease; cursor: default; }
-    .interactive-box:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important; border-color: var(--accent) !important; }
     
     .hub-core {
         background: white;
@@ -314,10 +302,6 @@ html[lang="en"] .catatan-bahasa{display:block;}
         position: relative;
         z-index: 5;
         transition: 0.4s ease;
-    }
-    .hub-core:hover {
-        transform: scale(1.03) translateY(-5px);
-        box-shadow: 0 25px 50px rgba(115, 53, 183, 0.25);
     }
     
     .arrow-flow { color: var(--success); font-size: 1.5rem; animation: pulse 2s infinite; }
@@ -338,23 +322,17 @@ html[lang="en"] .catatan-bahasa{display:block;}
         transition: 0.3s; 
     }
     
-    .hover-scale:hover { transform: scale(1.15); filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); }
 
-    .badge-status-live { background: linear-gradient(135deg, #128C7E, #25D366); color: white; padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
-    .badge-status-soon { background: linear-gradient(135deg, #6c757d, #495057); color: white; padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
+    .badge-status-live { background: linear-gradient(135deg, #128C7E, #25D366); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
+    .badge-status-soon { background: linear-gradient(135deg, #6c757d, #495057); color: white; padding: 8px 16px; border-radius: 50px; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; }
 
     /* Custom Strength List */
     .strength-item {
         background: rgba(255,255,255,0.05);
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 16px;
-        padding: 20px;
+        padding: 24px;
         transition: 0.3s;
-    }
-    .strength-item:hover {
-        background: rgba(255,255,255,0.1);
-        transform: translateX(10px);
-        border-color: var(--accent);
     }
     .strength-icon {
         width: 60px;
@@ -364,9 +342,37 @@ html[lang="en"] .catatan-bahasa{display:block;}
         justify-content: center;
         background: rgba(243, 112, 13, 0.1);
         border-radius: 12px;
-        margin-right: 20px;
+        margin-right: 24px;
     }
-</style>
+
+@media (hover: hover) and (pointer: fine) {
+    .preview-image-wrapper:hover {
+        transform: perspective(1000px) rotateY(0deg) translateY(-10px);
+    }
+    .ecosystem-card:hover { 
+        transform: translateY(-10px); 
+        border-color: var(--primary); 
+        box-shadow: 0 20px 40px rgba(115, 53, 183, 0.12); 
+    }
+    .ecosystem-card:hover .icon-box-large {
+        transform: scale(1.1) rotate(5deg);
+    }
+    .diagram-top-bar span:hover {
+        background: var(--accent);
+        transform: translateY(-3px);
+    }
+    .interactive-box:hover { transform: scale(1.05); box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important; border-color: var(--accent) !important; }
+    .hub-core:hover {
+        transform: scale(1.03) translateY(-5px);
+        box-shadow: 0 25px 50px rgba(115, 53, 183, 0.25);
+    }
+    .hover-scale:hover { transform: scale(1.15); filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); }
+    .strength-item:hover {
+        background: rgba(255,255,255,0.1);
+        transform: translateX(10px);
+        border-color: var(--accent);
+    }
+}</style>
 
 <section class="hero-section d-flex align-items-center">
     <div class="hero-blob" style="top: -10%; right: -5%;"></div>

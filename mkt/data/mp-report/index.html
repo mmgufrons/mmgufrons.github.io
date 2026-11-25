@@ -24,7 +24,7 @@
         .btn-back-main-porto {
             display: inline-flex !important;
             align-items: center !important;
-            gap: 7px !important;
+            gap: 8px !important;
             color: #ffffff !important;
             text-decoration: none !important;
             font-size: 0.8rem !important;
@@ -32,15 +32,18 @@
             background: #140927 !important;
             border: 1px solid rgba(255, 255, 255, 0.25) !important;
             border-radius: 8px !important;
-            padding: 7px 13px !important;
+            padding: 8px 16px !important;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
-            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
         }
         .btn-back-main-porto i {
             color: #F3700D !important;
             font-size: 0.75rem !important;
             transition: transform 0.2s ease, color 0.2s ease !important;
         }
+    
+    
+@media (hover: hover) and (pointer: fine) {
         .btn-back-main-porto:hover {
             background: #F3700D !important;
             border-color: #ff852e !important;
@@ -58,8 +61,7 @@
             color: #86efac !important;
             transform: translateX(-2px);
         }
-    
-    </style>
+}</style>
 
 </head>
 <body>
@@ -76,19 +78,21 @@
             
             <style>
                 .btn-back-mkt {
-                    display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; 
+                    display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; 
                     background: #7335b7; color: #ffffff !important; 
                     border: 1px solid #8e44ad; border-radius: 8px; text-decoration: none; 
-                    font-weight: 700; font-size: 14px; transition: all 0.3s ease;
+                    font-weight: 700; font-size: 0.875rem; transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
                     box-shadow: 0 2px 8px rgba(115,53,183,0.3);
-                }
-                .btn-back-mkt:hover {
-                    background: #5a2a8f; color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(115,53,183,0.35);
                 }
                 .btn-back-mkt:active {
                     transform: translateY(0);
                 }
-            </style>
+            
+@media (hover: hover) and (pointer: fine) {
+                .btn-back-mkt:hover {
+                    background: #5a2a8f; color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(115,53,183,0.35);
+                }
+}</style>
             <div style="padding: 0 14px 20px 14px;">
                 <a href="../../index.html" class="btn-back-mkt" data-kembali>
                     <i class='bx bx-arrow-back'></i>
