@@ -10,83 +10,81 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Token proyek + gerak (Proyek Manager). Warna merek tetap; rona digelapkan/diterangkan demi kontras AAA. */
   :root{
     --bg:#09090b; --panel:#121215; --panel-2:#18181c; --border:#27272a;
     --border-hover:#3f3f46; --text:#f4f4f5; --muted:#a1a1aa;
-    --accent:#6366f1; --accent-2:#10b981;
+    --accent:#a5b4fc; --accent-solid:#4338ca; --accent-solid-hover:#3730a3;
+    --oranye:#ff9a4d; --oranye-gelap:#9a3412;
+    --fs-12:.75rem; --fs-14:.875rem; --fs-16:1rem; --fs-18:1.125rem; --fs-20:1.25rem;
+    --gerak-cepat:120ms; --gerak-normal:200ms; --gerak-sedang:320ms;
+    --ease-keluar:cubic-bezier(0.16,1,0.3,1); --tekan-skala:.97;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;font-size:var(--fs-16);-webkit-font-smoothing:antialiased;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
   .top-nav{
-    display:flex; align-items:center; gap:12px; padding:18px 32px;
-    border-bottom:1px solid var(--border); background:rgba(18,18,21,0.7); backdrop-filter:blur(12px);
-    font-size:13px; font-weight:600;
+    display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;
+    padding:16px clamp(16px,4vw,32px);padding-top:max(16px,env(safe-area-inset-top));
+    border-bottom:1px solid var(--border);background:var(--panel);
+    font-size:var(--fs-14);font-weight:600;
   }
-  
-  .btn-nav-back {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: #140927 !important; color: #ffffff !important;
-    border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    border-radius: 8px; padding: 6px 13px;
-    font-size: 12.5px; font-weight: 700;
-    text-decoration: none !important;
-    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  @supports (backdrop-filter:blur(12px)){.top-nav{background:rgba(18,18,21,0.8);backdrop-filter:blur(12px);}}
+  .btn-nav-back{
+    display:inline-flex;align-items:center;gap:8px;min-height:44px;
+    background:#140927;color:#fff;border:1px solid rgba(255,255,255,0.25);
+    border-radius:8px;padding:8px 16px;font-size:var(--fs-14);font-weight:700;text-decoration:none;
+    transition:background-color var(--gerak-normal) var(--ease-keluar),transform var(--gerak-cepat) var(--ease-keluar);
   }
-  .btn-nav-back:hover {
-    background: #F3700D !important;
-    border-color: #ff852e !important;
-    color: #ffffff !important;
-    transform: translateX(-3px);
-    box-shadow: 0 4px 14px rgba(243, 112, 13, 0.45);
-  }
-  .card { cursor: pointer; }
+  .btn-nav-back:active{transform:scale(var(--tekan-skala));}
+  .top-nav .sep{color:#71717a;}
+  .top-nav .current{color:var(--text);}
 
-  .top-nav a{ color:var(--muted); text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all .2s ease; }
-  .top-nav a:hover{ color:#ffffff; transform:translateX(-2px); }
-  .top-nav .sep{ color:#3f3f46; }
-  .top-nav .current{ color:var(--text); }
-  header{padding:60px 24px 36px;text-align:center;background:radial-gradient(circle at 50% 0%, rgba(255,255,255,0.05) 0%, transparent 65%);}
-  header h1{margin:0 0 12px;font-size:clamp(28px,4vw,42px);font-weight:800;letter-spacing:-0.03em;color:#fafafa;}
-  header p{margin:0 auto;max-width:640px;color:var(--muted);font-size:14.5px;line-height:1.65;}
-  .badge{display:inline-block;background:rgba(255,255,255,0.06);color:#e4e4e7;border:1px solid rgba(255,255,255,0.14);padding:5px 14px;border-radius:99px;font-size:12px;font-weight:700;letter-spacing:.02em;margin-bottom:16px;transition:all .2s ease;}
-  .badge:hover{border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.09);}
-  main{max-width:1180px;margin:0 auto;padding:0 24px 80px;}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;}
-  .card:hover{transform:translateY(-4px);border-color:var(--border-hover);box-shadow:0 16px 36px rgba(0,0,0,0.6);}
-  .thumb{height:110px;display:flex;align-items:center;justify-content:center;font-size:38px;background:linear-gradient(135deg,#18181c,#121215);border-bottom:1px solid var(--border);}
-  .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:8px;flex:1;}
-  .body h3{margin:0;font-size:17px;font-weight:700;}
-  .body p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55;flex:1;}
-  .card-foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;justify-content:space-between;}
-  .badge-env{font-size:11px;padding:3px 9px;border-radius:6px;background:rgba(99,102,241,0.12);color:var(--accent);font-weight:600;border:1px solid rgba(99,102,241,0.2);}
-  .cta{display:inline-block;text-align:center;background:#6366f1;color:#fff;font-weight:700;font-size:12.5px;padding:8px 16px;border-radius:10px;text-decoration:none;transition:.2s;}
-  .cta:hover{background:#4f46e5;transform:scale(1.02);}
-  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:28px 24px 48px;border-top:1px solid var(--border);max-width:1180px;margin:0 auto;}
-  footer a{color:var(--accent);text-decoration:none;transition:all .2s ease;display:inline-block;}
-  footer a:hover{color:#818cf8;transform:translateX(-2px);text-decoration:underline;}
+  header{padding:clamp(32px,8vw,64px) 16px 32px;text-align:center;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,0.05) 0%,transparent 65%);}
+  header h1{margin:0 0 16px;font-size:clamp(1.75rem,4vw,2.625rem);font-weight:800;letter-spacing:-0.03em;color:#fafafa;line-height:1.15;}
+  header p{margin:0 auto;max-width:640px;color:var(--muted);font-size:var(--fs-16);line-height:1.65;}
+  .badge{display:inline-block;background:rgba(255,255,255,0.06);color:#e4e4e7;border:1px solid rgba(255,255,255,0.14);padding:4px 16px;border-radius:99px;font-size:var(--fs-12);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;}
 
-  /* Language Switcher */
-  .lang-switch{
-    display:inline-flex; align-items:center; gap:4px;
-    background:#18181c; border:1px solid var(--border);
-    border-radius:99px; padding:3px 6px;
-    margin-left:auto;
-  }
-  .lang-btn{
-    background:transparent; border:none; color:var(--muted);
-    font-size:11.5px; font-weight:700; padding:4px 10px; border-radius:99px;
-    cursor:pointer; transition:all .2s ease;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  }
-  .lang-btn:hover{ color:#fff; }
-  .lang-btn.active{
-    background:#27272a; color:#fff; border:1px solid #3f3f46;
-    box-shadow:0 2px 8px rgba(0,0,0,0.3);
-  }
-  .lang-sep{ color:#3f3f46; font-size:11px; }
+  main{max-width:1180px;margin:0 auto;padding:0 16px 64px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:24px;}
+  .card{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
+    transition:transform var(--gerak-normal) var(--ease-keluar),border-color var(--gerak-normal) ease,box-shadow var(--gerak-normal) ease;}
+  .card:active{transform:scale(.99);}
+  .card:focus-within{border-color:var(--accent);}
+  .thumb{height:112px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;background:linear-gradient(135deg,#18181c,#121215);border-bottom:1px solid var(--border);}
+  .body{padding:24px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .body h3{margin:0;font-size:var(--fs-18);font-weight:700;}
+  .body p{margin:0;color:var(--muted);font-size:var(--fs-16);line-height:1.55;flex:1;}
+  .card-foot{margin-top:auto;padding-top:16px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .badge-env{font-size:var(--fs-12);padding:4px 8px;border-radius:4px;background:rgba(99,102,241,0.12);color:var(--accent);font-weight:600;border:1px solid rgba(99,102,241,0.3);}
+  .cta{display:inline-flex;align-items:center;min-height:44px;background:var(--accent-solid);color:#fff;font-weight:700;font-size:var(--fs-14);padding:8px 16px;border-radius:8px;text-decoration:none;
+    transition:background-color var(--gerak-normal) ease,transform var(--gerak-cepat) var(--ease-keluar);}
+  /* Seluruh kartu bisa diklik lewat tautan ini (tanpa onclick), tetap bisa difokus keyboard. */
+  .cta::after{content:"";position:absolute;inset:0;}
+  .cta:active{transform:scale(var(--tekan-skala));}
 
+  footer{text-align:center;color:var(--muted);font-size:var(--fs-14);padding:32px 16px 48px;padding-bottom:max(48px,env(safe-area-inset-bottom));border-top:1px solid var(--border);max-width:1180px;margin:0 auto;}
+  footer a{color:var(--oranye);font-weight:700;text-decoration:underline;display:inline-block;padding:8px 0;}
+
+  .lang-switch{display:inline-flex;align-items:center;gap:4px;background:var(--panel-2);border:1px solid var(--border);border-radius:99px;padding:0 4px;margin-left:auto;}
+  .lang-btn{background:transparent;border:1px solid transparent;color:var(--muted);font-size:var(--fs-12);font-weight:700;min-width:44px;min-height:44px;padding:0 8px;border-radius:99px;cursor:pointer;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;transition:color var(--gerak-normal) ease,transform var(--gerak-cepat) var(--ease-keluar);}
+  .lang-btn:active{transform:scale(var(--tekan-skala));}
+  .lang-btn.active{background:#27272a;color:#fff;border-color:#3f3f46;}
+  .lang-sep{color:#71717a;font-size:var(--fs-12);}
+
+  @media (hover:hover) and (pointer:fine){
+    .btn-nav-back:hover{background:var(--oranye-gelap);border-color:#ff852e;}
+    .card:hover{transform:translateY(-4px);border-color:var(--border-hover);box-shadow:0 16px 32px rgba(0,0,0,0.6);}
+    .cta:hover{background:var(--accent-solid-hover);}
+    footer a:hover{color:#ffb380;}
+    .lang-btn:hover{color:#fff;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition-duration:1ms !important;animation-duration:1ms !important;}
+    .card:hover,.card:active,.cta:active,.btn-nav-back:active,.lang-btn:active{transform:none;}
+  }
 </style>
 </head>
 <body>
@@ -111,7 +109,7 @@
 <main>
   <div class="grid">
 
-    <div class="card" onclick="window.location.href='admin_panel.html'">
+    <div class="card">
       <div class="thumb">🛠️</div>
       <div class="body">
         <h3 data-i18n="mkt.card1.title">1. Admin Panel</h3>
@@ -123,7 +121,7 @@
       </div>
     </div>
 
-    <div class="card" onclick="window.location.href='partner/b2b.html'">
+    <div class="card">
       <div class="thumb">🤝</div>
       <div class="body">
         <h3 data-i18n="mkt.card2.title">2. Partner B2B</h3>
@@ -135,7 +133,7 @@
       </div>
     </div>
 
-    <div class="card" onclick="window.location.href='mitra/tracker.html'">
+    <div class="card">
       <div class="thumb">🧭</div>
       <div class="body">
         <h3 data-i18n="mkt.card3.title">3. Mitra Tracker</h3>
@@ -147,7 +145,7 @@
       </div>
     </div>
 
-    <div class="card" onclick="window.location.href='campaign/campaign-tracker/index.html'">
+    <div class="card">
       <div class="thumb">📈</div>
       <div class="body">
         <h3 data-i18n="mkt.card4.title">4. Campaign Tracker</h3>
@@ -159,7 +157,7 @@
       </div>
     </div>
 
-    <div class="card" onclick="window.location.href='data/ppob/index.html'">
+    <div class="card">
       <div class="thumb">💳</div>
       <div class="body">
         <h3 data-i18n="mkt.card5.title">5. PPOB Dashboard</h3>
@@ -171,7 +169,7 @@
       </div>
     </div>
 
-    <div class="card" onclick="window.location.href='data/mp-report/index.html'">
+    <div class="card">
       <div class="thumb">🛒</div>
       <div class="body">
         <h3 data-i18n="mkt.card6.title">6. MP Report</h3>
@@ -183,7 +181,7 @@
       </div>
     </div>
 
-    <div class="card" onclick="window.location.href='tools/legal/index.html'">
+    <div class="card">
       <div class="thumb">📑</div>
       <div class="body">
         <h3 data-i18n="mkt.card7.title">7. Legal Tools</h3>
@@ -199,7 +197,7 @@
 </main>
 
 <footer data-i18n="mkt.footer">
-  Arsitektur modul &amp; UI terintegrasi • Bagian dari <a href="../" style="color:#F3700D; font-weight:700; text-decoration:underline;">Hub Portofolio Utama</a>.
+  Arsitektur modul &amp; UI terintegrasi • Bagian dari <a href="../">Hub Portofolio Utama</a>.
 </footer>
 
 <script src="../assets/js/i18n.js"></script>
