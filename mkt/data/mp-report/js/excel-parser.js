@@ -12,24 +12,24 @@ class ExcelParser {
                     
                     const result = {
                         penjualan: {
-                            shopee_tokoklien: {},
+                            shopee_albanistore: {},
                             shopee_bobcare: {},
                             soundbox: {},
-                            tiktok_tokoklien: {}
+                            tiktok_albanie: {}
                         },
                         mutasi_saldo: {
                             bobcare: {}
                         }
                     };
 
-                    // 1. SHOPEE TOKO KLIEN
-                    if (workbook.SheetNames.includes('SHOPEE TOKO KLIEN')) {
-                        const sheet = workbook.Sheets['SHOPEE TOKO KLIEN'];
+                    // 1. SHOPEE ALBANISTORE
+                    if (workbook.SheetNames.includes('SHOPEE ALBANISTORE')) {
+                        const sheet = workbook.Sheets['SHOPEE ALBANISTORE'];
                         const jsonData = XLSX.utils.sheet_to_json(sheet);
                         jsonData.forEach(row => {
                             const id = row['No Pesanan'];
                             if (id) {
-                                result.penjualan.shopee_tokoklien[id] = {
+                                result.penjualan.shopee_albanistore[id] = {
                                     akun: row['Akun'] || '',
                                     tanggal_order: this.formatDate(row['Tanggal Order']),
                                     nama_produk: row['Nama Produk'] || 'Produk Tidak Diketahui',
@@ -107,14 +107,14 @@ class ExcelParser {
                         });
                     }
 
-                    // 4. TIKTOKSHOP TOKO KLIEN
-                    if (workbook.SheetNames.includes('TIKTOKSHOP TOKO KLIEN')) {
-                        const sheet = workbook.Sheets['TIKTOKSHOP TOKO KLIEN'];
+                    // 4. TIKTOKSHOP TOKO ALBANIE
+                    if (workbook.SheetNames.includes('TIKTOKSHOP TOKO ALBANIE')) {
+                        const sheet = workbook.Sheets['TIKTOKSHOP TOKO ALBANIE'];
                         const jsonData = XLSX.utils.sheet_to_json(sheet);
                         jsonData.forEach(row => {
                             const id = row['Order ID'] || row['No Pesanan'];
                             if (id) {
-                                result.penjualan.tiktok_tokoklien[id] = {
+                                result.penjualan.tiktok_albanie[id] = {
                                     tanggal_order: this.formatDate(row['Created Time'] || row['Tanggal Order']),
                                     nama_produk: row['Product Name'] || row['Nama Produk'] || 'TikTok Product',
                                     jumlah: parseInt(row['Jumlah']) || 1,

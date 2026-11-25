@@ -806,7 +806,7 @@ button.nav-item {
 .sb-tagline { margin: 4px 0 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.78); line-height: 1.4; white-space: nowrap; }
 
 /* Tombol bahasa ID/EN di menu samping (samakan dengan .lang-switch di mkt-standar.css) */
-.sb-lang { display: flex; justify-content: flex-end; margin-bottom: 16px; }
+.sb-lang { display: flex; justify-content: flex-start; margin-bottom: 16px; }
 .lang-switch{display:inline-flex;align-items:center;gap:4px;padding:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;}
 .lang-btn{min-width:44px;min-height:36px;padding:0 12px;border:0;background:transparent;color:rgba(255,255,255,0.78);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;border-radius:8px;cursor:pointer;position:relative;transition:background-color 200ms ease,color 200ms ease,transform 120ms cubic-bezier(0.16,1,0.3,1);}
 .lang-btn::after{content:"";position:absolute;inset:-4px 0;}/* area sentuh 44px */

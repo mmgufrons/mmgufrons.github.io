@@ -1,5 +1,5 @@
 /**
- * firebase-api.js — MP Report (Toko Klien Analytics)
+ * firebase-api.js — MP Report (Albani Store Analytics)
  * Mendukung mode live PHP proxy dan mode statis / offline (localStorage + seed JSON)
  */
 

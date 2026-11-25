@@ -19,10 +19,10 @@ class DashboardManager {
         let totalAdminFee = 0;
         
         const platformStats = {
-            shopee_tokoklien: 0,
+            shopee_albanistore: 0,
             shopee_bobcare: 0,
             soundbox: 0,
-            tiktok_tokoklien: 0
+            tiktok_albanie: 0
         };
 
         const monthlyTrendsMap = {};
@@ -125,10 +125,10 @@ class DashboardManager {
         chartWrapper.className = 'apple-bar-chart';
 
         const platformColors = {
-            shopee_tokoklien: '#2ECC71',
+            shopee_albanistore: '#2ECC71',
             shopee_bobcare: '#3498db',
             soundbox: '#f39c12',
-            tiktok_tokoklien: '#111111'
+            tiktok_albanie: '#111111'
         };
         
         monthlyTrends.labels.forEach((label, i) => {
@@ -167,10 +167,10 @@ class DashboardManager {
         container.innerHTML = '';
         
         const platforms = [
-            { name: 'Shopee Toko Klien', val: platformStats.shopee_tokoklien, color: '#2ECC71' },
+            { name: 'Shopee Albanistore', val: platformStats.shopee_albanistore, color: '#2ECC71' },
             { name: 'Shopee Bobcare', val: platformStats.shopee_bobcare, color: '#3498db' },
             { name: 'Soundbox', val: platformStats.soundbox, color: '#f39c12' },
-            { name: 'TikTok', val: platformStats.tiktok_tokoklien, color: '#111111' }
+            { name: 'TikTok', val: platformStats.tiktok_albanie, color: '#111111' }
         ];
         
         const total = platforms.reduce((s, p) => s + p.val, 0) || 1;
