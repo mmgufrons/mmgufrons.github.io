@@ -115,4 +115,9 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9fa;color:var(--t
   .btn-sm,.btn-action-sm,.form-control,.form-select,.form-control-sm,.form-select-sm{min-height:44px;}
   .btn.p-0,.btn-link-resource,.btn-wa-followup,.btn-action-sm{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
   input[type=checkbox],input[type=radio]{min-width:24px;min-height:24px;}
+  /* Label yang terhubung ikut jadi area sentuh, jadi baris centang setinggi 44px */
+  .d-flex > input[type=checkbox] + label[for]{min-height:44px;display:inline-flex;align-items:center;}
+  .steps-container *{min-width:0;}
+  .steps-container label{flex:1 1 auto;overflow-wrap:anywhere;}
+  .steps-container .btn-wa-followup,.steps-container .btn-link-resource{flex:0 0 44px;}
 }
