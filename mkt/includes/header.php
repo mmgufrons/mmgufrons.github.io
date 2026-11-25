@@ -104,7 +104,7 @@ $_base = $base_path;
     </script>
 
     <!-- Main MKT Hub CSS (dashboard-card, sidebar, section-title, icon-wrapper, etc.) -->
-    <link rel="stylesheet" href="<?= $_base ?>assets/css/style.css">
+    <link rel="stylesheet" href="<?= $_base ?>assets/css/style.css?v=<?= @filemtime(__DIR__ . "/../assets/css/style.css") ?>">
 
     <!-- Inline overrides: sidebar ID + layout compatibility (Tailwind + Bootstrap coexist) -->
     <style>
