@@ -160,6 +160,12 @@
         .text-white\/40 { color: rgba(255,255,255,0.4); }
         .font-medium { font-weight: 500; }
     </style>
+<style>
+/* Catatan bahasa: hanya muncul di mode EN, karena isi dokumen asli berbahasa Indonesia */
+.catatan-bahasa{display:none;margin:0;padding:8px 16px;background:#fff7ed;color:#7c2d12;border-bottom:1px solid #fed7aa;font-size:0.875rem;line-height:1.5;text-align:center;}
+html[lang="en"] .catatan-bahasa{display:block;}
+.pitch-bahasa{position:relative;z-index:1051;margin-top:72px;}
+</style>
 </head>
 <body>
 
@@ -218,6 +224,44 @@
         <a href="../tools/legal/index.html" class="nav-item ">
             <span class="icon"><i class="fas fa-file-contract"></i></span> 7. Legal Tools
         </a>
+        <hr class="nav-divider">
+        <p class="nav-section-label" data-menu="sop">Dokumen &amp; SOP</p>
+        <a href="../sop/ai.html" class="nav-item">
+            <span class="icon"><i class="fas fa-robot"></i></span> <span>SOP Prompt AI</span>
+        </a>
+        <a href="../sop/blueprint.html" class="nav-item">
+            <span class="icon"><i class="fas fa-map"></i></span> <span>SOP Active Blueprint</span>
+        </a>
+        <a href="../sop/klaim_logbook.html" class="nav-item">
+            <span class="icon"><i class="fas fa-clipboard-check"></i></span> <span>SOP Komplain & Klaim</span>
+        </a>
+        <a href="../hardware/edc.html" class="nav-item">
+            <span class="icon"><i class="fas fa-cash-register"></i></span> <span>Pendaftaran EDC</span>
+        </a>
+        <a href="../hardware/sqris_activation.html" class="nav-item">
+            <span class="icon"><i class="fas fa-qrcode"></i></span> <span>Aktivasi QRIS SoundBox</span>
+        </a>
+        <a href="../pitching/mitra/index.html" class="nav-item">
+            <span class="icon"><i class="fas fa-network-wired"></i></span> <span>Pitching Mitra</span>
+        </a>
+        <a href="../pitching/b2b/index.html" class="nav-item">
+            <span class="icon"><i class="fas fa-building"></i></span> <span>Pitching B2B</span>
+        </a>
+        <a href="../campaign/b2b_juni.html" class="nav-item">
+            <span class="icon"><i class="fas fa-bullseye"></i></span> <span>Campaign B2B</span>
+        </a>
+        <a href="../campaign/blueprint_laz.html" class="nav-item">
+            <span class="icon"><i class="fas fa-hand-holding-heart"></i></span> <span>Campaign LAZ</span>
+        </a>
+        <a href="../blueprint/juni_2.html" class="nav-item">
+            <span class="icon"><i class="fas fa-calendar-alt"></i></span> <span>Contoh Blueprint</span>
+        </a>
+        <a href="../partner/work_instructions.html" class="nav-item">
+            <span class="icon"><i class="fas fa-truck"></i></span> <span>Instruksi Multi-Kurir</span>
+        </a>
+        <a href="../mitra/sop_canvassing.html" class="nav-item active" aria-current="page">
+            <span class="icon"><i class="fas fa-walking"></i></span> <span>SOP Canvassing</span>
+        </a>
     </div>
 
     <!-- Back to Hub Footer -->
@@ -236,6 +280,7 @@
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
 <div id="mainContent">
+    <p class="catatan-bahasa" role="note">Original document in Indonesian. Only the titles and menu are translated.</p>
     <!-- Page Content mulai dari sini, diakhiri oleh footer.php -->
 
 <script>
@@ -697,7 +742,7 @@ document.getElementById('btn-export-word')?.addEventListener('click', () => {
         <h2>Alur Kerja</h2>${alurHtml}
         <h2>Script Canvassing — Kunjungan Langsung</h2>${scriptHtml}
         <script src="../../assets/js/i18n.js"></script>
-<script src="../assets/js/i18n-mkt.js?v=1"></script>
+<script src="../assets/js/i18n-mkt.js?v=3"></script>
 </body></html>`;
     const blob = new Blob(['﻿', preHtml], { type: 'application/msword' });
     const url = URL.createObjectURL(blob);

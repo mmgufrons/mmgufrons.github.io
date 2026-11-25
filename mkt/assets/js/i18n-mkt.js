@@ -9,6 +9,39 @@
 (function () {
   'use strict';
   const P = {
+    'Dokumen & SOP': 'Documents & SOPs',
+    'SOP Prompt AI': 'AI Prompt SOP',
+    'SOP Active Blueprint': 'Active Blueprint SOP',
+    'SOP Komplain & Klaim': 'Complaints & Claims SOP',
+    'Pendaftaran EDC': 'EDC Registration',
+    'Aktivasi QRIS SoundBox': 'QRIS SoundBox Activation',
+    'Pitching Mitra': 'Partner Pitch',
+    'Pitching B2B': 'B2B Pitch',
+    'Campaign B2B': 'B2B Campaign',
+    'Campaign LAZ': 'LAZ Campaign',
+    'Contoh Blueprint': 'Sample Blueprint',
+    'Instruksi Multi-Kurir': 'Multi-Courier Instructions',
+    'SOP Canvassing': 'Canvassing SOP',
+    'Dokumen kerja yang saya susun': 'Working documents I wrote',
+    'SOP, pitching, dan rencana campaign. Dokumen asli berbahasa Indonesia.': 'SOPs, pitch decks, and campaign plans. The original documents are in Indonesian.',
+    'SOP Update Prompt AI Internal': 'Internal AI Prompt Update SOP',
+    'SOP Pembuatan Active Blueprint': 'Active Blueprint Creation SOP',
+    'Penanganan Komplain & Klaim': 'Complaint & Claim Handling',
+    'SOP Akuisisi & Aktivasi EDC KB': 'KB EDC Acquisition & Activation SOP',
+    'Alur Proses Aktivasi QRIS SoundBox': 'QRIS SoundBox Activation Flow',
+    'Simbiosis Mutualisme Area Terpusat': 'Mutually Beneficial Area Hub',
+    'Pilar Akselerasi Bisnis SIMASRIM': 'SIMASRIM Business Acceleration Pillars',
+    'Blueprint Campaign B2B Institusional': 'Institutional B2B Campaign Blueprint',
+    'Blueprint Campaign LAZ Nasional': 'National LAZ Campaign Blueprint',
+    'Campaign Juni - Pekan #2': 'June Campaign - Week #2',
+    'Instruksi Kerja (Work Instructions)': 'Work Instructions',
+    'SOP Canvassing Mitra Area': 'Area Partner Canvassing SOP',
+    'Dari Blast WA ke Kunjungan Langsung': 'From WA Blasts to In-Person Visits',
+    'Pintu Masuk': 'Entry',
+    '7 Modul Portofolio': '7 Portfolio Modules',
+    'Beranda MKT': 'MKT Home',
+    'Portofolio Utama': 'Main Portfolio',
+    'Portofolio Demo': 'Portfolio Demo',
     // Umum / navigasi
     'Bahasa / Language': 'Language / Bahasa', 'Nama': 'Name', 'Hapus baris': 'Delete row',
     'Admin Only': 'Admin Only', '— PT Solusi Mitra Aplikasi.': '— PT Solusi Mitra Aplikasi.',
@@ -407,6 +440,7 @@
   }
 
   const asli = new WeakMap();       // simpul teks → teks ID asli
+  const tulisan = new WeakMap();    // simpul teks → nilai terakhir yang DITULIS penerjemah (pengamat berjalan belakangan, jadi perubahan sendiri harus dikenali)
   const asliAttr = new WeakMap();   // elemen → {attr: nilai asli}
   const ATTR = ['placeholder', 'title', 'aria-label'];
   let lang = 'id', mengubah = false;
@@ -418,8 +452,8 @@
     if (lang === 'en') {
       const sumber = asli.has(n) ? asli.get(n) : n.nodeValue;
       const hasil = tr(sumber);
-      if (hasil !== null) { if (!asli.has(n)) asli.set(n, sumber); if (n.nodeValue !== hasil) n.nodeValue = hasil; }
-    } else if (asli.has(n)) { n.nodeValue = asli.get(n); asli.delete(n); }
+      if (hasil !== null) { if (!asli.has(n)) asli.set(n, sumber); if (n.nodeValue !== hasil) n.nodeValue = hasil; tulisan.set(n, hasil); }
+    } else if (asli.has(n)) { n.nodeValue = asli.get(n); asli.delete(n); tulisan.delete(n); }
   }
 
   function terapkanAttr(el) {
@@ -446,7 +480,7 @@
   new MutationObserver(ms => {
     if (mengubah || lang !== 'en') return;
     ms.forEach(m => {
-      if (m.type === 'characterData') { mengubah = true; asli.delete(m.target); terapkanSimpul(m.target); mengubah = false; }
+      if (m.type === 'characterData') { if (tulisan.get(m.target) === m.target.nodeValue) return; mengubah = true; asli.delete(m.target); terapkanSimpul(m.target); mengubah = false; }
       m.addedNodes && m.addedNodes.forEach(x => { if (x.nodeType === 3) { mengubah = true; terapkanSimpul(x); mengubah = false; } else if (x.nodeType === 1) jalankan(x); });
     });
   }).observe(document.documentElement, { childList: true, subtree: true, characterData: true });

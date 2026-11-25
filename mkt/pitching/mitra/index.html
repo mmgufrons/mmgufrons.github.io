@@ -148,6 +148,12 @@
 .pt-lang .lang-sep{opacity:0.6;font-size:0.75rem;}
 @media (prefers-reduced-motion:reduce){.pt-lang .lang-btn{transition:none;}.pt-lang .lang-btn:active{transform:none;}}
 </style>
+<style>
+/* Catatan bahasa: hanya muncul di mode EN, karena isi dokumen asli berbahasa Indonesia */
+.catatan-bahasa{display:none;margin:0;padding:8px 16px;background:#fff7ed;color:#7c2d12;border-bottom:1px solid #fed7aa;font-size:0.875rem;line-height:1.5;text-align:center;}
+html[lang="en"] .catatan-bahasa{display:block;}
+.pitch-bahasa{position:relative;z-index:1051;margin-top:72px;}
+</style>
 </head>
 <body>
 
@@ -184,6 +190,7 @@
     </div>
   </div>
 </nav>
+<p class="catatan-bahasa pitch-bahasa" role="note">Original document in Indonesian. Only the titles and menu are translated.</p>
 <style>
     /* CUSTOM UI - MODERN & B2B FOCUSED */
     
@@ -684,6 +691,6 @@
 </script>
 
 <script src="../../../assets/js/i18n.js"></script>
-<script src="../../assets/js/i18n-mkt.js?v=1"></script>
+<script src="../../assets/js/i18n-mkt.js?v=3"></script>
 </body>
 </html>
