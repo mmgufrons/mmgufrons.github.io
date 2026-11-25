@@ -1945,7 +1945,10 @@
     } catch(e) {}
 
     document.documentElement.lang = lang;
-    const dict = DICTIONARY[lang] || DICTIONARY.id;
+    // Kamus tambahan per modul (mis. mkt/assets/js/i18n-mkt.js) dimuat sebelum berkas ini,
+    // supaya kamus utama tidak terus membengkak.
+    const extra = (window.PORTO_I18N_EXTRA || {})[lang] || {};
+    const dict = Object.assign({}, DICTIONARY[lang] || DICTIONARY.id, extra);
 
     // 1. Teks elemen [data-i18n]
     document.querySelectorAll('[data-i18n]').forEach(el => {

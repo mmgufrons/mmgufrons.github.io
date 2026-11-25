@@ -285,6 +285,7 @@
   table.preview td.chk-col, table.preview th.chk-col{width:34px;text-align:center;padding-left:12px;padding-right:0;}
   table.preview input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--moss);}
   tr.row-unselected{opacity:.4;}
+.wa-lang{display:flex;gap:4px;margin-left:auto}.wa-lang .lang-btn{min-width:44px;min-height:44px;border:1px solid currentColor;background:transparent;color:inherit;border-radius:8px;font:inherit;font-weight:700;cursor:pointer;opacity:.7;transition:transform var(--gerak-cepat,120ms) ease-out,opacity 200ms}.wa-lang .lang-btn.active{opacity:1;background:#075e54;color:#fff;border-color:#075e54}.wa-lang .lang-btn:active{transform:scale(.97)}.wa-lang .lang-btn:focus-visible{outline:2px solid #075e54;outline-offset:2px}
 </style>
 </head>
 <body>
@@ -298,6 +299,7 @@
         <p>Kirim pesan personal ke banyak nomor dari daftar Excel</p>
       </div>
     </div>
+    <div class="wa-lang" role="group" aria-label="Bahasa / Language"><button type="button" class="lang-btn" data-lang-btn="id" onclick="setLanguage('id')">ID</button><button type="button" class="lang-btn" data-lang-btn="en" onclick="setLanguage('en')">EN</button></div>
     <div class="status-pill" id="storageStatus">memuat data tersimpan…</div>
   </header>
 
@@ -1495,5 +1497,7 @@ async function init(){
 }
 init();
 </script>
+<script src="../../../assets/js/i18n.js"></script>
+<script src="../../assets/js/i18n-mkt.js?v=1"></script>
 </body>
 </html>
