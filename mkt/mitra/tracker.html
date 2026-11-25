@@ -97,34 +97,35 @@
     
     .tracker-card { 
         background: #fff; border-radius: 16px; border: 1px solid rgba(115, 53, 183, 0.1); 
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 25px; transition: 0.3s; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 24px; transition: 0.3s; 
     }
-    .tracker-card:hover { box-shadow: 0 8px 25px rgba(115, 53, 183, 0.1); transform: translateY(-3px); }
+    @media (hover: hover) and (pointer: fine) { .tracker-card:hover { box-shadow: 0 8px 25px rgba(115, 53, 183, 0.1); transform: translateY(-3px); } }
 
     .step-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #eee; }
     .step-item:last-child { border-bottom: none; }
     
     .btn-wa-followup { 
         color: #25D366; background: rgba(37, 211, 102, 0.1); border-radius: 6px; 
-        padding: 4px 10px; font-size: 0.75rem; font-weight: 700; text-decoration: none; 
-        transition: 0.2s; border: 1px solid transparent; 
+        padding: 4px 8px; font-size: 0.75rem; font-weight: 700; text-decoration: none; 
+        transition: background-color 0.2s, color 0.2s, border-color 0.2s; border: 1px solid transparent; 
     }
-    .btn-wa-followup:hover { background: #25D366; color: white; }
+    @media (hover: hover) and (pointer: fine) { .btn-wa-followup:hover { background: #25D366; color: white; } }
     
     .btn-link-resource {
         color: var(--primary); background: rgba(115, 53, 183, 0.1); border-radius: 6px;
-        padding: 4px 8px; font-size: 0.75rem; text-decoration: none; transition: 0.2s;
-        margin-left: 5px;
+        padding: 4px 8px; font-size: 0.75rem; text-decoration: none; transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        margin-left: 4px;
     }
-    .btn-link-resource:hover { background: var(--primary); color: white; }
+    @media (hover: hover) and (pointer: fine) { .btn-link-resource:hover { background: var(--primary); color: white; } }
 
-    .badge-parallel { font-size: 0.6rem; background: #e2e8f0; color: #64748b; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; font-weight: 800; }
+    .badge-parallel { font-size: 0.6rem; background: #e2e8f0; color: #64748b; padding: 2px 4px; border-radius: 4px; text-transform: uppercase; font-weight: 800; }
     
-    .sync-alert { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 12px; margin-bottom: 20px; display: none; }
+    .sync-alert { background: #fff3cd; border: 1px solid #ffeeba; padding: 16px; border-radius: 12px; margin-bottom: 16px; display: none; }
 
     .steps-container::-webkit-scrollbar { width: 5px; }
     .steps-container::-webkit-scrollbar-track { background: #f1f1f1; }
     .steps-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; } }
 </style>
 
 <div class="hero-section px-4">

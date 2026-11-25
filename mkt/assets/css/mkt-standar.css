@@ -24,7 +24,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9fa;color:var(--t
   transition:background-color var(--gerak-normal) ease,color var(--gerak-normal) ease;}
 .nav-item-link:active{background:rgba(255,255,255,0.12);}
 .nav-item-link.active{color:#fff;background:rgba(243,112,13,0.25);border-left-color:var(--accent);}
-.nav-item-link .icon{width:24px;text-align:center;}
+.nav-item-link .icon{flex:0 0 24px;width:24px;text-align:center;}
+.nav-item-link > span:last-child{line-height:1.35;}
 .nav-divider{border-color:rgba(255,255,255,0.12);margin:8px 0;}
 .sidebar-merek{font-size:var(--fs-24);font-weight:800;color:#fff;}
 .sidebar-merek .titik{color:var(--accent-terang);}
@@ -43,6 +44,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9fa;color:var(--t
 
 /* Isi utama + navbar HP */
 #mainContent{margin-left:var(--sidebar-w);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;}
+/* Anak flex boleh menyusut: tabel lebar menggulir di dalam bungkusnya, bukan melebarkan halaman */
+#mainContent{overflow-x:clip;}
+#mainContent > *{min-width:0;}
+#mainContent > .mx-auto{width:100%;}
 .mobile-navbar{display:none;background:#fff;padding:8px 16px;padding-top:max(8px,env(safe-area-inset-top));box-shadow:0 4px 16px rgba(0,0,0,0.05);position:sticky;top:0;z-index:1035;align-items:center;justify-content:space-between;}
 .mobile-navbar .merek{font-weight:800;font-size:var(--fs-20);letter-spacing:-0.025em;color:var(--primary-teks);}
 .mobile-navbar .merek-titik{color:var(--accent-gelap);}
@@ -103,4 +108,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:#f8f9fa;color:var(--t
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:1ms !important;animation-duration:1ms !important;}
   .btn:active,.lang-btn:active,.mobile-navbar .btn-menu:active{transform:none;}
+}
+
+/* Area sentuh minimal 44px di layar sentuh (tombol ikon & kontrol kecil bawaan halaman lama) */
+@media (pointer:coarse),(max-width:767.98px){
+  .btn-sm,.btn-action-sm,.form-control,.form-select,.form-control-sm,.form-select-sm{min-height:44px;}
+  .btn.p-0,.btn-link-resource,.btn-wa-followup,.btn-action-sm{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
+  input[type=checkbox],input[type=radio]{min-width:24px;min-height:24px;}
 }
