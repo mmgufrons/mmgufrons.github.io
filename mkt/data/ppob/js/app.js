@@ -7,7 +7,7 @@
 // KONFIGURASI GLOBAL
 // ================================================================
 const APP_CONFIG = {
-    LOGIN_PASSWORD: 'demo123', // Ganti password di sini
+    LOGIN_PASSWORD: 'demo123', // PORTOFOLIO DEMO: password asli dihapus
     DB_PATHS: {
         users:           'users',
         ppob:            'ppob_transactions',

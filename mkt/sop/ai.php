@@ -27,7 +27,7 @@ include __DIR__ . '/../includes/header.php';
             <div class="d-flex flex-wrap gap-3 align-items-center mt-3">
                 <div>
                     <span class="text-muted small d-block mb-1">Username:</span>
-                    <span class="credential-badge">prompter</span>
+                    <span class="credential-badge">prompter.demo</span>
                 </div>
                 <div>
                     <span class="text-muted small d-block mb-1">Password:</span>
