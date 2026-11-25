@@ -1,0 +1,60 @@
+/* Menu samping MKT — SATU-SATUNYA sumber gaya menu (isi menu: assets/js/mkt-sidebar.js).
+   Dimuat SETELAH Bootstrap/style.css supaya menang urutan. Acuan tampilan: sop/ai.html. */
+#sidebar{
+  --sb-aksen:#7335B7; --sb-oranye:#ff9a4d;
+  width:280px;height:100vh;height:100dvh;position:fixed;left:0;top:0;z-index:1040;overflow-y:auto;
+  background:linear-gradient(180deg,#3A1B5E,#1F0D3D);color:#fff;display:flex;flex-direction:column;
+  padding:20px 16px max(16px,env(safe-area-inset-bottom));border-right:1px solid rgba(255,255,255,0.05);
+  font-family:'Plus Jakarta Sans',sans-serif;line-height:1.5;
+  transition:transform 450ms cubic-bezier(0.16,1,0.3,1);
+}
+#sidebar::-webkit-scrollbar{width:6px;}
+#sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:4px;}
+
+/* Kepala: ID/EN → logo (terbesar) → keterangan kecil kapital */
+#sidebar .sb-kepala{padding:24px 32px 16px;}
+#sidebar .sb-lang{display:flex;justify-content:flex-start;margin-bottom:16px;}
+#sidebar .sb-logo{display:block;text-decoration:none;}
+#sidebar .sidebar-merek{font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:0.02em;}
+#sidebar .sidebar-merek .titik{color:var(--sb-oranye);}
+#sidebar .sb-tagline{margin:4px 0 0;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.78);line-height:1.4;white-space:nowrap;}
+
+/* Pengalih bahasa */
+#sidebar .lang-switch{display:inline-flex;align-items:center;gap:4px;padding:4px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;}
+#sidebar .lang-btn{min-width:44px;min-height:36px;padding:0 12px;border:0;background:transparent;color:rgba(255,255,255,0.78);font-size:0.75rem;font-weight:700;letter-spacing:0.08em;border-radius:8px;cursor:pointer;position:relative;transition:background-color 200ms ease,color 200ms ease,transform 120ms cubic-bezier(0.16,1,0.3,1);}
+#sidebar .lang-btn::after{content:"";position:absolute;inset:-4px 0;}
+#sidebar .lang-btn:active{transform:scale(0.97);}
+#sidebar .lang-btn.active{background:rgba(255,255,255,0.16);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08);}
+#sidebar .lang-sep{display:none;}
+
+/* Isi menu */
+#sidebar .sb-isi{flex:1 0 auto;}
+#sidebar .nav-section-label{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.72);font-weight:700;margin:24px 24px 8px;padding-left:16px;display:block;}
+#sidebar .nav-divider{border:0;border-top:1px solid rgba(255,255,255,0.12);margin:8px 0;opacity:1;}
+#sidebar .mt-auto{margin-top:auto;}
+#sidebar .nav-item-link{display:flex;align-items:center;min-height:44px;padding:12px 16px;margin-bottom:4px;color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.95rem;font-weight:500;border-radius:8px;
+  transition:background-color 200ms ease,color 200ms ease,transform 120ms cubic-bezier(0.16,1,0.3,1);}
+#sidebar .nav-item-link:active{background:rgba(255,255,255,0.12);transform:scale(0.97);}
+#sidebar .nav-item-link.active{color:#fff;background:var(--sb-aksen);box-shadow:0 4px 16px rgba(115,53,183,0.4);font-weight:600;}
+#sidebar .nav-item-link .icon{flex:0 0 24px;width:24px;text-align:center;margin-right:12px;}
+#sidebar .nav-item-link.btn-bottom-porto{margin:0 0 8px;color:#7ee0c1;background:rgba(126,224,193,0.08);}
+#sidebar :focus-visible{outline:2px solid var(--sb-oranye);outline-offset:2px;}
+
+/* Overlay + HP */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1039;display:block;visibility:hidden;opacity:0;transition:opacity 320ms ease,visibility 320ms;}
+.sidebar-overlay.show{visibility:visible;opacity:1;}
+@supports (backdrop-filter:blur(4px)){.sidebar-overlay{backdrop-filter:blur(4px);}}
+@media (max-width:991.98px){
+  #sidebar{transform:translateX(-100%);}
+  #sidebar.show{transform:translateX(0);}
+}
+
+@media (hover:hover) and (pointer:fine){
+  #sidebar .nav-item-link:not(.active):hover{color:#fff;background:rgba(255,255,255,0.08);}
+  #sidebar .nav-item-link.btn-bottom-porto:hover{background:rgba(126,224,193,0.16);color:#a7f3d0;}
+  #sidebar .lang-btn:not(.active):hover{color:#fff;background:rgba(255,255,255,0.06);}
+}
+@media (prefers-reduced-motion:reduce){
+  #sidebar,#sidebar *,.sidebar-overlay{transition-duration:1ms !important;}
+  #sidebar .nav-item-link:active,#sidebar .lang-btn:active{transform:none;}
+}
