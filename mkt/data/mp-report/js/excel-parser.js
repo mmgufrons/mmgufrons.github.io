@@ -22,9 +22,9 @@ class ExcelParser {
                         }
                     };
 
-                    // 1. SHOPEE ALBANISTORE
-                    if (workbook.SheetNames.includes('SHOPEE ALBANISTORE')) {
-                        const sheet = workbook.Sheets['SHOPEE ALBANISTORE'];
+                    // 1. SHOPEE TOKO KLIEN
+                    if (workbook.SheetNames.includes('SHOPEE TOKO KLIEN')) {
+                        const sheet = workbook.Sheets['SHOPEE TOKO KLIEN'];
                         const jsonData = XLSX.utils.sheet_to_json(sheet);
                         jsonData.forEach(row => {
                             const id = row['No Pesanan'];
@@ -107,9 +107,9 @@ class ExcelParser {
                         });
                     }
 
-                    // 4. TIKTOKSHOP TOKO ALBANIE
-                    if (workbook.SheetNames.includes('TIKTOKSHOP TOKO ALBANIE')) {
-                        const sheet = workbook.Sheets['TIKTOKSHOP TOKO ALBANIE'];
+                    // 4. TIKTOKSHOP TOKO KLIEN
+                    if (workbook.SheetNames.includes('TIKTOKSHOP TOKO KLIEN')) {
+                        const sheet = workbook.Sheets['TIKTOKSHOP TOKO KLIEN'];
                         const jsonData = XLSX.utils.sheet_to_json(sheet);
                         jsonData.forEach(row => {
                             const id = row['Order ID'] || row['No Pesanan'];

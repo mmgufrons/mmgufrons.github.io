@@ -167,7 +167,7 @@ class DashboardManager {
         container.innerHTML = '';
         
         const platforms = [
-            { name: 'Shopee Albanistore', val: platformStats.shopee_tokoklien, color: '#2ECC71' },
+            { name: 'Shopee Toko Klien', val: platformStats.shopee_tokoklien, color: '#2ECC71' },
             { name: 'Shopee Bobcare', val: platformStats.shopee_bobcare, color: '#3498db' },
             { name: 'Soundbox', val: platformStats.soundbox, color: '#f39c12' },
             { name: 'TikTok', val: platformStats.tiktok_tokoklien, color: '#111111' }
