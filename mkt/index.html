@@ -48,7 +48,7 @@
 
   main{max-width:1180px;margin:0 auto;padding:0 16px 64px;}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:24px;}
-  .card{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
+  .card{position:relative;container-type:inline-size;background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
     transition:transform var(--gerak-normal) var(--ease-keluar),border-color var(--gerak-normal) ease,box-shadow var(--gerak-normal) ease;}
   .card:active{transform:scale(.99);}
   .card:focus-within{border-color:var(--accent);}
@@ -60,6 +60,7 @@
   .badge-env{white-space:nowrap;font-size:var(--fs-12);padding:4px 8px;border-radius:4px;background:rgba(99,102,241,0.12);color:var(--accent);font-weight:600;border:1px solid rgba(99,102,241,0.3);}
   .cta{white-space:nowrap;margin-left:auto;display:inline-flex;align-items:center;min-height:44px;background:var(--accent-solid);color:#fff;font-weight:700;font-size:var(--fs-14);padding:8px 16px;border-radius:8px;text-decoration:none;
     transition:background-color var(--gerak-normal) ease,transform var(--gerak-cepat) var(--ease-keluar);}
+  @container (max-width:340px){.card-foot{flex-direction:column;align-items:flex-start;gap:16px}.cta{width:100%;justify-content:center;margin-left:0}}
   /* Seluruh kartu bisa diklik lewat tautan ini (tanpa onclick), tetap bisa difokus keyboard. */
   .cta::after{content:"";position:absolute;inset:0;}
   .cta:active{transform:scale(var(--tekan-skala));}
